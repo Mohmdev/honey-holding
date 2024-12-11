@@ -3,11 +3,14 @@ dist / media
 node_modules
 .DS_Store
 .env
+# .env.local
 .next
 .vercel
+.temp
 
 # Payload default media upload directory
-public/media/
+public/media/*
+!public/media/.gitkeep
 
 public/robots.txt
 public/sitemap*.xml
