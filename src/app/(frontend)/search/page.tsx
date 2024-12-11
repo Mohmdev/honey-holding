@@ -5,7 +5,7 @@ import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import React from 'react'
 import { Post } from '@/payload-types'
-import { Search } from '@/search/Component'
+import { Search } from '@/modules/settings/Search/Component'
 import PageClient from './page.client'
 import { CardPostData } from '@/components/Card'
 

@@ -5,6 +5,9 @@ import { revalidateFooter } from './hooks/revalidateFooter'
 
 export const Footer: GlobalConfig = {
   slug: 'footer',
+  admin: {
+    group: 'Customize',
+  },
   access: {
     read: () => true,
   },

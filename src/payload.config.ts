@@ -1,34 +1,56 @@
-// storage-adapter-import-placeholder
-import { mongooseAdapter } from '@payloadcms/db-mongodb' // database-adapter-import
-
-import sharp from 'sharp' // sharp-import
+import { postgresAdapter } from '@payloadcms/db-postgres'
+import sharp from 'sharp'
 import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
-
-import { Categories } from './collections/Categories'
-import { Media } from './collections/Media'
-import { Pages } from './collections/Pages'
-import { Posts } from './collections/Posts'
-import { Users } from './collections/Users'
-import { Footer } from './Footer/config'
-import { Header } from './Header/config'
-import { plugins } from './plugins'
+import { plugins } from '@/plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
-import { getServerSideURL } from './utilities/getURL'
+import { getServerSideURL } from '@/utilities/getURL'
+
+// Modules
+import { Pages } from '@/modules/content/Pages/config'
+import { Posts } from '@/modules/content/Posts/config'
+import { Categories } from '@/modules/content/Categories/config'
+import { Media } from '@/modules/uploads/Media/config'
+import { Assets } from '@/modules/uploads/Assets/config'
+import { Footer } from '@/modules/customize/Footer/config'
+import { Header } from '@/modules/customize/Header/config'
+// import { SiteInformation } from '@/modules/customize/SiteInformation'
+// import { ContactInformation } from '@/modules/customize/ContactInformation'
+// import { SiteGraphics } from '@/modules/customize/SiteGraphics'
+import { Users } from '@/modules/settings/Users/config'
+// import { HelpSection } from '@/modules/support/Help'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
+  collections: [
+    // Content
+    Pages,
+    Posts,
+    Categories,
+    // Uploads
+    Media,
+    Assets,
+    // Settings
+    Users,
+    // Support
+    // Help,
+    // Docs
+    // Tickets
+  ],
+  globals: [
+    // customize
+    Header,
+    Footer,
+    // SiteGraphics,
+    // SiteInformation,
+    // ContactInformation,
+  ],
   admin: {
     components: {
-      // The `BeforeLogin` component renders a message that you see while logging into your admin panel.
-      // Feel free to delete this at any time. Simply remove the line below and the import `BeforeLogin` statement on line 15.
       beforeLogin: ['@/components/BeforeLogin'],
-      // The `BeforeDashboard` component renders the 'welcome' block that you see after logging into your admin panel.
-      // Feel free to delete this at any time. Simply remove the line below and the import `BeforeDashboard` statement on line 15.
-      beforeDashboard: ['@/components/BeforeDashboard'],
     },
     importMap: {
       baseDir: path.resolve(dirname),
@@ -57,20 +79,15 @@ export default buildConfig({
       ],
     },
   },
-  // This config helps us configure global or default features that the other editors can inherit
   editor: defaultLexical,
-  // database-adapter-config-start
-  db: mongooseAdapter({
-    url: process.env.DATABASE_URI,
+  db: postgresAdapter({
+    pool: {
+      connectionString: process.env.POSTGRES_URI,
+    },
+    // prodMigrations: migrations,
   }),
-  // database-adapter-config-end
-  collections: [Pages, Posts, Media, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),
-  globals: [Header, Footer],
-  plugins: [
-    ...plugins,
-    // storage-adapter-placeholder
-  ],
+  plugins: [...plugins],
   secret: process.env.PAYLOAD_SECRET,
   sharp,
   typescript: {

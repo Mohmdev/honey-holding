@@ -8,14 +8,17 @@ import {
 import path from 'path'
 import { fileURLToPath } from 'url'
 
-import { anyone } from '../access/anyone'
-import { authenticated } from '../access/authenticated'
+import { anyone } from '@/access/anyone'
+import { authenticated } from '@/access/authenticated'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export const Media: CollectionConfig = {
   slug: 'media',
+  admin: {
+    group: 'Uploads',
+  },
   access: {
     create: authenticated,
     delete: authenticated,
@@ -39,10 +42,12 @@ export const Media: CollectionConfig = {
     },
   ],
   upload: {
-    // Upload to the public/media directory in Next.js making them publicly accessible even outside of Payload
-    staticDir: path.resolve(dirname, '../../public/media'),
-    adminThumbnail: 'thumbnail',
+    crop: true,
+    displayPreview: true,
     focalPoint: true,
+    disableLocalStorage: true,
+    adminThumbnail: 'thumbnail',
+    mimeTypes: ['image/*', 'video/*'],
     imageSizes: [
       {
         name: 'thumbnail',
@@ -76,5 +81,6 @@ export const Media: CollectionConfig = {
         crop: 'center',
       },
     ],
+    staticDir: path.resolve(dirname, '../../public/media'),
   },
 }

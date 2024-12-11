@@ -31,4 +31,4 @@ cacheDirectories = ['.next/cache', 'node_modules/.cache']
 
 
 [start]
-cmd = 'cross-env NODE_OPTIONS=--no-deprecation next start -p 6969'
+cmd = 'cross-env NODE_OPTIONS=--no-deprecation next start -p 2024'
