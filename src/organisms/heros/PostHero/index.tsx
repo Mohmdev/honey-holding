@@ -3,7 +3,7 @@ import React from 'react'
 
 import type { Post } from '@/payload-types'
 
-import { Media } from '@/components/Media'
+import { MediaComponent } from '@/components/MediaComponent'
 
 export const PostHero: React.FC<{
   post: Post
@@ -79,7 +79,7 @@ export const PostHero: React.FC<{
       </div>
       <div className="min-h-[80vh] select-none">
         {metaImage && typeof metaImage !== 'string' && (
-          <Media
+          <MediaComponent
             fill
             priority={false}
             loading="lazy"
