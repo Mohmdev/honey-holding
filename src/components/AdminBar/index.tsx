@@ -2,7 +2,7 @@
 
 import type { PayloadAdminBarProps } from 'payload-admin-bar'
 
-import { cn } from '@/utilities/cn'
+import { cn } from '@/lib/utilities/cn'
 import { useSelectedLayoutSegments } from 'next/navigation'
 import { PayloadAdminBar } from 'payload-admin-bar'
 import React, { useState } from 'react'
@@ -10,7 +10,7 @@ import { useRouter } from 'next/navigation'
 
 import './index.scss'
 
-import { getClientSideURL } from '@/utilities/getURL'
+import { getClientSideURL } from '@/lib/utilities/getURL'
 
 const baseClass = 'admin-bar'
 

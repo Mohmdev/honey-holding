@@ -1,4 +1,4 @@
-import { cn } from '@/utilities/cn'
+import { cn } from '@/lib/utilities/cn'
 import * as React from 'react'
 
 const Table = React.forwardRef<HTMLTableElement, React.HTMLAttributes<HTMLTableElement>>(

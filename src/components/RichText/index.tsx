@@ -1,4 +1,4 @@
-import { MediaBlock } from '@/blocks/MediaBlock/Component'
+import { MediaBlock } from '@/organisms/blocks/MediaBlock/Component'
 import { DefaultNodeTypes, SerializedBlockNode } from '@payloadcms/richtext-lexical'
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 import {
@@ -6,16 +6,16 @@ import {
   RichText as RichTextWithoutBlocks,
 } from '@payloadcms/richtext-lexical/react'
 
-import { CodeBlock, CodeBlockProps } from '@/blocks/Code/Component'
+import { CodeBlock, CodeBlockProps } from '@/organisms/blocks/Code/Component'
 
 import type {
   BannerBlock as BannerBlockProps,
   CallToActionBlock as CTABlockProps,
   MediaBlock as MediaBlockProps,
 } from '@/payload-types'
-import { BannerBlock } from '@/blocks/Banner/Component'
-import { CallToActionBlock } from '@/blocks/CallToAction/Component'
-import { cn } from '@/utilities/cn'
+import { BannerBlock } from '@/organisms/blocks/Banner/Component'
+import { CallToActionBlock } from '@/organisms/blocks/CallToAction/Component'
+import { cn } from '@/lib/utilities/cn'
 
 type NodeTypes =
   | DefaultNodeTypes

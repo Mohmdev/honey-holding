@@ -3,9 +3,11 @@ import sharp from 'sharp'
 import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
-import { plugins } from '@/plugins'
-import { defaultLexical } from '@/fields/defaultLexical'
-import { getServerSideURL } from '@/utilities/getURL'
+import { getServerSideURL } from '@/lib/utilities/getURL'
+
+// Core
+import { plugins } from '@/lib/plugins'
+import { defaultLexical } from '@/lib/editor/defaultLexical'
 
 // Modules
 import { Pages } from '@/modules/content/Pages/config'
@@ -84,6 +86,7 @@ export default buildConfig({
     pool: {
       connectionString: process.env.POSTGRES_URI,
     },
+    migrationDir: './src/lib/migrations',
     // prodMigrations: migrations,
   }),
   cors: [getServerSideURL()].filter(Boolean),

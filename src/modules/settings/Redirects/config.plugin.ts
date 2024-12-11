@@ -1,5 +1,5 @@
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
-import { revalidateRedirects } from '@/hooks/revalidateRedirects'
+import { revalidateRedirects } from '@/lib/hooks/revalidateRedirects'
 
 export const redirectsPluginConfig = redirectsPlugin({
   collections: ['pages', 'posts'],
