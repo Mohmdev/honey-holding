@@ -1,14 +1,14 @@
 {
-  "name": "honey-pharmaceuticals",
-  "version": "1.0.0",
-  "description": "A full-stack Next.js 15 and Payload CMS solution for Honey Pharmaceuticals Health Industries Group's digital platform. Built to showcase and manage their pharmaceutical and health products distribution services.",
+  "name": "nexweb-base-template",
+  "version": "1.1.0",
+  "description": "A full-stack Next.js 15 and Payload CMS solution for managing your digital platform and it's content.",
   "license": "MIT",
   "type": "module",
   "author": "Mohmdev",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/mohmdev/honey-pharmaceuticals"
+    "url": "https://github.com/mohmdev/nexweb-base-template"
   },
   "scripts": {
     "ii": "cross-env NODE_OPTIONS=--no-deprecation pnpm --ignore-workspace install",
