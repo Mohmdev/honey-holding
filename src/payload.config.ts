@@ -21,7 +21,9 @@ import { Header } from '@/modules/customize/Header/config'
 // import { ContactInformation } from '@/modules/customize/ContactInformation'
 // import { SiteGraphics } from '@/modules/customize/SiteGraphics'
 import { Users } from '@/modules/settings/Users/config'
-// import { HelpSection } from '@/modules/support/Help'
+import { GettingStarted } from './modules/support/GettingStarted/config'
+import { Docs } from './modules/support/Docs/config'
+import { Tickets } from './modules/support/Tickets/config'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -38,12 +40,12 @@ export default buildConfig({
     // Settings
     Users,
     // Support
-    // Help,
-    // Docs
-    // Tickets
+    GettingStarted,
+    Docs,
+    Tickets,
   ],
   globals: [
-    // customize
+    // Customize
     Header,
     Footer,
     // SiteGraphics,
