@@ -7,6 +7,7 @@ import type { Page } from '@/payload-types'
 import { CMSLink } from '@/components/Link'
 import { MediaComponent } from '@/components/MediaComponent'
 import RichText from '@/components/RichText'
+import { cn } from '@/lib/utilities/cn'
 
 export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText }) => {
   const { setHeaderTheme } = useHeaderTheme()
@@ -17,7 +18,11 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
 
   return (
     <div
-      className="relative -mt-[10.4rem] flex items-center justify-center text-white"
+      className={cn(
+        // '-mt-[10.4rem]',
+        //
+        'relative flex items-center justify-center text-white',
+      )}
       data-theme="dark"
     >
       <div className="container mb-8 z-10 relative flex items-center justify-center">
