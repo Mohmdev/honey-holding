@@ -2,7 +2,10 @@ import type { Field } from 'payload'
 
 import deepMerge from '@/utilities/deepMerge'
 
-export type LinkAppearances = 'default' | 'outline'
+import type { ButtonProps } from '@/components/ui/new-york/button'
+type ButtonVariants = NonNullable<ButtonProps['variant']>
+
+export type LinkAppearances = 'default' | 'outline' | ButtonVariants
 
 export const appearanceOptions: Record<LinkAppearances, { label: string; value: string }> = {
   default: {
@@ -12,6 +15,22 @@ export const appearanceOptions: Record<LinkAppearances, { label: string; value: 
   outline: {
     label: 'Outline',
     value: 'outline',
+  },
+  secondary: {
+    label: 'Secondary',
+    value: 'secondary',
+  },
+  destructive: {
+    label: 'Destructive',
+    value: 'destructive',
+  },
+  ghost: {
+    label: 'Ghost',
+    value: 'ghost',
+  },
+  link: {
+    label: 'Link',
+    value: 'link',
   },
 }
 
@@ -118,7 +137,7 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
   }
 
   if (appearances !== false) {
-    let appearanceOptionsToUse = [appearanceOptions.default, appearanceOptions.outline]
+    let appearanceOptionsToUse = Object.values(appearanceOptions)
 
     if (appearances) {
       appearanceOptionsToUse = appearances.map((appearance) => appearanceOptions[appearance])

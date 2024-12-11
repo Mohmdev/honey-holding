@@ -40,6 +40,9 @@ export const SlugComponent: React.FC<SlugComponentProps> = ({
     return fields[fieldToUse]?.value as string
   })
 
+  // Compute formatted slug for placeholder
+  const formattedSlugPreview = targetFieldValue ? formatSlug(targetFieldValue) : ''
+
   useEffect(() => {
     if (checkboxValue) {
       if (targetFieldValue) {
@@ -82,6 +85,7 @@ export const SlugComponent: React.FC<SlugComponentProps> = ({
         onChange={setValue}
         path={path || field.name}
         readOnly={Boolean(readOnly)}
+        placeholder={!readOnly ? formattedSlugPreview : undefined}
       />
     </div>
   )
