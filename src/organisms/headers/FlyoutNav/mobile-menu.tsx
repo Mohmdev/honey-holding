@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 
 import { FiMenu, FiArrowRight, FiX, FiChevronDown } from 'react-icons/fi'
 import { CTAs } from './cta'
-import { LINKS } from './links'
+import { LINKS } from './linkData'
 import { Logo } from './logo'
 
 export const MobileMenu = () => {

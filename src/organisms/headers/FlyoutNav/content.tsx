@@ -108,7 +108,7 @@ export const AboutUsContent = () => {
         <div>
           <h2 className="mb-2 text-xl font-semibold text-white">About us</h2>
           <p className="mb-6 max-w-xs text-sm text-neutral-400">
-            Placeholder is the world's leading placeholder company.
+            Placeholder is the world&apos;s leading placeholder company.
           </p>
         </div>
         <a href="#" className="flex items-center gap-1 text-xs text-indigo-300 hover:underline">

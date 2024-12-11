@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import React, { useState } from 'react'
-import { LINKS } from './links'
+import { LINKS } from './linkData'
 
 export const Links = () => {
   return (
