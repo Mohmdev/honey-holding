@@ -13,6 +13,7 @@ import { mergeOpenGraph } from '@/lib/utilities/mergeOpenGraph'
 
 import './globals.css'
 import { getServerSideURL } from '@/lib/utilities/getURL'
+import FlyoutNav from '@/organisms/headers/FlyoutNav'
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -31,7 +32,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               'layout-wrapper',
             )}
           >
-            <Header />
+            {/* <Header /> */}
+            <FlyoutNav />
             <main>{children}</main>
             <Footer />
           </div>
