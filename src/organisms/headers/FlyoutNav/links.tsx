@@ -42,10 +42,10 @@ const NavLink = ({ children, href, FlyoutContent }) => {
             exit={{ opacity: 0, y: 15 }}
             style={{ translateX: '-50%' }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="absolute left-1/2 top-12 bg-white text-black"
+            className="absolute left-1/2 top-12 text-black rounded-md"
           >
             <div className="absolute -top-6 left-0 right-0 h-6 bg-transparent" />
-            <div className="absolute left-1/2 top-0 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-white" />
+            <div className="z-[-1] absolute left-1/2 top-0 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rotate-45 rounded-[1px] bg-secondary shadow-sm" />
             <FlyoutContent />
           </motion.div>
         )}

@@ -2,7 +2,7 @@ import { FiArrowRight } from 'react-icons/fi'
 
 export const PricingContent = () => {
   return (
-    <div className="w-full bg-white p-6 shadow-none lg:w-[250px] lg:shadow-xl">
+    <div className="w-full bg-secondary rounded-md p-6 shadow-none lg:w-[250px] lg:shadow-xl">
       <div className="grid grid-cols-2 lg:grid-cols-1">
         <div className="mb-3 space-y-3">
           <h3 className="font-semibold">For Individuals</h3>
@@ -26,7 +26,7 @@ export const PricingContent = () => {
           </a>
         </div>
       </div>
-      <button className="w-full rounded-lg border-2 border-neutral-950 px-4 py-2 font-semibold transition-colors hover:bg-neutral-950 hover:text-white">
+      <button className="w-full rounded-lg border border-neutral-950 px-4 py-2 font-semibold transition-colors hover:bg-neutral-950 hover:text-white">
         Contact sales
       </button>
     </div>
@@ -35,7 +35,7 @@ export const PricingContent = () => {
 
 export const CareersContent = () => {
   return (
-    <div className="grid w-full grid-cols-12 shadow-xl lg:w-[750px]">
+    <div className="grid w-full grid-cols-12 shadow-xl lg:w-[750px] bg-secondary rounded-md">
       <div className="col-span-12 flex flex-col justify-between bg-indigo-600 p-6 lg:col-span-4">
         <div className="mb-6">
           <h2 className="mb-2 text-xl font-semibold text-white">Careers</h2>
@@ -47,7 +47,7 @@ export const CareersContent = () => {
           Careers site <FiArrowRight />
         </a>
       </div>
-      <div className="col-span-12 grid grid-cols-2 gap-3 bg-white p-6 lg:col-span-8 lg:grid-cols-3">
+      <div className="col-span-12 grid grid-cols-2 gap-3 p-6 lg:col-span-8 lg:grid-cols-3">
         <div className="space-y-3">
           <h3 className="font-semibold">Business</h3>
           <a href="#" className="block text-sm hover:underline">
@@ -103,7 +103,7 @@ export const CareersContent = () => {
 
 export const AboutUsContent = () => {
   return (
-    <div className="grid h-fit w-full grid-cols-12 shadow-xl lg:h-72 lg:w-[600px] lg:shadow-none xl:w-[750px]">
+    <div className="grid h-fit w-full grid-cols-12 shadow-xl lg:h-72 lg:w-[600px] xl:w-[750px] bg-secondary rounded-md">
       <div className="col-span-12 flex flex-col justify-between bg-neutral-950 p-6 lg:col-span-4">
         <div>
           <h2 className="mb-2 text-xl font-semibold text-white">About us</h2>
@@ -115,10 +115,10 @@ export const AboutUsContent = () => {
           Learn more <FiArrowRight />
         </a>
       </div>
-      <div className="col-span-12 grid grid-cols-2 grid-rows-2 gap-3 bg-white p-6 lg:col-span-8">
+      <div className="col-span-12 grid grid-cols-2 grid-rows-2 gap-3 p-6 lg:col-span-8">
         <a
           href="#"
-          className="rounded border-2 border-neutral-200 bg-white p-3 transition-colors hover:bg-neutral-100"
+          className="rounded border border-border p-3 transition-colors hover:bg-neutral-100"
         >
           <h3 className="mb-1 font-semibold">Features</h3>
           <p className="text-xs">
@@ -127,7 +127,7 @@ export const AboutUsContent = () => {
         </a>
         <a
           href="#"
-          className="rounded border-2 border-neutral-200 bg-white p-3 transition-colors hover:bg-neutral-100"
+          className="rounded border border-border p-3 transition-colors hover:bg-neutral-100"
         >
           <h3 className="mb-1 font-semibold">Testimonials</h3>
           <p className="text-xs">
@@ -136,7 +136,7 @@ export const AboutUsContent = () => {
         </a>
         <a
           href="#"
-          className="rounded border-2 border-neutral-200 bg-white p-3 transition-colors hover:bg-neutral-100"
+          className="rounded border border-border p-3 transition-colors hover:bg-neutral-100"
         >
           <h3 className="mb-1 font-semibold">Press</h3>
           <p className="text-xs">
@@ -145,7 +145,7 @@ export const AboutUsContent = () => {
         </a>
         <a
           href="#"
-          className="rounded border-2 border-neutral-200 bg-white p-3 transition-colors hover:bg-neutral-100"
+          className="rounded border border-border p-3 transition-colors hover:bg-neutral-100"
         >
           <h3 className="mb-1 font-semibold">Blog</h3>
           <p className="text-xs">
