@@ -9,13 +9,13 @@ import { draftMode } from 'next/headers'
 export async function Header() {
   const { isEnabled } = await draftMode()
 
-  const header: Header = await getCachedGlobal('header', 1)()
+  const headerData: Header = await getCachedGlobal('header', 1)()
 
   return (
     <header className="h-max">
       <AdminBar adminBarProps={{ preview: isEnabled }} />
       <HeaderClient
-        header={header}
+        data={headerData}
         //  logoUrl={logoUrl}
         //  className={className}
       />
