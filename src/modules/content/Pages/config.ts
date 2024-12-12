@@ -40,10 +40,11 @@ export const Pages: CollectionConfig<'pages'> = {
     group: 'Content',
     defaultColumns: ['title', 'slug', 'updatedAt'],
     livePreview: {
-      url: ({ data }) => {
+      url: ({ data, req }) => {
         const path = generatePreviewPath({
           slug: typeof data?.slug === 'string' ? data.slug : '',
-          collection: 'pages',
+          collection: 'posts',
+          req,
         })
 
         return path
