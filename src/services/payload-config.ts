@@ -12,6 +12,7 @@ import { Assets } from '@/CMS/Assets/config'
 
 import { getServerSideURL } from '@/lib/utils/getURL'
 import { Pages } from '@/CMS/Pages'
+import { Posts } from '@/CMS/Posts'
 const groupCollections = (
   group: string,
   collections: CollectionConfig[]
@@ -29,7 +30,7 @@ const groupCollections = (
 
 export default buildConfig({
   collections: [
-    ...groupCollections('Content', [Pages]),
+    ...groupCollections('Content', [Pages, Posts]),
     ...groupCollections('Uploads', [Media, Assets]),
     ...groupCollections('Settings', [Users])
   ],
