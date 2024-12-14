@@ -11,8 +11,9 @@ import { Media } from '@/CMS/Media/config'
 import { Assets } from '@/CMS/Assets/config'
 
 import { getServerSideURL } from '@/lib/utils/getURL'
-import { Pages } from '@/CMS/Pages'
-import { Posts } from '@/CMS/Posts'
+import { Pages } from '@/CMS/Pages/config'
+import { Posts } from '@/CMS/Posts/config'
+import { Categories } from '@/CMS/Categories/config'
 const groupCollections = (
   group: string,
   collections: CollectionConfig[]
@@ -30,7 +31,7 @@ const groupCollections = (
 
 export default buildConfig({
   collections: [
-    ...groupCollections('Content', [Pages, Posts]),
+    ...groupCollections('Content', [Pages, Posts, Categories]),
     ...groupCollections('Uploads', [Media, Assets]),
     ...groupCollections('Settings', [Users])
   ],
@@ -38,7 +39,7 @@ export default buildConfig({
   admin: adminConfig,
   email: emailAdapter,
   db: databaseAdapter,
-  // plugins: [...plugins],
+  plugins: [...plugins],
   editor: defaultLexical,
   secret: process.env.PAYLOAD_SECRET,
   cors: [getServerSideURL()].filter(Boolean),

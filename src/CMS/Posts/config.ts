@@ -26,7 +26,7 @@ import {
   PreviewField
 } from '@payloadcms/plugin-seo/fields'
 
-export const Posts: CollectionConfig = {
+export const Posts: CollectionConfig<'posts'> = {
   slug: 'posts',
   access: {
     create: authenticated,
@@ -46,27 +46,27 @@ export const Posts: CollectionConfig = {
       description: true
     }
   },
-  // admin: {
-  //   defaultColumns: ['title', 'slug', 'updatedAt'],
-  //   livePreview: {
-  //     url: ({ data, req }) => {
-  //       const path = generatePreviewPath({
-  //         slug: typeof data?.slug === 'string' ? data.slug : '',
-  //         collection: 'posts',
-  //         req
-  //       })
+  admin: {
+    defaultColumns: ['title', 'slug', 'updatedAt'],
+    livePreview: {
+      url: ({ data, req }) => {
+        const path = generatePreviewPath({
+          slug: typeof data?.slug === 'string' ? data.slug : '',
+          collection: 'posts',
+          req
+        })
 
-  //       return path
-  //     }
-  //   },
-  //   preview: (data, { req }) =>
-  //     generatePreviewPath({
-  //       slug: typeof data?.slug === 'string' ? data.slug : '',
-  //       collection: 'posts',
-  //       req
-  //     }),
-  //   useAsTitle: 'title'
-  // },
+        return path
+      }
+    },
+    preview: (data, { req }) =>
+      generatePreviewPath({
+        slug: typeof data?.slug === 'string' ? data.slug : '',
+        collection: 'posts',
+        req
+      }),
+    useAsTitle: 'title'
+  },
   fields: [
     {
       name: 'title',
@@ -76,61 +76,61 @@ export const Posts: CollectionConfig = {
     {
       type: 'tabs',
       tabs: [
-        // {
-        //   fields: [
-        //     {
-        //       name: 'content',
-        //       type: 'richText',
-        //       editor: lexicalEditor({
-        //         features: ({ rootFeatures }) => {
-        //           return [
-        //             ...rootFeatures,
-        //             HeadingFeature({
-        //               enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4']
-        //             }),
-        //             BlocksFeature({ blocks: [Banner, Code, MediaBlock] }),
-        //             FixedToolbarFeature(),
-        //             InlineToolbarFeature(),
-        //             HorizontalRuleFeature()
-        //           ]
-        //         }
-        //       }),
-        //       label: false,
-        //       required: true
-        //     }
-        //   ],
-        //   label: 'Content'
-        // },
-        // {
-        //   fields: [
-        //     {
-        //       name: 'relatedPosts',
-        //       type: 'relationship',
-        //       admin: {
-        //         position: 'sidebar'
-        //       },
-        //       filterOptions: ({ id }) => {
-        //         return {
-        //           id: {
-        //             not_in: [id]
-        //           }
-        //         }
-        //       },
-        //       hasMany: true,
-        //       relationTo: 'posts'
-        //     },
-        //     {
-        //       name: 'categories',
-        //       type: 'relationship',
-        //       admin: {
-        //         position: 'sidebar'
-        //       },
-        //       hasMany: true,
-        //       relationTo: 'categories'
-        //     }
-        //   ],
-        //   label: 'Meta'
-        // },
+        {
+          fields: [
+            {
+              name: 'content',
+              type: 'richText',
+              editor: lexicalEditor({
+                features: ({ rootFeatures }) => {
+                  return [
+                    ...rootFeatures,
+                    HeadingFeature({
+                      enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4']
+                    }),
+                    // BlocksFeature({ blocks: [Banner, Code, MediaBlock] }),
+                    FixedToolbarFeature(),
+                    InlineToolbarFeature(),
+                    HorizontalRuleFeature()
+                  ]
+                }
+              }),
+              label: false,
+              required: true
+            }
+          ],
+          label: 'Content'
+        },
+        {
+          fields: [
+            {
+              name: 'relatedPosts',
+              type: 'relationship',
+              admin: {
+                position: 'sidebar'
+              },
+              filterOptions: ({ id }) => {
+                return {
+                  id: {
+                    not_in: [id]
+                  }
+                }
+              },
+              hasMany: true,
+              relationTo: 'posts'
+            },
+            {
+              name: 'categories',
+              type: 'relationship',
+              admin: {
+                position: 'sidebar'
+              },
+              hasMany: true,
+              relationTo: 'categories'
+            }
+          ],
+          label: 'Meta'
+        },
         {
           name: 'meta',
           label: 'SEO',
