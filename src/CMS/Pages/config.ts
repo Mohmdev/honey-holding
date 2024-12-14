@@ -2,11 +2,11 @@ import type { CollectionConfig } from 'payload'
 
 import { admins } from '@/access/admins'
 import { adminsOrPublished } from '@/access/adminsOrPublished'
-// import { Archive } from '@/blocks/ArchiveBlock/config'
-// import { CallToAction } from '@/blocks/CallToAction/config'
-// import { Content } from '@/blocks/Content/config'
-// import { FormBlock } from '@/blocks/Form/config'
-// import { MediaBlock } from '@/blocks/MediaBlock/config'
+import { Archive } from '@/blocks/ArchiveBlock/config'
+import { CallToAction } from '@/blocks/CallToAction/config'
+import { Content } from '@/blocks/Content/config'
+import { FormBlock } from '@/blocks/Form/config'
+import { MediaBlock } from '@/blocks/MediaBlock/config'
 import { hero } from '@/fields/heros/config'
 import { slugField } from '@/fields/slug/config'
 import { populatePublishedAt } from '@/hooks/populatePublishedAt'
@@ -74,20 +74,20 @@ export const Pages: CollectionConfig<'pages'> = {
           fields: [hero],
           label: 'Hero'
         },
-        // {
-        //   fields: [
-        //     {
-        //       name: 'layout',
-        //       type: 'blocks',
-        //       blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock],
-        //       required: true,
-        //       admin: {
-        //         initCollapsed: true
-        //       }
-        //     }
-        //   ],
-        //   label: 'Content'
-        // },
+        {
+          fields: [
+            {
+              name: 'layout',
+              type: 'blocks',
+              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock],
+              required: true,
+              admin: {
+                initCollapsed: true
+              }
+            }
+          ],
+          label: 'Content'
+        },
         {
           name: 'meta',
           label: 'SEO',
