@@ -1,6 +1,6 @@
 /* THIS FILE WAS GENERATED AUTOMATICALLY BY PAYLOAD. */
 /* DO NOT MODIFY IT BECAUSE IT COULD BE REWRITTEN AT ANY TIME. */
-import config from '@payload-config'
+import config from '@/services/payload.config'
 import '@payloadcms/next/css'
 import {
   REST_DELETE,
@@ -8,7 +8,7 @@ import {
   REST_OPTIONS,
   REST_PATCH,
   REST_POST,
-  REST_PUT,
+  REST_PUT
 } from '@payloadcms/next/routes'
 
 export const GET = REST_GET(config)
