@@ -6,7 +6,7 @@ import type { Plugin } from 'payload'
 export const redirectsPluginConfig: Plugin = redirectsPlugin({
   collections: ['pages', 'posts'],
   overrides: {
-    // @ts-expect-error
+    // @ts-expect-error: This is a valid override
     fields: ({ defaultFields }) => {
       return defaultFields.map((field) => {
         if ('name' in field && field.name === 'from') {

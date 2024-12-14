@@ -1,7 +1,8 @@
 import { Users } from '@/CMS/Users/config'
+import type { Config } from 'payload'
+
 import { fileURLToPath } from 'url'
 import path from 'path'
-import type { Config } from 'payload'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)

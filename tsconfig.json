@@ -28,7 +28,13 @@
     ],
     "paths": {
       "@payload-config": [
-        "src/services/payload.config.ts"
+        "./src/services/payload-config.ts"
+      ],
+      "@/payload-types": [
+        "./src/lib/payload-types.ts"
+      ],
+      "@/access/*": [
+        "./src/CMS/access/*"
       ],
       "react": [
         "./node_modules/@types/react"
