@@ -41,10 +41,11 @@
   "include": [
     "**/*.ts",
     "**/*.tsx",
+    "next-env.d.ts",
     ".next/types/**/*.ts",
     "redirects.js",
-    "next.config.js",
-    "next-sitemap.config.cjs"
+    "next.config.ts",
+    "next-sitemap.config.js"
   ],
   "exclude": [
     "node_modules"

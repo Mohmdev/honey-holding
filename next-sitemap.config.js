@@ -4,7 +4,7 @@ const SITE_URL =
   'https://example.com'
 
 /** @type {import('next-sitemap').IConfig} */
-module.exports = {
+const sitemapConfig = {
   siteUrl: SITE_URL,
   generateRobotsTxt: true,
   exclude: ['/posts-sitemap.xml', '/pages-sitemap.xml', '/*', '/posts/*'],
@@ -18,3 +18,5 @@ module.exports = {
     additionalSitemaps: [`${SITE_URL}/pages-sitemap.xml`, `${SITE_URL}/posts-sitemap.xml`],
   },
 }
+
+export default sitemapConfig

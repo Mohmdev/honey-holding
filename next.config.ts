@@ -4,12 +4,13 @@ import redirects from './redirects.js'
 
 const NEXT_PUBLIC_SERVER_URL = process.env.VERCEL_PROJECT_PRODUCTION_URL
   ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-  : undefined || process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
+  : process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+import type { NextConfig } from 'next'
+
+const nextConfig: NextConfig = {
   experimental: {
-    reactCompiler: true,
+    reactCompiler: true
   },
   images: {
     remotePatterns: [
@@ -18,13 +19,13 @@ const nextConfig = {
 
         return {
           hostname: url.hostname,
-          protocol: url.protocol.replace(':', ''),
+          protocol: url.protocol.replace(':', '') as 'http' | 'https'
         }
-      }),
-    ],
+      })
+    ]
   },
   reactStrictMode: true,
-  redirects,
+  redirects
 }
 
 export default withPayload(nextConfig)

@@ -11,13 +11,21 @@ import { Providers } from '@/providers'
 import { InitTheme } from '@/providers/Theme/InitTheme'
 import { mergeOpenGraph } from '@/lib/utilities/mergeOpenGraph'
 
-import './globals.css'
+import '@/styles/globals.css'
 import { getServerSideURL } from '@/lib/utilities/getURL'
 import FlyoutNav from '@/organisms/headers/FlyoutNav'
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({
+  children
+}: {
+  children: React.ReactNode
+}) {
   return (
-    <html className={cn(GeistSans.variable, GeistMono.variable)} lang="en" suppressHydrationWarning>
+    <html
+      className={cn(GeistSans.variable, GeistMono.variable)}
+      lang="en"
+      suppressHydrationWarning
+    >
       <head>
         <InitTheme />
         <link href="/favicon.ico" rel="icon" sizes="32x32" />
@@ -29,7 +37,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             style={{ minHeight: '100dvh' }}
             className={cn(
               'min-h-fallback', // fallback
-              'layout-wrapper',
+              'layout-wrapper'
             )}
           >
             {/* <Header /> */}
@@ -48,6 +56,6 @@ export const metadata: Metadata = {
   openGraph: mergeOpenGraph(),
   twitter: {
     card: 'summary_large_image',
-    creator: '@payloadcms',
-  },
+    creator: '@payloadcms'
+  }
 }
