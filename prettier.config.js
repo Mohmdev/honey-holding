@@ -10,7 +10,8 @@ const prettierConfig = {
   tabWidth: 2,
   semi: false,
   plugins: ['prettier-plugin-tailwindcss'],
-  tailwindStylesheet: 'src/styles/globals.css'
+  tailwindStylesheet: 'src/styles/globals.css',
+  tailwindConfig: 'src/styles/globals.css'
 }
 
 export default prettierConfig
