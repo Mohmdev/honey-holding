@@ -43,7 +43,7 @@ export const Pages: CollectionConfig<'pages'> = {
       url: ({ data, req }) => {
         const path = generatePreviewPath({
           slug: typeof data?.slug === 'string' ? data.slug : '',
-          collection: 'posts',
+          collection: 'pages',
           req,
         })
 
