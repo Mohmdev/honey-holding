@@ -9,7 +9,8 @@ const prettierConfig = {
   printWidth: 80,
   tabWidth: 2,
   semi: false,
-  plugins: ['prettier-plugin-tailwindcss']
+  plugins: ['prettier-plugin-tailwindcss'],
+  tailwindStylesheet: 'src/styles/globals.css'
 }
 
-export default prettierConfig;
+export default prettierConfig
