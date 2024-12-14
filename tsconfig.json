@@ -36,6 +36,12 @@
       "@/access/*": [
         "./src/CMS/access/*"
       ],
+      "@/utils/*": [
+        "./src/lib/utils/*"
+      ],
+      "@/hooks/*": [
+        "./src/lib/hooks/*"
+      ],
       "react": [
         "./node_modules/@types/react"
       ],

@@ -9,7 +9,7 @@ import { authenticated } from '../access/authenticated'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
-export const Assets: CollectionConfig = {
+export const Assets: CollectionConfig<'assets'> = {
   // admin: {
   //   group: 'Uploads'
   // },
