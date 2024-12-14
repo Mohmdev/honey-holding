@@ -1,6 +1,6 @@
 import React from 'react'
 import RichText from '@/components/RichText'
-import { Media } from '@/components/Media'
+import { Media } from '@/components/MediaComponent'
 import { cn } from '@/utils/cn'
 
 import type { MediaBlock as MediaBlockProps } from '@/payload-types'

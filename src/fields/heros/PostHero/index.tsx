@@ -3,7 +3,7 @@ import React from 'react'
 
 import type { Post } from '@/payload-types'
 
-import { Media } from '@/components/Media'
+import { Media } from '@/components/MediaComponent'
 import { formatAuthors } from '@/utils/formatAuthors'
 
 export const PostHero: React.FC<{
