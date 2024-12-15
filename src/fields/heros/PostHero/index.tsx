@@ -1,9 +1,9 @@
-import { formatDateTime } from 'src/utilities/formatDateTime'
+import { formatDateTime } from '@/utils/formatDateTime'
 import React from 'react'
 
 import type { Post } from '@/payload-types'
 
-import { Media } from '@/components/MediaComponent'
+import { MediaComponent } from '@/components/MediaComponent'
 import { formatAuthors } from '@/utils/formatAuthors'
 
 export const PostHero: React.FC<{
@@ -73,8 +73,8 @@ export const PostHero: React.FC<{
         </div>
       </div>
       <div className="min-h-[80vh] select-none">
-        {metaImage && typeof metaImage !== 'string' && (
-          <Media
+        {metaImage && typeof metaImage === 'object' && (
+          <MediaComponent
             fill
             priority={false}
             loading="lazy"

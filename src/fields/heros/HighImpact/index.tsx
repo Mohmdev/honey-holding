@@ -1,23 +1,24 @@
 'use client'
-import { useHeaderTheme } from '@/providers/HeaderTheme'
-import React, { useEffect } from 'react'
 
-import type { Page } from '@/payload-types'
-
+import React from 'react'
+// import { useHeaderTheme } from '@/providers/HeaderTheme'
+// import { useEffect } from 'react'
 import { CMSLink } from '@/components/Link'
-import { Media } from '@/components/MediaComponent'
+import { MediaComponent } from '@/components/MediaComponent'
+
 import RichText from '@/components/RichText'
+import type { Page } from '@/payload-types'
 
 export const HighImpactHero: React.FC<Page['hero']> = ({
   links,
   media,
   richText
 }) => {
-  const { setHeaderTheme } = useHeaderTheme()
+  // const { setHeaderTheme } = useHeaderTheme()
 
-  useEffect(() => {
-    setHeaderTheme('dark')
-  })
+  // useEffect(() => {
+  //   setHeaderTheme('dark')
+  // })
 
   return (
     <div
@@ -44,7 +45,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
       </div>
       <div className="min-h-[80vh] select-none">
         {media && typeof media === 'object' && (
-          <Media
+          <MediaComponent
             fill
             imgClassName="-z-10 object-cover"
             priority={false}
