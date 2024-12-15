@@ -2,28 +2,28 @@ import React from 'react'
 import { Banner } from '@payloadcms/ui/elements/Banner'
 import type { ServerSideEditViewProps } from 'payload'
 import classes from './Component.module.scss'
-import { DocsWrapper } from './Component.client'
+import { DocsView } from './DocsView'
 
 interface SearchParams {
   doc?: string
 }
 
-interface DocsViewProps extends ServerSideEditViewProps {
+interface DocsProps extends ServerSideEditViewProps {
   search: SearchParams
 }
 
-export const Docs: React.FC<DocsViewProps> = ({ search = {} as SearchParams }) => {
+export const Docs: React.FC<DocsProps> = ({ search = {} as SearchParams }) => {
   const docKey = search.doc || 'getting-started'
 
   return (
     <div className={classes['before-dashboard']}>
       <Banner
-        type="default"
+        type="info"
         className={classes['before-dashboard__banner']}
       >
-        <h2>Nexweb Tabs</h2>
+        <h2>Documentation</h2>
       </Banner>
-      <DocsWrapper activeKey={docKey} />
+      <DocsView activeKey={docKey} />
     </div>
   )
 }

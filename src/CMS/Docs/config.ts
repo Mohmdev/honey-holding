@@ -13,6 +13,7 @@ export const Docs: CollectionConfig = {
     read: admins,
   },
   admin: {
+    useAsTitle: 'dummy',
     components: {
       views: {
         list: {
@@ -21,15 +22,24 @@ export const Docs: CollectionConfig = {
         },
       },
     },
+    pagination: {
+      defaultLimit: undefined
+    },
   },
   fields: [
     {
-      name: 'dummyField',
-      type: 'text',
+      type: 'select',
+      name: 'dummy',
+      defaultValue: 'dummy',
+      options: [
+        {
+          label: 'Dummy',
+          value: 'dummy',
+        },
+      ],
       admin: {
         hidden: true,
       },
-      virtual: true,
-    },
+    }
   ],
 }

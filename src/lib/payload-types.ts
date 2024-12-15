@@ -657,7 +657,7 @@ export interface Asset {
  */
 export interface Doc {
   id: number;
-  dummyField?: string | null;
+  dummy?: 'dummy' | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1142,7 +1142,7 @@ export interface UsersSelect<T extends boolean = true> {
  * via the `definition` "docs_select".
  */
 export interface DocsSelect<T extends boolean = true> {
-  dummyField?: T;
+  dummy?: T;
   updatedAt?: T;
   createdAt?: T;
 }

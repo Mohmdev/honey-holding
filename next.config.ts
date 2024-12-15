@@ -25,8 +25,10 @@ const nextConfig: NextConfig = {
     ]
   },
   eslint: {
-    // Dont run ESLint during build
     ignoreDuringBuilds: true
+  },
+  typescript: {
+    ignoreBuildErrors: false
   },
   reactStrictMode: true,
   redirects

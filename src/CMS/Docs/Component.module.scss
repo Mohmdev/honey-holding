@@ -1,40 +1,15 @@
 .before-dashboard {
-  margin-inline: base(1.5);
-  margin-inline: var(--gutter-h);
+  display: flex;
+  flex-direction: column;
+
+  padding-inline: var(--gutter-h);
+  height: calc(100vh - var(--app-header-height)); // fallback
+  height: calc(100dvh - var(--app-header-height));
 
   &__banner {
+    background-color: transparent;
     & h2 {
       margin: 0;
-    }
-  }
-
-  &__content {
-    display: grid;
-    grid-template-columns: 250px 1fr;
-    gap: 2rem;
-    margin-top: 2rem;
-  }
-
-  &__sidebar {
-    border-right: 1px solid var(--theme-elevation-100);
-    padding-right: 1rem;
-
-    & ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    &-item {
-      padding: 0.75rem 1rem;
-      border-radius: 4px;
-      cursor: pointer;
-      margin-bottom: 0.5rem;
-      font-weight: 500;
-
-      &--active {
-        background: var(--theme-elevation-100);
-      }
     }
   }
 
