@@ -1,39 +1,25 @@
-import { buildConfig, type CollectionConfig } from 'payload'
+import { buildConfig } from 'payload'
 import sharp from 'sharp'
 import { emailAdapter } from '@/services/email/config'
 import { adminConfig } from '@/services/admin/config'
 import { databaseAdapter } from '@/services/database/config'
 import { defaultLexical } from '@/services/editor/defaultLexical'
 import { plugins } from '@/services/plugins'
+import { collectionGroup } from '@/utils/groupContent'
+import { getServerSideURL } from '@/lib/utils/getURL'
 //
 import { Users } from '@/CMS/Users/config'
 import { Media } from '@/CMS/Media/config'
 import { Assets } from '@/CMS/Assets/config'
-
-import { getServerSideURL } from '@/lib/utils/getURL'
 import { Pages } from '@/CMS/Pages/config'
 import { Posts } from '@/CMS/Posts/config'
 import { Categories } from '@/CMS/Categories/config'
-const groupCollections = (
-  group: string,
-  collections: CollectionConfig[]
-): CollectionConfig[] => {
-  return collections.map((collection) => {
-    return {
-      ...collection,
-      admin: {
-        ...collection.admin,
-        group
-      }
-    }
-  })
-}
 
 export default buildConfig({
   collections: [
-    ...groupCollections('Content', [Pages, Posts, Categories]),
-    ...groupCollections('Uploads', [Media, Assets]),
-    ...groupCollections('Settings', [Users])
+    ...collectionGroup('Content', [Pages, Posts, Categories]),
+    ...collectionGroup('Uploads', [Media, Assets]),
+    ...collectionGroup('Settings', [Users])
   ],
   sharp,
   admin: adminConfig,
