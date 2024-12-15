@@ -14,6 +14,8 @@ import { Assets } from '@/CMS/Assets/config'
 import { Pages } from '@/CMS/Pages/config'
 import { Posts } from '@/CMS/Posts/config'
 import { Categories } from '@/CMS/Categories/config'
+import { Docs } from '@/CMS/Docs/config'
+import { Tickets } from '@/CMS/Tickets/config'
 import { Header } from '@/CMS/Header/config'
 import { Footer } from '@/CMS/Footer/config'
 
@@ -21,7 +23,8 @@ export default buildConfig({
   collections: [
     ...collectionGroup('Content', [Pages, Posts, Categories]),
     ...collectionGroup('Uploads', [Media, Assets]),
-    ...collectionGroup('Settings', [Users])
+    ...collectionGroup('Settings', [Users]),
+    ...collectionGroup('Support', [Docs, Tickets])
   ],
   globals: [...globalGroup('Navigation', [Header, Footer])],
   sharp,

@@ -7,6 +7,9 @@ import type { ServerSideEditViewProps } from 'payload'
 import classes from './Component.module.scss'
 
 export const Docs: React.FC<ServerSideEditViewProps> = () => {
+  const defaultKey = 'getting-started'
+  const ActiveComponent = Documentation[defaultKey].component
+
   return (
     <div className={classes['before-dashboard']}>
       <Banner
@@ -16,16 +19,51 @@ export const Docs: React.FC<ServerSideEditViewProps> = () => {
       >
         <h2>Nexweb Documentation</h2>
       </Banner>
-      <div>
-        <aside>
-          {/* List of documentation docs in the sidebar */}
-          {/* Make a sample list for now with the first item being "Getting Started" */}
+      <div className={classes['before-dashboard__content']}>
+        <aside className={classes['before-dashboard__sidebar']}>
+          <ul>
+            {Object.entries(Documentation).map(([key, { title }]) => (
+              <li
+                key={key}
+                className={`${classes['before-dashboard__sidebar-item']} ${
+                  key === defaultKey ? classes['before-dashboard__sidebar-item--active'] : ''
+                }`}
+              >
+                {title}
+              </li>
+            ))}
+          </ul>
         </aside>
         <div>
-          {/* Here we render the content of the selected item in the list */}
-          <GettingStarted />
+          <ActiveComponent />
         </div>
       </div>
     </div>
   )
+}
+
+
+const Documentation = {
+  'getting-started': {
+    title: 'Getting Started',
+    component: GettingStarted,
+  },
+  'collections': {
+    title: 'Collections',
+    component: () => (
+      <div>
+        <h3>Collections Documentation</h3>
+        <p>Learn about how collections are structured in this project.</p>
+      </div>
+    ),
+  },
+  'deployment': {
+    title: 'Deployment',
+    component: () => (
+      <div>
+        <h3>Deployment Guide</h3>
+        <p>Instructions for deploying your Nexweb application.</p>
+      </div>
+    ),
+  },
 }

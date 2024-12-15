@@ -17,6 +17,8 @@ export interface Config {
     media: Media;
     assets: Asset;
     users: User;
+    'getting-started': GettingStarted;
+    tickets: Ticket;
     redirects: Redirect;
     search: Search;
     forms: Form;
@@ -33,6 +35,8 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     assets: AssetsSelect<false> | AssetsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
+    'getting-started': GettingStartedSelect<false> | GettingStartedSelect<true>;
+    tickets: TicketsSelect<false> | TicketsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     search: SearchSelect<false> | SearchSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
@@ -649,6 +653,26 @@ export interface Asset {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "getting-started".
+ */
+export interface GettingStarted {
+  id: number;
+  dummyField?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tickets".
+ */
+export interface Ticket {
+  id: number;
+  dummyField?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -745,6 +769,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'users';
         value: number | User;
+      } | null)
+    | ({
+        relationTo: 'getting-started';
+        value: number | GettingStarted;
+      } | null)
+    | ({
+        relationTo: 'tickets';
+        value: number | Ticket;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -1104,6 +1136,24 @@ export interface UsersSelect<T extends boolean = true> {
   _verificationToken?: T;
   loginAttempts?: T;
   lockUntil?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "getting-started_select".
+ */
+export interface GettingStartedSelect<T extends boolean = true> {
+  dummyField?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tickets_select".
+ */
+export interface TicketsSelect<T extends boolean = true> {
+  dummyField?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

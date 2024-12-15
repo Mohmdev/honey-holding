@@ -2,7 +2,7 @@
 import { admins } from '@/access/admins'
 import type { CollectionConfig } from 'payload'
 
-export const GettingStarted: CollectionConfig = {
+export const Docs: CollectionConfig = {
   slug: 'getting-started',
   endpoints: false,
   labels: {
