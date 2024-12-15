@@ -10,9 +10,6 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export const Assets: CollectionConfig<'assets'> = {
-  // admin: {
-  //   group: 'Uploads'
-  // },
   slug: 'assets',
   labels: {
     singular: 'Asset',

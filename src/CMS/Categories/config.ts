@@ -1,15 +1,15 @@
+import { admins } from '@/access/admins'
+import { adminsOrPublished } from '@/access/adminsOrPublished'
+
 import type { CollectionConfig } from 'payload'
 
-import { anyone } from '@/access/anyone'
-import { authenticated } from '@/access/authenticated'
-
-export const Categories: CollectionConfig = {
+export const Categories: CollectionConfig<'categories'> = {
   slug: 'categories',
   access: {
-    create: authenticated,
-    delete: authenticated,
-    read: anyone,
-    update: authenticated
+    create: admins,
+    delete: admins,
+    read: adminsOrPublished,
+    update: admins
   },
   admin: {
     useAsTitle: 'title'
