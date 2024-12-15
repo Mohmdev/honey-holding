@@ -26,8 +26,11 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE TYPE "public"."enum__pages_v_version_status" AS ENUM('draft', 'published');
   CREATE TYPE "public"."enum_posts_status" AS ENUM('draft', 'published');
   CREATE TYPE "public"."enum__posts_v_version_status" AS ENUM('draft', 'published');
+  CREATE TYPE "public"."enum_users_roles" AS ENUM('admin', 'user');
   CREATE TYPE "public"."enum_redirects_to_type" AS ENUM('reference', 'custom');
   CREATE TYPE "public"."enum_forms_confirmation_type" AS ENUM('message', 'redirect');
+  CREATE TYPE "public"."enum_header_nav_items_link_type" AS ENUM('reference', 'custom');
+  CREATE TYPE "public"."enum_footer_nav_items_link_type" AS ENUM('reference', 'custom');
   CREATE TABLE IF NOT EXISTS "pages_hero_links" (
   	"_order" integer NOT NULL,
   	"_parent_id" integer NOT NULL,
@@ -352,6 +355,119 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
   );
   
+  CREATE TABLE IF NOT EXISTS "media" (
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"alt" varchar,
+  	"caption" jsonb,
+  	"prefix" varchar DEFAULT 'media',
+  	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
+  	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
+  	"url" varchar,
+  	"thumbnail_u_r_l" varchar,
+  	"filename" varchar,
+  	"mime_type" varchar,
+  	"filesize" numeric,
+  	"width" numeric,
+  	"height" numeric,
+  	"focal_x" numeric,
+  	"focal_y" numeric,
+  	"sizes_thumbnail_url" varchar,
+  	"sizes_thumbnail_width" numeric,
+  	"sizes_thumbnail_height" numeric,
+  	"sizes_thumbnail_mime_type" varchar,
+  	"sizes_thumbnail_filesize" numeric,
+  	"sizes_thumbnail_filename" varchar,
+  	"sizes_square_url" varchar,
+  	"sizes_square_width" numeric,
+  	"sizes_square_height" numeric,
+  	"sizes_square_mime_type" varchar,
+  	"sizes_square_filesize" numeric,
+  	"sizes_square_filename" varchar,
+  	"sizes_small_url" varchar,
+  	"sizes_small_width" numeric,
+  	"sizes_small_height" numeric,
+  	"sizes_small_mime_type" varchar,
+  	"sizes_small_filesize" numeric,
+  	"sizes_small_filename" varchar,
+  	"sizes_medium_url" varchar,
+  	"sizes_medium_width" numeric,
+  	"sizes_medium_height" numeric,
+  	"sizes_medium_mime_type" varchar,
+  	"sizes_medium_filesize" numeric,
+  	"sizes_medium_filename" varchar,
+  	"sizes_large_url" varchar,
+  	"sizes_large_width" numeric,
+  	"sizes_large_height" numeric,
+  	"sizes_large_mime_type" varchar,
+  	"sizes_large_filesize" numeric,
+  	"sizes_large_filename" varchar,
+  	"sizes_xlarge_url" varchar,
+  	"sizes_xlarge_width" numeric,
+  	"sizes_xlarge_height" numeric,
+  	"sizes_xlarge_mime_type" varchar,
+  	"sizes_xlarge_filesize" numeric,
+  	"sizes_xlarge_filename" varchar,
+  	"sizes_og_url" varchar,
+  	"sizes_og_width" numeric,
+  	"sizes_og_height" numeric,
+  	"sizes_og_mime_type" varchar,
+  	"sizes_og_filesize" numeric,
+  	"sizes_og_filename" varchar
+  );
+  
+  CREATE TABLE IF NOT EXISTS "assets" (
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"alt" varchar,
+  	"caption" varchar,
+  	"prefix" varchar DEFAULT 'assets',
+  	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
+  	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
+  	"url" varchar,
+  	"thumbnail_u_r_l" varchar,
+  	"filename" varchar,
+  	"mime_type" varchar,
+  	"filesize" numeric,
+  	"width" numeric,
+  	"height" numeric,
+  	"focal_x" numeric,
+  	"focal_y" numeric
+  );
+  
+  CREATE TABLE IF NOT EXISTS "users_roles" (
+  	"order" integer NOT NULL,
+  	"parent_id" integer NOT NULL,
+  	"value" "enum_users_roles",
+  	"id" serial PRIMARY KEY NOT NULL
+  );
+  
+  CREATE TABLE IF NOT EXISTS "users" (
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"name" varchar,
+  	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
+  	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
+  	"email" varchar NOT NULL,
+  	"reset_password_token" varchar,
+  	"reset_password_expiration" timestamp(3) with time zone,
+  	"salt" varchar,
+  	"hash" varchar,
+  	"_verified" boolean,
+  	"_verificationtoken" varchar,
+  	"login_attempts" numeric DEFAULT 0,
+  	"lock_until" timestamp(3) with time zone
+  );
+  
+  CREATE TABLE IF NOT EXISTS "docs" (
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
+  	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
+  );
+  
+  CREATE TABLE IF NOT EXISTS "tickets" (
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
+  	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
+  );
+  
   CREATE TABLE IF NOT EXISTS "redirects" (
   	"id" serial PRIMARY KEY NOT NULL,
   	"from" varchar NOT NULL,
@@ -555,15 +671,104 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
   );
   
-  ALTER TABLE "media" ADD COLUMN "prefix" varchar DEFAULT 'media';
-  ALTER TABLE "assets" ADD COLUMN "prefix" varchar DEFAULT 'assets';
-  ALTER TABLE "payload_locked_documents_rels" ADD COLUMN "pages_id" integer;
-  ALTER TABLE "payload_locked_documents_rels" ADD COLUMN "posts_id" integer;
-  ALTER TABLE "payload_locked_documents_rels" ADD COLUMN "categories_id" integer;
-  ALTER TABLE "payload_locked_documents_rels" ADD COLUMN "redirects_id" integer;
-  ALTER TABLE "payload_locked_documents_rels" ADD COLUMN "search_id" integer;
-  ALTER TABLE "payload_locked_documents_rels" ADD COLUMN "forms_id" integer;
-  ALTER TABLE "payload_locked_documents_rels" ADD COLUMN "form_submissions_id" integer;
+  CREATE TABLE IF NOT EXISTS "payload_locked_documents" (
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"global_slug" varchar,
+  	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
+  	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
+  );
+  
+  CREATE TABLE IF NOT EXISTS "payload_locked_documents_rels" (
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"order" integer,
+  	"parent_id" integer NOT NULL,
+  	"path" varchar NOT NULL,
+  	"pages_id" integer,
+  	"posts_id" integer,
+  	"categories_id" integer,
+  	"media_id" integer,
+  	"assets_id" integer,
+  	"users_id" integer,
+  	"docs_id" integer,
+  	"tickets_id" integer,
+  	"redirects_id" integer,
+  	"search_id" integer,
+  	"forms_id" integer,
+  	"form_submissions_id" integer
+  );
+  
+  CREATE TABLE IF NOT EXISTS "payload_preferences" (
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"key" varchar,
+  	"value" jsonb,
+  	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
+  	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
+  );
+  
+  CREATE TABLE IF NOT EXISTS "payload_preferences_rels" (
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"order" integer,
+  	"parent_id" integer NOT NULL,
+  	"path" varchar NOT NULL,
+  	"users_id" integer
+  );
+  
+  CREATE TABLE IF NOT EXISTS "payload_migrations" (
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"name" varchar,
+  	"batch" numeric,
+  	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
+  	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
+  );
+  
+  CREATE TABLE IF NOT EXISTS "header_nav_items" (
+  	"_order" integer NOT NULL,
+  	"_parent_id" integer NOT NULL,
+  	"id" varchar PRIMARY KEY NOT NULL,
+  	"link_type" "enum_header_nav_items_link_type" DEFAULT 'reference',
+  	"link_new_tab" boolean,
+  	"link_url" varchar,
+  	"link_label" varchar NOT NULL
+  );
+  
+  CREATE TABLE IF NOT EXISTS "header" (
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"updated_at" timestamp(3) with time zone,
+  	"created_at" timestamp(3) with time zone
+  );
+  
+  CREATE TABLE IF NOT EXISTS "header_rels" (
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"order" integer,
+  	"parent_id" integer NOT NULL,
+  	"path" varchar NOT NULL,
+  	"pages_id" integer
+  );
+  
+  CREATE TABLE IF NOT EXISTS "footer_nav_items" (
+  	"_order" integer NOT NULL,
+  	"_parent_id" integer NOT NULL,
+  	"id" varchar PRIMARY KEY NOT NULL,
+  	"link_type" "enum_footer_nav_items_link_type" DEFAULT 'reference',
+  	"link_new_tab" boolean,
+  	"link_url" varchar,
+  	"link_label" varchar NOT NULL
+  );
+  
+  CREATE TABLE IF NOT EXISTS "footer" (
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"updated_at" timestamp(3) with time zone,
+  	"created_at" timestamp(3) with time zone
+  );
+  
+  CREATE TABLE IF NOT EXISTS "footer_rels" (
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"order" integer,
+  	"parent_id" integer NOT NULL,
+  	"path" varchar NOT NULL,
+  	"pages_id" integer
+  );
+  
   DO $$ BEGIN
    ALTER TABLE "pages_hero_links" ADD CONSTRAINT "pages_hero_links_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages"("id") ON DELETE cascade ON UPDATE no action;
   EXCEPTION
@@ -859,6 +1064,12 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   END $$;
   
   DO $$ BEGIN
+   ALTER TABLE "users_roles" ADD CONSTRAINT "users_roles_parent_fk" FOREIGN KEY ("parent_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
    ALTER TABLE "redirects_rels" ADD CONSTRAINT "redirects_rels_parent_fk" FOREIGN KEY ("parent_id") REFERENCES "public"."redirects"("id") ON DELETE cascade ON UPDATE no action;
   EXCEPTION
    WHEN duplicate_object THEN null;
@@ -978,6 +1189,132 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
    WHEN duplicate_object THEN null;
   END $$;
   
+  DO $$ BEGIN
+   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_parent_fk" FOREIGN KEY ("parent_id") REFERENCES "public"."payload_locked_documents"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_pages_fk" FOREIGN KEY ("pages_id") REFERENCES "public"."pages"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_posts_fk" FOREIGN KEY ("posts_id") REFERENCES "public"."posts"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_categories_fk" FOREIGN KEY ("categories_id") REFERENCES "public"."categories"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_media_fk" FOREIGN KEY ("media_id") REFERENCES "public"."media"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_assets_fk" FOREIGN KEY ("assets_id") REFERENCES "public"."assets"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_users_fk" FOREIGN KEY ("users_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_docs_fk" FOREIGN KEY ("docs_id") REFERENCES "public"."docs"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_tickets_fk" FOREIGN KEY ("tickets_id") REFERENCES "public"."tickets"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_redirects_fk" FOREIGN KEY ("redirects_id") REFERENCES "public"."redirects"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_search_fk" FOREIGN KEY ("search_id") REFERENCES "public"."search"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_forms_fk" FOREIGN KEY ("forms_id") REFERENCES "public"."forms"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_form_submissions_fk" FOREIGN KEY ("form_submissions_id") REFERENCES "public"."form_submissions"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "payload_preferences_rels" ADD CONSTRAINT "payload_preferences_rels_parent_fk" FOREIGN KEY ("parent_id") REFERENCES "public"."payload_preferences"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "payload_preferences_rels" ADD CONSTRAINT "payload_preferences_rels_users_fk" FOREIGN KEY ("users_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "header_nav_items" ADD CONSTRAINT "header_nav_items_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."header"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "header_rels" ADD CONSTRAINT "header_rels_parent_fk" FOREIGN KEY ("parent_id") REFERENCES "public"."header"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "header_rels" ADD CONSTRAINT "header_rels_pages_fk" FOREIGN KEY ("pages_id") REFERENCES "public"."pages"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "footer_nav_items" ADD CONSTRAINT "footer_nav_items_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."footer"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "footer_rels" ADD CONSTRAINT "footer_rels_parent_fk" FOREIGN KEY ("parent_id") REFERENCES "public"."footer"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "footer_rels" ADD CONSTRAINT "footer_rels_pages_fk" FOREIGN KEY ("pages_id") REFERENCES "public"."pages"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
   CREATE INDEX IF NOT EXISTS "pages_hero_links_order_idx" ON "pages_hero_links" USING btree ("_order");
   CREATE INDEX IF NOT EXISTS "pages_hero_links_parent_id_idx" ON "pages_hero_links" USING btree ("_parent_id");
   CREATE INDEX IF NOT EXISTS "pages_blocks_cta_links_order_idx" ON "pages_blocks_cta_links" USING btree ("_order");
@@ -1090,6 +1427,28 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX IF NOT EXISTS "categories_parent_idx" ON "categories" USING btree ("parent_id");
   CREATE INDEX IF NOT EXISTS "categories_updated_at_idx" ON "categories" USING btree ("updated_at");
   CREATE INDEX IF NOT EXISTS "categories_created_at_idx" ON "categories" USING btree ("created_at");
+  CREATE INDEX IF NOT EXISTS "media_updated_at_idx" ON "media" USING btree ("updated_at");
+  CREATE INDEX IF NOT EXISTS "media_created_at_idx" ON "media" USING btree ("created_at");
+  CREATE UNIQUE INDEX IF NOT EXISTS "media_filename_idx" ON "media" USING btree ("filename");
+  CREATE INDEX IF NOT EXISTS "media_sizes_thumbnail_sizes_thumbnail_filename_idx" ON "media" USING btree ("sizes_thumbnail_filename");
+  CREATE INDEX IF NOT EXISTS "media_sizes_square_sizes_square_filename_idx" ON "media" USING btree ("sizes_square_filename");
+  CREATE INDEX IF NOT EXISTS "media_sizes_small_sizes_small_filename_idx" ON "media" USING btree ("sizes_small_filename");
+  CREATE INDEX IF NOT EXISTS "media_sizes_medium_sizes_medium_filename_idx" ON "media" USING btree ("sizes_medium_filename");
+  CREATE INDEX IF NOT EXISTS "media_sizes_large_sizes_large_filename_idx" ON "media" USING btree ("sizes_large_filename");
+  CREATE INDEX IF NOT EXISTS "media_sizes_xlarge_sizes_xlarge_filename_idx" ON "media" USING btree ("sizes_xlarge_filename");
+  CREATE INDEX IF NOT EXISTS "media_sizes_og_sizes_og_filename_idx" ON "media" USING btree ("sizes_og_filename");
+  CREATE INDEX IF NOT EXISTS "assets_updated_at_idx" ON "assets" USING btree ("updated_at");
+  CREATE INDEX IF NOT EXISTS "assets_created_at_idx" ON "assets" USING btree ("created_at");
+  CREATE UNIQUE INDEX IF NOT EXISTS "assets_filename_idx" ON "assets" USING btree ("filename");
+  CREATE INDEX IF NOT EXISTS "users_roles_order_idx" ON "users_roles" USING btree ("order");
+  CREATE INDEX IF NOT EXISTS "users_roles_parent_idx" ON "users_roles" USING btree ("parent_id");
+  CREATE INDEX IF NOT EXISTS "users_updated_at_idx" ON "users" USING btree ("updated_at");
+  CREATE INDEX IF NOT EXISTS "users_created_at_idx" ON "users" USING btree ("created_at");
+  CREATE UNIQUE INDEX IF NOT EXISTS "users_email_idx" ON "users" USING btree ("email");
+  CREATE INDEX IF NOT EXISTS "docs_updated_at_idx" ON "docs" USING btree ("updated_at");
+  CREATE INDEX IF NOT EXISTS "docs_created_at_idx" ON "docs" USING btree ("created_at");
+  CREATE INDEX IF NOT EXISTS "tickets_updated_at_idx" ON "tickets" USING btree ("updated_at");
+  CREATE INDEX IF NOT EXISTS "tickets_created_at_idx" ON "tickets" USING btree ("created_at");
   CREATE INDEX IF NOT EXISTS "redirects_from_idx" ON "redirects" USING btree ("from");
   CREATE INDEX IF NOT EXISTS "redirects_updated_at_idx" ON "redirects" USING btree ("updated_at");
   CREATE INDEX IF NOT EXISTS "redirects_created_at_idx" ON "redirects" USING btree ("created_at");
@@ -1146,107 +1505,50 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX IF NOT EXISTS "form_submissions_form_idx" ON "form_submissions" USING btree ("form_id");
   CREATE INDEX IF NOT EXISTS "form_submissions_updated_at_idx" ON "form_submissions" USING btree ("updated_at");
   CREATE INDEX IF NOT EXISTS "form_submissions_created_at_idx" ON "form_submissions" USING btree ("created_at");
-  DO $$ BEGIN
-   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_pages_fk" FOREIGN KEY ("pages_id") REFERENCES "public"."pages"("id") ON DELETE cascade ON UPDATE no action;
-  EXCEPTION
-   WHEN duplicate_object THEN null;
-  END $$;
-  
-  DO $$ BEGIN
-   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_posts_fk" FOREIGN KEY ("posts_id") REFERENCES "public"."posts"("id") ON DELETE cascade ON UPDATE no action;
-  EXCEPTION
-   WHEN duplicate_object THEN null;
-  END $$;
-  
-  DO $$ BEGIN
-   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_categories_fk" FOREIGN KEY ("categories_id") REFERENCES "public"."categories"("id") ON DELETE cascade ON UPDATE no action;
-  EXCEPTION
-   WHEN duplicate_object THEN null;
-  END $$;
-  
-  DO $$ BEGIN
-   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_redirects_fk" FOREIGN KEY ("redirects_id") REFERENCES "public"."redirects"("id") ON DELETE cascade ON UPDATE no action;
-  EXCEPTION
-   WHEN duplicate_object THEN null;
-  END $$;
-  
-  DO $$ BEGIN
-   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_search_fk" FOREIGN KEY ("search_id") REFERENCES "public"."search"("id") ON DELETE cascade ON UPDATE no action;
-  EXCEPTION
-   WHEN duplicate_object THEN null;
-  END $$;
-  
-  DO $$ BEGIN
-   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_forms_fk" FOREIGN KEY ("forms_id") REFERENCES "public"."forms"("id") ON DELETE cascade ON UPDATE no action;
-  EXCEPTION
-   WHEN duplicate_object THEN null;
-  END $$;
-  
-  DO $$ BEGIN
-   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_form_submissions_fk" FOREIGN KEY ("form_submissions_id") REFERENCES "public"."form_submissions"("id") ON DELETE cascade ON UPDATE no action;
-  EXCEPTION
-   WHEN duplicate_object THEN null;
-  END $$;
-  
+  CREATE INDEX IF NOT EXISTS "payload_locked_documents_global_slug_idx" ON "payload_locked_documents" USING btree ("global_slug");
+  CREATE INDEX IF NOT EXISTS "payload_locked_documents_updated_at_idx" ON "payload_locked_documents" USING btree ("updated_at");
+  CREATE INDEX IF NOT EXISTS "payload_locked_documents_created_at_idx" ON "payload_locked_documents" USING btree ("created_at");
+  CREATE INDEX IF NOT EXISTS "payload_locked_documents_rels_order_idx" ON "payload_locked_documents_rels" USING btree ("order");
+  CREATE INDEX IF NOT EXISTS "payload_locked_documents_rels_parent_idx" ON "payload_locked_documents_rels" USING btree ("parent_id");
+  CREATE INDEX IF NOT EXISTS "payload_locked_documents_rels_path_idx" ON "payload_locked_documents_rels" USING btree ("path");
   CREATE INDEX IF NOT EXISTS "payload_locked_documents_rels_pages_id_idx" ON "payload_locked_documents_rels" USING btree ("pages_id");
   CREATE INDEX IF NOT EXISTS "payload_locked_documents_rels_posts_id_idx" ON "payload_locked_documents_rels" USING btree ("posts_id");
   CREATE INDEX IF NOT EXISTS "payload_locked_documents_rels_categories_id_idx" ON "payload_locked_documents_rels" USING btree ("categories_id");
+  CREATE INDEX IF NOT EXISTS "payload_locked_documents_rels_media_id_idx" ON "payload_locked_documents_rels" USING btree ("media_id");
+  CREATE INDEX IF NOT EXISTS "payload_locked_documents_rels_assets_id_idx" ON "payload_locked_documents_rels" USING btree ("assets_id");
+  CREATE INDEX IF NOT EXISTS "payload_locked_documents_rels_users_id_idx" ON "payload_locked_documents_rels" USING btree ("users_id");
+  CREATE INDEX IF NOT EXISTS "payload_locked_documents_rels_docs_id_idx" ON "payload_locked_documents_rels" USING btree ("docs_id");
+  CREATE INDEX IF NOT EXISTS "payload_locked_documents_rels_tickets_id_idx" ON "payload_locked_documents_rels" USING btree ("tickets_id");
   CREATE INDEX IF NOT EXISTS "payload_locked_documents_rels_redirects_id_idx" ON "payload_locked_documents_rels" USING btree ("redirects_id");
   CREATE INDEX IF NOT EXISTS "payload_locked_documents_rels_search_id_idx" ON "payload_locked_documents_rels" USING btree ("search_id");
   CREATE INDEX IF NOT EXISTS "payload_locked_documents_rels_forms_id_idx" ON "payload_locked_documents_rels" USING btree ("forms_id");
-  CREATE INDEX IF NOT EXISTS "payload_locked_documents_rels_form_submissions_id_idx" ON "payload_locked_documents_rels" USING btree ("form_submissions_id");`)
+  CREATE INDEX IF NOT EXISTS "payload_locked_documents_rels_form_submissions_id_idx" ON "payload_locked_documents_rels" USING btree ("form_submissions_id");
+  CREATE INDEX IF NOT EXISTS "payload_preferences_key_idx" ON "payload_preferences" USING btree ("key");
+  CREATE INDEX IF NOT EXISTS "payload_preferences_updated_at_idx" ON "payload_preferences" USING btree ("updated_at");
+  CREATE INDEX IF NOT EXISTS "payload_preferences_created_at_idx" ON "payload_preferences" USING btree ("created_at");
+  CREATE INDEX IF NOT EXISTS "payload_preferences_rels_order_idx" ON "payload_preferences_rels" USING btree ("order");
+  CREATE INDEX IF NOT EXISTS "payload_preferences_rels_parent_idx" ON "payload_preferences_rels" USING btree ("parent_id");
+  CREATE INDEX IF NOT EXISTS "payload_preferences_rels_path_idx" ON "payload_preferences_rels" USING btree ("path");
+  CREATE INDEX IF NOT EXISTS "payload_preferences_rels_users_id_idx" ON "payload_preferences_rels" USING btree ("users_id");
+  CREATE INDEX IF NOT EXISTS "payload_migrations_updated_at_idx" ON "payload_migrations" USING btree ("updated_at");
+  CREATE INDEX IF NOT EXISTS "payload_migrations_created_at_idx" ON "payload_migrations" USING btree ("created_at");
+  CREATE INDEX IF NOT EXISTS "header_nav_items_order_idx" ON "header_nav_items" USING btree ("_order");
+  CREATE INDEX IF NOT EXISTS "header_nav_items_parent_id_idx" ON "header_nav_items" USING btree ("_parent_id");
+  CREATE INDEX IF NOT EXISTS "header_rels_order_idx" ON "header_rels" USING btree ("order");
+  CREATE INDEX IF NOT EXISTS "header_rels_parent_idx" ON "header_rels" USING btree ("parent_id");
+  CREATE INDEX IF NOT EXISTS "header_rels_path_idx" ON "header_rels" USING btree ("path");
+  CREATE INDEX IF NOT EXISTS "header_rels_pages_id_idx" ON "header_rels" USING btree ("pages_id");
+  CREATE INDEX IF NOT EXISTS "footer_nav_items_order_idx" ON "footer_nav_items" USING btree ("_order");
+  CREATE INDEX IF NOT EXISTS "footer_nav_items_parent_id_idx" ON "footer_nav_items" USING btree ("_parent_id");
+  CREATE INDEX IF NOT EXISTS "footer_rels_order_idx" ON "footer_rels" USING btree ("order");
+  CREATE INDEX IF NOT EXISTS "footer_rels_parent_idx" ON "footer_rels" USING btree ("parent_id");
+  CREATE INDEX IF NOT EXISTS "footer_rels_path_idx" ON "footer_rels" USING btree ("path");
+  CREATE INDEX IF NOT EXISTS "footer_rels_pages_id_idx" ON "footer_rels" USING btree ("pages_id");`)
 }
 
 export async function down({ db, payload, req }: MigrateDownArgs): Promise<void> {
   await db.execute(sql`
-   ALTER TABLE "pages_hero_links" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "pages_blocks_cta_links" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "pages_blocks_cta" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "pages_blocks_content_columns" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "pages_blocks_content" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "pages_blocks_media_block" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "pages_blocks_archive" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "pages_blocks_form_block" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "pages" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "pages_rels" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "_pages_v_version_hero_links" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "_pages_v_blocks_cta_links" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "_pages_v_blocks_cta" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "_pages_v_blocks_content_columns" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "_pages_v_blocks_content" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "_pages_v_blocks_media_block" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "_pages_v_blocks_archive" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "_pages_v_blocks_form_block" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "_pages_v" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "_pages_v_rels" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "posts_populated_authors" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "posts" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "posts_rels" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "_posts_v_version_populated_authors" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "_posts_v" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "_posts_v_rels" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "categories_breadcrumbs" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "categories" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "redirects" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "redirects_rels" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "search_categories" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "search" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "search_rels" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "forms_blocks_checkbox" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "forms_blocks_country" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "forms_blocks_email" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "forms_blocks_message" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "forms_blocks_number" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "forms_blocks_select_options" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "forms_blocks_select" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "forms_blocks_state" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "forms_blocks_text" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "forms_blocks_textarea" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "forms_emails" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "forms" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "form_submissions_submission_data" DISABLE ROW LEVEL SECURITY;
-  ALTER TABLE "form_submissions" DISABLE ROW LEVEL SECURITY;
-  DROP TABLE "pages_hero_links" CASCADE;
+   DROP TABLE "pages_hero_links" CASCADE;
   DROP TABLE "pages_blocks_cta_links" CASCADE;
   DROP TABLE "pages_blocks_cta" CASCADE;
   DROP TABLE "pages_blocks_content_columns" CASCADE;
@@ -1274,6 +1576,12 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   DROP TABLE "_posts_v_rels" CASCADE;
   DROP TABLE "categories_breadcrumbs" CASCADE;
   DROP TABLE "categories" CASCADE;
+  DROP TABLE "media" CASCADE;
+  DROP TABLE "assets" CASCADE;
+  DROP TABLE "users_roles" CASCADE;
+  DROP TABLE "users" CASCADE;
+  DROP TABLE "docs" CASCADE;
+  DROP TABLE "tickets" CASCADE;
   DROP TABLE "redirects" CASCADE;
   DROP TABLE "redirects_rels" CASCADE;
   DROP TABLE "search_categories" CASCADE;
@@ -1293,36 +1601,17 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   DROP TABLE "forms" CASCADE;
   DROP TABLE "form_submissions_submission_data" CASCADE;
   DROP TABLE "form_submissions" CASCADE;
-  ALTER TABLE "payload_locked_documents_rels" DROP CONSTRAINT "payload_locked_documents_rels_pages_fk";
-  
-  ALTER TABLE "payload_locked_documents_rels" DROP CONSTRAINT "payload_locked_documents_rels_posts_fk";
-  
-  ALTER TABLE "payload_locked_documents_rels" DROP CONSTRAINT "payload_locked_documents_rels_categories_fk";
-  
-  ALTER TABLE "payload_locked_documents_rels" DROP CONSTRAINT "payload_locked_documents_rels_redirects_fk";
-  
-  ALTER TABLE "payload_locked_documents_rels" DROP CONSTRAINT "payload_locked_documents_rels_search_fk";
-  
-  ALTER TABLE "payload_locked_documents_rels" DROP CONSTRAINT "payload_locked_documents_rels_forms_fk";
-  
-  ALTER TABLE "payload_locked_documents_rels" DROP CONSTRAINT "payload_locked_documents_rels_form_submissions_fk";
-  
-  DROP INDEX IF EXISTS "payload_locked_documents_rels_pages_id_idx";
-  DROP INDEX IF EXISTS "payload_locked_documents_rels_posts_id_idx";
-  DROP INDEX IF EXISTS "payload_locked_documents_rels_categories_id_idx";
-  DROP INDEX IF EXISTS "payload_locked_documents_rels_redirects_id_idx";
-  DROP INDEX IF EXISTS "payload_locked_documents_rels_search_id_idx";
-  DROP INDEX IF EXISTS "payload_locked_documents_rels_forms_id_idx";
-  DROP INDEX IF EXISTS "payload_locked_documents_rels_form_submissions_id_idx";
-  ALTER TABLE "media" DROP COLUMN IF EXISTS "prefix";
-  ALTER TABLE "assets" DROP COLUMN IF EXISTS "prefix";
-  ALTER TABLE "payload_locked_documents_rels" DROP COLUMN IF EXISTS "pages_id";
-  ALTER TABLE "payload_locked_documents_rels" DROP COLUMN IF EXISTS "posts_id";
-  ALTER TABLE "payload_locked_documents_rels" DROP COLUMN IF EXISTS "categories_id";
-  ALTER TABLE "payload_locked_documents_rels" DROP COLUMN IF EXISTS "redirects_id";
-  ALTER TABLE "payload_locked_documents_rels" DROP COLUMN IF EXISTS "search_id";
-  ALTER TABLE "payload_locked_documents_rels" DROP COLUMN IF EXISTS "forms_id";
-  ALTER TABLE "payload_locked_documents_rels" DROP COLUMN IF EXISTS "form_submissions_id";
+  DROP TABLE "payload_locked_documents" CASCADE;
+  DROP TABLE "payload_locked_documents_rels" CASCADE;
+  DROP TABLE "payload_preferences" CASCADE;
+  DROP TABLE "payload_preferences_rels" CASCADE;
+  DROP TABLE "payload_migrations" CASCADE;
+  DROP TABLE "header_nav_items" CASCADE;
+  DROP TABLE "header" CASCADE;
+  DROP TABLE "header_rels" CASCADE;
+  DROP TABLE "footer_nav_items" CASCADE;
+  DROP TABLE "footer" CASCADE;
+  DROP TABLE "footer_rels" CASCADE;
   DROP TYPE "public"."enum_pages_hero_type";
   DROP TYPE "public"."enum_pages_hero_links_link_type";
   DROP TYPE "public"."enum_pages_hero_links_link_appearance";
@@ -1347,6 +1636,9 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   DROP TYPE "public"."enum__pages_v_version_status";
   DROP TYPE "public"."enum_posts_status";
   DROP TYPE "public"."enum__posts_v_version_status";
+  DROP TYPE "public"."enum_users_roles";
   DROP TYPE "public"."enum_redirects_to_type";
-  DROP TYPE "public"."enum_forms_confirmation_type";`)
+  DROP TYPE "public"."enum_forms_confirmation_type";
+  DROP TYPE "public"."enum_header_nav_items_link_type";
+  DROP TYPE "public"."enum_footer_nav_items_link_type";`)
 }

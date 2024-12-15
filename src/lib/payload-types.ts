@@ -17,7 +17,7 @@ export interface Config {
     media: Media;
     assets: Asset;
     users: User;
-    'getting-started': GettingStarted;
+    docs: Doc;
     tickets: Ticket;
     redirects: Redirect;
     search: Search;
@@ -35,7 +35,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     assets: AssetsSelect<false> | AssetsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
-    'getting-started': GettingStartedSelect<false> | GettingStartedSelect<true>;
+    docs: DocsSelect<false> | DocsSelect<true>;
     tickets: TicketsSelect<false> | TicketsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     search: SearchSelect<false> | SearchSelect<true>;
@@ -653,9 +653,9 @@ export interface Asset {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "getting-started".
+ * via the `definition` "docs".
  */
-export interface GettingStarted {
+export interface Doc {
   id: number;
   dummyField?: string | null;
   updatedAt: string;
@@ -771,8 +771,8 @@ export interface PayloadLockedDocument {
         value: number | User;
       } | null)
     | ({
-        relationTo: 'getting-started';
-        value: number | GettingStarted;
+        relationTo: 'docs';
+        value: number | Doc;
       } | null)
     | ({
         relationTo: 'tickets';
@@ -1139,9 +1139,9 @@ export interface UsersSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "getting-started_select".
+ * via the `definition` "docs_select".
  */
-export interface GettingStartedSelect<T extends boolean = true> {
+export interface DocsSelect<T extends boolean = true> {
   dummyField?: T;
   updatedAt?: T;
   createdAt?: T;

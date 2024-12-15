@@ -3,11 +3,11 @@ import { admins } from '@/access/admins'
 import type { CollectionConfig } from 'payload'
 
 export const Docs: CollectionConfig = {
-  slug: 'getting-started',
+  slug: 'docs',
   endpoints: false,
   labels: {
-    singular: 'Getting Started',
-    plural: 'Getting Started',
+    singular: 'Docs',
+    plural: 'Docs',
   },
   access: {
     read: admins,
