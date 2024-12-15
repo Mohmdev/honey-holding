@@ -1,5 +1,5 @@
-import { Loader2 } from "lucide-react";
-import React from "react";
+import { Loader2 } from 'lucide-react'
+import React from 'react'
 
 const Loading = () => {
   return (
@@ -7,7 +7,7 @@ const Loading = () => {
       <Loader2 className="loading__spinner" />
       <span className="loading__text">Loading...</span>
     </div>
-  );
-};
+  )
+}
 
-export default Loading;
+export default Loading

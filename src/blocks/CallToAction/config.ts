@@ -4,7 +4,7 @@ import {
   FixedToolbarFeature,
   HeadingFeature,
   InlineToolbarFeature,
-  lexicalEditor,
+  lexicalEditor
 } from '@payloadcms/richtext-lexical'
 
 import { linkGroup } from '../../fields/linkGroup'
@@ -22,21 +22,21 @@ export const CallToAction: Block = {
             ...rootFeatures,
             HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
             FixedToolbarFeature(),
-            InlineToolbarFeature(),
+            InlineToolbarFeature()
           ]
-        },
+        }
       }),
-      label: false,
+      label: false
     },
     linkGroup({
       appearances: ['default', 'outline'],
       overrides: {
-        maxRows: 2,
-      },
-    }),
+        maxRows: 2
+      }
+    })
   ],
   labels: {
     plural: 'Calls to Action',
-    singular: 'Call to Action',
-  },
+    singular: 'Call to Action'
+  }
 }

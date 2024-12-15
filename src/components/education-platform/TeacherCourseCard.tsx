@@ -55,7 +55,7 @@ const TeacherCourseCard = ({
             </span>
           </p>
           {course.enrollments && (
-            <p className="text-secondary bg-secondary/10 mt-1 ml-1 inline-block text-sm font-normal">
+            <p className="text-secondary bg-secondary/10 ml-1 mt-1 inline-block text-sm font-normal">
               <span className="text-white-100 font-bold">
                 {course.enrollments.length}
               </span>{' '}
@@ -87,7 +87,7 @@ const TeacherCourseCard = ({
               </div>
             </>
           ) : (
-            <p className="text-sm text-gray-500 italic">View Only</p>
+            <p className="text-sm italic text-gray-500">View Only</p>
           )}
         </div>
       </CardContent>

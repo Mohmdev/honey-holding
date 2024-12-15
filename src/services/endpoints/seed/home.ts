@@ -11,17 +11,17 @@ export const home: RequiredDataFromCollectionSlug<'pages'> = {
           type: 'custom',
           appearance: 'default',
           label: 'All posts',
-          url: '/posts',
-        },
+          url: '/posts'
+        }
       },
       {
         link: {
           type: 'custom',
           appearance: 'outline',
           label: 'Contact',
-          url: '/contact',
-        },
-      },
+          url: '/contact'
+        }
+      }
     ],
     // @ts-ignore
     media: '{{IMAGE_1}}',
@@ -39,14 +39,14 @@ export const home: RequiredDataFromCollectionSlug<'pages'> = {
                 mode: 'normal',
                 style: '',
                 text: 'Payload Website Template',
-                version: 1,
-              },
+                version: 1
+              }
             ],
             direction: 'ltr',
             format: '',
             indent: 0,
             tag: 'h1',
-            version: 1,
+            version: 1
           },
           {
             type: 'paragraph',
@@ -61,18 +61,18 @@ export const home: RequiredDataFromCollectionSlug<'pages'> = {
                     mode: 'normal',
                     style: '',
                     text: 'Visit the admin dashboard',
-                    version: 1,
-                  },
+                    version: 1
+                  }
                 ],
                 direction: 'ltr',
                 fields: {
                   linkType: 'custom',
                   newTab: false,
-                  url: '/admin',
+                  url: '/admin'
                 },
                 format: '',
                 indent: 0,
-                version: 3,
+                version: 3
               },
               {
                 type: 'text',
@@ -81,7 +81,7 @@ export const home: RequiredDataFromCollectionSlug<'pages'> = {
                 mode: 'normal',
                 style: '',
                 text: " to begin managing this site's content. The code for this template is completely open-source and can be found ",
-                version: 1,
+                version: 1
               },
               {
                 type: 'link',
@@ -93,18 +93,18 @@ export const home: RequiredDataFromCollectionSlug<'pages'> = {
                     mode: 'normal',
                     style: '',
                     text: 'on our Github',
-                    version: 1,
-                  },
+                    version: 1
+                  }
                 ],
                 direction: 'ltr',
                 fields: {
                   linkType: 'custom',
                   newTab: true,
-                  url: 'https://github.com/payloadcms/payload/tree/main/templates/website',
+                  url: 'https://github.com/payloadcms/payload/tree/main/templates/website'
                 },
                 format: '',
                 indent: 0,
-                version: 3,
+                version: 3
               },
               {
                 type: 'text',
@@ -113,22 +113,22 @@ export const home: RequiredDataFromCollectionSlug<'pages'> = {
                 mode: 'normal',
                 style: '',
                 text: '. ',
-                version: 1,
-              },
+                version: 1
+              }
             ],
             direction: 'ltr',
             format: '',
             indent: 0,
             textFormat: 0,
-            version: 1,
-          },
+            version: 1
+          }
         ],
         direction: 'ltr',
         format: '',
         indent: 0,
-        version: 1,
-      },
-    },
+        version: 1
+      }
+    }
   },
   layout: [
     {
@@ -150,23 +150,23 @@ export const home: RequiredDataFromCollectionSlug<'pages'> = {
                       mode: 'normal',
                       style: '',
                       text: 'Core features',
-                      version: 1,
-                    },
+                      version: 1
+                    }
                   ],
                   direction: 'ltr',
                   format: '',
                   indent: 0,
                   tag: 'h2',
-                  version: 1,
-                },
+                  version: 1
+                }
               ],
               direction: 'ltr',
               format: '',
               indent: 0,
-              version: 1,
-            },
+              version: 1
+            }
           },
-          size: 'full',
+          size: 'full'
         },
         {
           enableLink: false,
@@ -184,14 +184,14 @@ export const home: RequiredDataFromCollectionSlug<'pages'> = {
                       mode: 'normal',
                       style: '',
                       text: 'Admin Dashboard',
-                      version: 1,
-                    },
+                      version: 1
+                    }
                   ],
                   direction: 'ltr',
                   format: '',
                   indent: 0,
                   tag: 'h3',
-                  version: 1,
+                  version: 1
                 },
                 {
                   type: 'paragraph',
@@ -203,7 +203,7 @@ export const home: RequiredDataFromCollectionSlug<'pages'> = {
                       mode: 'normal',
                       style: '',
                       text: "Manage this site's pages and posts from the ",
-                      version: 1,
+                      version: 1
                     },
                     {
                       type: 'link',
@@ -215,18 +215,18 @@ export const home: RequiredDataFromCollectionSlug<'pages'> = {
                           mode: 'normal',
                           style: '',
                           text: 'admin dashboard',
-                          version: 1,
-                        },
+                          version: 1
+                        }
                       ],
                       direction: 'ltr',
                       fields: {
                         linkType: 'custom',
                         newTab: false,
-                        url: '/admin',
+                        url: '/admin'
                       },
                       format: '',
                       indent: 0,
-                      version: 2,
+                      version: 2
                     },
                     {
                       type: 'text',
@@ -235,23 +235,23 @@ export const home: RequiredDataFromCollectionSlug<'pages'> = {
                       mode: 'normal',
                       style: '',
                       text: '.',
-                      version: 1,
-                    },
+                      version: 1
+                    }
                   ],
                   direction: 'ltr',
                   format: '',
                   indent: 0,
                   textFormat: 0,
-                  version: 1,
-                },
+                  version: 1
+                }
               ],
               direction: 'ltr',
               format: '',
               indent: 0,
-              version: 1,
-            },
+              version: 1
+            }
           },
-          size: 'oneThird',
+          size: 'oneThird'
         },
         {
           enableLink: false,
@@ -269,14 +269,14 @@ export const home: RequiredDataFromCollectionSlug<'pages'> = {
                       mode: 'normal',
                       style: '',
                       text: 'Preview',
-                      version: 1,
-                    },
+                      version: 1
+                    }
                   ],
                   direction: 'ltr',
                   format: '',
                   indent: 0,
                   tag: 'h3',
-                  version: 1,
+                  version: 1
                 },
                 {
                   type: 'paragraph',
@@ -288,23 +288,23 @@ export const home: RequiredDataFromCollectionSlug<'pages'> = {
                       mode: 'normal',
                       style: '',
                       text: 'Using versions, drafts, and preview, editors can review and share their changes before publishing them.',
-                      version: 1,
-                    },
+                      version: 1
+                    }
                   ],
                   direction: 'ltr',
                   format: '',
                   indent: 0,
                   textFormat: 0,
-                  version: 1,
-                },
+                  version: 1
+                }
               ],
               direction: 'ltr',
               format: '',
               indent: 0,
-              version: 1,
-            },
+              version: 1
+            }
           },
-          size: 'oneThird',
+          size: 'oneThird'
         },
         {
           enableLink: false,
@@ -322,14 +322,14 @@ export const home: RequiredDataFromCollectionSlug<'pages'> = {
                       mode: 'normal',
                       style: '',
                       text: 'Page Builder',
-                      version: 1,
-                    },
+                      version: 1
+                    }
                   ],
                   direction: 'ltr',
                   format: '',
                   indent: 0,
                   tag: 'h3',
-                  version: 1,
+                  version: 1
                 },
                 {
                   type: 'paragraph',
@@ -341,23 +341,23 @@ export const home: RequiredDataFromCollectionSlug<'pages'> = {
                       mode: 'normal',
                       style: '',
                       text: 'Custom page builder allows you to create unique page, post, and project layouts for any type of content.',
-                      version: 1,
-                    },
+                      version: 1
+                    }
                   ],
                   direction: 'ltr',
                   format: '',
                   indent: 0,
                   textFormat: 0,
-                  version: 1,
-                },
+                  version: 1
+                }
               ],
               direction: 'ltr',
               format: '',
               indent: 0,
-              version: 1,
-            },
+              version: 1
+            }
           },
-          size: 'oneThird',
+          size: 'oneThird'
         },
         {
           enableLink: false,
@@ -375,14 +375,14 @@ export const home: RequiredDataFromCollectionSlug<'pages'> = {
                       mode: 'normal',
                       style: '',
                       text: 'SEO',
-                      version: 1,
-                    },
+                      version: 1
+                    }
                   ],
                   direction: 'ltr',
                   format: '',
                   indent: 0,
                   tag: 'h3',
-                  version: 1,
+                  version: 1
                 },
                 {
                   type: 'paragraph',
@@ -394,7 +394,7 @@ export const home: RequiredDataFromCollectionSlug<'pages'> = {
                       mode: 'normal',
                       style: '',
                       text: 'Editors have complete control over SEO data and site content directly from the ',
-                      version: 1,
+                      version: 1
                     },
                     {
                       type: 'link',
@@ -406,18 +406,18 @@ export const home: RequiredDataFromCollectionSlug<'pages'> = {
                           mode: 'normal',
                           style: '',
                           text: 'admin dashboard',
-                          version: 1,
-                        },
+                          version: 1
+                        }
                       ],
                       direction: 'ltr',
                       fields: {
                         linkType: 'custom',
                         newTab: false,
-                        url: '/admin',
+                        url: '/admin'
                       },
                       format: '',
                       indent: 0,
-                      version: 2,
+                      version: 2
                     },
                     {
                       type: 'text',
@@ -426,23 +426,23 @@ export const home: RequiredDataFromCollectionSlug<'pages'> = {
                       mode: 'normal',
                       style: '',
                       text: '.',
-                      version: 1,
-                    },
+                      version: 1
+                    }
                   ],
                   direction: 'ltr',
                   format: '',
                   indent: 0,
                   textFormat: 0,
-                  version: 1,
-                },
+                  version: 1
+                }
               ],
               direction: 'ltr',
               format: '',
               indent: 0,
-              version: 1,
-            },
+              version: 1
+            }
           },
-          size: 'oneThird',
+          size: 'oneThird'
         },
         {
           enableLink: false,
@@ -460,14 +460,14 @@ export const home: RequiredDataFromCollectionSlug<'pages'> = {
                       mode: 'normal',
                       style: '',
                       text: 'Dark Mode',
-                      version: 1,
-                    },
+                      version: 1
+                    }
                   ],
                   direction: 'ltr',
                   format: '',
                   indent: 0,
                   tag: 'h3',
-                  version: 1,
+                  version: 1
                 },
                 {
                   type: 'paragraph',
@@ -479,31 +479,31 @@ export const home: RequiredDataFromCollectionSlug<'pages'> = {
                       mode: 'normal',
                       style: '',
                       text: 'Users will experience this site in their preferred color scheme and each block can be inverted.',
-                      version: 1,
-                    },
+                      version: 1
+                    }
                   ],
                   direction: 'ltr',
                   format: '',
                   indent: 0,
                   textFormat: 0,
-                  version: 1,
-                },
+                  version: 1
+                }
               ],
               direction: 'ltr',
               format: '',
               indent: 0,
-              version: 1,
-            },
+              version: 1
+            }
           },
-          size: 'oneThird',
-        },
-      ],
+          size: 'oneThird'
+        }
+      ]
     },
     {
       blockName: 'Media Block',
       blockType: 'mediaBlock',
       // @ts-ignore
-      media: '{{IMAGE_2}}',
+      media: '{{IMAGE_2}}'
     },
     {
       blockName: 'Archive Block',
@@ -523,14 +523,14 @@ export const home: RequiredDataFromCollectionSlug<'pages'> = {
                   mode: 'normal',
                   style: '',
                   text: 'Recent posts',
-                  version: 1,
-                },
+                  version: 1
+                }
               ],
               direction: 'ltr',
               format: '',
               indent: 0,
               tag: 'h3',
-              version: 1,
+              version: 1
             },
             {
               type: 'paragraph',
@@ -542,24 +542,24 @@ export const home: RequiredDataFromCollectionSlug<'pages'> = {
                   mode: 'normal',
                   style: '',
                   text: 'The posts below are displayed in an "Archive" layout building block which is an extremely powerful way to display documents on a page. It can be auto-populated by collection or by category, or posts can be individually selected. Pagination controls will automatically appear if the number of results exceeds the number of items per page.',
-                  version: 1,
-                },
+                  version: 1
+                }
               ],
               direction: 'ltr',
               format: '',
               indent: 0,
               textFormat: 0,
-              version: 1,
-            },
+              version: 1
+            }
           ],
           direction: 'ltr',
           format: '',
           indent: 0,
-          version: 1,
-        },
+          version: 1
+        }
       },
       populateBy: 'collection',
-      relationTo: 'posts',
+      relationTo: 'posts'
     },
     {
       blockName: 'CTA',
@@ -570,9 +570,9 @@ export const home: RequiredDataFromCollectionSlug<'pages'> = {
             type: 'custom',
             appearance: 'default',
             label: 'All posts',
-            url: '/posts',
-          },
-        },
+            url: '/posts'
+          }
+        }
       ],
       richText: {
         root: {
@@ -588,14 +588,14 @@ export const home: RequiredDataFromCollectionSlug<'pages'> = {
                   mode: 'normal',
                   style: '',
                   text: 'This is a call to action',
-                  version: 1,
-                },
+                  version: 1
+                }
               ],
               direction: 'ltr',
               format: '',
               indent: 0,
               tag: 'h3',
-              version: 1,
+              version: 1
             },
             {
               type: 'paragraph',
@@ -607,7 +607,7 @@ export const home: RequiredDataFromCollectionSlug<'pages'> = {
                   mode: 'normal',
                   style: '',
                   text: 'This is a custom layout building block ',
-                  version: 1,
+                  version: 1
                 },
                 {
                   type: 'link',
@@ -619,18 +619,18 @@ export const home: RequiredDataFromCollectionSlug<'pages'> = {
                       mode: 'normal',
                       style: '',
                       text: 'configured in the admin dashboard',
-                      version: 1,
-                    },
+                      version: 1
+                    }
                   ],
                   direction: 'ltr',
                   fields: {
                     linkType: 'custom',
                     newTab: false,
-                    url: '/admin',
+                    url: '/admin'
                   },
                   format: '',
                   indent: 0,
-                  version: 2,
+                  version: 2
                 },
                 {
                   type: 'text',
@@ -639,29 +639,29 @@ export const home: RequiredDataFromCollectionSlug<'pages'> = {
                   mode: 'normal',
                   style: '',
                   text: '.',
-                  version: 1,
-                },
+                  version: 1
+                }
               ],
               direction: 'ltr',
               format: '',
               indent: 0,
               textFormat: 0,
-              version: 1,
-            },
+              version: 1
+            }
           ],
           direction: 'ltr',
           format: '',
           indent: 0,
-          version: 1,
-        },
-      },
-    },
+          version: 1
+        }
+      }
+    }
   ],
   meta: {
     description: 'An open-source website built with Payload and Next.js.',
     // @ts-ignore
     image: '{{IMAGE_1}}',
-    title: 'Payload Website Template',
+    title: 'Payload Website Template'
   },
-  title: 'Home',
+  title: 'Home'
 }

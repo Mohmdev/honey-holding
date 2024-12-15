@@ -15,21 +15,21 @@ export const contactForm: Partial<Form> = {
               mode: 'normal',
               style: '',
               text: 'The contact form has been submitted successfully.',
-              version: 1,
-            },
+              version: 1
+            }
           ],
           direction: 'ltr',
           format: '',
           indent: 0,
           tag: 'h2',
-          version: 1,
-        },
+          version: 1
+        }
       ],
       direction: 'ltr',
       format: '',
       indent: 0,
-      version: 1,
-    },
+      version: 1
+    }
   },
   confirmationType: 'message',
   createdAt: '2023-01-12T21:47:41.374Z',
@@ -51,24 +51,24 @@ export const contactForm: Partial<Form> = {
                   mode: 'normal',
                   style: '',
                   text: 'Your contact form submission was successfully received.',
-                  version: 1,
-                },
+                  version: 1
+                }
               ],
               direction: 'ltr',
               format: '',
               indent: 0,
               textFormat: 0,
-              version: 1,
-            },
+              version: 1
+            }
           ],
           direction: 'ltr',
           format: '',
           indent: 0,
-          version: 1,
-        },
+          version: 1
+        }
       },
-      subject: "You've received a new message.",
-    },
+      subject: "You've received a new message."
+    }
   ],
   fields: [
     {
@@ -77,7 +77,7 @@ export const contactForm: Partial<Form> = {
       blockType: 'text',
       label: 'Full Name',
       required: true,
-      width: 100,
+      width: 100
     },
     {
       name: 'email',
@@ -85,7 +85,7 @@ export const contactForm: Partial<Form> = {
       blockType: 'email',
       label: 'Email',
       required: true,
-      width: 100,
+      width: 100
     },
     {
       name: 'phone',
@@ -93,7 +93,7 @@ export const contactForm: Partial<Form> = {
       blockType: 'number',
       label: 'Phone',
       required: false,
-      width: 100,
+      width: 100
     },
     {
       name: 'message',
@@ -101,11 +101,11 @@ export const contactForm: Partial<Form> = {
       blockType: 'textarea',
       label: 'Message',
       required: true,
-      width: 100,
-    },
+      width: 100
+    }
   ],
   redirect: undefined,
   submitButtonLabel: 'Submit',
   title: 'Contact Form',
-  updatedAt: '2023-01-12T21:47:41.374Z',
+  updatedAt: '2023-01-12T21:47:41.374Z'
 }

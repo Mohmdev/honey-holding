@@ -48,5 +48,5 @@ export const stateOptions = [
   { label: 'Washington', value: 'WA' },
   { label: 'West Virginia', value: 'WV' },
   { label: 'Wisconsin', value: 'WI' },
-  { label: 'Wyoming', value: 'WY' },
+  { label: 'Wyoming', value: 'WY' }
 ]

@@ -1,8 +1,12 @@
 import { BeforeSync, DocToSync } from '@payloadcms/plugin-search/types'
 
-export const beforeSyncWithSearch: BeforeSync = async ({ originalDoc, searchDoc, payload }) => {
+export const beforeSyncWithSearch: BeforeSync = async ({
+  originalDoc,
+  searchDoc,
+  payload
+}) => {
   const {
-    doc: { relationTo: collection },
+    doc: { relationTo: collection }
   } = searchDoc
 
   const { slug, id, categories, title, meta, excerpt } = originalDoc
@@ -14,9 +18,9 @@ export const beforeSyncWithSearch: BeforeSync = async ({ originalDoc, searchDoc,
       ...meta,
       title: meta?.title || title,
       image: meta?.image?.id || meta?.image,
-      description: meta?.description,
+      description: meta?.description
     },
-    categories: [],
+    categories: []
   }
 
   if (categories && Array.isArray(categories) && categories.length > 0) {
@@ -28,14 +32,14 @@ export const beforeSyncWithSearch: BeforeSync = async ({ originalDoc, searchDoc,
         return {
           relationTo: 'categories',
           id,
-          title,
+          title
         }
       })
 
       modifiedDoc.categories = mappedCategories
     } catch (err) {
       console.error(
-        `Failed. Category not found when syncing collection '${collection}' with id: '${id}' to search.`,
+        `Failed. Category not found when syncing collection '${collection}' with id: '${id}' to search.`
       )
     }
   }

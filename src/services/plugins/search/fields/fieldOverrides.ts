@@ -6,8 +6,8 @@ export const searchFields: Field[] = [
     type: 'text',
     index: true,
     admin: {
-      readOnly: true,
-    },
+      readOnly: true
+    }
   },
   {
     name: 'meta',
@@ -15,47 +15,47 @@ export const searchFields: Field[] = [
     type: 'group',
     index: true,
     admin: {
-      readOnly: true,
+      readOnly: true
     },
     fields: [
       {
         type: 'text',
         name: 'title',
-        label: 'Title',
+        label: 'Title'
       },
       {
         type: 'text',
         name: 'description',
-        label: 'Description',
+        label: 'Description'
       },
       {
         name: 'image',
         label: 'Image',
         type: 'upload',
-        relationTo: 'media',
-      },
-    ],
+        relationTo: 'media'
+      }
+    ]
   },
   {
     label: 'Categories',
     name: 'categories',
     type: 'array',
     admin: {
-      readOnly: true,
+      readOnly: true
     },
     fields: [
       {
         name: 'relationTo',
-        type: 'text',
+        type: 'text'
       },
       {
         name: 'id',
-        type: 'text',
+        type: 'text'
       },
       {
         name: 'title',
-        type: 'text',
-      },
-    ],
-  },
+        type: 'text'
+      }
+    ]
+  }
 ]

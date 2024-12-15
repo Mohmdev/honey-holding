@@ -284,7 +284,7 @@ layer(base);
 }
 
 .search__content {
-  @apply flex w-full flex-col-reverse gap-8 pt-2 pb-8 md:flex-row;
+  @apply flex w-full flex-col-reverse gap-8 pb-8 pt-2 md:flex-row;
 }
 
 .search__courses-grid {
@@ -342,7 +342,7 @@ layer(base);
 }
 
 .checkout__content {
-  @apply mt-10 flex w-full max-w-(--breakpoint-lg) flex-col items-center;
+  @apply max-w-(--breakpoint-lg) mt-10 flex w-full flex-col items-center;
 }
 
 /* Completion Page */
@@ -542,7 +542,7 @@ layer(base);
 }
 
 .checkout-details__divider-text {
-  @apply px-4 text-sm whitespace-nowrap text-gray-400;
+  @apply whitespace-nowrap px-4 text-sm text-gray-400;
 }
 
 .checkout-details__auth {
@@ -767,7 +767,7 @@ layer(base);
 }
 
 .course__video {
-  @apply mb-6 border-none!;
+  @apply border-none! mb-6;
 }
 
 .course__video-container {
@@ -853,7 +853,7 @@ layer(base);
 }
 
 .chapters-sidebar__title {
-  @apply px-8 pt-9 pb-6 text-lg font-bold;
+  @apply px-8 pb-6 pt-9 text-lg font-bold;
 }
 
 .chapters-sidebar__divider {
@@ -885,7 +885,7 @@ layer(base);
 }
 
 .chapters-sidebar__section-content {
-  @apply bg-customgreys-primarybg/40 pt-8 pb-8;
+  @apply bg-customgreys-primarybg/40 pb-8 pt-8;
 }
 
 .chapters-sidebar__progress {
@@ -913,7 +913,7 @@ layer(base);
 }
 
 .chapters-sidebar__progress-text {
-  @apply mt-3 mb-5 px-7 text-xs text-gray-500;
+  @apply mb-5 mt-3 px-7 text-xs text-gray-500;
 }
 
 .chapters-sidebar__chapter {
@@ -1203,7 +1203,7 @@ layer(base);
 
 /* Custom Modal */
 .custom-modal__overlay {
-  @apply bg-opacity-50 fixed inset-0 z-40 bg-black;
+  @apply fixed inset-0 z-40 bg-black bg-opacity-50;
 }
 
 .custom-modal__content {
@@ -1254,11 +1254,11 @@ layer(base);
 }
 
 .navbar__search-input {
-  @apply bg-customgreys-primarybg text-customgreys-dirtyGrey hover:text-white-50 hover:bg-customgreys-darkerGrey rounded-xl py-3 pr-6 pl-10 text-sm transition-all duration-300 sm:py-4 sm:pr-20 sm:pl-14 sm:text-base;
+  @apply bg-customgreys-primarybg text-customgreys-dirtyGrey hover:text-white-50 hover:bg-customgreys-darkerGrey rounded-xl py-3 pl-10 pr-6 text-sm transition-all duration-300 sm:py-4 sm:pl-14 sm:pr-20 sm:text-base;
 }
 
 .navbar__search-icon {
-  @apply text-customgreys-dirtyGrey absolute top-1/2 left-3 -translate-y-1/2 transform transition-all duration-300 sm:left-5;
+  @apply text-customgreys-dirtyGrey absolute left-3 top-1/2 -translate-y-1/2 transform transition-all duration-300 sm:left-5;
 }
 
 .navbar__actions {
@@ -1283,7 +1283,7 @@ layer(base);
 }
 
 .toolbar__search {
-  @apply bg-customgreys-primarybg placeholder-customgreys-dirtyGrey text-customgreys-dirtyGrey focus-visible:ring-ring h-12 w-full rounded-md border-none px-5 focus-visible:ring-1 focus-visible:outline-hidden;
+  @apply bg-customgreys-primarybg placeholder-customgreys-dirtyGrey text-customgreys-dirtyGrey focus-visible:ring-ring focus-visible:outline-hidden h-12 w-full rounded-md border-none px-5 focus-visible:ring-1;
 }
 
 .toolbar__select {
@@ -1291,7 +1291,7 @@ layer(base);
 }
 
 .toolbar__select-item {
-  @apply hover:text-customgreys-darkGrey! cursor-pointer hover:bg-gray-100!;
+  @apply hover:text-customgreys-darkGrey! hover:bg-gray-100! cursor-pointer;
 }
 
 /* Wizard Stepper */
@@ -1365,11 +1365,11 @@ layer(base);
 }
 
 .nondashboard-navbar__search-input {
-  @apply bg-customgreys-secondarybg text-customgreys-dirtyGrey hover:text-white-50 hover:bg-customgreys-darkerGrey rounded-xl py-3 pr-6 pl-10 text-sm transition-all duration-300 sm:py-4 sm:pr-20 sm:pl-14 sm:text-base;
+  @apply bg-customgreys-secondarybg text-customgreys-dirtyGrey hover:text-white-50 hover:bg-customgreys-darkerGrey rounded-xl py-3 pl-10 pr-6 text-sm transition-all duration-300 sm:py-4 sm:pl-14 sm:pr-20 sm:text-base;
 }
 
 .nondashboard-navbar__search-icon {
-  @apply text-customgreys-dirtyGrey absolute top-1/2 left-3 -translate-y-1/2 transform transition-all duration-300 sm:left-5;
+  @apply text-customgreys-dirtyGrey absolute left-3 top-1/2 -translate-y-1/2 transform transition-all duration-300 sm:left-5;
 }
 
 .nondashboard-navbar__actions {
@@ -1381,7 +1381,7 @@ layer(base);
 }
 
 .nondashboard-navbar__notification-indicator {
-  @apply absolute top-0 right-0 h-1.5 w-1.5 rounded-full bg-blue-500 sm:h-2 sm:w-2;
+  @apply absolute right-0 top-0 h-1.5 w-1.5 rounded-full bg-blue-500 sm:h-2 sm:w-2;
 }
 
 .nondashboard-navbar__notification-icon {
@@ -1439,7 +1439,7 @@ layer(base);
 
 /* Course Card Teacher Additional Classes */
 .course-card-teacher__content {
-  @apply flex w-full grow flex-col justify-between pt-4 pb-6 text-gray-400;
+  @apply flex w-full grow flex-col justify-between pb-6 pt-4 text-gray-400;
 }
 
 .course-card-teacher__title {
@@ -1447,7 +1447,7 @@ layer(base);
 }
 
 .course-card-teacher__category {
-  @apply bg-customgreys-dirtyGrey/50 mt-3 mb-3 w-fit rounded-xl px-2 py-1 text-sm;
+  @apply bg-customgreys-dirtyGrey/50 mb-3 mt-3 w-fit rounded-xl px-2 py-1 text-sm;
 }
 
 .course-card-teacher__edit-button {
@@ -1468,7 +1468,7 @@ layer(base);
 }
 
 .navbar__notification-indicator {
-  @apply absolute top-0 right-0 h-1.5 w-1.5 rounded-full bg-blue-500 sm:h-2 sm:w-2;
+  @apply absolute right-0 top-0 h-1.5 w-1.5 rounded-full bg-blue-500 sm:h-2 sm:w-2;
 }
 
 .navbar__notification-icon {
@@ -1476,7 +1476,7 @@ layer(base);
 }
 
 .navbar__search-icon {
-  @apply text-customgreys-dirtyGrey absolute top-1/2 left-3 -translate-y-1/2 transform transition-all duration-300 sm:left-5;
+  @apply text-customgreys-dirtyGrey absolute left-3 top-1/2 -translate-y-1/2 transform transition-all duration-300 sm:left-5;
 }
 
 /* Dark Mode Button */
@@ -1537,7 +1537,7 @@ layer(base);
 }
 
 .app-sidebar__logo-container {
-  @apply flex h-10 w-full items-center justify-between gap-5 pr-1 pl-3 group-data-[collapsible=icon]:ml-1 group-data-[collapsible=icon]:w-10 group-data-[collapsible=icon]:px-0;
+  @apply flex h-10 w-full items-center justify-between gap-5 pl-3 pr-1 group-data-[collapsible=icon]:ml-1 group-data-[collapsible=icon]:w-10 group-data-[collapsible=icon]:px-0;
 }
 
 .app-sidebar__logo-wrapper {
@@ -1577,7 +1577,7 @@ layer(base);
 }
 
 .app-sidebar__active-indicator {
-  @apply bg-primary-750 absolute top-0 right-0 h-full w-[4px];
+  @apply bg-primary-750 absolute right-0 top-0 h-full w-[4px];
 }
 
 .app-sidebar__signout {
@@ -1656,11 +1656,11 @@ layer(base);
 }
 
 .dashboard-navbar__search-input {
-  @apply bg-customgreys-primarybg text-customgreys-dirtyGrey hover:text-white-50 hover:bg-customgreys-darkerGrey rounded-xl py-3 pr-6 pl-10 text-sm transition-all duration-300 sm:py-4 sm:pr-20 sm:pl-14 sm:text-base;
+  @apply bg-customgreys-primarybg text-customgreys-dirtyGrey hover:text-white-50 hover:bg-customgreys-darkerGrey rounded-xl py-3 pl-10 pr-6 text-sm transition-all duration-300 sm:py-4 sm:pl-14 sm:pr-20 sm:text-base;
 }
 
 .dashboard-navbar__search-icon {
-  @apply text-customgreys-dirtyGrey absolute top-1/2 left-3 -translate-y-1/2 transform transition-all duration-300 sm:left-5;
+  @apply text-customgreys-dirtyGrey absolute left-3 top-1/2 -translate-y-1/2 transform transition-all duration-300 sm:left-5;
 }
 
 .dashboard-navbar__actions {

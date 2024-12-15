@@ -4,7 +4,7 @@ import {
   FixedToolbarFeature,
   HeadingFeature,
   InlineToolbarFeature,
-  lexicalEditor,
+  lexicalEditor
 } from '@payloadcms/richtext-lexical'
 
 import { link } from '@/fields/link'
@@ -17,21 +17,21 @@ const columnFields: Field[] = [
     options: [
       {
         label: 'One Third',
-        value: 'oneThird',
+        value: 'oneThird'
       },
       {
         label: 'Half',
-        value: 'half',
+        value: 'half'
       },
       {
         label: 'Two Thirds',
-        value: 'twoThirds',
+        value: 'twoThirds'
       },
       {
         label: 'Full',
-        value: 'full',
-      },
-    ],
+        value: 'full'
+      }
+    ]
   },
   {
     name: 'richText',
@@ -42,23 +42,23 @@ const columnFields: Field[] = [
           ...rootFeatures,
           HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
           FixedToolbarFeature(),
-          InlineToolbarFeature(),
+          InlineToolbarFeature()
         ]
-      },
+      }
     }),
-    label: false,
+    label: false
   },
   {
     name: 'enableLink',
-    type: 'checkbox',
+    type: 'checkbox'
   },
   link({
     overrides: {
       admin: {
-        condition: (_, { enableLink }) => Boolean(enableLink),
-      },
-    },
-  }),
+        condition: (_, { enableLink }) => Boolean(enableLink)
+      }
+    }
+  })
 ]
 
 export const Content: Block = {
@@ -69,9 +69,9 @@ export const Content: Block = {
       name: 'columns',
       type: 'array',
       admin: {
-        initCollapsed: true,
+        initCollapsed: true
       },
-      fields: columnFields,
-    },
-  ],
+      fields: columnFields
+    }
+  ]
 }

@@ -22,7 +22,7 @@ interface Props {
 function useClickableCard<T extends HTMLElement>({
   external = false,
   newTab = false,
-  scroll = true,
+  scroll = true
 }: Props): UseClickableCardType<T> {
   const router = useRouter()
   const card = useRef<T>(null)
@@ -50,7 +50,7 @@ function useClickableCard<T extends HTMLElement>({
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [router, card, link, timeDown],
+    [router, card, link, timeDown]
   )
 
   const handleMouseUp = useCallback(
@@ -60,7 +60,11 @@ function useClickableCard<T extends HTMLElement>({
         const difference = timeNow - timeDown.current
 
         if (link.current?.href && difference <= 250) {
-          if (!hasActiveParent.current && pressedButton.current === 0 && !e.ctrlKey) {
+          if (
+            !hasActiveParent.current &&
+            pressedButton.current === 0 &&
+            !e.ctrlKey
+          ) {
             if (external) {
               const target = newTab ? '_blank' : '_self'
               window.open(link.current.href, target)
@@ -72,7 +76,7 @@ function useClickableCard<T extends HTMLElement>({
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [router, card, link, timeDown],
+    [router, card, link, timeDown]
   )
 
   useEffect(() => {
@@ -96,11 +100,11 @@ function useClickableCard<T extends HTMLElement>({
 
   return {
     card: {
-      ref: card,
+      ref: card
     },
     link: {
-      ref: link,
-    },
+      ref: link
+    }
   }
 }
 

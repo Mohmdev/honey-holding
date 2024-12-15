@@ -107,7 +107,7 @@ export const CustomFormField: React.FC<FormFieldProps> = ({
                 <SelectItem
                   key={option.value}
                   value={option.value}
-                  className={`hover:text-customgreys-darkGrey! cursor-pointer hover:bg-gray-100!`}
+                  className={`hover:text-customgreys-darkGrey! hover:bg-gray-100! cursor-pointer`}
                 >
                   {option.label}
                 </SelectItem>

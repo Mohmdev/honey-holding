@@ -12,11 +12,14 @@ const sitemapConfig = {
     policies: [
       {
         userAgent: '*',
-        disallow: '/admin/*',
-      },
+        disallow: '/admin/*'
+      }
     ],
-    additionalSitemaps: [`${SITE_URL}/pages-sitemap.xml`, `${SITE_URL}/posts-sitemap.xml`],
-  },
+    additionalSitemaps: [
+      `${SITE_URL}/pages-sitemap.xml`,
+      `${SITE_URL}/posts-sitemap.xml`
+    ]
+  }
 }
 
 export default sitemapConfig

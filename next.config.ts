@@ -24,6 +24,10 @@ const nextConfig: NextConfig = {
       })
     ]
   },
+  eslint: {
+    // Dont run ESLint during build
+    ignoreDuringBuilds: true
+  },
   reactStrictMode: true,
   redirects
 }

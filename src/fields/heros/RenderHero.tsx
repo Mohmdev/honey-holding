@@ -9,7 +9,7 @@ import { MediumImpactHero } from '@/heros/MediumImpact'
 const heroes = {
   highImpact: HighImpactHero,
   lowImpact: LowImpactHero,
-  mediumImpact: MediumImpactHero,
+  mediumImpact: MediumImpactHero
 }
 
 export const RenderHero: React.FC<Page['hero']> = (props) => {

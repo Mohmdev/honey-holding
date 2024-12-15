@@ -4,7 +4,7 @@ export const contact: Partial<Page> = {
   slug: 'contact',
   _status: 'published',
   hero: {
-    type: 'none',
+    type: 'none'
   },
   layout: [
     {
@@ -26,23 +26,23 @@ export const contact: Partial<Page> = {
                   mode: 'normal',
                   style: '',
                   text: 'Example contact form:',
-                  version: 1,
-                },
+                  version: 1
+                }
               ],
               direction: 'ltr',
               format: '',
               indent: 0,
               tag: 'h3',
-              version: 1,
-            },
+              version: 1
+            }
           ],
           direction: 'ltr',
           format: '',
           indent: 0,
-          version: 1,
-        },
-      },
-    },
+          version: 1
+        }
+      }
+    }
   ],
-  title: 'Contact',
+  title: 'Contact'
 }

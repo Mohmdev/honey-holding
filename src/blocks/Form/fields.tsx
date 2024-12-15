@@ -17,5 +17,5 @@ export const fields = {
   select: Select,
   state: State,
   text: Text,
-  textarea: Textarea,
+  textarea: Textarea
 }

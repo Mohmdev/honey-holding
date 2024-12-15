@@ -1,19 +1,17 @@
-import React, {
-  CSSProperties,
-  ReactElement,
-  useEffect,
-  useState
-} from 'react';
+import React, { CSSProperties, ReactElement, useEffect, useState } from 'react'
 
 const dummyUser = {
   email: 'dev@email.com',
   id: '12345'
 }
 
-export type PayloadMeUser = {
-  email: string
-  id: string
-} | null | undefined
+export type PayloadMeUser =
+  | {
+      email: string
+      id: string
+    }
+  | null
+  | undefined
 
 export type PayloadAdminBarProps = {
   cmsURL?: string
@@ -21,19 +19,19 @@ export type PayloadAdminBarProps = {
   apiPath?: string
   collection?: string
   collectionLabels?: {
-    singular?: string,
+    singular?: string
     plural?: string
   }
   id?: string
   logo?: ReactElement
   className?: string
   classNames?: {
-    user?: string,
-    logo?: string,
-    create?: string,
-    logout?: string,
-    controls?: string,
-    edit?: string,
+    user?: string
+    logo?: string
+    create?: string
+    logout?: string
+    controls?: string
+    edit?: string
     preview?: string
   }
   logoProps?: {
@@ -96,22 +94,22 @@ export const PayloadAdminBar: React.FC<PayloadAdminBarProps> = (props) => {
     preview,
     onPreviewExit,
     previewProps
-  } = props;
+  } = props
 
-  const [user, setUser] = useState<PayloadMeUser>();
+  const [user, setUser] = useState<PayloadMeUser>()
 
   useEffect(() => {
     const fetchMe = async () => {
       try {
         const meRequest = await fetch(`${cmsURL}${apiPath}/users/me`, {
           method: 'get',
-          credentials: 'include',
-        });
-        const meResponse = await meRequest.json();
-        const { user } = meResponse;
+          credentials: 'include'
+        })
+        const meResponse = await meRequest.json()
+        const { user } = meResponse
 
         if (user) {
-          setUser(user);
+          setUser(user)
         } else {
           if (devMode !== true) {
             setUser(null)
@@ -126,48 +124,41 @@ export const PayloadAdminBar: React.FC<PayloadAdminBarProps> = (props) => {
         }
       }
     }
-    fetchMe();
-  }, [
-    cmsURL,
-    adminPath,
-    apiPath
-  ])
+    fetchMe()
+  }, [cmsURL, adminPath, apiPath])
 
   useEffect(() => {
     if (typeof onAuthChange === 'function') {
       onAuthChange(user)
     }
-  }, [
-    user,
-    onAuthChange
-  ])
+  }, [user, onAuthChange])
 
   if (user) {
-    const {
-      email,
-      id: userID
-    } = user;
+    const { email, id: userID } = user
 
     return (
       <div
         className={className}
         style={{
-          ...unstyled !== true ? {
-            fontSize: 'small',
-            position: 'fixed',
-            display: 'flex',
-            minWidth: '0',
-            alignItems: 'center',
-            top: 0,
-            left: 0,
-            width: '100%',
-            padding: '0.5rem',
-            zIndex: 99999,
-            boxSizing: 'border-box',
-            backgroundColor: '#222',
-            color: '#fff',
-            fontFamily: '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif'
-          } : {},
+          ...(unstyled !== true
+            ? {
+                fontSize: 'small',
+                position: 'fixed',
+                display: 'flex',
+                minWidth: '0',
+                alignItems: 'center',
+                top: 0,
+                left: 0,
+                width: '100%',
+                padding: '0.5rem',
+                zIndex: 99999,
+                boxSizing: 'border-box',
+                backgroundColor: '#222',
+                color: '#fff',
+                fontFamily:
+                  '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif'
+              }
+            : {}),
           ...style
         }}
       >
@@ -176,18 +167,22 @@ export const PayloadAdminBar: React.FC<PayloadAdminBarProps> = (props) => {
           className={classNames?.logo}
           {...logoProps}
           style={{
-            ...unstyled !== true ? {
-              marginRight: '10px',
-              flexShrink: 0,
-              display: 'flex',
-              height: '20px',
-              textDecoration: 'none',
-              color: 'inherit',
-              alignItems: 'center',
-              ...logoProps?.style ? {
-                ...logoProps.style
-              } : {}
-            } : {}
+            ...(unstyled !== true
+              ? {
+                  marginRight: '10px',
+                  flexShrink: 0,
+                  display: 'flex',
+                  height: '20px',
+                  textDecoration: 'none',
+                  color: 'inherit',
+                  alignItems: 'center',
+                  ...(logoProps?.style
+                    ? {
+                        ...logoProps.style
+                      }
+                    : {})
+                }
+              : {})
           }}
         >
           {logo || 'Payload CMS'}
@@ -199,28 +194,34 @@ export const PayloadAdminBar: React.FC<PayloadAdminBarProps> = (props) => {
           className={classNames?.user}
           {...userProps}
           style={{
-            ...unstyled !== true ? {
-              marginRight: '10px',
-              display: 'block',
-              minWidth: '50px',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              textDecoration: 'none',
-              whiteSpace: 'nowrap',
-              color: 'inherit',
-              ...userProps?.style ? {
-                ...userProps.style
-              } : {}
-            } : {}
+            ...(unstyled !== true
+              ? {
+                  marginRight: '10px',
+                  display: 'block',
+                  minWidth: '50px',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  textDecoration: 'none',
+                  whiteSpace: 'nowrap',
+                  color: 'inherit',
+                  ...(userProps?.style
+                    ? {
+                        ...userProps.style
+                      }
+                    : {})
+                }
+              : {})
           }}
         >
           <span
             style={{
-              ...unstyled !== true ? {
-                whiteSpace: 'nowrap',
-                textOverflow: 'ellipsis',
-                overflow: 'hidden',
-              } : {}
+              ...(unstyled !== true
+                ? {
+                    whiteSpace: 'nowrap',
+                    textOverflow: 'ellipsis',
+                    overflow: 'hidden'
+                  }
+                : {})
             }}
           >
             {email || 'Profile'}
@@ -230,17 +231,21 @@ export const PayloadAdminBar: React.FC<PayloadAdminBarProps> = (props) => {
           className={classNames?.controls}
           {...divProps}
           style={{
-            ...unstyled !== true ? {
-              display: 'flex',
-              marginRight: '10px',
-              flexShrink: 1,
-              flexGrow: 1,
-              alignItems: 'center',
-              justifyContent: 'flex-end',
-              ...divProps?.style ? {
-                ...divProps.style
-              } : {}
-            } : {}
+            ...(unstyled !== true
+              ? {
+                  display: 'flex',
+                  marginRight: '10px',
+                  flexShrink: 1,
+                  flexGrow: 1,
+                  alignItems: 'center',
+                  justifyContent: 'flex-end',
+                  ...(divProps?.style
+                    ? {
+                        ...divProps.style
+                      }
+                    : {})
+                }
+              : {})
           }}
         >
           {collection && id && (
@@ -252,27 +257,33 @@ export const PayloadAdminBar: React.FC<PayloadAdminBarProps> = (props) => {
               {...editProps}
               style={{
                 display: 'block',
-                ...unstyled !== true ? {
-                  marginRight: '10px',
-                  textDecoration: 'none',
-                  color: 'inherit',
-                  textOverflow: 'ellipsis',
-                  overflow: 'hidden',
-                  whiteSpace: 'nowrap',
-                  flexShrink: 1,
-                  ...editProps?.style ? {
-                    ...editProps.style
-                  } : {}
-                } : {}
+                ...(unstyled !== true
+                  ? {
+                      marginRight: '10px',
+                      textDecoration: 'none',
+                      color: 'inherit',
+                      textOverflow: 'ellipsis',
+                      overflow: 'hidden',
+                      whiteSpace: 'nowrap',
+                      flexShrink: 1,
+                      ...(editProps?.style
+                        ? {
+                            ...editProps.style
+                          }
+                        : {})
+                    }
+                  : {})
               }}
             >
               <span
                 style={{
-                  ...unstyled !== true ? {
-                    whiteSpace: 'nowrap',
-                    textOverflow: 'ellipsis',
-                    overflow: 'hidden',
-                  } : {}
+                  ...(unstyled !== true
+                    ? {
+                        whiteSpace: 'nowrap',
+                        textOverflow: 'ellipsis',
+                        overflow: 'hidden'
+                      }
+                    : {})
                 }}
               >
                 {`Edit ${collectionLabels?.singular || 'page'}`}
@@ -287,27 +298,33 @@ export const PayloadAdminBar: React.FC<PayloadAdminBarProps> = (props) => {
               className={classNames?.create}
               {...createProps}
               style={{
-                ...unstyled !== true ? {
-                  flexShrink: 1,
-                  display: 'block',
-                  textDecoration: 'none',
-                  color: 'inherit',
-                  textOverflow: 'ellipsis',
-                  overflow: 'hidden',
-                  whiteSpace: 'nowrap',
-                  ...createProps?.style ? {
-                    ...createProps.style
-                  } : {}
-                } : {}
+                ...(unstyled !== true
+                  ? {
+                      flexShrink: 1,
+                      display: 'block',
+                      textDecoration: 'none',
+                      color: 'inherit',
+                      textOverflow: 'ellipsis',
+                      overflow: 'hidden',
+                      whiteSpace: 'nowrap',
+                      ...(createProps?.style
+                        ? {
+                            ...createProps.style
+                          }
+                        : {})
+                    }
+                  : {})
               }}
             >
               <span
                 style={{
-                  ...unstyled !== true ? {
-                    whiteSpace: 'nowrap',
-                    textOverflow: 'ellipsis',
-                    overflow: 'hidden',
-                  } : {}
+                  ...(unstyled !== true
+                    ? {
+                        whiteSpace: 'nowrap',
+                        textOverflow: 'ellipsis',
+                        overflow: 'hidden'
+                      }
+                    : {})
                 }}
               >
                 {`New ${collectionLabels?.singular || 'page'}`}
@@ -320,19 +337,23 @@ export const PayloadAdminBar: React.FC<PayloadAdminBarProps> = (props) => {
               onClick={onPreviewExit}
               {...previewProps}
               style={{
-                ...unstyled !== true ? {
-                  marginLeft: '10px',
-                  background: 'none',
-                  border: 'none',
-                  padding: 0,
-                  cursor: 'pointer',
-                  color: 'inherit',
-                  fontFamily: 'inherit',
-                  fontSize: 'inherit',
-                  ...previewProps?.style ? {
-                    ...previewProps.style
-                  } : {}
-                } : {}
+                ...(unstyled !== true
+                  ? {
+                      marginLeft: '10px',
+                      background: 'none',
+                      border: 'none',
+                      padding: 0,
+                      cursor: 'pointer',
+                      color: 'inherit',
+                      fontFamily: 'inherit',
+                      fontSize: 'inherit',
+                      ...(previewProps?.style
+                        ? {
+                            ...previewProps.style
+                          }
+                        : {})
+                    }
+                  : {})
               }}
             >
               Exit preview mode
@@ -346,27 +367,33 @@ export const PayloadAdminBar: React.FC<PayloadAdminBarProps> = (props) => {
           className={classNames?.logout}
           {...logoutProps}
           style={{
-            ...unstyled !== true ? {
-              textDecoration: 'none',
-              color: 'inherit',
-              textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap',
-              overflow: 'hidden',
-              display: 'block',
-              flexShrink: 1,
-              ...logoutProps?.style ? {
-                ...logoutProps.style
-              } : {}
-            } : {}
+            ...(unstyled !== true
+              ? {
+                  textDecoration: 'none',
+                  color: 'inherit',
+                  textOverflow: 'ellipsis',
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  display: 'block',
+                  flexShrink: 1,
+                  ...(logoutProps?.style
+                    ? {
+                        ...logoutProps.style
+                      }
+                    : {})
+                }
+              : {})
           }}
         >
           <span
             style={{
-              ...unstyled !== true ? {
-                whiteSpace: 'nowrap',
-                textOverflow: 'ellipsis',
-                overflow: 'hidden',
-              } : {}
+              ...(unstyled !== true
+                ? {
+                    whiteSpace: 'nowrap',
+                    textOverflow: 'ellipsis',
+                    overflow: 'hidden'
+                  }
+                : {})
             }}
           >
             Logout
@@ -376,5 +403,5 @@ export const PayloadAdminBar: React.FC<PayloadAdminBarProps> = (props) => {
     )
   }
 
-  return null;
+  return null
 }
