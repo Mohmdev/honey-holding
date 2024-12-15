@@ -1,0 +1,24 @@
+.getting-started {
+  // margin: base(1.5);
+  // margin: var(--gutter-h);
+
+  &__banner {
+    background-color: transparent;
+    // & h4 {
+    //   margin: 0;
+    // }
+  }
+
+  &__instructions {
+    list-style: decimal;
+    margin-bottom: base(0.5);
+
+    & li {
+      width: 100%;
+    }
+  }
+
+  & a:hover {
+    opacity: 0.85;
+  }
+}

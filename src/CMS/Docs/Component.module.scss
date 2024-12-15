@@ -1,0 +1,14 @@
+.before-dashboard {
+  margin: base(1.5);
+  margin: var(--gutter-h);
+
+  &__banner {
+    & h2 {
+      margin: 0;
+    }
+  }
+
+  & a:hover {
+    opacity: 0.85;
+  }
+}
