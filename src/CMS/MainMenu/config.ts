@@ -1,9 +1,10 @@
-import type { GlobalConfig } from 'payload'
-
 import { revalidatePath } from 'next/cache'
 
-import { isAdmin } from '@access/isAdmin'
 import { link } from '@/fields/link'
+
+import { isAdmin } from '@access/isAdmin'
+
+import type { GlobalConfig } from 'payload'
 
 export const MainMenu: GlobalConfig = {
   slug: 'main-menu',
@@ -17,7 +18,7 @@ export const MainMenu: GlobalConfig = {
       type: 'array',
       admin: {
         components: {
-          RowLabel: '@/CMS/MainMenu/CustomRowLabelTabs'
+          RowLabel: '@admin-components/RowLabelCustom/Tabs'
         }
       },
       fields: [
@@ -79,7 +80,7 @@ export const MainMenu: GlobalConfig = {
               type: 'array',
               admin: {
                 components: {
-                  RowLabel: '@/CMS/MainMenu/CustomRowLabelNavItems'
+                  RowLabel: '@admin-components/RowLabelCustom/NavItems'
                 }
               },
               fields: [

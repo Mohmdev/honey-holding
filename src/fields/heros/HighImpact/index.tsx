@@ -1,13 +1,13 @@
 'use client'
 
 import React from 'react'
+
+import type { Page } from '@payload-types'
+import { MediaComponent } from '@components/MediaComponent'
+import RichText from '@components/RichText'
 // import { useHeaderTheme } from '@providers/HeaderTheme'
 // import { useEffect } from 'react'
-import { CMSLink } from '@components/Link'
-import { MediaComponent } from '@components/MediaComponent'
-
-import RichText from '@components/RichText'
-import type { Page } from '@payload-types'
+import { CMSLink } from '@/components/_basic/CMSLink'
 
 export const HighImpactHero: React.FC<Page['hero']> = ({
   links,

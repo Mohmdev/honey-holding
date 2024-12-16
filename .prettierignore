@@ -11,5 +11,7 @@
 **/temp
 **/docs/**
 src/services/database/migrations/**/*
+src/app/(payload)/**/*
+!src/app/(payload)/custom.scss
 pnpm-lock.yaml
 package-lock.json

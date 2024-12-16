@@ -20,9 +20,9 @@ import { Docs as Docs_83b6ad72a5c0457b0f95da721dbe3737 } from '@/CMS/Docs/Compon
 import { Tickets as Tickets_7600a6ead971534937296a1c47b4afa1 } from '@/CMS/Tickets/Component'
 import { LinkToDoc as LinkToDoc_aead06e4cbf6b2620c5c51c9ab283634 } from '@payloadcms/plugin-search/client'
 import { ReindexButton as ReindexButton_aead06e4cbf6b2620c5c51c9ab283634 } from '@payloadcms/plugin-search/client'
-import { RowLabel as RowLabel_b8757d72a42d1eb14a8253f1c4061f8e } from '@/CMS/Header/RowLabel'
-import { RowLabel as RowLabel_67eb5f22dfb16187ef4c0eaa1bde4662 } from '@/CMS/Footer/RowLabel'
-import { default as default_8a7ab0eb7ab5c511aba12e68480bfe5e } from '@components/BeforeLogin'
+import { RowLabel as RowLabel_b8757d72a42d1eb14a8253f1c4061f8e } from '@/CMS/_basic/Header/RowLabel'
+import { RowLabel as RowLabel_67eb5f22dfb16187ef4c0eaa1bde4662 } from '@/CMS/_components/RowLabel'
+import { default as default_8a7ab0eb7ab5c511aba12e68480bfe5e } from '@/CMS/_components/BeforeLogin'
 
 export const importMap = {
   '@payloadcms/richtext-lexical/rsc#RscEntryLexicalCell':

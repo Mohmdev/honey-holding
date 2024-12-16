@@ -1,6 +1,7 @@
-import { DocSearch } from '@docsearch/react'
-import { usePathname } from 'next/navigation'
 import React from 'react'
+import { usePathname } from 'next/navigation'
+
+import { DocSearch } from '@docsearch/react'
 
 import classes from './index.module.scss'
 

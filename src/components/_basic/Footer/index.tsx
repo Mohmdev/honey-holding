@@ -1,10 +1,12 @@
 import React from 'react'
 import Link from 'next/link'
-import { CMSLink } from '@components/Link'
-import { Logo } from '@components/Logo/Logo'
+
 import { getCachedGlobal } from '@utils/getGlobals'
 
 import type { Footer } from '@payload-types'
+
+import { CMSLink } from '@components/_basic/CMSLink'
+import { Logo } from '@components/Logo/Logo'
 
 // import { ThemeSelector } from '@providers/Theme/ThemeSelector'
 

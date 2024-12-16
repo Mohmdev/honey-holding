@@ -3,14 +3,14 @@
 import React, { forwardRef, HTMLAttributes, useEffect, useState } from 'react'
 import Link from 'next/link'
 
+import { Page } from '@payload-types'
+
 import { GitHubIcon } from '@graphics/GitHub'
 import { ArrowIcon } from '@icons/ArrowIcon'
+import { CopyIcon } from '@icons/CopyIcon'
 import { LoaderIcon } from '@icons/LoaderIcon'
 import { PlusIcon } from '@icons/PlusIcon'
 import { SearchIcon } from '@icons/SearchIcon'
-import { Page } from '@payload-types'
-import { CopyIcon } from '@icons/CopyIcon'
-
 import { LinkType, Reference } from '@components/CMSLink'
 
 import classes from './index.module.scss'
@@ -396,3 +396,4 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     return null
   }
 )
+Button.displayName = 'ButtonComponent'

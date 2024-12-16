@@ -26,6 +26,8 @@
       "@/*": ["src/*"],
       "@payload-config": ["src/CMS/payload-config.ts"],
       "@payload-types": ["src/CMS/payload-types.ts"],
+      "@CMS/*": ["src/CMS/*"],
+      "@admin-components/*": ["src/CMS/_components/*"],
       "@blocks/*": ["src/blocks/*"],
       "@fields/*": ["src/fields/*"],
       "@components/*": ["src/components/*"],

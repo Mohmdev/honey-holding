@@ -1,3 +1,5 @@
+// @ts-check
+
 /**
  * @see https://prettier.io/docs/en/configuration.html
  * @type {import('prettier').Config}
@@ -9,9 +11,58 @@ const prettierConfig = {
   printWidth: 80,
   tabWidth: 2,
   semi: false,
-  plugins: ['prettier-plugin-tailwindcss'],
+  plugins: [
+    'prettier-plugin-tailwindcss',
+    '@ianvs/prettier-plugin-sort-imports'
+  ],
   tailwindStylesheet: 'src/styles/globals.css',
-  tailwindConfig: 'src/styles/globals.css'
+  tailwindConfig: 'src/styles/globals.css',
+  // importOrder config
+  importOrder: [
+    '^(react/(.*)$)|^(react$)',
+    '^(next/(.*)$)|^(next$)',
+    '<TYPES>^(react/(.*)$)|^(react$)',
+    '<TYPES>^(next/(.*)$)|^(next$)',
+    '',
+    '<THIRD_PARTY_MODULES>',
+    '',
+    '^@providers/(.*)$',
+    '^@lib/(.*)$',
+    '^@utils/(.*)$',
+    '^@hooks/(.*)$',
+    '^@/config/(.*)$',
+    '^@/(.*)$',
+    '',
+    '^(@payloadcms/(.*)$)',
+    '^@payload-config$',
+    '^@CMS/(.*)$',
+    '^@services/(.*)$',
+    '^@blocks/(.*)$',
+    '^@fields/(.*)$',
+    '^@access/(.*)$',
+    '',
+    '<TYPES>.*$',
+    '<TYPES><THIRD_PARTY_MODULES>',
+    '^types$',
+    '^@/types/(.*)$',
+    '^@payload-types$',
+    '',
+    '^@ui/(.*)$',
+    '^@graphics/(.*)$',
+    '^@icons/(.*)$',
+    '^@components/(.*)$',
+    '^@admin-components/(.*)$',
+    '',
+    '^[./]', // Relative imports
+    '',
+    '^@styles/(.*)$'
+  ],
+  importOrderSeparation: false,
+  importOrderSortSpecifiers: true,
+  importOrderBuiltinModulesToTop: true,
+  importOrderParserPlugins: ['typescript', 'jsx', 'decorators-legacy'],
+  importOrderMergeDuplicateImports: true,
+  importOrderCombineTypeAndValueImports: true
 }
 
 export default prettierConfig

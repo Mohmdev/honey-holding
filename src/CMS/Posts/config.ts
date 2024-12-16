@@ -1,5 +1,16 @@
-import type { CollectionConfig } from 'payload'
+import { generatePreviewPath } from '@utils/generatePreviewPath'
+import { Banner } from '@/blocks/Banner/config'
+import { Code } from '@/blocks/Code/config'
+import { MediaBlock } from '@/blocks/MediaBlock/config'
+import { slugField } from '@/fields/slug/config'
 
+import {
+  MetaDescriptionField,
+  MetaImageField,
+  MetaTitleField,
+  OverviewField,
+  PreviewField
+} from '@payloadcms/plugin-seo/fields'
 import {
   BlocksFeature,
   FixedToolbarFeature,
@@ -8,23 +19,13 @@ import {
   InlineToolbarFeature,
   lexicalEditor
 } from '@payloadcms/richtext-lexical'
-
 import { authenticated } from '@access/authenticated'
 import { authenticatedOrPublished } from '@access/authenticatedOrPublished'
-import { Banner } from '@/blocks/Banner/config'
-import { Code } from '@/blocks/Code/config'
-import { MediaBlock } from '@/blocks/MediaBlock/config'
-import { generatePreviewPath } from '@utils/generatePreviewPath'
-import { populateAuthors } from './hooks/populateAuthors'
-import { revalidateDelete, revalidatePost } from './hooks/revalidatePost'
-import { slugField } from '@/fields/slug/config'
-import {
-  MetaDescriptionField,
-  MetaImageField,
-  MetaTitleField,
-  OverviewField,
-  PreviewField
-} from '@payloadcms/plugin-seo/fields'
+
+import type { CollectionConfig } from 'payload'
+
+import { populateAuthors } from './populateAuthors'
+import { revalidateDelete, revalidatePost } from './revalidatePost'
 
 export const Posts: CollectionConfig<'posts'> = {
   slug: 'posts',

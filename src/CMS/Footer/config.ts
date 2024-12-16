@@ -1,7 +1,8 @@
-import { link } from '@/fields/link'
-import { isAdmin } from '@access/isAdmin'
 import { revalidatePath } from 'next/cache'
-// import { revalidateFooter } from './hooks/revalidateFooter'
+
+import { link } from '@/fields/link'
+
+import { isAdmin } from '@access/isAdmin'
 
 import type { GlobalConfig } from 'payload'
 
@@ -34,7 +35,7 @@ export const Footer: GlobalConfig = {
           // admin: {
           //   initCollapsed: true,
           //   components: {
-          //     RowLabel: '@/CMS/Footer/RowLabel#RowLabel'
+          //   RowLabel: '@admin-components/RowLabel#RowLabel'
           //   }
           // }
         }
@@ -43,6 +44,5 @@ export const Footer: GlobalConfig = {
   ],
   hooks: {
     afterChange: [() => revalidatePath('/', 'layout')]
-    // afterChange: [revalidateFooter]
   }
 }

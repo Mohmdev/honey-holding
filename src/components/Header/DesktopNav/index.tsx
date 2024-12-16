@@ -1,19 +1,21 @@
 import * as React from 'react'
 import Link from 'next/link'
 
+import { useAuth } from '@providers/Auth'
+import { useHeaderObserver } from '@providers/HeaderIntersectionObserver'
+import { useStarCount } from '@utils/use-star-count'
+
+import { MainMenu } from '@payload-types'
+
+import { FullLogo } from '@graphics/FullLogo'
+import { GitHubIcon } from '@graphics/GitHub'
+import { ArrowIcon } from '@icons/ArrowIcon'
 import { Avatar } from '@components/Avatar'
+import { CMSLink } from '@components/CMSLink'
 import { Gutter } from '@components/Gutter'
 import { RichText } from '@components/RichText'
-import { GitHubIcon } from '@root/graphics/GitHub'
-import { ArrowIcon } from '@root/icons/ArrowIcon'
-import { MainMenu } from '@payload-types'
-import { useAuth } from '@root/providers/Auth'
-import { useHeaderObserver } from '@root/providers/HeaderIntersectionObserver'
-import { useStarCount } from '@root/utilities/use-star-count.js'
-import { FullLogo } from '../../../graphics/FullLogo'
-import { CMSLink } from '../../CMSLink'
-import { DocSearch } from '../Docsearch'
 
+import { DocSearch } from '../Docsearch'
 import classes from './index.module.scss'
 
 type DesktopNavType = Pick<MainMenu, 'tabs' | 'menuCta'> & {

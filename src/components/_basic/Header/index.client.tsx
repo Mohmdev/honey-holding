@@ -2,10 +2,13 @@
 
 import React from 'react'
 import Link from 'next/link'
-import { HeaderNav } from './Nav'
-import { Logo } from '@components/Logo/Logo'
 
 import type { Header } from '@payload-types'
+
+import { Logo } from '@components/Logo/Logo'
+
+import { HeaderNav } from './HeaderNav'
+
 // import { useHeaderTheme } from '@providers/HeaderTheme'
 // import { usePathname } from 'next/navigation'
 // import React, { useEffect, useState } from 'react'

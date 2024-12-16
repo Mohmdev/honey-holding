@@ -1,17 +1,20 @@
 'use client'
 
 import * as React from 'react'
-import { useModal } from '@faceless-ui/modal'
-import { useScrollInfo } from '@faceless-ui/scroll-info'
 import { useSearchParams } from 'next/navigation'
 
-import { UniversalTruth } from '@components/UniversalTruth'
-import { MainMenu } from '@payload-types'
-import { useHeaderObserver } from '@providers/HeaderIntersectionObserver'
-import { DesktopNav } from './DesktopNav'
-import { MobileNav, modalSlug as mobileNavModalSlug } from './MobileNav'
+import { useModal } from '@faceless-ui/modal'
+import { useScrollInfo } from '@faceless-ui/scroll-info'
 
+import { useHeaderObserver } from '@providers/HeaderIntersectionObserver'
+
+import { MainMenu } from '@payload-types'
+
+import { UniversalTruth } from '@components/UniversalTruth'
+
+import { DesktopNav } from './DesktopNav'
 import classes from './index.module.scss'
+import { MobileNav, modalSlug as mobileNavModalSlug } from './MobileNav'
 
 export const Header: React.FC<MainMenu> = ({ tabs, menuCta }) => {
   const { isModalOpen } = useModal()

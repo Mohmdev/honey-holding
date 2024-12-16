@@ -1,9 +1,8 @@
 import React from 'react'
 import Link from 'next/link'
 
-import { CaseStudy, Page, Post } from '@payload-types'
-
-import { Button, ButtonProps } from '@components/Button'
+import type { CaseStudy, Page, Post } from '@payload-types'
+import { Button, ButtonProps } from '@/components/ButtonComponent'
 
 const relationSlugs = {
   case_studies: 'case-studies'

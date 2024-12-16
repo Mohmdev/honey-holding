@@ -2,10 +2,12 @@
 
 import React from 'react'
 import Link from 'next/link'
-import { CMSLink } from '@components/Link'
+
 import { SearchIcon } from 'lucide-react'
 
 import type { Header as HeaderType } from '@payload-types'
+
+import { CMSLink } from '@components/_basic/CMSLink'
 
 export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
   const navItems = data?.navItems || []

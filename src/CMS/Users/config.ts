@@ -1,14 +1,14 @@
-import { rolesField } from './fields/roles'
-
-import { adminsAndUser } from '@access/adminsAndUser'
-import { canUpdateUser } from '@access/canUpdateUser'
-import { anyone } from '@access/anyone'
-import { admins } from '@access/admins'
-
 import { generateForgotPasswordEmail } from '@/services/email/generateForgotPasswordEmail'
 import { generateVerificationEmail } from '@/services/email/generateVerificationEmail'
 
+import { admins } from '@access/admins'
+import { adminsAndUser } from '@access/adminsAndUser'
+import { anyone } from '@access/anyone'
+import { canUpdateUser } from '@access/canUpdateUser'
+
 import type { CollectionConfig } from 'payload'
+
+import { rolesField } from './fields/roles'
 
 export const Users: CollectionConfig<'users'> = {
   slug: 'users',
