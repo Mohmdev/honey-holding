@@ -2,7 +2,7 @@ import { unstable_cache } from 'next/cache'
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 
-import type { Config } from '@/payload-types'
+import type { Config } from '@payload-types'
 
 type Global = keyof Config['globals']
 

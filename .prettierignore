@@ -10,6 +10,6 @@
 **/node_modules
 **/temp
 **/docs/**
-tsconfig.json
+src/services/database/migrations/**/*
 pnpm-lock.yaml
 package-lock.json

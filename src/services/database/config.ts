@@ -9,5 +9,5 @@ export const databaseAdapter: Config['db'] = postgresAdapter({
   },
 
   // prodMigrations: migrations,
-  migrationDir: 'src/services/database/migrations'
+  migrationDir: '@services/database/migrations'
 })

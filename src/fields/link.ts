@@ -1,8 +1,8 @@
 import type { Field } from 'payload'
 
-import deepMerge from '@/utils/deepMerge'
+import deepMerge from '@utils/deepMerge'
 
-import type { ButtonProps } from '@/components/ui/button'
+import type { ButtonProps } from '@ui/button'
 type ButtonVariants = NonNullable<ButtonProps['variant']>
 
 export type LinkAppearances = 'default' | 'outline' | ButtonVariants

@@ -1,5 +1,5 @@
-import { admins } from '@/access/admins'
-import { adminsOrPublished } from '@/access/adminsOrPublished'
+import { admins } from '@access/admins'
+import { adminsOrPublished } from '@access/adminsOrPublished'
 
 import type { CollectionConfig } from 'payload'
 

@@ -3,15 +3,15 @@
 import React, { forwardRef, HTMLAttributes, useEffect, useState } from 'react'
 import Link from 'next/link'
 
-import { GitHubIcon } from '@/graphics/GitHub'
-import { ArrowIcon } from '@/graphics/_icons/ArrowIcon'
-import { LoaderIcon } from '@/graphics/_icons/LoaderIcon'
-import { PlusIcon } from '@/graphics/_icons/PlusIcon'
-import { SearchIcon } from '@/graphics/_icons/SearchIcon'
-import { Page } from '@/payload-types.js'
-import { CopyIcon } from '@/graphics/_icons/CopyIcon'
+import { GitHubIcon } from '@graphics/GitHub'
+import { ArrowIcon } from '@icons/ArrowIcon'
+import { LoaderIcon } from '@icons/LoaderIcon'
+import { PlusIcon } from '@icons/PlusIcon'
+import { SearchIcon } from '@icons/SearchIcon'
+import { Page } from '@payload-types'
+import { CopyIcon } from '@icons/CopyIcon'
 
-import { LinkType, Reference } from '@/components/CMSLink'
+import { LinkType, Reference } from '@components/CMSLink'
 
 import classes from './index.module.scss'
 

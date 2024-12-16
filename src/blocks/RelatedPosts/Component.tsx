@@ -1,9 +1,9 @@
 import React from 'react'
-import RichText from '@/components/RichText'
-import { Card } from '@/components/Card'
-import { cn } from '@/utils/cn'
+import RichText from '@components/RichText'
+import { Card } from '@components/Card'
+import { cn } from '@utils/cn'
 
-import type { Post } from '@/payload-types'
+import type { Post } from '@payload-types'
 
 export type RelatedPostsProps = {
   className?: string

@@ -1,6 +1,6 @@
 import type { Field } from 'payload'
 import { ensureFirstUserIsAdmin } from '../hooks/ensureFirstUserIsAdmin'
-import { admins } from '@/access/admins'
+import { admins } from '@access/admins'
 
 export const rolesField: Field = {
   name: 'roles',

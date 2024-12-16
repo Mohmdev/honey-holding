@@ -1,6 +1,6 @@
 import type { FieldHook } from 'payload'
 
-import type { User } from '@/payload-types'
+import type { User } from '@payload-types'
 
 // ensure there is always a `user` role
 // do not let non-admins change roles

@@ -1,7 +1,7 @@
 import React from 'react'
-import RichText from '@/components/RichText'
+import RichText from '@components/RichText'
 
-import type { Page } from '@/payload-types'
+import type { Page } from '@payload-types'
 
 type LowImpactHeroType =
   | {

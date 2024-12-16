@@ -1,15 +1,14 @@
 'use client'
 
-import type { StaticImageData } from 'next/image'
-
-import { cn } from '@/utils/cn'
-import NextImage from 'next/image'
 import React from 'react'
+import NextImage from 'next/image'
+import type { StaticImageData } from 'next/image'
+import { getClientSideURL } from '@utils/getURL'
+import { cn } from '@utils/cn'
 
+import { cssVariables } from '@styles/cssVariables'
 import type { MediaProps } from '../types'
-import { getClientSideURL } from '@/utils/getURL'
 
-import { cssVariables } from '@/styles/cssVariables'
 const { breakpoints } = cssVariables
 
 // A base64 encoded image to use as a placeholder while the image is loading

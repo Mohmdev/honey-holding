@@ -1,7 +1,7 @@
 import type { CollectionConfig } from 'payload'
 
-import { admins } from '@/access/admins'
-import { adminsOrPublished } from '@/access/adminsOrPublished'
+import { admins } from '@access/admins'
+import { adminsOrPublished } from '@access/adminsOrPublished'
 import { Archive } from '@/blocks/ArchiveBlock/config'
 import { CallToAction } from '@/blocks/CallToAction/config'
 import { Content } from '@/blocks/Content/config'
@@ -9,8 +9,8 @@ import { FormBlock } from '@/blocks/Form/config'
 import { MediaBlock } from '@/blocks/MediaBlock/config'
 import { hero } from '@/fields/heros/config'
 import { slugField } from '@/fields/slug/config'
-import { populatePublishedAt } from '@/hooks/populatePublishedAt'
-import { generatePreviewPath } from '@/utils/generatePreviewPath'
+import { populatePublishedAt } from '@hooks/populatePublishedAt'
+import { generatePreviewPath } from '@utils/generatePreviewPath'
 import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
 
 import {

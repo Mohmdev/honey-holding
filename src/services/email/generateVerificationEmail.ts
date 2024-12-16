@@ -1,4 +1,4 @@
-import { getServerSideURL } from '@/lib/utils/getURL'
+import { getServerSideURL } from '@utils/getURL'
 import { generateEmailHTML } from './generateEmailHTML'
 
 type User = {

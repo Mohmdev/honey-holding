@@ -1,33 +1,43 @@
 import * as React from 'react'
 import Link from 'next/link'
 
-import { Avatar } from '@components/Avatar/index.js'
-import { Gutter } from '@components/Gutter/index.js'
-import { RichText } from '@components/RichText/index.js'
-import { GitHubIcon } from '@root/graphics/GitHub/index.js'
-import { ArrowIcon } from '@root/icons/ArrowIcon/index.js'
-import { MainMenu } from '@root/payload-types.js'
-import { useAuth } from '@root/providers/Auth/index.js'
-import { useHeaderObserver } from '@root/providers/HeaderIntersectionObserver/index.js'
+import { Avatar } from '@components/Avatar'
+import { Gutter } from '@components/Gutter'
+import { RichText } from '@components/RichText'
+import { GitHubIcon } from '@root/graphics/GitHub'
+import { ArrowIcon } from '@root/icons/ArrowIcon'
+import { MainMenu } from '@payload-types'
+import { useAuth } from '@root/providers/Auth'
+import { useHeaderObserver } from '@root/providers/HeaderIntersectionObserver'
 import { useStarCount } from '@root/utilities/use-star-count.js'
-import { FullLogo } from '../../../graphics/FullLogo/index.js'
-import { CMSLink } from '../../CMSLink/index.js'
-import { DocSearch } from '../Docsearch/index.js'
+import { FullLogo } from '../../../graphics/FullLogo'
+import { CMSLink } from '../../CMSLink'
+import { DocSearch } from '../Docsearch'
 
 import classes from './index.module.scss'
 
-type DesktopNavType = Pick<MainMenu, 'tabs' | 'menuCta'> & { hideBackground?: boolean }
-export const DesktopNav: React.FC<DesktopNavType> = ({ tabs, hideBackground, menuCta }) => {
+type DesktopNavType = Pick<MainMenu, 'tabs' | 'menuCta'> & {
+  hideBackground?: boolean
+}
+export const DesktopNav: React.FC<DesktopNavType> = ({
+  tabs,
+  hideBackground,
+  menuCta
+}) => {
   const { user } = useAuth()
   const [activeTab, setActiveTab] = React.useState<number | undefined>()
-  const [activeDropdown, setActiveDropdown] = React.useState<boolean | undefined>(false)
+  const [activeDropdown, setActiveDropdown] = React.useState<
+    boolean | undefined
+  >(false)
   const [backgroundStyles, setBackgroundStyles] = React.useState<any>({
-    height: '0px',
+    height: '0px'
   })
   const bgHeight = hideBackground ? { top: '0px' } : ''
   const [underlineStyles, setUnderlineStyles] = React.useState<any>({})
   const { headerTheme } = useHeaderObserver()
-  const [activeDropdownItem, setActiveDropdownItem] = React.useState<number | undefined>(undefined)
+  const [activeDropdownItem, setActiveDropdownItem] = React.useState<
+    number | undefined
+  >(undefined)
 
   const menuItemRefs = [] as (HTMLButtonElement | null)[]
   const dropdownMenuRefs = [] as (HTMLDivElement | null)[]
@@ -43,7 +53,7 @@ export const DesktopNav: React.FC<DesktopNavType> = ({ tabs, hideBackground, men
         setActiveDropdown(undefined)
       } else {
         setBackgroundStyles({
-          height: hideBackground ? `${bgHeight + 90}px` : `${bgHeight}px`,
+          height: hideBackground ? `${bgHeight + 90}px` : `${bgHeight}px`
         })
       }
     }
@@ -51,7 +61,7 @@ export const DesktopNav: React.FC<DesktopNavType> = ({ tabs, hideBackground, men
   }, [hideBackground])
   const hoverTimeout = React.useRef<number | null>(null)
 
-  const handleMouseEnter = args => {
+  const handleMouseEnter = (args) => {
     if (!activeDropdown) {
       hoverTimeout.current = window.setTimeout(() => {
         handleHoverEnter(args)
@@ -68,7 +78,7 @@ export const DesktopNav: React.FC<DesktopNavType> = ({ tabs, hideBackground, men
     }
   }
 
-  const handleHoverEnter = index => {
+  const handleHoverEnter = (index) => {
     setActiveTab(index)
     setActiveDropdown(true)
 
@@ -79,7 +89,7 @@ export const DesktopNav: React.FC<DesktopNavType> = ({ tabs, hideBackground, men
     if (hoveredMenuItem) {
       setUnderlineStyles({
         width: `${hoveredMenuItem.clientWidth}px`,
-        left: hoveredMenuItem.offsetLeft,
+        left: hoveredMenuItem.offsetLeft
       })
     }
 
@@ -88,7 +98,7 @@ export const DesktopNav: React.FC<DesktopNavType> = ({ tabs, hideBackground, men
       setActiveDropdown(undefined)
     } else {
       setBackgroundStyles({
-        height: hideBackground ? `${bgHeight + 90}px` : `${bgHeight}px`,
+        height: hideBackground ? `${bgHeight + 90}px` : `${bgHeight}px`
       })
     }
 
@@ -109,12 +119,19 @@ export const DesktopNav: React.FC<DesktopNavType> = ({ tabs, hideBackground, men
       style={{ width: '100%' }}
     >
       <Gutter
-        className={[classes.desktopNav, activeDropdown && classes.active].filter(Boolean).join(' ')}
+        className={[classes.desktopNav, activeDropdown && classes.active]
+          .filter(Boolean)
+          .join(' ')}
       >
         <div className={[classes.grid, 'grid'].join(' ')}>
           <div className={[classes.logo, 'cols-4'].join(' ')}>
-            <Link href="/" className={classes.logo} prefetch={false} aria-label="Full Payload Logo">
-              <FullLogo className="w-auto h-[30px]" />
+            <Link
+              href="/"
+              className={classes.logo}
+              prefetch={false}
+              aria-label="Full Payload Logo"
+            >
+              <FullLogo className="h-[30px] w-auto" />
             </Link>
           </div>
           <div className={[classes.content, 'cols-8'].join(' ')}>
@@ -129,12 +146,16 @@ export const DesktopNav: React.FC<DesktopNavType> = ({ tabs, hideBackground, men
                   >
                     <button
                       className={classes.tab}
-                      ref={ref => {
+                      ref={(ref) => {
                         menuItemRefs[tabIndex] = ref
                       }}
                     >
                       {enableDirectLink ? (
-                        <CMSLink className={classes.directLink} {...tab.link} label={tab.label}>
+                        <CMSLink
+                          className={classes.directLink}
+                          {...tab.link}
+                          label={tab.label}
+                        >
                           {tab.link?.newTab && tab.link.type === 'custom' && (
                             <ArrowIcon className={classes.tabArrow} />
                           )}
@@ -148,16 +169,18 @@ export const DesktopNav: React.FC<DesktopNavType> = ({ tabs, hideBackground, men
                         className={[
                           'grid',
                           classes.dropdown,
-                          tabIndex === activeTab && classes.activeTab,
+                          tabIndex === activeTab && classes.activeTab
                         ]
                           .filter(Boolean)
                           .join(' ')}
-                        ref={ref => {
+                        ref={(ref) => {
                           dropdownMenuRefs[tabIndex] = ref
                         }}
                         onClick={resetHoverStyles}
                       >
-                        <div className={[classes.description, 'cols-4'].join(' ')}>
+                        <div
+                          className={[classes.description, 'cols-4'].join(' ')}
+                        >
                           {tab.description}
                           {tab.descriptionLinks && (
                             <div className={classes.descriptionLinks}>
@@ -178,9 +201,10 @@ export const DesktopNav: React.FC<DesktopNavType> = ({ tabs, hideBackground, men
                             const isActive = activeDropdownItem === index
                             let columnSpan = 12 / (tab.navItems?.length || 1)
                             const containsFeatured = tab.navItems?.some(
-                              navItem => navItem.style === 'featured',
+                              (navItem) => navItem.style === 'featured'
                             )
-                            const showUnderline = isActive && item.style === 'default'
+                            const showUnderline =
+                              isActive && item.style === 'default'
 
                             if (containsFeatured) {
                               columnSpan = item.style === 'featured' ? 6 : 3
@@ -190,66 +214,89 @@ export const DesktopNav: React.FC<DesktopNavType> = ({ tabs, hideBackground, men
                                 className={[
                                   `cols-${columnSpan}`,
                                   classes.dropdownItem,
-                                  showUnderline && classes.showUnderline,
+                                  showUnderline && classes.showUnderline
                                 ].join(' ')}
-                                onMouseEnter={() => setActiveDropdownItem(index)}
+                                onMouseEnter={() =>
+                                  setActiveDropdownItem(index)
+                                }
                                 key={index}
                               >
-                                {item.style === 'default' && item.defaultLink && (
-                                  <CMSLink
-                                    className={classes.defaultLink}
-                                    {...item.defaultLink.link}
-                                    label=""
-                                  >
-                                    <div className={classes.defaultLinkLabel}>
-                                      {item.defaultLink.link.label}
-                                    </div>
-                                    <div className={classes.defaultLinkDescription}>
-                                      {item.defaultLink.description}
-                                      <ArrowIcon size="medium" />
-                                    </div>
-                                  </CMSLink>
-                                )}
+                                {item.style === 'default' &&
+                                  item.defaultLink && (
+                                    <CMSLink
+                                      className={classes.defaultLink}
+                                      {...item.defaultLink.link}
+                                      label=""
+                                    >
+                                      <div className={classes.defaultLinkLabel}>
+                                        {item.defaultLink.link.label}
+                                      </div>
+                                      <div
+                                        className={
+                                          classes.defaultLinkDescription
+                                        }
+                                      >
+                                        {item.defaultLink.description}
+                                        <ArrowIcon size="medium" />
+                                      </div>
+                                    </CMSLink>
+                                  )}
                                 {item.style === 'list' && item.listLinks && (
                                   <div className={classes.linkList}>
-                                    <div className={classes.listLabel}>{item.listLinks.tag}</div>
+                                    <div className={classes.listLabel}>
+                                      {item.listLinks.tag}
+                                    </div>
                                     {item.listLinks.links &&
-                                      item.listLinks.links.map((link, linkIndex) => (
-                                        <CMSLink
-                                          className={classes.link}
-                                          key={linkIndex}
-                                          {...link.link}
-                                        >
-                                          {link.link?.newTab && link.link?.type === 'custom' && (
-                                            <ArrowIcon className={classes.linkArrow} />
-                                          )}
-                                        </CMSLink>
-                                      ))}
-                                  </div>
-                                )}
-                                {item.style === 'featured' && item.featuredLink && (
-                                  <div className={classes.featuredLink}>
-                                    <div className={classes.listLabel}>{item.featuredLink.tag}</div>
-                                    {item.featuredLink?.label && (
-                                      <RichText
-                                        className={classes.featuredLinkLabel}
-                                        content={item.featuredLink.label}
-                                      />
-                                    )}
-                                    <div className={classes.featuredLinkWrap}>
-                                      {item.featuredLink.links &&
-                                        item.featuredLink.links.map((link, linkIndex) => (
+                                      item.listLinks.links.map(
+                                        (link, linkIndex) => (
                                           <CMSLink
-                                            className={classes.featuredLinks}
+                                            className={classes.link}
                                             key={linkIndex}
                                             {...link.link}
                                           >
-                                            <ArrowIcon className={classes.linkArrow} />
+                                            {link.link?.newTab &&
+                                              link.link?.type === 'custom' && (
+                                                <ArrowIcon
+                                                  className={classes.linkArrow}
+                                                />
+                                              )}
                                           </CMSLink>
-                                        ))}
-                                    </div>
+                                        )
+                                      )}
                                   </div>
                                 )}
+                                {item.style === 'featured' &&
+                                  item.featuredLink && (
+                                    <div className={classes.featuredLink}>
+                                      <div className={classes.listLabel}>
+                                        {item.featuredLink.tag}
+                                      </div>
+                                      {item.featuredLink?.label && (
+                                        <RichText
+                                          className={classes.featuredLinkLabel}
+                                          content={item.featuredLink.label}
+                                        />
+                                      )}
+                                      <div className={classes.featuredLinkWrap}>
+                                        {item.featuredLink.links &&
+                                          item.featuredLink.links.map(
+                                            (link, linkIndex) => (
+                                              <CMSLink
+                                                className={
+                                                  classes.featuredLinks
+                                                }
+                                                key={linkIndex}
+                                                {...link.link}
+                                              >
+                                                <ArrowIcon
+                                                  className={classes.linkArrow}
+                                                />
+                                              </CMSLink>
+                                            )
+                                          )}
+                                      </div>
+                                    </div>
+                                  )}
                               </div>
                             )
                           })}
@@ -260,7 +307,10 @@ export const DesktopNav: React.FC<DesktopNavType> = ({ tabs, hideBackground, men
               })}
               <div
                 className={classes.underline}
-                style={{ ...underlineStyles, opacity: activeDropdown || activeTab ? 1 : 0 }}
+                style={{
+                  ...underlineStyles,
+                  opacity: activeDropdown || activeTab ? 1 : 0
+                }}
                 aria-hidden="true"
               >
                 <div className={classes.underlineFill} />
@@ -269,7 +319,10 @@ export const DesktopNav: React.FC<DesktopNavType> = ({ tabs, hideBackground, men
           </div>
           <div className={'cols-4'}>
             <div
-              className={[classes.secondaryNavItems, user !== undefined && classes.show].join(' ')}
+              className={[
+                classes.secondaryNavItems,
+                user !== undefined && classes.show
+              ].join(' ')}
             >
               <a
                 className={classes.github}
@@ -288,14 +341,19 @@ export const DesktopNav: React.FC<DesktopNavType> = ({ tabs, hideBackground, men
                   <Link prefetch={false} href="/login">
                     Login
                   </Link>
-                  {menuCta && menuCta.label && <CMSLink {...menuCta} className={classes.button} />}
+                  {menuCta && menuCta.label && (
+                    <CMSLink {...menuCta} className={classes.button} />
+                  )}
                 </>
               )}
               <DocSearch />
             </div>
           </div>
         </div>
-        <div className={classes.background} style={{ ...backgroundStyles, ...bgHeight }} />
+        <div
+          className={classes.background}
+          style={{ ...backgroundStyles, ...bgHeight }}
+        />
       </Gutter>
     </div>
   )

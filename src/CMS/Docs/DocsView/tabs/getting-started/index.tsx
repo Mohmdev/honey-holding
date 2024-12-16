@@ -1,6 +1,6 @@
 import React from 'react'
 import { Banner } from '@payloadcms/ui/elements/Banner'
-import { SeedButton } from '@/components/BeforeDashboard/SeedButton'
+import { SeedButton } from '@components/BeforeDashboard/SeedButton'
 
 import classes from './index.module.scss'
 

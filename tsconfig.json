@@ -3,11 +3,7 @@
     "baseUrl": ".",
     "esModuleInterop": true,
     "target": "ES2022",
-    "lib": [
-      "DOM",
-      "DOM.Iterable",
-      "ES2022"
-    ],
+    "lib": ["DOM", "DOM.Iterable", "ES2022"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -27,27 +23,23 @@
       }
     ],
     "paths": {
-      "@payload-config": [
-        "./src/services/payload-config.ts"
-      ],
-      "@/payload-types": [
-        "./src/lib/payload-types.ts"
-      ],
-      "@/access/*": [
-        "./src/CMS/access/*"
-      ],
-      "@/utils/*": [
-        "./src/lib/utils/*"
-      ],
-      "@/hooks/*": [
-        "./src/lib/hooks/*"
-      ],
-      "react": [
-        "./node_modules/@types/react"
-      ],
-      "@/*": [
-        "./src/*"
-      ],
+      "@/*": ["src/*"],
+      "@payload-config": ["src/CMS/payload-config.ts"],
+      "@payload-types": ["src/CMS/payload-types.ts"],
+      "@blocks/*": ["src/blocks/*"],
+      "@fields/*": ["src/fields/*"],
+      "@components/*": ["src/components/*"],
+      "@ui/*": ["src/components/_ui/*"],
+      "@graphics/*": ["src/components/_ui/graphics/*"],
+      "@icons/*": ["src/components/_ui/icons/*"],
+      "@styles/*": ["src/styles/*"],
+      "@providers/*": ["src/providers/*"],
+      "@services/*": ["src/services/*"],
+      "@access/*": ["src/services/access/*"],
+      "@lib/*": ["src/lib/*"],
+      "@utils/*": ["src/lib/utils/*"],
+      "@hooks/*": ["src/lib/hooks/*"],
+      "react": ["node_modules/@types/react"]
     }
   },
   "include": [
@@ -59,7 +51,5 @@
     "next.config.ts",
     "next-sitemap.config.js"
   ],
-  "exclude": [
-    "node_modules",
-  ]
+  "exclude": ["node_modules", ".temp"]
 }

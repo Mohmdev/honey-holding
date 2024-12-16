@@ -20,6 +20,7 @@
     "devsafe": "rm -rf .next && cross-env NODE_OPTIONS=--no-deprecation next dev --turbopack -p 3000",
     "lint": "cross-env NODE_OPTIONS=--no-deprecation next lint",
     "lint:fix": "cross-env NODE_OPTIONS=--no-deprecation next lint --fix",
+    "format:src": "prettier --write src --config prettier.config.js",
     "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
     "generate:importmap": "payload generate:importmap",
     "generate:schema": "payload-graphql generate:schema",

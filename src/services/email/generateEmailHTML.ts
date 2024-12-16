@@ -4,10 +4,7 @@ import juice from 'juice'
 import path from 'path'
 
 export const generateEmailHTML = async (data: any): Promise<string> => {
-  const templatePath = path.join(
-    process.cwd(),
-    'src/services/email/template.ejs'
-  )
+  const templatePath = path.join(process.cwd(), '@services/email/template.ejs')
   const templateContent = fs.readFileSync(templatePath, 'utf8')
 
   // Compile and render the template with EJS

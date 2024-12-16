@@ -1,5 +1,5 @@
 import { link } from '@/fields/link'
-import { isAdmin } from '@/access/isAdmin'
+import { isAdmin } from '@access/isAdmin'
 import { revalidatePath } from 'next/cache'
 // import { revalidateFooter } from './hooks/revalidateFooter'
 

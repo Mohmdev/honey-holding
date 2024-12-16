@@ -4,8 +4,8 @@ import {
   lexicalEditor
 } from '@payloadcms/richtext-lexical'
 
-import { anyone } from '@/access/anyone'
-import { authenticated } from '@/access/authenticated'
+import { anyone } from '@access/anyone'
+import { authenticated } from '@access/authenticated'
 
 import type { CollectionConfig } from 'payload'
 

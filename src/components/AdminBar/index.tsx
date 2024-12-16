@@ -5,8 +5,8 @@ import { useRouter } from 'next/navigation'
 import { useSelectedLayoutSegments } from 'next/navigation'
 import { PayloadAdminBar } from './admin-bar'
 
-import { getClientSideURL } from '@/utils/getURL'
-import { cn } from '@/utils/cn'
+import { getClientSideURL } from '@utils/getURL'
+import { cn } from '@utils/cn'
 import './index.scss'
 
 import type { PayloadAdminBarProps } from './admin-bar'

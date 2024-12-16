@@ -1,5 +1,5 @@
 
-import { admins } from '@/access/admins'
+import { admins } from '@access/admins'
 import type { CollectionConfig } from 'payload'
 
 export const Docs: CollectionConfig = {

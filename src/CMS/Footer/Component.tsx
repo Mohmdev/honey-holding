@@ -1,12 +1,12 @@
 import React from 'react'
 import Link from 'next/link'
-import { CMSLink } from '@/components/Link'
-import { Logo } from '@/components/Logo/Logo'
-import { getCachedGlobal } from '@/utils/getGlobals'
+import { CMSLink } from '@components/Link'
+import { Logo } from '@components/Logo/Logo'
+import { getCachedGlobal } from '@utils/getGlobals'
 
-import type { Footer } from '@/payload-types'
+import type { Footer } from '@payload-types'
 
-// import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
+// import { ThemeSelector } from '@providers/Theme/ThemeSelector'
 
 export async function Footer() {
   const footerData: Footer = await getCachedGlobal('footer', 1)()

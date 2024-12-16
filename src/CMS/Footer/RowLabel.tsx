@@ -2,7 +2,7 @@
 
 import { RowLabelProps, useRowLabel } from '@payloadcms/ui'
 
-import type { Footer } from '@/payload-types'
+import type { Footer } from '@payload-types'
 
 export const RowLabel: React.FC<RowLabelProps> = (props) => {
   const data = useRowLabel<NonNullable<Footer['navItems']>[number]>()

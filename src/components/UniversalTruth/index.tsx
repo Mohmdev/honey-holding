@@ -25,5 +25,7 @@ export const UniversalTruth = () => {
     }
   }, [])
 
-  return universalTruth ? <div className={classes.cursor} ref={cursorRef} /> : null
+  return universalTruth ? (
+    <div className={classes.cursor} ref={cursorRef} />
+  ) : null
 }

@@ -1,5 +1,5 @@
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
-import { revalidateRedirects } from '@/lib/hooks/revalidateRedirects'
+import { revalidateRedirects } from '@hooks/revalidateRedirects'
 
 import type { Plugin } from 'payload'
 

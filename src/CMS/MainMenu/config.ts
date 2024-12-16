@@ -2,7 +2,7 @@ import type { GlobalConfig } from 'payload'
 
 import { revalidatePath } from 'next/cache'
 
-import { isAdmin } from '@/access/isAdmin'
+import { isAdmin } from '@access/isAdmin'
 import { link } from '@/fields/link'
 
 export const MainMenu: GlobalConfig = {

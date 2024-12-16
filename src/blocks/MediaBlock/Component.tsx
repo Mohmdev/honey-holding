@@ -1,9 +1,9 @@
 import React from 'react'
-import RichText from '@/components/RichText'
-import { MediaComponent } from '@/components/MediaComponent'
-import { cn } from '@/utils/cn'
+import RichText from '@components/RichText'
+import { MediaComponent } from '@components/MediaComponent'
+import { cn } from '@utils/cn'
 
-import type { MediaBlock as MediaBlockProps } from '@/payload-types'
+import type { MediaBlock as MediaBlockProps } from '@payload-types'
 import type { StaticImageData } from 'next/image'
 
 type Props = MediaBlockProps & {

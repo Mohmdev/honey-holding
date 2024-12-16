@@ -5,14 +5,11 @@ import { useModal } from '@faceless-ui/modal'
 import { useScrollInfo } from '@faceless-ui/scroll-info'
 import { useSearchParams } from 'next/navigation'
 
-import { UniversalTruth } from '@/components/UniversalTruth'
-import { MainMenu } from '@/payload-types'
-import { useHeaderObserver } from '@/providers/HeaderIntersectionObserver'
-import { DesktopNav } from './DesktopNav/index.js'
-import {
-  MobileNav,
-  modalSlug as mobileNavModalSlug
-} from './MobileNav/index.js'
+import { UniversalTruth } from '@components/UniversalTruth'
+import { MainMenu } from '@payload-types'
+import { useHeaderObserver } from '@providers/HeaderIntersectionObserver'
+import { DesktopNav } from './DesktopNav'
+import { MobileNav, modalSlug as mobileNavModalSlug } from './MobileNav'
 
 import classes from './index.module.scss'
 

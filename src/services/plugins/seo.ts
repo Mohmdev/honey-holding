@@ -1,4 +1,4 @@
-import { getServerSideURL } from '@/lib/utils/getURL'
+import { getServerSideURL } from '@utils/getURL'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import type { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
 

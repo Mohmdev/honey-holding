@@ -1,11 +1,11 @@
 'use client'
 
-import { cn } from '@/utils/cn'
+import { cn } from '@utils/cn'
 import React, { useEffect, useRef } from 'react'
 
 import type { MediaProps } from '../types'
 
-import { getClientSideURL } from '@/utils/getURL'
+import { getClientSideURL } from '@utils/getURL'
 
 export const VideoMedia: React.FC<MediaProps> = (props) => {
   const { onClick, resource, videoClassName } = props
