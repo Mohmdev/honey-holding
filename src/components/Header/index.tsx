@@ -1,0 +1,58 @@
+'use client'
+
+import * as React from 'react'
+import { useModal } from '@faceless-ui/modal'
+import { useScrollInfo } from '@faceless-ui/scroll-info'
+import { useSearchParams } from 'next/navigation'
+
+import { UniversalTruth } from '@/components/UniversalTruth'
+import { MainMenu } from '@/payload-types'
+import { useHeaderObserver } from '@/providers/HeaderIntersectionObserver'
+import { DesktopNav } from './DesktopNav/index.js'
+import {
+  MobileNav,
+  modalSlug as mobileNavModalSlug
+} from './MobileNav/index.js'
+
+import classes from './index.module.scss'
+
+export const Header: React.FC<MainMenu> = ({ tabs, menuCta }) => {
+  const { isModalOpen } = useModal()
+  const isMobileNavOpen = isModalOpen(mobileNavModalSlug)
+  const { headerTheme } = useHeaderObserver()
+  const { y } = useScrollInfo()
+  const [hideBackground, setHideBackground] = React.useState(true)
+
+  React.useEffect(() => {
+    if (isMobileNavOpen) {
+      setHideBackground(false)
+    } else {
+      setHideBackground(y < 30)
+    }
+  }, [y, isMobileNavOpen])
+
+  return (
+    <div data-theme={headerTheme}>
+      <header
+        className={[
+          classes.header,
+          hideBackground && classes.hideBackground,
+          isMobileNavOpen && classes.mobileNavOpen,
+          headerTheme && classes.themeIsSet
+        ]
+          .filter(Boolean)
+          .join(' ')}
+      >
+        <DesktopNav
+          tabs={tabs}
+          hideBackground={hideBackground}
+          menuCta={menuCta}
+        />
+        <MobileNav tabs={tabs} menuCta={menuCta} />
+        <React.Suspense>
+          <UniversalTruth />
+        </React.Suspense>
+      </header>
+    </div>
+  )
+}

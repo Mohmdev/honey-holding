@@ -52,7 +52,8 @@ export const link: LinkType = ({
     name: 'link',
     type: 'group',
     admin: {
-      hideGutter: true
+      hideGutter: true,
+      ...(overrides?.admin || {})
     },
     fields: [
       {
@@ -84,7 +85,7 @@ export const link: LinkType = ({
               style: {
                 alignSelf: 'flex-end'
               },
-              width: '50%'
+              width: '25%'
             },
             label: 'Open in new tab'
           }
