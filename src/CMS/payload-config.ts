@@ -22,19 +22,19 @@ import { plugins } from '@/services/plugins'
 
 export default buildConfig({
   collections: [
-    ...collectionGroup('Content', [Pages, Posts, Categories]),
+    // ...collectionGroup('Content', [Pages, Posts, Categories]),
     ...collectionGroup('Uploads', [Media, Assets]),
     ...collectionGroup('Settings', [Users]),
     ...collectionGroup('Support', [Docs, Tickets])
   ],
-  globals: [...globalGroup('Navigation', [Header, Footer])],
+  // globals: [...globalGroup('Navigation', [Header, Footer])],
   sharp,
   admin: adminConfig,
-  email: emailAdapter,
+  // email: emailAdapter,
   db: databaseAdapter,
-  plugins: [...plugins],
-  editor: defaultLexical,
+  // plugins: [...plugins],
+  // editor: defaultLexical,
   secret: process.env.PAYLOAD_SECRET,
   cors: [getServerSideURL()].filter(Boolean),
-  typescript: { outputFile: '@payload-types' }
+  typescript: { outputFile: 'src/CMS/payload-types.ts' }
 })

@@ -1,46 +1,52 @@
-import {
-  FixedToolbarFeature,
-  InlineToolbarFeature,
-  lexicalEditor
-} from '@payloadcms/richtext-lexical'
-
-import { anyone } from '@access/anyone'
-import { authenticated } from '@access/authenticated'
-
-import type { CollectionConfig } from 'payload'
-
 import path from 'path'
 import { fileURLToPath } from 'url'
+
+import { uploadDarkModeFallback } from '@/fields/uploadDarkModeFallback'
+import { basicLexical } from '@/services/editor/basicLexical'
+
+import { anyone } from '@access/anyone'
+import { isAdminOrEditor } from '@access/isAdminOrEditor'
+
+import type { CollectionConfig } from 'payload'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export const Media: CollectionConfig<'media'> = {
   slug: 'media',
+  labels: {
+    singular: 'Media',
+    plural: 'Media'
+  },
   access: {
-    create: authenticated,
-    delete: authenticated,
     read: anyone,
-    update: authenticated
+    create: isAdminOrEditor,
+    delete: isAdminOrEditor,
+    update: isAdminOrEditor
+  },
+  defaultPopulate: {
+    alt: true,
+    darkModeFallback: true,
+    filename: true,
+    height: true,
+    mimeType: true,
+    url: true,
+    width: true
   },
   fields: [
+    uploadDarkModeFallback,
     {
       name: 'alt',
-      type: 'text'
-      //required: true,
+      type: 'text',
+      required: true
     },
     {
       name: 'caption',
       type: 'richText',
-      editor: lexicalEditor({
-        features: ({ rootFeatures }) => {
-          return [
-            ...rootFeatures,
-            FixedToolbarFeature(),
-            InlineToolbarFeature()
-          ]
-        }
-      })
+      editor: basicLexical,
+      admin: {
+        description: 'Optional'
+      }
     }
   ],
   upload: {
@@ -49,7 +55,6 @@ export const Media: CollectionConfig<'media'> = {
     focalPoint: true,
     disableLocalStorage: true,
     adminThumbnail: 'thumbnail',
-    mimeTypes: ['image/*', 'video/*'],
     imageSizes: [
       {
         name: 'thumbnail',

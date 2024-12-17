@@ -11,6 +11,8 @@ const prettierConfig = {
   printWidth: 80,
   tabWidth: 2,
   semi: false,
+  proseWrap: 'preserve',
+  embeddedLanguageFormatting: 'auto',
   plugins: [
     'prettier-plugin-tailwindcss',
     '@ianvs/prettier-plugin-sort-imports'

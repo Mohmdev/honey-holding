@@ -7,6 +7,7 @@ import { FormBlock } from '@/blocks/Form/config'
 import { MediaBlock } from '@/blocks/MediaBlock/config'
 import { hero } from '@/fields/heros/config'
 import { slugField } from '@/fields/slug/config'
+import { admins } from '@/services/access/depricated/admins'
 
 import {
   MetaDescriptionField,
@@ -15,7 +16,6 @@ import {
   OverviewField,
   PreviewField
 } from '@payloadcms/plugin-seo/fields'
-import { admins } from '@access/admins'
 import { adminsOrPublished } from '@access/adminsOrPublished'
 
 import type { CollectionConfig } from 'payload'

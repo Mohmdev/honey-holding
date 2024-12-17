@@ -1,4 +1,4 @@
-import { admins } from '@access/admins'
+import { isAdminOrEditor } from '@access/isAdminOrEditor'
 
 import type { CollectionConfig } from 'payload'
 
@@ -10,7 +10,7 @@ export const Tickets: CollectionConfig = {
     plural: 'Tickets'
   },
   access: {
-    read: admins
+    read: isAdminOrEditor
   },
   admin: {
     components: {
@@ -24,12 +24,11 @@ export const Tickets: CollectionConfig = {
   },
   fields: [
     {
-      name: 'dummyField',
+      name: 'dummy',
       type: 'text',
       admin: {
         hidden: true
-      },
-      virtual: true
+      }
     }
   ]
 }

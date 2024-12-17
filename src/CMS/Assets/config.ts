@@ -1,10 +1,13 @@
-import type { CollectionConfig } from 'payload'
-
 import path from 'path'
 import { fileURLToPath } from 'url'
 
+import { uploadDarkModeFallback } from '@/fields/uploadDarkModeFallback'
+
 import { anyone } from '@access/anyone'
-import { authenticated } from '@access/authenticated'
+import { isAdminOrEditor } from '@access/isAdminOrEditor'
+import { isAdminOrEditorOrSelf } from '@access/isAdminOrEditorOrSelf'
+
+import type { CollectionConfig } from 'payload'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -16,19 +19,26 @@ export const Assets: CollectionConfig<'assets'> = {
     plural: 'Assets'
   },
   access: {
-    create: authenticated,
-    delete: authenticated,
     read: anyone,
-    update: authenticated
+    create: isAdminOrEditor,
+    delete: isAdminOrEditorOrSelf,
+    update: isAdminOrEditorOrSelf
+  },
+  defaultPopulate: {
+    alt: true,
+    darkModeFallback: true,
+    filename: true,
+    height: true,
+    mimeType: true,
+    url: true,
+    width: true
   },
   fields: [
+    uploadDarkModeFallback,
     {
       name: 'alt',
-      type: 'text'
-    },
-    {
-      name: 'caption',
-      type: 'textarea'
+      type: 'text',
+      required: true
     }
   ],
   upload: {

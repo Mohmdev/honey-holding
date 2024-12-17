@@ -53,5 +53,5 @@
     "next.config.ts",
     "next-sitemap.config.js"
   ],
-  "exclude": ["node_modules", ".temp"]
+  "exclude": ["node_modules", ".temp", ".docs"]
 }

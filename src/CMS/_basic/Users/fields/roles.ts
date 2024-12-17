@@ -1,4 +1,4 @@
-import { admins } from '@access/admins'
+import { admins } from '@/services/access/depricated/admins'
 
 import type { Field } from 'payload'
 
