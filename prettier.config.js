@@ -61,7 +61,8 @@ const prettierConfig = {
     '',
     '^@styles/(.*)$',
     '',
-    '^@constants'
+    '^@constants',
+    '^@data/(.*)$'
   ],
   importOrderSeparation: false,
   importOrderSortSpecifiers: true,

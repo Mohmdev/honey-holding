@@ -43,6 +43,7 @@
       "@hooks/*": ["src/lib/hooks/*"],
       "@constants": ["src/lib/constants.ts"],
       "react": ["node_modules/@types/react"],
+      "@data": ["src/app/_data/*"],
       "@/*": ["src/*"]
     }
   },
