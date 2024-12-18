@@ -33,6 +33,12 @@ export const Users: CollectionConfig<'users'> = {
     useAsTitle: 'firstName',
     defaultColumns: ['photo', 'firstName', 'role', 'email']
   },
+  defaultPopulate: {
+    firstName: true,
+    lastName: true,
+    role: true,
+    photo: true
+  },
   auth: {
     // verify: false,
     cookies: {
@@ -89,7 +95,10 @@ export const Users: CollectionConfig<'users'> = {
     {
       name: 'photo',
       type: 'upload',
-      relationTo: 'media'
+      relationTo: 'media',
+      admin: {
+        //
+      }
     },
     {
       name: 'role',
@@ -104,7 +113,7 @@ export const Users: CollectionConfig<'users'> = {
       options: ['admin', 'editor', 'public'],
       hasMany: false, // setting this to `true` makes the roles field type definition an array. Keep it false.
       hooks: {
-        afterChange: [ensureFirstUserIsAdmin]
+        beforeChange: [ensureFirstUserIsAdmin]
       }
     }
   ],

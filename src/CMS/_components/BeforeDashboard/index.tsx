@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { SeedButton } from '@admin-components/SeedButton'
-
 import { Banner } from '@payloadcms/ui/elements/Banner'
+
+import { SeedButton } from '@admin-components/SeedButton'
 
 import './index.scss'
 

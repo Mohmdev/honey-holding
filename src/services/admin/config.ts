@@ -9,6 +9,9 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export const adminConfig: Config['admin'] = {
+  avatar: {
+    Component: '@CMS/_components/AdminAvatar'
+  },
   components: {
     beforeLogin: ['@CMS/_components/BeforeLogin']
     // beforeDashboard: ['@CMS/_components/BeforeDashboard']

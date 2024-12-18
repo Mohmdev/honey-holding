@@ -20,6 +20,7 @@ import { Docs as Docs_526b5b714de42f9d3393e2cf5aab9bf3 } from '@CMS/Docs/Compone
 import { Tickets as Tickets_d2f03e2c0605419c1b880f11a0a2ae5a } from '@CMS/Tickets/Component'
 import { LinkToDoc as LinkToDoc_aead06e4cbf6b2620c5c51c9ab283634 } from '@payloadcms/plugin-search/client'
 import { ReindexButton as ReindexButton_aead06e4cbf6b2620c5c51c9ab283634 } from '@payloadcms/plugin-search/client'
+import { default as default_b4121937ea0796cf3c5d959002423de0 } from '@CMS/_components/AdminAvatar'
 import { default as default_02362ec9fc38bdb4351b07b88434c124 } from '@CMS/_components/BeforeLogin'
 
 export const importMap = {
@@ -45,5 +46,6 @@ export const importMap = {
   "@CMS/Tickets/Component#Tickets": Tickets_d2f03e2c0605419c1b880f11a0a2ae5a,
   "@payloadcms/plugin-search/client#LinkToDoc": LinkToDoc_aead06e4cbf6b2620c5c51c9ab283634,
   "@payloadcms/plugin-search/client#ReindexButton": ReindexButton_aead06e4cbf6b2620c5c51c9ab283634,
+  "@CMS/_components/AdminAvatar#default": default_b4121937ea0796cf3c5d959002423de0,
   "@CMS/_components/BeforeLogin#default": default_02362ec9fc38bdb4351b07b88434c124
 }
