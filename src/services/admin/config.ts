@@ -10,11 +10,11 @@ const dirname = path.dirname(filename)
 
 export const adminConfig: Config['admin'] = {
   avatar: {
-    Component: '@CMS/_components/AdminAvatar'
+    Component: '@admin-components/AdminAvatar'
   },
   components: {
-    beforeLogin: ['@CMS/_components/BeforeLogin']
-    // beforeDashboard: ['@CMS/_components/BeforeDashboard']
+    beforeLogin: ['@admin-components/BeforeLogin']
+    // beforeDashboard: ['@admin-components/BeforeDashboard']
   },
   importMap: {
     baseDir: path.resolve(dirname)

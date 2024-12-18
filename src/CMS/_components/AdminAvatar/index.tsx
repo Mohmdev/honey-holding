@@ -14,7 +14,7 @@ const AdminAvatar: React.FC<AdminAvatarProps> = ({ user, size = 30 }) => {
   const dynamicStyle: React.CSSProperties = {
     width: size,
     height: size,
-    fontSize: `${size * 0.3}px`
+    fontSize: `${size * 0.4}px`
   }
 
   if (!user?.email) {

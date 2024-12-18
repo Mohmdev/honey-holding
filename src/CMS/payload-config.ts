@@ -4,11 +4,11 @@ import sharp from 'sharp'
 import { getServerSideURL } from '@utils/getURL'
 import { collectionGroup, globalGroup } from '@utils/groupContent'
 
-import { Header } from '@CMS/_basic/Header/config'
 import { Assets } from '@CMS/Assets/config'
 import { Categories } from '@CMS/Categories/config'
 import { Docs } from '@CMS/Docs/config'
 import { Footer } from '@CMS/Footer/config'
+import { MainMenu } from '@CMS/MainMenu/config'
 import { Media } from '@CMS/Media/config'
 import { Pages } from '@CMS/Pages/config'
 import { Posts } from '@CMS/Posts/config'
@@ -28,7 +28,7 @@ export default buildConfig({
     ...collectionGroup('Settings', [Users]),
     ...collectionGroup('Support', [Docs, Tickets])
   ],
-  // globals: [...globalGroup('Navigation', [Header, Footer])],
+  globals: [...globalGroup('Navigation', [MainMenu, Footer])],
   sharp,
   admin: adminConfig,
   email: emailAdapter,

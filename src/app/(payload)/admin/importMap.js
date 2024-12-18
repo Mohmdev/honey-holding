@@ -20,8 +20,10 @@ import { Docs as Docs_526b5b714de42f9d3393e2cf5aab9bf3 } from '@CMS/Docs/Compone
 import { Tickets as Tickets_d2f03e2c0605419c1b880f11a0a2ae5a } from '@CMS/Tickets/Component'
 import { LinkToDoc as LinkToDoc_aead06e4cbf6b2620c5c51c9ab283634 } from '@payloadcms/plugin-search/client'
 import { ReindexButton as ReindexButton_aead06e4cbf6b2620c5c51c9ab283634 } from '@payloadcms/plugin-search/client'
-import { default as default_b4121937ea0796cf3c5d959002423de0 } from '@CMS/_components/AdminAvatar'
-import { default as default_02362ec9fc38bdb4351b07b88434c124 } from '@CMS/_components/BeforeLogin'
+import { default as default_917e9fc4e11db638dc20d6d5698829dc } from '@admin-components/RowLabelCustom/Items'
+import { default as default_4aac834173fbc6c7ec28bdfde43d40db } from '@admin-components/RowLabelCustom/Tabs'
+import { default as default_ae4fab1c31e066562fe310ac50523ba8 } from '@admin-components/AdminAvatar'
+import { default as default_78bac11f0c351b4f703225a685e62b53 } from '@admin-components/BeforeLogin'
 
 export const importMap = {
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalCell": RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e,
@@ -46,6 +48,8 @@ export const importMap = {
   "@CMS/Tickets/Component#Tickets": Tickets_d2f03e2c0605419c1b880f11a0a2ae5a,
   "@payloadcms/plugin-search/client#LinkToDoc": LinkToDoc_aead06e4cbf6b2620c5c51c9ab283634,
   "@payloadcms/plugin-search/client#ReindexButton": ReindexButton_aead06e4cbf6b2620c5c51c9ab283634,
-  "@CMS/_components/AdminAvatar#default": default_b4121937ea0796cf3c5d959002423de0,
-  "@CMS/_components/BeforeLogin#default": default_02362ec9fc38bdb4351b07b88434c124
+  "@admin-components/RowLabelCustom/Items#default": default_917e9fc4e11db638dc20d6d5698829dc,
+  "@admin-components/RowLabelCustom/Tabs#default": default_4aac834173fbc6c7ec28bdfde43d40db,
+  "@admin-components/AdminAvatar#default": default_ae4fab1c31e066562fe310ac50523ba8,
+  "@admin-components/BeforeLogin#default": default_78bac11f0c351b4f703225a685e62b53
 }

@@ -79,7 +79,7 @@ export const MainMenu: GlobalConfig = {
               type: 'array',
               admin: {
                 components: {
-                  RowLabel: '@admin-components/RowLabelCustom/NavItems'
+                  RowLabel: '@admin-components/RowLabelCustom/Items'
                 }
               },
               fields: [
