@@ -7,6 +7,7 @@ import { getPreviewUrl } from '@lib/utils/getPreviewUrl'
 import { isAdminOrEditor } from '@services/access/isAdminOrEditor'
 import { isAdminOrSelf } from '@services/access/isAdminOrSelf'
 import { publishedOnly } from '@services/access/publishedOnly'
+import { Callout } from '@blocks/Callout'
 import { slugField } from '@fields/slug/config'
 
 import type { CollectionConfig } from 'payload'

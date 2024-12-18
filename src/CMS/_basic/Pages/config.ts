@@ -9,12 +9,12 @@ import {
   OverviewField,
   PreviewField
 } from '@payloadcms/plugin-seo/fields'
+import { CallToAction } from '@blocks/_basic/CallToAction/config'
 import { Archive } from '@blocks/ArchiveBlock/config'
-import { CallToAction } from '@blocks/CallToAction/config'
 import { Content } from '@blocks/Content/config'
 import { FormBlock } from '@blocks/Form/config'
 import { MediaBlock } from '@blocks/MediaBlock/config'
-import { hero } from '@fields/heros/config'
+import { hero } from '@fields/_basic/heros/config'
 import { slugField } from '@fields/slug/config'
 import { isAdminOrEditor } from '@access/isAdminOrEditor'
 import { isAdminOrSelf } from '@access/isAdminOrSelf'

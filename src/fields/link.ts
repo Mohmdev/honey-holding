@@ -1,8 +1,10 @@
-import type { Field } from 'payload'
-
 import deepMerge from '@utils/deepMerge'
 
 import type { ButtonProps } from '@ui/button'
+import type { Field } from 'payload'
+
+import { ENABLED_COLLECTIONS } from '@constants'
+
 type ButtonVariants = NonNullable<ButtonProps['variant']>
 
 export type LinkAppearances = 'default' | 'outline' | ButtonVariants
@@ -102,7 +104,7 @@ export const link: LinkType = ({
         condition: (_, siblingData) => siblingData?.type === 'reference'
       },
       label: 'Document to link to',
-      relationTo: ['pages'],
+      relationTo: ENABLED_COLLECTIONS,
       required: true
     },
     {
@@ -137,11 +139,28 @@ export const link: LinkType = ({
           },
           label: 'Label',
           required: true
+        },
+        {
+          name: 'customId',
+          type: 'text',
+          admin: {
+            width: '25%'
+          }
         }
       ]
     })
   } else {
-    linkResult.fields = [...linkResult.fields, ...linkTypes]
+    linkResult.fields = [
+      ...linkResult.fields,
+      ...linkTypes,
+      {
+        name: 'customId',
+        type: 'text',
+        admin: {
+          width: '25%'
+        }
+      }
+    ]
   }
 
   if (appearances !== false) {

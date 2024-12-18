@@ -9,8 +9,8 @@ import {
   JSXConvertersFunction,
   RichText as RichTextWithoutBlocks
 } from '@payloadcms/richtext-lexical/react'
+import { CallToActionBlock } from '@blocks/_basic/CallToAction/Component'
 import { BannerBlock } from '@blocks/Banner/Component'
-import { CallToActionBlock } from '@blocks/CallToAction/Component'
 import { CodeBlock, CodeBlockProps } from '@blocks/Code/Component'
 import { MediaBlock } from '@blocks/MediaBlock/Component'
 
