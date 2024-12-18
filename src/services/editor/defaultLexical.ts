@@ -1,7 +1,5 @@
 import { Config } from 'payload'
 
-import { enabledCollections } from '@/lib/constants'
-
 import {
   BoldFeature,
   ItalicFeature,
@@ -11,6 +9,8 @@ import {
   UnderlineFeature
 } from '@payloadcms/richtext-lexical'
 
+import { ENABLED_COLLECTIONS } from '@constants'
+
 export const defaultLexical: Config['editor'] = lexicalEditor({
   features: () => {
     return [
@@ -19,7 +19,7 @@ export const defaultLexical: Config['editor'] = lexicalEditor({
       BoldFeature(),
       ItalicFeature(),
       LinkFeature({
-        enabledCollections: enabledCollections,
+        enabledCollections: ENABLED_COLLECTIONS,
         fields: ({ defaultFields }) => {
           const defaultFieldsWithoutUrl = defaultFields.filter((field) => {
             if ('name' in field && field.name === 'url') return false

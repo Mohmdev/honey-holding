@@ -30,6 +30,7 @@
       "@admin-components/*": ["src/CMS/_components/*"],
       "@blocks/*": ["src/blocks/*"],
       "@fields/*": ["src/fields/*"],
+      "@forms/*": ["src/forms/*"],
       "@components/*": ["src/components/*"],
       "@ui/*": ["src/components/_ui/*"],
       "@graphics/*": ["src/components/_ui/graphics/*"],
@@ -41,6 +42,7 @@
       "@lib/*": ["src/lib/*"],
       "@utils/*": ["src/lib/utils/*"],
       "@hooks/*": ["src/lib/hooks/*"],
+      "@constants": ["src/lib/constants.ts"],
       "react": ["node_modules/@types/react"]
     }
   },

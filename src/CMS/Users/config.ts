@@ -1,10 +1,15 @@
 import { anyone } from '@access/anyone'
+import { hasAdminPanelAccess } from '@access/hasAdminPanelAccess'
 import { isAdmin, isAdminFieldLevel } from '@access/isAdmin'
 import { isAdminOrEditor } from '@access/isAdminOrEditor'
 import { isAdminOrEditorOrSelf } from '@access/isAdminOrEditorOrSelf'
 import { isAdminOrSelfFieldLevel } from '@access/isAdminOrSelf'
 
 import type { CollectionConfig } from 'payload'
+
+import { ensureFirstUserIsAdmin } from './ensureFirstUserIsAdmin'
+
+import { ROLES_WITH_ADMIN_ACCESS } from '@constants'
 
 export const Users: CollectionConfig<'users'> = {
   slug: 'users',
@@ -18,7 +23,9 @@ export const Users: CollectionConfig<'users'> = {
     delete: isAdminOrEditorOrSelf,
     update: isAdminOrEditorOrSelf,
     // Determines which users can unlock other users who may be blocked due to failing too many login attempts.
-    unlock: isAdminOrEditor
+    unlock: isAdminOrEditor,
+    // Determines whether or not the currently logged in user can access the admin
+    admin: hasAdminPanelAccess(...ROLES_WITH_ADMIN_ACCESS)
   },
   admin: {
     useAsTitle: 'firstName',
@@ -93,7 +100,10 @@ export const Users: CollectionConfig<'users'> = {
       },
       defaultValue: ['public'],
       options: ['admin', 'editor', 'public'],
-      hasMany: false // was `true`
+      hasMany: false, // setting this to `true` makes the roles field type definition an array. Keep it false.
+      hooks: {
+        afterChange: [ensureFirstUserIsAdmin]
+      }
     }
   ],
   timestamps: true

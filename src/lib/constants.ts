@@ -1,3 +1,7 @@
 import type { CollectionSlug } from 'payload'
 
-export const enabledCollections: CollectionSlug[] = ['pages', 'posts']
+const ENABLED_COLLECTIONS: CollectionSlug[] = ['pages', 'posts']
+
+const ROLES_WITH_ADMIN_ACCESS = ['admin', 'editor'] as const
+
+export { ENABLED_COLLECTIONS, ROLES_WITH_ADMIN_ACCESS }

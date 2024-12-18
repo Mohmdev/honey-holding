@@ -49,6 +49,8 @@ const prettierConfig = {
     '^@/types/(.*)$',
     '^@payload-types$',
     '',
+    '^@forms/(.*)$',
+    '',
     '^@ui/(.*)$',
     '^@graphics/(.*)$',
     '^@icons/(.*)$',
@@ -57,7 +59,9 @@ const prettierConfig = {
     '',
     '^[./]', // Relative imports
     '',
-    '^@styles/(.*)$'
+    '^@styles/(.*)$',
+    '',
+    '^@constants'
   ],
   importOrderSeparation: false,
   importOrderSortSpecifiers: true,
