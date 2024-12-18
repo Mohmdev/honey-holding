@@ -11,6 +11,7 @@ import { Footer } from '@CMS/Footer/config'
 import { MainMenu } from '@CMS/MainMenu/config'
 import { Media } from '@CMS/Media/config'
 import { Pages } from '@CMS/Pages/config'
+import { Portfolio } from '@CMS/Portfolio/config'
 import { Posts } from '@CMS/Posts/config'
 import { Tickets } from '@CMS/Tickets/config'
 //
@@ -23,6 +24,7 @@ import { plugins } from '@services/plugins'
 
 export default buildConfig({
   collections: [
+    ...collectionGroup('Portfolio', [Portfolio]),
     ...collectionGroup('Content', [Pages, Posts, Categories]),
     ...collectionGroup('Uploads', [Media, Assets]),
     ...collectionGroup('Settings', [Users]),
