@@ -16,7 +16,7 @@ export const Tickets: CollectionConfig = {
     components: {
       views: {
         list: {
-          Component: '@/CMS/Tickets/Component#Tickets',
+          Component: '@CMS/Tickets/Component#Tickets',
           actions: undefined
         }
       }

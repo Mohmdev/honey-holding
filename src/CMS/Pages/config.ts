@@ -1,13 +1,6 @@
-import { generatePreviewPath } from '@utils/generatePreviewPath'
+import { getLivePreviewUrl } from '@utils/getLivePreviewUrl'
+import { getPreviewUrl } from '@utils/getPreviewUrl'
 import { populatePublishedAt } from '@hooks/populatePublishedAt'
-import { Archive } from '@/blocks/ArchiveBlock/config'
-import { CallToAction } from '@/blocks/CallToAction/config'
-import { Content } from '@/blocks/Content/config'
-import { FormBlock } from '@/blocks/Form/config'
-import { MediaBlock } from '@/blocks/MediaBlock/config'
-import { hero } from '@/fields/heros/config'
-import { slugField } from '@/fields/slug/config'
-import { admins } from '@/services/access/depricated/admins'
 
 import {
   MetaDescriptionField,
@@ -16,7 +9,16 @@ import {
   OverviewField,
   PreviewField
 } from '@payloadcms/plugin-seo/fields'
-import { adminsOrPublished } from '@access/adminsOrPublished'
+import { Archive } from '@blocks/ArchiveBlock/config'
+import { CallToAction } from '@blocks/CallToAction/config'
+import { Content } from '@blocks/Content/config'
+import { FormBlock } from '@blocks/Form/config'
+import { MediaBlock } from '@blocks/MediaBlock/config'
+import { hero } from '@fields/heros/config'
+import { slugField } from '@fields/slug/config'
+import { isAdminOrEditor } from '@access/isAdminOrEditor'
+import { isAdminOrSelf } from '@access/isAdminOrSelf'
+import { publishedOnly } from '@access/publishedOnly'
 
 import type { CollectionConfig } from 'payload'
 
@@ -29,10 +31,10 @@ export const Pages: CollectionConfig<'pages'> = {
     plural: 'Pages'
   },
   access: {
-    create: admins,
-    delete: admins,
-    read: adminsOrPublished,
-    update: admins
+    read: publishedOnly,
+    create: isAdminOrEditor,
+    delete: isAdminOrSelf,
+    update: isAdminOrSelf
   },
   // This config controls what's populated by default when a page is referenced
   // https://payloadcms.com/docs/queries/select#defaultpopulate-collection-config-property
@@ -43,23 +45,8 @@ export const Pages: CollectionConfig<'pages'> = {
   },
   admin: {
     defaultColumns: ['title', 'slug', 'updatedAt'],
-    livePreview: {
-      url: ({ data, req }) => {
-        const path = generatePreviewPath({
-          slug: typeof data?.slug === 'string' ? data.slug : '',
-          collection: 'pages',
-          req
-        })
-
-        return path
-      }
-    },
-    preview: (data, { req }) =>
-      generatePreviewPath({
-        slug: typeof data?.slug === 'string' ? data.slug : '',
-        collection: 'pages',
-        req
-      }),
+    livePreview: getLivePreviewUrl('pages'),
+    preview: getPreviewUrl('pages'),
     useAsTitle: 'title'
   },
   fields: [
@@ -83,7 +70,7 @@ export const Pages: CollectionConfig<'pages'> = {
               blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock],
               required: true,
               admin: {
-                initCollapsed: true
+                initCollapsed: false
               }
             }
           ],

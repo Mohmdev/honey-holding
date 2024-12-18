@@ -1,4 +1,5 @@
-import { MediaBlock } from '@/blocks/MediaBlock/Component'
+import { cn } from '@utils/cn'
+
 import {
   DefaultNodeTypes,
   SerializedBlockNode
@@ -8,17 +9,16 @@ import {
   JSXConvertersFunction,
   RichText as RichTextWithoutBlocks
 } from '@payloadcms/richtext-lexical/react'
-
-import { CodeBlock, CodeBlockProps } from '@/blocks/Code/Component'
+import { BannerBlock } from '@blocks/Banner/Component'
+import { CallToActionBlock } from '@blocks/CallToAction/Component'
+import { CodeBlock, CodeBlockProps } from '@blocks/Code/Component'
+import { MediaBlock } from '@blocks/MediaBlock/Component'
 
 import type {
   BannerBlock as BannerBlockProps,
   CallToActionBlock as CTABlockProps,
   MediaBlock as MediaBlockProps
 } from '@payload-types'
-import { BannerBlock } from '@/blocks/Banner/Component'
-import { CallToActionBlock } from '@/blocks/CallToAction/Component'
-import { cn } from '@utils/cn'
 
 type NodeTypes =
   | DefaultNodeTypes

@@ -1,7 +1,7 @@
 import path from 'path'
 import { fileURLToPath } from 'url'
 
-// import { Users } from '@/CMS/_basic/Users/config'
+// import { Users } from '@CMS/_basic/Users/config'
 
 import type { Config } from 'payload'
 
@@ -10,8 +10,8 @@ const dirname = path.dirname(filename)
 
 export const adminConfig: Config['admin'] = {
   components: {
-    beforeLogin: ['@components/BeforeLogin']
-    // beforeDashboard: ['@components/BeforeDashboard']
+    beforeLogin: ['@CMS/_components/BeforeLogin']
+    // beforeDashboard: ['@CMS/_components/BeforeDashboard']
   },
   importMap: {
     baseDir: path.resolve(dirname)

@@ -1,11 +1,10 @@
 import path from 'path'
 import { fileURLToPath } from 'url'
 
-import { uploadDarkModeFallback } from '@/fields/uploadDarkModeFallback'
-
+import { uploadDarkModeFallback } from '@fields/uploadDarkModeFallback'
 import { anyone } from '@access/anyone'
 import { isAdminOrEditor } from '@access/isAdminOrEditor'
-import { isAdminOrEditorOrSelf } from '@access/isAdminOrEditorOrSelf'
+import { isAdminOrSelf } from '@access/isAdminOrSelf'
 
 import type { CollectionConfig } from 'payload'
 
@@ -21,8 +20,8 @@ export const Assets: CollectionConfig<'assets'> = {
   access: {
     read: anyone,
     create: isAdminOrEditor,
-    delete: isAdminOrEditorOrSelf,
-    update: isAdminOrEditorOrSelf
+    delete: isAdminOrSelf,
+    update: isAdminOrSelf
   },
   defaultPopulate: {
     alt: true,

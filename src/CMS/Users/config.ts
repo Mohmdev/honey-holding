@@ -1,3 +1,5 @@
+import { generateForgotPasswordEmail } from '@services/email/generateForgotPasswordEmail'
+import { generateVerificationEmail } from '@services/email/generateVerificationEmail'
 import { anyone } from '@access/anyone'
 import { hasAdminPanelAccess } from '@access/hasAdminPanelAccess'
 import { isAdmin, isAdminFieldLevel } from '@access/isAdmin'
@@ -50,15 +52,15 @@ export const Users: CollectionConfig<'users'> = {
           ? true
           : undefined
     },
-    tokenExpiration: 28800 // 8 hours
-    // forgotPassword: {
-    //   generateEmailHTML: generateForgotPasswordEmail,
-    //   generateEmailSubject: () => 'Reset your password'
-    // },
-    // verify: {
-    //   generateEmailHTML: generateVerificationEmail,
-    //   generateEmailSubject: () => 'Verify your email'
-    // }
+    tokenExpiration: 28800, // 8 hours
+    forgotPassword: {
+      generateEmailHTML: generateForgotPasswordEmail,
+      generateEmailSubject: () => 'Reset your password'
+    },
+    verify: {
+      generateEmailHTML: generateVerificationEmail,
+      generateEmailSubject: () => 'Verify your email'
+    }
   },
   fields: [
     {
@@ -98,7 +100,7 @@ export const Users: CollectionConfig<'users'> = {
         read: isAdminOrSelfFieldLevel,
         update: isAdminFieldLevel
       },
-      defaultValue: ['public'],
+      defaultValue: 'public',
       options: ['admin', 'editor', 'public'],
       hasMany: false, // setting this to `true` makes the roles field type definition an array. Keep it false.
       hooks: {

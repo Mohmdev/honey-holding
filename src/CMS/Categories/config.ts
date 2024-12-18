@@ -1,16 +1,16 @@
-import { publishedOnly } from '@/services/access/publishedOnly'
-
-import { isAdmin } from '@access/isAdmin'
+import { isAdminOrEditor } from '@access/isAdminOrEditor'
+import { isAdminOrSelf } from '@access/isAdminOrSelf'
+import { publishedOnly } from '@access/publishedOnly'
 
 import type { CollectionConfig } from 'payload'
 
 export const Categories: CollectionConfig<'categories'> = {
   slug: 'categories',
   access: {
-    create: isAdmin,
-    delete: isAdmin,
     read: publishedOnly,
-    update: isAdmin
+    create: isAdminOrEditor,
+    delete: isAdminOrSelf,
+    update: isAdminOrSelf
   },
   admin: {
     useAsTitle: 'title'

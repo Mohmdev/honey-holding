@@ -17,7 +17,7 @@ export const Docs: CollectionConfig = {
     components: {
       views: {
         list: {
-          Component: '@/CMS/Docs/Component#Docs',
+          Component: '@CMS/Docs/Component#Docs',
           actions: undefined
         }
       }

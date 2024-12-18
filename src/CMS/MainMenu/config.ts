@@ -1,7 +1,6 @@
 import { revalidatePath } from 'next/cache'
 
-import { link } from '@/fields/link'
-
+import { link } from '@fields/link'
 import { isAdmin } from '@access/isAdmin'
 
 import type { GlobalConfig } from 'payload'

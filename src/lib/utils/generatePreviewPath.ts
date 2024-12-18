@@ -1,9 +1,22 @@
-import { PayloadRequest, CollectionSlug } from 'payload'
+import { CollectionSlug, PayloadRequest } from 'payload'
 
-const collectionPrefixMap: Partial<Record<CollectionSlug, string>> = {
-  posts: '/posts',
-  pages: ''
-}
+import { ENABLED_COLLECTIONS } from '../constants'
+
+// Dynamic collection prefix map
+const collectionPrefixMap: Partial<Record<CollectionSlug, string>> =
+  ENABLED_COLLECTIONS.reduce(
+    (acc, collection) => ({
+      ...acc,
+      [collection]: collection === 'pages' ? '' : `/${collection}`
+    }),
+    {}
+  )
+
+// Static collection prefix map
+// const collectionPrefixMap: Partial<Record<CollectionSlug, string>> = {
+//   posts: '/posts',
+//   pages: ''
+// }
 
 type Props = {
   collection: keyof typeof collectionPrefixMap

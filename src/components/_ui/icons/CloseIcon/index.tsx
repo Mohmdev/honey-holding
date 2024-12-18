@@ -1,8 +1,7 @@
 import React from 'react'
 
-import { IconProps } from '../types.js'
-
 import classes from '../index.module.scss'
+import { IconProps } from '../types.js'
 
 export const CloseIcon: React.FC<IconProps> = (props) => {
   const { color, size, className, bold, rotation } = props
@@ -44,4 +43,3 @@ export const CloseIcon: React.FC<IconProps> = (props) => {
     </svg>
   )
 }
-;``

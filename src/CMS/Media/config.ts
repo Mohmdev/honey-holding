@@ -1,11 +1,11 @@
 import path from 'path'
 import { fileURLToPath } from 'url'
 
-import { uploadDarkModeFallback } from '@/fields/uploadDarkModeFallback'
-import { basicLexical } from '@/services/editor/basicLexical'
-
+import { bareboneLexical } from '@services/editor/bareboneLexical'
+import { uploadDarkModeFallback } from '@fields/uploadDarkModeFallback'
 import { anyone } from '@access/anyone'
 import { isAdminOrEditor } from '@access/isAdminOrEditor'
+import { isAdminOrSelf } from '@access/isAdminOrSelf'
 
 import type { CollectionConfig } from 'payload'
 
@@ -21,8 +21,8 @@ export const Media: CollectionConfig<'media'> = {
   access: {
     read: anyone,
     create: isAdminOrEditor,
-    delete: isAdminOrEditor,
-    update: isAdminOrEditor
+    delete: isAdminOrSelf,
+    update: isAdminOrSelf
   },
   defaultPopulate: {
     alt: true,
@@ -43,7 +43,7 @@ export const Media: CollectionConfig<'media'> = {
     {
       name: 'caption',
       type: 'richText',
-      editor: basicLexical,
+      editor: bareboneLexical,
       admin: {
         description: 'Optional'
       }

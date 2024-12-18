@@ -1,15 +1,9 @@
-import * as migration_20241215_160757_initial from './20241215_160757_initial';
-import * as migration_20241215_170033_sasas from './20241215_170033_sasas';
+import * as migration_20241218_140409_base_version from './20241218_140409_base_version';
 
 export const migrations = [
   {
-    up: migration_20241215_160757_initial.up,
-    down: migration_20241215_160757_initial.down,
-    name: '20241215_160757_initial',
-  },
-  {
-    up: migration_20241215_170033_sasas.up,
-    down: migration_20241215_170033_sasas.down,
-    name: '20241215_170033_sasas'
+    up: migration_20241218_140409_base_version.up,
+    down: migration_20241218_140409_base_version.down,
+    name: '20241218_140409_base_version'
   },
 ];

@@ -1,8 +1,5 @@
-import { generatePreviewPath } from '@utils/generatePreviewPath'
-import { Banner } from '@/blocks/Banner/config'
-import { Code } from '@/blocks/Code/config'
-import { MediaBlock } from '@/blocks/MediaBlock/config'
-import { slugField } from '@/fields/slug/config'
+import { getLivePreviewUrl } from '@utils/getLivePreviewUrl'
+import { getPreviewUrl } from '@utils/getPreviewUrl'
 
 import {
   MetaDescriptionField,
@@ -11,16 +8,11 @@ import {
   OverviewField,
   PreviewField
 } from '@payloadcms/plugin-seo/fields'
-import {
-  BlocksFeature,
-  FixedToolbarFeature,
-  HeadingFeature,
-  HorizontalRuleFeature,
-  InlineToolbarFeature,
-  lexicalEditor
-} from '@payloadcms/richtext-lexical'
-import { authenticated } from '@access/authenticated'
-import { authenticatedOrPublished } from '@access/authenticatedOrPublished'
+import { basicLexical } from '@services/editor/basicLexical'
+import { slugField } from '@fields/slug/config'
+import { isAdminOrEditor } from '@access/isAdminOrEditor'
+import { isAdminOrSelf } from '@access/isAdminOrSelf'
+import { publishedOnly } from '@access/publishedOnly'
 
 import type { CollectionConfig } from 'payload'
 
@@ -29,11 +21,15 @@ import { revalidateDelete, revalidatePost } from './revalidatePost'
 
 export const Posts: CollectionConfig<'posts'> = {
   slug: 'posts',
+  labels: {
+    singular: 'Post',
+    plural: 'Posts'
+  },
   access: {
-    create: authenticated,
-    delete: authenticated,
-    read: authenticatedOrPublished,
-    update: authenticated
+    read: publishedOnly,
+    create: isAdminOrEditor,
+    delete: isAdminOrSelf,
+    update: isAdminOrSelf
   },
   // This config controls what's populated by default when a post is referenced
   // https://payloadcms.com/docs/queries/select#defaultpopulate-collection-config-property
@@ -49,23 +45,8 @@ export const Posts: CollectionConfig<'posts'> = {
   },
   admin: {
     defaultColumns: ['title', 'slug', 'updatedAt'],
-    livePreview: {
-      url: ({ data, req }) => {
-        const path = generatePreviewPath({
-          slug: typeof data?.slug === 'string' ? data.slug : '',
-          collection: 'posts',
-          req
-        })
-
-        return path
-      }
-    },
-    preview: (data, { req }) =>
-      generatePreviewPath({
-        slug: typeof data?.slug === 'string' ? data.slug : '',
-        collection: 'posts',
-        req
-      }),
+    livePreview: getLivePreviewUrl('posts'),
+    preview: getPreviewUrl('posts'),
     useAsTitle: 'title'
   },
   fields: [
@@ -82,20 +63,7 @@ export const Posts: CollectionConfig<'posts'> = {
             {
               name: 'content',
               type: 'richText',
-              editor: lexicalEditor({
-                features: ({ rootFeatures }) => {
-                  return [
-                    ...rootFeatures,
-                    HeadingFeature({
-                      enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4']
-                    }),
-                    BlocksFeature({ blocks: [Banner, Code, MediaBlock] }),
-                    FixedToolbarFeature(),
-                    InlineToolbarFeature(),
-                    HorizontalRuleFeature()
-                  ]
-                }
-              }),
+              editor: basicLexical,
               label: false,
               required: true
             }

@@ -23,7 +23,6 @@
       }
     ],
     "paths": {
-      "@/*": ["src/*"],
       "@payload-config": ["src/CMS/payload-config.ts"],
       "@payload-types": ["src/CMS/payload-types.ts"],
       "@CMS/*": ["src/CMS/*"],
@@ -43,7 +42,8 @@
       "@utils/*": ["src/lib/utils/*"],
       "@hooks/*": ["src/lib/hooks/*"],
       "@constants": ["src/lib/constants.ts"],
-      "react": ["node_modules/@types/react"]
+      "react": ["node_modules/@types/react"],
+      "@/*": ["src/*"]
     }
   },
   "include": [
