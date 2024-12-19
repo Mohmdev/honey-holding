@@ -45,7 +45,7 @@ type LinkType = (options?: {
   overrides?: Record<string, unknown>
 }) => Field
 
-export const link: LinkType = ({
+const link: LinkType = ({
   appearances,
   disableLabel = false,
   overrides = {}
@@ -185,3 +185,5 @@ export const link: LinkType = ({
 
   return deepMerge(linkResult, overrides)
 }
+
+export default link

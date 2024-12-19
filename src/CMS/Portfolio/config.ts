@@ -7,7 +7,13 @@ import { getPreviewUrl } from '@lib/utils/getPreviewUrl'
 import { isAdminOrEditor } from '@services/access/isAdminOrEditor'
 import { isAdminOrSelf } from '@services/access/isAdminOrSelf'
 import { publishedOnly } from '@services/access/publishedOnly'
-import { Callout } from '@blocks/Callout'
+import { Callout } from '@blocks/Callout/config'
+import { CallToAction } from '@blocks/CallToAction/config'
+import { CardGrid } from '@blocks/CardGrid/config'
+import { CodeFeature } from '@blocks/CodeFeature/config'
+import { PortfolioCards } from '@blocks/Portfolio/Cards/config'
+import { PortfolioHighlight } from '@blocks/Portfolio/Highlight/config'
+import { PortfolioParallax } from '@blocks/Portfolio/Parallax/config'
 import { slugField } from '@fields/slug/config'
 
 import type { CollectionConfig } from 'payload'
@@ -71,9 +77,9 @@ export const Portfolio: CollectionConfig<'portfolio'> = {
         Callout,
         CallToAction,
         CardGrid,
-        CaseStudyCards,
-        CaseStudiesHighlight,
-        CaseStudyParallax,
+        PortfolioCards,
+        PortfolioHighlight,
+        PortfolioParallax,
         CodeFeature,
         Content,
         ContentGrid,

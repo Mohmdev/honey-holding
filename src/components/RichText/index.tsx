@@ -1,74 +1,140 @@
-import { cn } from '@utils/cn'
+import React from 'react'
 
+import { SerializedLabelNode } from '@root/fields/richText/features/label/LabelNode'
+import { SerializedLargeBodyNode } from '@root/fields/richText/features/largeBody/LargeBodyNode'
 import {
+  BannerBlock,
+  BrBlock,
+  CommandLineBlock,
+  SpotlightBlock,
+  TemplateCardsBlock,
+  VideoBlock
+} from '@types'
+
+import { RichText as SerializedRichText } from '@payloadcms/richtext-lexical/react'
+
+import type { AllowedElements } from '../SpotlightAnimation/types.js'
+import type {
   DefaultNodeTypes,
   SerializedBlockNode
 } from '@payloadcms/richtext-lexical'
-import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
-import {
-  JSXConvertersFunction,
-  RichText as RichTextWithoutBlocks
-} from '@payloadcms/richtext-lexical/react'
-import { CallToActionBlock } from '@blocks/_basic/CallToAction/Component'
-import { BannerBlock } from '@blocks/Banner/Component'
-import { CodeBlock, CodeBlockProps } from '@blocks/Code/Component'
-import { MediaBlock } from '@blocks/MediaBlock/Component'
+import type { SerializedLexicalNode } from '@payloadcms/richtext-lexical/lexical'
+import type { JSXConvertersFunction } from '@payloadcms/richtext-lexical/react'
 
-import type {
-  BannerBlock as BannerBlockProps,
-  CallToActionBlock as CTABlockProps,
-  MediaBlock as MediaBlockProps
-} from '@payload-types'
+import { Banner } from '@components/Banner'
+import { CMSLink, Reference } from '@components/CMSLink'
+import { CommandLine } from '@components/CommandLine'
+import { Label } from '@components/Label'
+import { LargeBody } from '@components/LargeBody'
+import RichTextUpload from '@components/RichText/Upload'
+import { Video } from '@components/RichText/Video'
+import SpotlightAnimation from '@components/SpotlightAnimation'
+import { TemplateCards } from '@components/TemplateCardsBlock'
 
-type NodeTypes =
+import classes from './index.module.scss'
+
+type Props = {
+  className?: string
+  content: any
+}
+
+export type NodeTypes =
   | DefaultNodeTypes
   | SerializedBlockNode<
-      CTABlockProps | MediaBlockProps | BannerBlockProps | CodeBlockProps
+      | SpotlightBlock
+      | VideoBlock
+      | BrBlock
+      | CommandLineBlock
+      | TemplateCardsBlock
+      | BannerBlock
     >
+  | SerializedLabelNode
+  | SerializedLargeBodyNode
 
 const jsxConverters: JSXConvertersFunction<NodeTypes> = ({
   defaultConverters
 }) => ({
   ...defaultConverters,
   blocks: {
-    banner: ({ node }) => (
-      <BannerBlock className="col-start-2 mb-4" {...node.fields} />
-    ),
-    mediaBlock: ({ node }) => (
-      <MediaBlock
-        className="col-span-3 col-start-1"
-        imgClassName="m-0"
-        {...node.fields}
-        captionClassName="mx-auto max-w-[48rem]"
-        enableGutter={false}
-        disableInnerContainer={true}
-      />
-    ),
-    code: ({ node }) => <CodeBlock className="col-start-2" {...node.fields} />,
-    cta: ({ node }) => <CallToActionBlock {...node.fields} />
+    banner: ({ node }) => {
+      return <Banner {...node.fields} />
+    },
+    br: () => <br />,
+    commandLine: ({ node }) => {
+      const { command } = node.fields
+      if (command) return <CommandLine command={command} lexical />
+      return null
+    },
+    spotlight: ({ node, nodesToJSX }) => {
+      const { element, richText } = node.fields
+
+      const as: AllowedElements = (element as AllowedElements) ?? 'h2'
+
+      const Children = nodesToJSX({
+        nodes: richText?.root?.children as SerializedLexicalNode[]
+      })
+
+      return (
+        <SpotlightAnimation as={as} richTextChildren={node.children}>
+          {Children}
+        </SpotlightAnimation>
+      )
+    },
+    templateCards: ({ node }) => {
+      const { templates } = node.fields
+      if (!templates) return null
+      return <TemplateCards templates={templates} />
+    },
+    video: ({ node }) => {
+      const { url } = node.fields
+
+      if (url && (url.includes('vimeo') || url.includes('youtube'))) {
+        const source = url.includes('vimeo') ? 'vimeo' : 'youtube'
+        const id =
+          source === 'vimeo' ? url.split('/').pop() : url.split('v=').pop()
+
+        return <Video id={id as string} platform={source} />
+      }
+
+      return null
+    }
+  },
+  link: ({ node, nodesToJSX }) => {
+    const fields = node.fields
+
+    return (
+      <CMSLink
+        newTab={Boolean(fields?.newTab)}
+        reference={fields.doc as Reference}
+        type={fields.linkType === 'internal' ? 'reference' : 'custom'}
+        url={fields.url}
+      >
+        {nodesToJSX({ nodes: node.children })}
+      </CMSLink>
+    )
+  },
+  upload: ({ node }) => {
+    return <RichTextUpload node={node} />
+  },
+  label: ({ node, nodesToJSX }) => {
+    return <Label>{nodesToJSX({ nodes: node.children })}</Label>
+  },
+  largeBody: ({ node, nodesToJSX }) => {
+    return <LargeBody>{nodesToJSX({ nodes: node.children })}</LargeBody>
   }
 })
+export const RichText: React.FC<Props> = ({ className, content }) => {
+  if (!content) {
+    return null
+  }
 
-type Props = {
-  data: SerializedEditorState
-  enableGutter?: boolean
-  enableProse?: boolean
-} & React.HTMLAttributes<HTMLDivElement>
-
-export default function RichText(props: Props) {
-  const { className, enableProse = true, enableGutter = true, ...rest } = props
   return (
-    <RichTextWithoutBlocks
+    <SerializedRichText
+      className={[classes.richText, className].filter(Boolean).join(' ')}
       converters={jsxConverters}
-      className={cn(
-        {
-          container: enableGutter,
-          'max-w-none': !enableGutter,
-          'prose md:prose-md dark:prose-invert mx-auto': enableProse
-        },
-        className
-      )}
-      {...rest}
+      data={content}
     />
   )
 }
+
+export default RichText

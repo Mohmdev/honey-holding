@@ -13,7 +13,7 @@ import { ArrowIcon } from '@icons/ArrowIcon'
 import { Avatar } from '@components/Avatar'
 import { CMSLink } from '@components/CMSLink'
 import { Gutter } from '@components/Gutter'
-import { RichText } from '@components/RichText'
+import { RichText } from '@components/RichText/basic'
 
 import { DocSearch } from '../Docsearch'
 import classes from './index.module.scss'

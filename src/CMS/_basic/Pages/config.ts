@@ -11,7 +11,7 @@ import {
 } from '@payloadcms/plugin-seo/fields'
 import { CallToAction } from '@blocks/_basic/CallToAction/config'
 import { Archive } from '@blocks/ArchiveBlock/config'
-import { Content } from '@blocks/Content/config'
+import { Content } from '@blocks/ContentBlock/basic'
 import { FormBlock } from '@blocks/Form/config'
 import { MediaBlock } from '@blocks/MediaBlock/config'
 import { hero } from '@fields/_basic/heros/config'

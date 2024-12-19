@@ -1,7 +1,7 @@
 import type { ArrayField } from 'payload'
 
-import { link } from './link'
-import richText from './richText/config'
+import link from './link'
+import richText from './richText'
 
 const codeBlips: ArrayField = {
   name: 'codeBlips',

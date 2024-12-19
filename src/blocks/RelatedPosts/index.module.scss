@@ -1,0 +1,11 @@
+@use '@scss/common' as *;
+
+.title {
+  margin: 0;
+  margin-bottom: 2rem;
+}
+
+.grid {
+  display: grid;
+  row-gap: 2rem;
+}
