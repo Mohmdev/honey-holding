@@ -5,7 +5,7 @@ import { Media as MediaType } from '@types'
 import { SerializedUploadNode } from '@payloadcms/richtext-lexical'
 
 import { CMSLink, CMSLinkType } from '@components/CMSLink'
-import { Media } from '@components/MediaComponent'
+import { Media } from '@components/Media'
 
 export type RichTextUploadNodeType = {
   fields: {

@@ -9,8 +9,8 @@ import {
   OverviewField,
   PreviewField
 } from '@payloadcms/plugin-seo/fields'
+import { Archive } from '@blocks/_basic/ArchiveBlock/config'
 import { CallToAction } from '@blocks/_basic/CallToAction/config'
-import { Archive } from '@blocks/ArchiveBlock/config'
 import { Content } from '@blocks/ContentBlock/basic'
 import { FormBlock } from '@blocks/Form/config'
 import { MediaBlock } from '@blocks/MediaBlock/config'

@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@faceless-ui/collapsibles':
+        specifier: ^1.1.5
+        version: 1.1.5(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@faceless-ui/css-grid':
         specifier: ^1.2.1
         version: 1.2.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -122,6 +125,9 @@ importers:
       ejs:
         specifier: ^3.1.10
         version: 3.1.10
+      flatley:
+        specifier: ^5.2.0
+        version: 5.2.0
       framer-motion:
         specifier: ^11.14.4
         version: 11.15.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -998,6 +1004,12 @@ packages:
   '@eslint/plugin-kit@0.2.4':
     resolution: {integrity: sha512-zSkKow6H5Kdm0ZUQUB2kV5JIXqoG0+uH5YADhaEHswm664N9Db8dXSi0nMJpacpMf+MyyglF1vnZohpEg5yUtg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@faceless-ui/collapsibles@1.1.5':
+    resolution: {integrity: sha512-ozym6tdYV/jakldJzph9gPUX3JEBXsyexyVJUrXqrLOYuj5UW5lZpJ8yztvVT83tHFAF2PRug0UVmFybKfo1Wg==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
 
   '@faceless-ui/css-grid@1.2.1':
     resolution: {integrity: sha512-NE5dnzV2Jj2WzQ4gsQUU/Dzlz33kE/3R2hdW227zFU2Y16vyyrqDAD07AeC+JL8HhZtVmsxjxs1Du/Jc41LsdQ==}
@@ -3289,6 +3301,9 @@ packages:
     resolution: {integrity: sha512-f7ccFPK3SXFHpx15UIGyRJ/FJQctuKZ0zVuN3frBo4HnK3cay9VEW0R6yPYFHC0AgqhukPzKjq22t5DmAyqGyw==}
     engines: {node: '>=16'}
 
+  flatley@5.2.0:
+    resolution: {integrity: sha512-vsb0/03uIHu7/3jRqABweblFUJMLokz1uMrcgFlvx6OAr6V3FiSic2iXeiJCj+cciTiQeumSDsIFAAnN1yvu4w==}
+
   flatted@3.3.2:
     resolution: {integrity: sha512-AiwGJM8YcNOaobumgtng+6NHuOqC3A7MixFeDafM3X9cIUM+xUXoS5Vfgf+OihAYe20fxqNM9yPBXJzRtZ/4eA==}
 
@@ -4473,6 +4488,13 @@ packages:
   range-parser@1.2.1:
     resolution: {integrity: sha512-Hrgsx+orqoygnmhFbKaHE6c296J+HTAQXoxEF6gNupROmmGJRoyzfG3ccAveqCBrwr/2yxQ5BVd/GTl5agOwSg==}
     engines: {node: '>= 0.6'}
+
+  react-animate-height@3.2.3:
+    resolution: {integrity: sha512-R6DSvr7ud07oeCixScyvXWEMJY/Mt2+GyOWC1KMaRc69gOBw+SsCg4TJmrp4rKUM1hyd6p+YKw90brjPH93Y2A==}
+    engines: {node: '>= 12.0.0'}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
 
   react-cookie@7.2.2:
     resolution: {integrity: sha512-e+hi6axHcw9VODoeVu8WyMWyoosa1pzpyjfvrLdF7CexfU+WSGZdDuRfHa4RJgTpfv3ZjdIpHE14HpYBieHFhg==}
@@ -6133,6 +6155,13 @@ snapshots:
   '@eslint/plugin-kit@0.2.4':
     dependencies:
       levn: 0.4.1
+
+  '@faceless-ui/collapsibles@1.1.5(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
+    dependencies:
+      react: 19.0.0
+      react-animate-height: 3.2.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      react-dom: 19.0.0(react@19.0.0)
+      react-transition-group: 4.4.5(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
 
   '@faceless-ui/css-grid@1.2.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
@@ -8899,6 +8928,10 @@ snapshots:
       flatted: 3.3.2
       keyv: 4.5.4
 
+  flatley@5.2.0:
+    dependencies:
+      is-buffer: 1.1.6
+
   flatted@3.3.2: {}
 
   focus-trap@7.5.4:
@@ -10290,6 +10323,11 @@ snapshots:
   quick-format-unescaped@4.0.4: {}
 
   range-parser@1.2.1: {}
+
+  react-animate-height@3.2.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
+    dependencies:
+      react: 19.0.0
+      react-dom: 19.0.0(react@19.0.0)
 
   react-cookie@7.2.2(react@19.0.0):
     dependencies:

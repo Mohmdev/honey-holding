@@ -1,6 +1,7 @@
-import { ContentMediaCard } from '@components/cards/ContentMediaCard/index.js'
-import { Gutter } from '@components/Gutter/index.js'
-import { Post } from '@root/payload-types.js'
+import { Post } from '@payload-types'
+
+import { ContentMediaCard } from '@components/cards/ContentMediaCard'
+import { Gutter } from '@components/Gutter'
 
 import classes from './index.module.scss'
 
@@ -12,7 +13,7 @@ export type RelatedPostsBlock = {
   disableGutter?: boolean
 }
 
-export const RelatedPosts: React.FC<RelatedPostsBlock> = props => {
+export const RelatedPosts: React.FC<RelatedPostsBlock> = (props) => {
   const { relatedPosts, id = '', disableGutter } = props
 
   if (!relatedPosts || relatedPosts?.length === 0) {
@@ -22,7 +23,7 @@ export const RelatedPosts: React.FC<RelatedPostsBlock> = props => {
   const colStart = {
     0: 'start-1',
     1: 'start-6',
-    2: 'start-11',
+    2: 'start-11'
   }
 
   return (
@@ -40,10 +41,12 @@ export const RelatedPosts: React.FC<RelatedPostsBlock> = props => {
                   media={post.image}
                   publishedOn={post.publishedOn}
                   authors={post.authors}
-                  orientation={relatedPosts.length < 3 ? 'horizontal' : undefined}
+                  orientation={
+                    relatedPosts.length < 3 ? 'horizontal' : undefined
+                  }
                   key={key}
                 />
-              ),
+              )
           )}
         </div>
       </div>

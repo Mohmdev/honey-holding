@@ -1,9 +1,12 @@
 'use client'
+
 import React, { useEffect, useMemo, useState } from 'react'
 
-import { ChangeHeaderTheme } from '@components/ChangeHeaderTheme/index.js'
-import { Page } from '@root/payload-types.js'
-import { useThemePreference } from '@root/providers/Theme/index.js'
+import { useThemePreference } from '@providers/Theme/index.js'
+
+import { Page } from '@payload-types'
+
+import { ChangeHeaderTheme } from '@components/ChangeHeaderTheme'
 
 import classes from './index.module.scss'
 
@@ -40,7 +43,9 @@ export const BlockWrapper: React.FC<Props> = ({
   hideBackground,
   ...rest
 }) => {
-  const [themeState, setThemeState] = useState<Page['hero']['theme']>(settings?.theme)
+  const [themeState, setThemeState] = useState<Page['hero']['theme']>(
+    settings?.theme
+  )
   const { theme: themeFromContext } = useThemePreference()
   const theme = settings?.theme
 
@@ -62,7 +67,7 @@ export const BlockWrapper: React.FC<Props> = ({
           setPadding && classes.setPadding,
           settings?.background && classes[`background-${settings.background}`],
           hideBackground && classes.hideBackground,
-          className,
+          className
         ]
           .filter(Boolean)
           .join(' ')}
