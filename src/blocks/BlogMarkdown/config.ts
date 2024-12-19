@@ -1,6 +1,6 @@
-import type { Block } from 'payload'
+import { blockFields } from '@fields/blockFields'
 
-import { blockFields } from '../../fields/blockFields'
+import type { Block } from 'payload'
 
 export const BlogMarkdown: Block = {
   slug: 'blogMarkdown',
@@ -13,7 +13,7 @@ export const BlogMarkdown: Block = {
           type: 'text',
           admin: {
             components: {
-              Field: '@root/blocks/BlogMarkdown/Field#BlogMarkdownField'
+              Field: '@blocks/BlogMarkdown/Field#BlogMarkdownField'
             }
           },
           required: true

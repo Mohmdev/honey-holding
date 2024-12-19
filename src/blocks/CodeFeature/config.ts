@@ -1,9 +1,9 @@
-import type { Block } from 'payload'
+import { blockFields } from '@fields/blockFields'
+import codeBlips from '@fields/codeBlips'
+import linkGroup from '@fields/linkGroup'
+import richText from '@fields/richText'
 
-import { blockFields } from '../../fields/blockFields'
-import codeBlips from '../../fields/codeBlips'
-import linkGroup from '../../fields/linkGroup'
-import richText from '../../fields/richText'
+import type { Block } from 'payload'
 
 export const CodeFeature: Block = {
   slug: 'codeFeature',

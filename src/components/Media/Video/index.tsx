@@ -21,7 +21,7 @@ export const Video: React.FC<Props> = (props) => {
     }
   }, [])
 
-  if (resource && typeof resource !== 'string') {
+  if (resource && typeof resource === 'object') {
     return (
       <video
         playsInline

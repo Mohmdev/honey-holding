@@ -1,8 +1,8 @@
-import type { Block } from 'payload'
+import { blockFields } from '@fields/blockFields'
+import link from '@fields/link'
+import richText from '@fields/richText'
 
-import { blockFields } from '../../fields/blockFields'
-import link from '../../fields/link'
-import richText from '../../fields/richText'
+import type { Block } from 'payload'
 
 export const MediaContent: Block = {
   slug: 'mediaContent',

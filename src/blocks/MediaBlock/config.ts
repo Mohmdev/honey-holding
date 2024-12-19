@@ -1,6 +1,6 @@
-import type { Block } from 'payload'
+import { blockFields } from '@fields/blockFields'
 
-import { blockFields } from '../../fields/blockFields'
+import type { Block } from 'payload'
 
 export const MediaBlock: Block = {
   slug: 'mediaBlock',

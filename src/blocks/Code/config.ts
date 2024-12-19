@@ -1,7 +1,7 @@
-import type { Block } from 'payload'
+import { blockFields } from '@fields/blockFields'
+import codeBlips from '@fields/codeBlips'
 
-import { blockFields } from '../../fields/blockFields'
-import codeBlips from '../../fields/codeBlips'
+import type { Block } from 'payload'
 
 export const Code: Block = {
   slug: 'code',

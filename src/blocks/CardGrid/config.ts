@@ -1,9 +1,9 @@
-import type { Block } from 'payload'
+import { blockFields } from '@fields/blockFields'
+import link from '@fields/link'
+import linkGroup from '@fields/linkGroup'
+import richText from '@fields/richText'
 
-import { blockFields } from '../../fields/blockFields'
-import link from '../../fields/link'
-import linkGroup from '../../fields/linkGroup'
-import richText from '../../fields/richText'
+import type { Block } from 'payload'
 
 export const CardGrid: Block = {
   slug: 'cardGrid',

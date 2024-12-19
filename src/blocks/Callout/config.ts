@@ -1,7 +1,7 @@
-import type { Block } from 'payload'
+import { blockFields } from '@fields/blockFields'
+import richText from '@fields/richText'
 
-import { blockFields } from '../../fields/blockFields'
-import richText from '../../fields/richText'
+import type { Block } from 'payload'
 
 export const Callout: Block = {
   slug: 'callout',

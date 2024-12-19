@@ -1,7 +1,7 @@
-import type { Block } from 'payload'
+import { blockFields } from '@fields/blockFields'
+import linkGroup from '@fields/linkGroup'
 
-import { blockFields } from '../../fields/blockFields'
-import linkGroup from '../../fields/linkGroup'
+import type { Block } from 'payload'
 
 export const LinkGrid: Block = {
   slug: 'linkGrid',
