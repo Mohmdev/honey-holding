@@ -8,4 +8,6 @@ const ENABLED_COLLECTIONS: CollectionSlug[] = [
 
 const ROLES_WITH_ADMIN_ACCESS = ['admin', 'editor'] as const
 
-export { ENABLED_COLLECTIONS, ROLES_WITH_ADMIN_ACCESS }
+const DASHBOARD_SLUG = 'dashboard'
+
+export { ENABLED_COLLECTIONS, ROLES_WITH_ADMIN_ACCESS, DASHBOARD_SLUG }

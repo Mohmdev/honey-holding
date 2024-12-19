@@ -13,7 +13,7 @@ import { ArrowIcon } from '@icons/ArrowIcon'
 import { Avatar } from '@components/Avatar'
 import { CMSLink } from '@components/CMSLink'
 import { Gutter } from '@components/Gutter'
-import { RichText } from '@components/RichText/basic'
+import { RichText } from '@components/RichText'
 
 import { DocSearch } from '../Docsearch'
 import classes from './index.module.scss'
@@ -133,7 +133,7 @@ export const DesktopNav: React.FC<DesktopNavType> = ({
               prefetch={false}
               aria-label="Full Payload Logo"
             >
-              <FullLogo className="h-[30px] w-auto" />
+              <FullLogo className="w-auto h-[30px]" />
             </Link>
           </div>
           <div className={[classes.content, 'cols-8'].join(' ')}>

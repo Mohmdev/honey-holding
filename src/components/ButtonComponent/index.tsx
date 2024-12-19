@@ -107,8 +107,8 @@ const generateHref = (args: GenerateSlugType): string => {
       return `/blog/${reference.value.slug}`
     }
 
-    if (reference.relationTo === 'case_studies') {
-      return `/case-studies/${reference.value.slug}`
+    if (reference.relationTo === 'portfolio') {
+      return `/portfolio/${reference.value.slug}`
     }
 
     return `/${reference.relationTo}/${reference.value.slug}`

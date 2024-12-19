@@ -1,8 +1,9 @@
 'use client'
+
 /* eslint-disable @next/next/no-img-element */
 import React from 'react'
 
-import { useThemePreference } from '@root/providers/Theme/index.js'
+import { useThemePreference } from '@providers/Theme'
 
 import classes from './index.module.scss'
 

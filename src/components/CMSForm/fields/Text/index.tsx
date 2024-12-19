@@ -3,7 +3,7 @@
 import React, { Fragment, useEffect } from 'react'
 
 import Error from '@forms/Error'
-import { FieldProps } from '@forms/fields/types.js'
+import { FieldProps } from '@forms/fields/types'
 import { useField } from '@forms/fields/useField'
 
 import { EyeIcon } from '@icons/EyeIcon'

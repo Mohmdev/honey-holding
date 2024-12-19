@@ -11,7 +11,7 @@ export const Media = forwardRef<
   const { className, resource, htmlElement = 'div' } = props
 
   const isVideo =
-    typeof resource !== 'string' && resource?.mimeType?.includes('video')
+    typeof resource === 'object' && resource?.mimeType?.includes('video')
   const Tag = (htmlElement as ElementType) || Fragment
 
   return (

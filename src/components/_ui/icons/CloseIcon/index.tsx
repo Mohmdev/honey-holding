@@ -1,7 +1,7 @@
 import React from 'react'
 
 import classes from '../index.module.scss'
-import { IconProps } from '../types.js'
+import { IconProps } from '../types'
 
 export const CloseIcon: React.FC<IconProps> = (props) => {
   const { color, size, className, bold, rotation } = props

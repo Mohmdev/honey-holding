@@ -1,11 +1,9 @@
 import React from 'react'
-
 import { Media as MediaType } from '@types'
 
+import { CMSLink, CMSLinkType } from '@components/CMSLink/index.js'
+import { Media } from '@components/Media/index.js'
 import { SerializedUploadNode } from '@payloadcms/richtext-lexical'
-
-import { CMSLink, CMSLinkType } from '@components/CMSLink'
-import { Media } from '@components/Media'
 
 export type RichTextUploadNodeType = {
   fields: {
@@ -21,10 +19,10 @@ export type Props = {
   className?: string
 }
 
-export const RichTextUpload: React.FC<Props> = (props) => {
+export const RichTextUpload: React.FC<Props> = props => {
   const {
     node: { fields, value },
-    className
+    className,
   } = props
 
   let Wrap: React.ComponentType<CMSLinkType> | string = 'div'
@@ -36,7 +34,7 @@ export const RichTextUpload: React.FC<Props> = (props) => {
   if (fields?.enableLink) {
     Wrap = CMSLink
     wrapProps = {
-      ...fields?.link
+      ...fields?.link,
     }
   }
 

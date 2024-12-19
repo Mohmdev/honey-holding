@@ -1,8 +1,7 @@
 import React from 'react'
 
-import { IconProps } from '../types.js'
-
 import classes from '../index.module.scss'
+import { IconProps } from '../types'
 
 export const ArrowRightIcon: React.FC<IconProps> = (props) => {
   const { size, className, bold } = props

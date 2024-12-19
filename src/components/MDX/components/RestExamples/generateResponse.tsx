@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Code from '@components/Code/index.js'
+import Code from '@components/Code'
 
 import classes from './index.module.scss'
 
@@ -18,7 +18,7 @@ export const GenerateResponse = ({ res }) => {
       hasPrevPage: false,
       hasNextPage: false,
       prevPage: null,
-      nextPage: null,
+      nextPage: null
     }
 
     return (
@@ -27,7 +27,7 @@ export const GenerateResponse = ({ res }) => {
         <Code className={classes.code} disableMinHeight>{`${JSON.stringify(
           paginatedRes,
           null,
-          2,
+          2
         )}`}</Code>
       </>
     )

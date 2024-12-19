@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Code from '@components/Code/index.js'
+import Code from '@components/Code'
 
 import classes from './index.module.scss'
 
@@ -39,11 +39,11 @@ const stringifiedQuery = qs.stringify({
 
   const body = `{
     method: "${row.method}", ${
-    req.credentials
-      ? `
+      req.credentials
+        ? `
     credentials: "include",`
-      : ``
-  }
+        : ``
+    }
     headers: {
       "Content-Type": "application/json",
     },${

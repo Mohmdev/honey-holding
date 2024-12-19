@@ -21,7 +21,7 @@ export const BackgroundGrid: React.FC<Props> = ({
   style,
   zIndex = -1,
   gridLineStyles = {},
-  wideGrid = false,
+  wideGrid = false
 }: Props) => {
   return (
     <div
@@ -31,7 +31,7 @@ export const BackgroundGrid: React.FC<Props> = ({
         'grid',
         ignoreGutter && classes.ignoreGutter,
         className,
-        wideGrid && classes.wideGrid,
+        wideGrid && classes.wideGrid
       ]
         .filter(Boolean)
         .join(' ')}

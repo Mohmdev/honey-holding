@@ -1,14 +1,12 @@
-// @ts-nocheck
-
 import React from 'react'
 import Link from 'next/link'
 
-import type { CaseStudy, Page, Post } from '@payload-types'
+import type { Page, Portfolio, Post } from '@payload-types'
 
 import { Button, ButtonProps } from '@components/ButtonComponent'
 
 const relationSlugs = {
-  case_studies: 'case-studies'
+  portfolio: 'portfolio'
 }
 
 type PageReference = {
@@ -21,16 +19,16 @@ type PostsReference = {
   relationTo: 'posts'
 }
 
-type CaseStudyReference = {
-  value: string | CaseStudy
-  relationTo: (typeof relationSlugs)['case_studies']
+type PortfolioReference = {
+  value: string | Portfolio
+  relationTo: (typeof relationSlugs)['portfolio']
 }
 
 export type LinkType = 'reference' | 'custom' | null
 export type Reference =
   | PageReference
   | PostsReference
-  | CaseStudyReference
+  | PortfolioReference
   | null
 
 export type CMSLinkType = {
@@ -84,8 +82,8 @@ const generateHref = (args: GenerateSlugType): string => {
       return `/blog/${reference.value.slug}`
     }
 
-    if (reference.relationTo === 'case_studies') {
-      return `/case-studies/${reference.value.slug}`
+    if (reference.relationTo === 'portfolio') {
+      return `/portfolio/${reference.value.slug}`
     }
 
     return `/${reference.relationTo}/${reference.value.slug}`

@@ -2,12 +2,12 @@ import * as React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-import { cloudSlug } from '@cloud/slug'
-
 import { useAuth } from '@providers/Auth/index'
 import useClickAway from '@utils/use-click-away'
 
 import classes from './index.module.scss'
+
+import { DASHBOARD_SLUG } from '@constants'
 
 export const DropdownMenu: React.FC<{
   isOpen: boolean
@@ -45,7 +45,7 @@ export const DropdownMenu: React.FC<{
         <div>
           <p className={classes.dropdownLabel}>Personal account</p>
           <Link
-            href={`/${cloudSlug}`}
+            href={`/${DASHBOARD_SLUG}`}
             className={classes.profileLink}
             prefetch={false}
           >
@@ -60,7 +60,7 @@ export const DropdownMenu: React.FC<{
         <div>
           <p className={classes.dropdownLabel}>Teams</p>
           <Link
-            href={`/${cloudSlug}`}
+            href={`/${DASHBOARD_SLUG}`}
             className={classes.profileLink}
             prefetch={false}
           >

@@ -1,10 +1,12 @@
 'use client'
 
-import { useStarCount } from '@root/utilities/use-star-count.js'
+import { useStarCount } from '@utils/use-star-count'
 
 import classes from './index.module.scss'
 
-export const GithubStarsPill: React.FC<{ className?: string }> = ({ className }) => {
+export const GithubStarsPill: React.FC<{ className?: string }> = ({
+  className
+}) => {
   const starCount = useStarCount()
 
   return (

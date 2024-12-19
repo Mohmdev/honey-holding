@@ -2,7 +2,7 @@
 
 import React, { useEffect, useMemo, useState } from 'react'
 
-import { useThemePreference } from '@providers/Theme/index.js'
+import { useThemePreference } from '@providers/Theme'
 
 import { Page } from '@payload-types'
 

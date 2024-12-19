@@ -1,4 +1,5 @@
 'use client'
+
 import React, { useEffect, useRef, useState } from 'react'
 
 import classes from './index.module.scss'
@@ -19,10 +20,19 @@ export type Props = {
   inDrawer?: boolean
 }
 
-const CustomTable: React.FC<Props> = ({ className, columns, data, inDrawer }) => {
+const CustomTable: React.FC<Props> = ({
+  className,
+  columns,
+  data,
+  inDrawer
+}) => {
   return (
     <div
-      className={[classes.table, inDrawer && classes.inDrawer, className && className]
+      className={[
+        classes.table,
+        inDrawer && classes.inDrawer,
+        className && className
+      ]
         .filter(Boolean)
         .join(' ')}
     >

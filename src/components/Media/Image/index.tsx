@@ -2,17 +2,18 @@
 
 import React, { useState } from 'react'
 import NextImage from 'next/image'
-
 import type { StaticImageData } from 'next/image'
 
-import cssVariables from '../../../../cssVariables.cjs'
-import { Props } from '../types.js'
+import { cn } from '@utils/cn'
 
+import { Props } from '../types'
 import classes from './index.module.scss'
+
+import { cssVariables } from '@styles/cssVariables'
 
 const { breakpoints } = cssVariables
 
-export const Image: React.FC<Props> = props => {
+export const Image: React.FC<Props> = (props) => {
   const {
     imgClassName,
     onClick,
@@ -24,7 +25,7 @@ export const Image: React.FC<Props> = props => {
     src: srcFromProps,
     alt: altFromProps,
     width: widthFromProps,
-    height: heightFromProps,
+    height: heightFromProps
   } = props
 
   const [isLoading, setIsLoading] = useState(true)
@@ -58,7 +59,8 @@ export const Image: React.FC<Props> = props => {
     isLoading && classes.placeholder,
     classes.image,
     imgClassName,
-    hasDarkModeFallback && classes.hasDarkModeFallback,
+    'transition-opacity duration-300 ease-in-out',
+    hasDarkModeFallback && classes.hasDarkModeFallback
   ]
     .filter(Boolean)
     .join(' ')
@@ -66,7 +68,7 @@ export const Image: React.FC<Props> = props => {
   return (
     <React.Fragment>
       <NextImage
-        className={`${baseClasses} ${classes.themeLight}`}
+        className={cn(baseClasses, classes.themeDark)}
         src={src || ''}
         alt={alt || ''}
         onClick={onClick}
@@ -77,8 +79,8 @@ export const Image: React.FC<Props> = props => {
           }
         }}
         fill={fill}
-        width={!fill ? width ?? undefined : undefined}
-        height={!fill ? height ?? undefined : undefined}
+        width={!fill ? (width ?? undefined) : undefined}
+        height={!fill ? (height ?? undefined) : undefined}
         sizes={sizes}
         priority={priority}
         quality={90}
@@ -87,22 +89,22 @@ export const Image: React.FC<Props> = props => {
         typeof resource.darkModeFallback === 'object' &&
         resource.darkModeFallback !== null && (
           <NextImage
-            className={`${baseClasses} ${classes.themeDark}`}
+            quality={90}
             src={resource.darkModeFallback.url || ''}
             alt={alt || ''}
             onClick={onClick}
+            sizes={sizes}
+            priority={priority}
+            fill={fill}
+            width={!fill ? (width ?? undefined) : undefined}
+            height={!fill ? (height ?? undefined) : undefined}
             onLoad={() => {
               setIsLoading(false)
               if (typeof onLoadFromProps === 'function') {
                 onLoadFromProps()
               }
             }}
-            fill={fill}
-            width={!fill ? width ?? undefined : undefined}
-            height={!fill ? height ?? undefined : undefined}
-            sizes={sizes}
-            priority={priority}
-            quality={90}
+            className={cn(baseClasses, classes.themeDark)}
           />
         )}
     </React.Fragment>

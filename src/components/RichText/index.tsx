@@ -1,19 +1,18 @@
 import React from 'react'
 
-import { SerializedLabelNode } from '@root/fields/richText/features/label/LabelNode'
-import { SerializedLargeBodyNode } from '@root/fields/richText/features/largeBody/LargeBodyNode'
-import {
+import { RichText as SerializedRichText } from '@payloadcms/richtext-lexical/react'
+import { SerializedLabelNode } from '@fields/richText/features/label/LabelNode'
+import { SerializedLargeBodyNode } from '@fields/richText/features/largeBody/LargeBodyNode'
+
+import type { AllowedElements } from '../SpotlightAnimation/types'
+import type {
   BannerBlock,
   BrBlock,
   CommandLineBlock,
   SpotlightBlock,
   TemplateCardsBlock,
   VideoBlock
-} from '@types'
-
-import { RichText as SerializedRichText } from '@payloadcms/richtext-lexical/react'
-
-import type { AllowedElements } from '../SpotlightAnimation/types.js'
+} from '@payload-types'
 import type {
   DefaultNodeTypes,
   SerializedBlockNode

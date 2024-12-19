@@ -6,10 +6,10 @@ import { Modal, useModal } from '@faceless-ui/modal'
 
 import { useAuth } from '@providers/Auth'
 import { useHeaderObserver } from '@providers/HeaderIntersectionObserver'
+import { Theme } from '@providers/Theme/types.js'
 import { useStarCount } from '@utils/use-star-count'
 
-import type { MainMenu } from '@payload-types'
-import type { Theme } from '@providers/Theme/types'
+import { MainMenu } from '@payload-types'
 
 import { FullLogo } from '@graphics/FullLogo'
 import { GitHubIcon } from '@graphics/GitHub'
@@ -17,11 +17,11 @@ import { MenuIcon } from '@graphics/MenuIcon'
 import { ArrowIcon } from '@icons/ArrowIcon'
 import { CrosshairIcon } from '@icons/CrosshairIcon'
 import { Avatar } from '@components/Avatar'
-import { BackgroundGrid } from '@components/BackgroundGrid'
-import { BackgroundScanline } from '@components/BackgroundScanline'
+import { BackgroundGrid } from '@components/Background/Grid'
+import { BackgroundScanline } from '@components/Background/Scanline'
 import { CMSLink } from '@components/CMSLink'
 import { Gutter } from '@components/Gutter'
-import { RichText } from '@components/RichText/basic'
+import { RichText } from '@components/RichText'
 
 import { DocSearch } from '../Docsearch'
 import classes from './index.module.scss'
@@ -315,7 +315,7 @@ export const MobileNav: React.FC<NavItems> = (props) => {
                 prefetch={false}
                 aria-label="Full Payload Logo"
               >
-                <FullLogo className="h-[30px] w-auto" />
+                <FullLogo className="w-auto h-[30px]" />
               </Link>
               <div className={classes.icons}>
                 <a

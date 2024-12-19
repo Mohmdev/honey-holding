@@ -1,12 +1,12 @@
 import * as React from 'react'
 import Link from 'next/link'
 
-import { cloudSlug } from '@cloud/slug'
-
-import { useAuth } from '@providers/Auth/index'
+import { useAuth } from '@providers/Auth'
 
 // import { DropdownMenu } from './DropdownMenu'
 import classes from './index.module.scss'
+
+import { DASHBOARD_SLUG } from '@constants'
 
 export const Avatar: React.FC<{ className?: string }> = ({ className }) => {
   const { user } = useAuth()
@@ -27,7 +27,7 @@ export const Avatar: React.FC<{ className?: string }> = ({ className }) => {
         </div>
       </button>
       <DropdownMenu isOpen={isOpen} onChange={setIsOpen} /> */}
-      <Link href={`/${cloudSlug}`} prefetch={false}>
+      <Link href={`/${DASHBOARD_SLUG}`} prefetch={false}>
         <div className={classes.primaryUser}>
           <div className={classes.userInitial}>
             {user?.email?.charAt(0).toUpperCase()}

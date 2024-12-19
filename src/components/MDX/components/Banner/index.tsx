@@ -1,10 +1,13 @@
-import { ReusableContent } from '@root/payload-types.js'
-import { RichText } from '../../../RichText/index.js'
+import { ReusableContent } from '@payload-types'
 
+import { RichText } from '../../../RichText'
 import classes from './index.module.scss'
 
 export type Props = {
-  type?: Extract<ReusableContent['layout'][0], { blockType: 'banner' }>['bannerFields']['type']
+  type?: Extract<
+    ReusableContent['layout'][0],
+    { blockType: 'banner' }
+  >['bannerFields']['type']
   content?: Extract<
     ReusableContent['layout'][0],
     { blockType: 'banner' }
@@ -19,11 +22,16 @@ export const Banner: (props) => React.JSX.Element = ({
   content,
   children,
   type = 'default',
-  margin = true,
+  margin = true
 }) => {
   return (
     <div
-      className={[classes.banner, 'banner', type && classes[type], !margin && classes.noMargin]
+      className={[
+        classes.banner,
+        'banner',
+        type && classes[type],
+        !margin && classes.noMargin
+      ]
         .filter(Boolean)
         .join(' ')}
     >

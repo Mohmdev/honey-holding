@@ -1,6 +1,7 @@
-import { Drawer, DrawerToggler } from '@components/Drawer/index.js'
-import { ChevronIcon } from '@root/icons/ChevronIcon/index.js'
 import React from 'react'
+
+import { ChevronIcon } from '@icons/ChevronIcon'
+import { Drawer, DrawerToggler } from '@components/Drawer'
 
 import classes from './index.module.scss'
 
@@ -14,12 +15,15 @@ type Props = {
         drawerSlug?: string
         drawerTitle?: string
         value?: string
-      },
-    ],
+      }
+    ]
   ]
 }
 
-export const TableWithDrawers: (props) => React.JSX.Element = ({ columns, rows }) => {
+export const TableWithDrawers: (props) => React.JSX.Element = ({
+  columns,
+  rows
+}) => {
   return (
     <div className={classes.tableWithDrawer}>
       <table cellPadding="0" cellSpacing="0">
@@ -37,12 +41,21 @@ export const TableWithDrawers: (props) => React.JSX.Element = ({ columns, rows }
           {rows.map((row, rowIndex) => (
             <tr className={`row-${rowIndex + 1}`} key={rowIndex}>
               {row.map((cell, cellIndex) => {
-                const { drawerContent, drawerDescription, drawerSlug, drawerTitle, value } = cell
+                const {
+                  drawerContent,
+                  drawerDescription,
+                  drawerSlug,
+                  drawerTitle,
+                  value
+                } = cell
 
                 if (drawerSlug && drawerContent) {
                   return (
                     <td key={cellIndex}>
-                      <DrawerToggler className={classes.drawerToggler} slug={drawerSlug}>
+                      <DrawerToggler
+                        className={classes.drawerToggler}
+                        slug={drawerSlug}
+                      >
                         {value || <ChevronIcon />}
                       </DrawerToggler>
                       <Drawer

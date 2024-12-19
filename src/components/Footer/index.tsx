@@ -64,6 +64,7 @@ export const Footer: React.FC<FooterType> = (props) => {
 
   const pathname = usePathname()
 
+  // TODO
   const allowedSegments = [
     'cloud',
     'cloud-terms',

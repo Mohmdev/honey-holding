@@ -1,16 +1,21 @@
 'use client'
-import { Drawer, DrawerToggler } from '@components/Drawer/index.js'
-import { CodeIcon } from '@root/icons/CodeIcon/index.js'
+
 import React from 'react'
 
-import type { Data, Example } from './types.js'
+import type { Data, Example } from './types'
 
-import CustomTable from '../CustomTable/index.js'
-import { GenerateRequest } from './generateRequest.js'
-import { GenerateResponse } from './generateResponse.js'
+import { CodeIcon } from '@icons/CodeIcon'
+import { Drawer, DrawerToggler } from '@components/Drawer'
+
+import CustomTable from '../CustomTable'
+import { GenerateRequest } from './generateRequest'
+import { GenerateResponse } from './generateResponse'
 import classes from './index.module.scss'
 
-const ExampleCell: React.FC<{ example: Example; row: Data }> = ({ example, row }) => {
+const ExampleCell: React.FC<{ example: Example; row: Data }> = ({
+  example,
+  row
+}) => {
   const { drawerContent, req, res } = example
   const drawerRow = [{ ...row, example: false, operation: false }] as any
   const slug = row?.example?.slug
@@ -29,7 +34,9 @@ const ExampleCell: React.FC<{ example: Example; row: Data }> = ({ example, row }
         />
         <GenerateRequest req={req} row={row} />
         <GenerateResponse res={res} />
-        {drawerContent && <div className={classes.drawerContent}>{drawerContent}</div>}
+        {drawerContent && (
+          <div className={classes.drawerContent}>{drawerContent}</div>
+        )}
       </Drawer>
     </React.Fragment>
   )
@@ -40,22 +47,22 @@ const columns = [
     accessor: 'operation',
     components: {
       Heading: 'Operation',
-      renderCell: (_, data) => <span>{data}</span>,
-    },
+      renderCell: (_, data) => <span>{data}</span>
+    }
   },
   {
     accessor: 'method',
     components: {
       Heading: 'Method',
-      renderCell: (_, data) => <code>{data}</code>,
-    },
+      renderCell: (_, data) => <code>{data}</code>
+    }
   },
   {
     accessor: 'path',
     components: {
       Heading: 'Path',
-      renderCell: (_, data) => <span className={classes.cellPath}>{data}</span>,
-    },
+      renderCell: (_, data) => <span className={classes.cellPath}>{data}</span>
+    }
   },
   {
     accessor: 'example',
@@ -64,9 +71,9 @@ const columns = [
       renderCell: (row, data) => {
         if (!data || !row) return null
         return <ExampleCell example={data} row={row} />
-      },
-    },
-  },
+      }
+    }
+  }
 ]
 
 export const RestExamples: (props) => React.JSX.Element = ({ data }) => {

@@ -110,7 +110,10 @@ export const NewsletterSignUp: React.FC<NewsletterSignUpProps> = (props) => {
         .join(' ')}
     >
       {error && (
-        <div className={classes.errorWrap}>{`${error.message || ''}`}</div>
+        <div className={classes.errorWrap}>
+          <ErrorIcon className={classes.errorIcon} />
+          {`${error.message || ''}`}
+        </div>
       )}
       <FormComponent onSubmit={onSubmit}>
         <div className={classes.inputWrap}>

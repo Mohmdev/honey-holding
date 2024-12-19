@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Code from '../../../Code/index.js'
+import Code from '@components/Code'
 
 import classes from './index.module.scss'
 
