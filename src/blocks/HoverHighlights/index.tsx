@@ -1,22 +1,26 @@
 import React, { Fragment } from 'react'
 
+import { Page } from '@payload-types.js'
+
+import { ArrowIcon } from '@icons/ArrowIcon/index.js'
 import { BackgroundGrid } from '@components/BackgroundGrid/index.js'
 import { BackgroundScanline } from '@components/BackgroundScanline/index.js'
 import { BlockWrapper } from '@components/BlockWrapper/index.js'
 import { CMSLink } from '@components/CMSLink/index.js'
 import { Gutter } from '@components/Gutter/index.js'
 import { Media } from '@components/Media/index.js'
-import { ArrowIcon } from '@root/icons/ArrowIcon/index.js'
-import { Page } from '@root/payload-types.js'
-import { Highlights } from './Highlights/index.js'
 
+import { Highlights } from './Highlights/index.js'
 import classes from './index.module.scss'
 
-export type HoverHighlightProps = Extract<Page['layout'][0], { blockType: 'hoverHighlights' }> & {
+export type HoverHighlightProps = Extract<
+  Page['layout'][0],
+  { blockType: 'hoverHighlights' }
+> & {
   hideBackground?: boolean
 }
 
-export const HoverHighlights: React.FC<HoverHighlightProps> = props => {
+export const HoverHighlights: React.FC<HoverHighlightProps> = (props) => {
   const { hoverHighlightsFields, hideBackground } = props
   const { settings, beforeHighlights, highlights, afterHighlights, link } =
     hoverHighlightsFields || {}
@@ -40,15 +44,24 @@ export const HoverHighlights: React.FC<HoverHighlightProps> = props => {
                   const { top, bottom } = highlight.media || {}
                   return (
                     <Fragment key={key}>
-                      <CMSLink className={classes.highlightText} {...highlight.link}>
+                      <CMSLink
+                        className={classes.highlightText}
+                        {...highlight.link}
+                      >
                         {highlight.text}
-                        <ArrowIcon className={classes.arrow} size="large" bold />
+                        <ArrowIcon
+                          className={classes.arrow}
+                          size="large"
+                          bold
+                        />
                       </CMSLink>
                       <div className={classes.highlightMediaTop}>
                         {top && typeof top !== 'string' && (
                           <Media
                             resource={top}
-                            className={[classes.media, classes.mediaTop].join(' ')}
+                            className={[classes.media, classes.mediaTop].join(
+                              ' '
+                            )}
                           />
                         )}
                       </div>
@@ -56,13 +69,16 @@ export const HoverHighlights: React.FC<HoverHighlightProps> = props => {
                         {bottom && typeof bottom !== 'string' && (
                           <Media
                             resource={bottom}
-                            className={[classes.media, classes.mediaBottom].join(' ')}
+                            className={[
+                              classes.media,
+                              classes.mediaBottom
+                            ].join(' ')}
                           />
                         )}
                       </div>
                     </Fragment>
                   )
-                }),
+                })
               ]}
           </Highlights>
         </div>

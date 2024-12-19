@@ -1,22 +1,24 @@
 'use client'
+
 import React, { createRef, Fragment, useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
+
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleGroup,
-  CollapsibleToggler,
+  CollapsibleToggler
 } from '@faceless-ui/collapsibles'
-import Image from 'next/image'
+import { Page } from '@payload-types.js'
 
+import { ArrowRightIcon } from '@icons/ArrowRightIcon/index.js'
+import { ChevronDownIcon } from '@icons/ChevronDownIcon/index.js'
+import { CrosshairIcon } from '@icons/CrosshairIcon/index.js'
 import { BackgroundScanline } from '@components/BackgroundScanline/index.js'
 import { CMSLink } from '@components/CMSLink/index.js'
 import { Media } from '@components/Media/index.js'
 import { RichText } from '@components/RichText/index.js'
 import SplitAnimate from '@components/SplitAnimate/index.js'
-import { ArrowRightIcon } from '@root/icons/ArrowRightIcon/index.js'
-import { ChevronDownIcon } from '@root/icons/ChevronDownIcon/index.js'
-import { CrosshairIcon } from '@root/icons/CrosshairIcon/index.js'
-import { Page } from '@root/payload-types.js'
 
 import classes from './index.module.scss'
 
@@ -27,11 +29,11 @@ export type MediaContentAccordionProps = Extract<
   className?: string
 }
 
-export const DesktopMediaContentAccordion: React.FC<MediaContentAccordionProps> = ({
-  mediaContentAccordionFields,
-  className,
-}) => {
-  const { alignment, leader, heading, accordion } = mediaContentAccordionFields || {}
+export const DesktopMediaContentAccordion: React.FC<
+  MediaContentAccordionProps
+> = ({ mediaContentAccordionFields, className }) => {
+  const { alignment, leader, heading, accordion } =
+    mediaContentAccordionFields || {}
 
   const mediaRefs = useRef<Array<React.RefObject<HTMLDivElement>>>([])
   const [containerHeight, setContainerHeight] = useState(0)
@@ -44,8 +46,14 @@ export const DesktopMediaContentAccordion: React.FC<MediaContentAccordionProps> 
     setActiveAccordion(index)
   }
 
-  if (accordion && accordion.length > 0 && mediaRefs.current.length !== accordion.length) {
-    mediaRefs.current = accordion.map((_, i) => mediaRefs.current[i] || createRef())
+  if (
+    accordion &&
+    accordion.length > 0 &&
+    mediaRefs.current.length !== accordion.length
+  ) {
+    mediaRefs.current = accordion.map(
+      (_, i) => mediaRefs.current[i] || createRef()
+    )
   }
 
   useEffect(() => {
@@ -58,14 +66,16 @@ export const DesktopMediaContentAccordion: React.FC<MediaContentAccordionProps> 
     }
 
     const updateContentWidth = () => {
-      const newContentWidth = contentRef.current ? contentRef.current.offsetWidth : 0
+      const newContentWidth = contentRef.current
+        ? contentRef.current.offsetWidth
+        : 0
       setContentWidth(newContentWidth)
     }
 
     updateContainerHeight()
     updateContentWidth()
 
-    const resizeObserver = new ResizeObserver(entries => {
+    const resizeObserver = new ResizeObserver((entries) => {
       updateContainerHeight()
       updateContentWidth()
     })
@@ -81,18 +91,22 @@ export const DesktopMediaContentAccordion: React.FC<MediaContentAccordionProps> 
   const rightPositionClassMap = {
     normal: 'start-9 cols-8 start-m-1 cols-m-8',
     inset: 'start-10 cols-6 start-m-1 cols-m-8',
-    wide: 'start-7 cols-12 start-m-1 cols-m-8',
+    wide: 'start-7 cols-12 start-m-1 cols-m-8'
   }
 
   const leftPositionClassMap = {
     normal: 'start-1 cols-8 start-m-1 cols-m-8',
     inset: 'start-2 cols-6 start-m-1 cols-m-8',
-    wide: 'start-1 cols-12 start-m-1 cols-m-8',
+    wide: 'start-1 cols-12 start-m-1 cols-m-8'
   }
 
   return (
     <div
-      className={[classes.desktopAccordionWrapper, 'grid', className && className]
+      className={[
+        classes.desktopAccordionWrapper,
+        'grid',
+        className && className
+      ]
         .filter(Boolean)
         .join(' ')}
     >
@@ -107,7 +121,7 @@ export const DesktopMediaContentAccordion: React.FC<MediaContentAccordionProps> 
                       <div
                         className={[
                           classes.gradientDesktopWrapper,
-                          'start-1 cols-8 start-m-1 cols-m-8',
+                          'start-1 cols-8 start-m-1 cols-m-8'
                         ]
                           .filter(Boolean)
                           .join(' ')}
@@ -121,16 +135,24 @@ export const DesktopMediaContentAccordion: React.FC<MediaContentAccordionProps> 
                           src={`/images/gradients/1.jpg`}
                         />
                         <CrosshairIcon
-                          className={[classes.crosshairTopOne].filter(Boolean).join(' ')}
+                          className={[classes.crosshairTopOne]
+                            .filter(Boolean)
+                            .join(' ')}
                         />
                         <CrosshairIcon
-                          className={[classes.crosshairTopTwo].filter(Boolean).join(' ')}
+                          className={[classes.crosshairTopTwo]
+                            .filter(Boolean)
+                            .join(' ')}
                         />
                         <CrosshairIcon
-                          className={[classes.crosshairBottomOne].filter(Boolean).join(' ')}
+                          className={[classes.crosshairBottomOne]
+                            .filter(Boolean)
+                            .join(' ')}
                         />
                         <CrosshairIcon
-                          className={[classes.crosshairBottomTwo].filter(Boolean).join(' ')}
+                          className={[classes.crosshairBottomTwo]
+                            .filter(Boolean)
+                            .join(' ')}
                         />
                       </div>
                     )}
@@ -138,26 +160,36 @@ export const DesktopMediaContentAccordion: React.FC<MediaContentAccordionProps> 
                       <div
                         className={[
                           classes.scanlineDesktopWrapper,
-                          'start-1 cols-8 start-m-1 cols-m-8',
+                          'start-1 cols-8 start-m-1 cols-m-8'
                         ]
                           .filter(Boolean)
                           .join(' ')}
                         style={{ height: `calc(${containerHeight}px + 8rem)` }}
                       >
                         <BackgroundScanline
-                          className={[classes.scanlineDesktop].filter(Boolean).join(' ')}
+                          className={[classes.scanlineDesktop]
+                            .filter(Boolean)
+                            .join(' ')}
                         />
                         <CrosshairIcon
-                          className={[classes.crosshairTopOne].filter(Boolean).join(' ')}
+                          className={[classes.crosshairTopOne]
+                            .filter(Boolean)
+                            .join(' ')}
                         />
                         <CrosshairIcon
-                          className={[classes.crosshairTopTwo].filter(Boolean).join(' ')}
+                          className={[classes.crosshairTopTwo]
+                            .filter(Boolean)
+                            .join(' ')}
                         />
                         <CrosshairIcon
-                          className={[classes.crosshairBottomOne].filter(Boolean).join(' ')}
+                          className={[classes.crosshairBottomOne]
+                            .filter(Boolean)
+                            .join(' ')}
                         />
                         <CrosshairIcon
-                          className={[classes.crosshairBottomTwo].filter(Boolean).join(' ')}
+                          className={[classes.crosshairBottomTwo]
+                            .filter(Boolean)
+                            .join(' ')}
                         />
                       </div>
                     )}
@@ -165,7 +197,7 @@ export const DesktopMediaContentAccordion: React.FC<MediaContentAccordionProps> 
                       <div
                         className={[
                           classes.transparentDesktopWrapper,
-                          'start-1 cols-8 start-m-1 cols-m-8',
+                          'start-1 cols-8 start-m-1 cols-m-8'
                         ]
                           .filter(Boolean)
                           .join(' ')}
@@ -180,14 +212,19 @@ export const DesktopMediaContentAccordion: React.FC<MediaContentAccordionProps> 
                   ref={mediaRefs.current[index]}
                   className={[
                     classes.mediaDesktopContainer,
-                    leftPositionClassMap[item.position as keyof typeof leftPositionClassMap],
+                    leftPositionClassMap[
+                      item.position as keyof typeof leftPositionClassMap
+                    ]
                   ]
                     .filter(Boolean)
                     .join(' ')}
                   style={{
                     opacity: index === activeAccordion ? 1 : 0,
                     width: '100%',
-                    left: item.position === 'wide' ? `calc(-1 * ${contentWidth}px / 2)` : '0px',
+                    left:
+                      item.position === 'wide'
+                        ? `calc(-1 * ${contentWidth}px / 2)`
+                        : '0px'
                   }}
                 >
                   {typeof item.media === 'object' && item.media !== null && (
@@ -196,7 +233,10 @@ export const DesktopMediaContentAccordion: React.FC<MediaContentAccordionProps> 
                 </div>
               </Fragment>
             ))}
-          <div ref={contentRef} className={['cols-4 start-13 cols-m-8'].filter(Boolean).join(' ')}>
+          <div
+            ref={contentRef}
+            className={['cols-4 start-13 cols-m-8'].filter(Boolean).join(' ')}
+          >
             <div className={[classes.introWrapper].filter(Boolean).join(' ')}>
               {leader && <div className={classes.leader}>{leader}</div>}
               {heading && (
@@ -206,14 +246,20 @@ export const DesktopMediaContentAccordion: React.FC<MediaContentAccordionProps> 
               )}
             </div>
             <div>
-              <CollapsibleGroup allowMultiple={false} transTime={500} transCurve="ease-in-out">
+              <CollapsibleGroup
+                allowMultiple={false}
+                transTime={500}
+                transCurve="ease-in-out"
+              >
                 {hasAccordion &&
                   accordion.map((item, index) => (
                     <div
                       key={item.id || index}
                       className={[
                         classes.collapsibleWrapper,
-                        activeAccordion === index ? classes.activeLeftBorder : '',
+                        activeAccordion === index
+                          ? classes.activeLeftBorder
+                          : ''
                       ]
                         .filter(Boolean)
                         .join(' ')}
@@ -225,23 +271,29 @@ export const DesktopMediaContentAccordion: React.FC<MediaContentAccordionProps> 
                         <CollapsibleToggler
                           className={[
                             classes.collapsibleToggler,
-                            activeAccordion === index ? classes.activeItem : '',
+                            activeAccordion === index ? classes.activeItem : ''
                           ]
                             .filter(Boolean)
                             .join(' ')}
                           onClick={() => toggleAccordion(index)}
                         >
-                          <div className={classes.togglerTitle}>{item.mediaLabel}</div>
+                          <div className={classes.togglerTitle}>
+                            {item.mediaLabel}
+                          </div>
                           <ChevronDownIcon
                             className={[
                               classes.chevronDownIcon,
-                              activeAccordion === index ? classes.rotateChevron : '',
+                              activeAccordion === index
+                                ? classes.rotateChevron
+                                : ''
                             ]
                               .filter(Boolean)
                               .join(' ')}
                           />
                         </CollapsibleToggler>
-                        <CollapsibleContent className={classes.collapsibleContent}>
+                        <CollapsibleContent
+                          className={classes.collapsibleContent}
+                        >
                           <div className={classes.contentWrapper}>
                             <RichText
                               className={classes.mediaDescription}
@@ -263,7 +315,10 @@ export const DesktopMediaContentAccordion: React.FC<MediaContentAccordionProps> 
         </Fragment>
       ) : (
         <Fragment>
-          <div ref={contentRef} className={['cols-4 start-1 cols-m-8'].filter(Boolean).join(' ')}>
+          <div
+            ref={contentRef}
+            className={['cols-4 start-1 cols-m-8'].filter(Boolean).join(' ')}
+          >
             <div className={[classes.introWrapper].filter(Boolean).join(' ')}>
               {leader && <div className={classes.leader}>{leader}</div>}
               {heading && (
@@ -273,14 +328,20 @@ export const DesktopMediaContentAccordion: React.FC<MediaContentAccordionProps> 
               )}
             </div>
             <div>
-              <CollapsibleGroup allowMultiple={false} transTime={500} transCurve="ease-in-out">
+              <CollapsibleGroup
+                allowMultiple={false}
+                transTime={500}
+                transCurve="ease-in-out"
+              >
                 {hasAccordion &&
                   accordion.map((item, index) => (
                     <div
                       key={item.id || index}
                       className={[
                         classes.collapsibleWrapper,
-                        activeAccordion === index ? classes.activeLeftBorder : '',
+                        activeAccordion === index
+                          ? classes.activeLeftBorder
+                          : ''
                       ]
                         .filter(Boolean)
                         .join(' ')}
@@ -292,23 +353,29 @@ export const DesktopMediaContentAccordion: React.FC<MediaContentAccordionProps> 
                         <CollapsibleToggler
                           className={[
                             classes.collapsibleToggler,
-                            activeAccordion === index ? classes.activeItem : '',
+                            activeAccordion === index ? classes.activeItem : ''
                           ]
                             .filter(Boolean)
                             .join(' ')}
                           onClick={() => toggleAccordion(index)}
                         >
-                          <div className={classes.togglerTitle}>{item.mediaLabel}</div>
+                          <div className={classes.togglerTitle}>
+                            {item.mediaLabel}
+                          </div>
                           <ChevronDownIcon
                             className={[
                               classes.chevronDownIcon,
-                              activeAccordion === index ? classes.rotateChevron : '',
+                              activeAccordion === index
+                                ? classes.rotateChevron
+                                : ''
                             ]
                               .filter(Boolean)
                               .join(' ')}
                           />
                         </CollapsibleToggler>
-                        <CollapsibleContent className={classes.collapsibleContent}>
+                        <CollapsibleContent
+                          className={classes.collapsibleContent}
+                        >
                           <div className={classes.contentWrapper}>
                             <RichText
                               className={classes.mediaDescription}
@@ -336,7 +403,7 @@ export const DesktopMediaContentAccordion: React.FC<MediaContentAccordionProps> 
                       <div
                         className={[
                           classes.gradientDesktopWrapper,
-                          'start-9 cols-8 start-m-1 cols-m-8',
+                          'start-9 cols-8 start-m-1 cols-m-8'
                         ]
                           .filter(Boolean)
                           .join(' ')}
@@ -350,16 +417,24 @@ export const DesktopMediaContentAccordion: React.FC<MediaContentAccordionProps> 
                           src={`/images/gradients/1.jpg`}
                         />
                         <CrosshairIcon
-                          className={[classes.crosshairTopOne].filter(Boolean).join(' ')}
+                          className={[classes.crosshairTopOne]
+                            .filter(Boolean)
+                            .join(' ')}
                         />
                         <CrosshairIcon
-                          className={[classes.crosshairTopTwo].filter(Boolean).join(' ')}
+                          className={[classes.crosshairTopTwo]
+                            .filter(Boolean)
+                            .join(' ')}
                         />
                         <CrosshairIcon
-                          className={[classes.crosshairBottomOne].filter(Boolean).join(' ')}
+                          className={[classes.crosshairBottomOne]
+                            .filter(Boolean)
+                            .join(' ')}
                         />
                         <CrosshairIcon
-                          className={[classes.crosshairBottomTwo].filter(Boolean).join(' ')}
+                          className={[classes.crosshairBottomTwo]
+                            .filter(Boolean)
+                            .join(' ')}
                         />
                       </div>
                     )}
@@ -367,26 +442,36 @@ export const DesktopMediaContentAccordion: React.FC<MediaContentAccordionProps> 
                       <div
                         className={[
                           classes.scanlineDesktopWrapper,
-                          'start-9 cols-8 start-m-1 cols-m-8',
+                          'start-9 cols-8 start-m-1 cols-m-8'
                         ]
                           .filter(Boolean)
                           .join(' ')}
                         style={{ height: `calc(${containerHeight}px + 8rem)` }}
                       >
                         <BackgroundScanline
-                          className={[classes.scanlineDesktop].filter(Boolean).join(' ')}
+                          className={[classes.scanlineDesktop]
+                            .filter(Boolean)
+                            .join(' ')}
                         />
                         <CrosshairIcon
-                          className={[classes.crosshairTopOne].filter(Boolean).join(' ')}
+                          className={[classes.crosshairTopOne]
+                            .filter(Boolean)
+                            .join(' ')}
                         />
                         <CrosshairIcon
-                          className={[classes.crosshairTopTwo].filter(Boolean).join(' ')}
+                          className={[classes.crosshairTopTwo]
+                            .filter(Boolean)
+                            .join(' ')}
                         />
                         <CrosshairIcon
-                          className={[classes.crosshairBottomOne].filter(Boolean).join(' ')}
+                          className={[classes.crosshairBottomOne]
+                            .filter(Boolean)
+                            .join(' ')}
                         />
                         <CrosshairIcon
-                          className={[classes.crosshairBottomTwo].filter(Boolean).join(' ')}
+                          className={[classes.crosshairBottomTwo]
+                            .filter(Boolean)
+                            .join(' ')}
                         />
                       </div>
                     )}
@@ -394,7 +479,7 @@ export const DesktopMediaContentAccordion: React.FC<MediaContentAccordionProps> 
                       <div
                         className={[
                           classes.transparentDesktopWrapper,
-                          'start-9 cols-8 start-m-1 cols-m-8',
+                          'start-9 cols-8 start-m-1 cols-m-8'
                         ]
                           .filter(Boolean)
                           .join(' ')}
@@ -409,13 +494,18 @@ export const DesktopMediaContentAccordion: React.FC<MediaContentAccordionProps> 
                   ref={mediaRefs.current[index]}
                   className={[
                     classes.mediaDesktopContainer,
-                    rightPositionClassMap[item.position as keyof typeof rightPositionClassMap],
+                    rightPositionClassMap[
+                      item.position as keyof typeof rightPositionClassMap
+                    ]
                   ]
                     .filter(Boolean)
                     .join(' ')}
                   style={{
                     opacity: index === activeAccordion ? 1 : 0,
-                    width: item.position === 'wide' ? `calc(100% + ${contentWidth}px / 2)` : '100%',
+                    width:
+                      item.position === 'wide'
+                        ? `calc(100% + ${contentWidth}px / 2)`
+                        : '100%'
                   }}
                 >
                   {typeof item.media === 'object' && item.media !== null && (

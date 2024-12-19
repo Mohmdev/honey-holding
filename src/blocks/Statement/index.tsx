@@ -1,5 +1,8 @@
 'use client'
+
 import React from 'react'
+
+import { Page } from '@payload-types.js'
 
 import { BackgroundGrid } from '@components/BackgroundGrid/index.js'
 import { BlockWrapper, PaddingProps } from '@components/BlockWrapper/index.js'
@@ -8,16 +11,18 @@ import Code from '@components/Code/index.js'
 import { Gutter } from '@components/Gutter/index.js'
 import { Media } from '@components/Media/index.js'
 import { RichText } from '@components/RichText/index.js'
-import { Page } from '@root/payload-types.js'
 
 import classes from './index.module.scss'
 
-export type StatementProps = Extract<Page['layout'][0], { blockType: 'statement' }> & {
+export type StatementProps = Extract<
+  Page['layout'][0],
+  { blockType: 'statement' }
+> & {
   padding?: PaddingProps
   hideBackground?: boolean
 }
 
-export const Statement: React.FC<StatementProps> = props => {
+export const Statement: React.FC<StatementProps> = (props) => {
   const {
     statementFields: {
       richText,
@@ -28,10 +33,10 @@ export const Statement: React.FC<StatementProps> = props => {
       mediaWidth,
       backgroundGlow,
       settings,
-      assetCaption,
+      assetCaption
     },
     padding,
-    hideBackground,
+    hideBackground
   } = props
 
   const hasLinks = links && links.length > 0
@@ -40,13 +45,17 @@ export const Statement: React.FC<StatementProps> = props => {
     mediaWidth === 'small'
       ? 'cols-8 start-5 cols-m-8 start-m-1'
       : mediaWidth === 'large'
-      ? 'cols-16 cols-m-8'
-      : mediaWidth === 'full'
-      ? 'cols-16 cols-m-8'
-      : 'cols-12 start-3 cols-m-8 start-m-1'
+        ? 'cols-16 cols-m-8'
+        : mediaWidth === 'full'
+          ? 'cols-16 cols-m-8'
+          : 'cols-12 start-3 cols-m-8 start-m-1'
 
   return (
-    <BlockWrapper settings={settings} padding={padding} hideBackground={hideBackground}>
+    <BlockWrapper
+      settings={settings}
+      padding={padding}
+      hideBackground={hideBackground}
+    >
       <BackgroundGrid zIndex={0} />
       <Gutter className={classes.statementWrap}>
         <div className={['grid'].filter(Boolean).join(' ')}>
@@ -68,7 +77,7 @@ export const Statement: React.FC<StatementProps> = props => {
                       buttonProps={{
                         icon: 'arrow',
                         hideHorizontalBorders: true,
-                        hideBottomBorderExceptLast: true,
+                        hideBottomBorderExceptLast: true
                       }}
                     />
                   )
@@ -83,13 +92,19 @@ export const Statement: React.FC<StatementProps> = props => {
               ? media &&
                 typeof media !== 'string' && (
                   <div
-                    className={[mediaWidthClass, mediaWidth === 'full' && classes.fullMedia]
+                    className={[
+                      mediaWidthClass,
+                      mediaWidth === 'full' && classes.fullMedia
+                    ]
                       .filter(Boolean)
                       .join(' ')}
                   >
                     <Media
                       resource={media}
-                      className={[mediaWidthClass, backgroundGlow && classes[backgroundGlow]]
+                      className={[
+                        mediaWidthClass,
+                        backgroundGlow && classes[backgroundGlow]
+                      ]
                         .filter(Boolean)
                         .join(' ')}
                     />
@@ -99,7 +114,7 @@ export const Statement: React.FC<StatementProps> = props => {
                   <div
                     className={[
                       backgroundGlow && classes[backgroundGlow],
-                      'cols-10 start-4 cols-m-8 start-m-1',
+                      'cols-10 start-4 cols-m-8 start-m-1'
                     ]
                       .filter(Boolean)
                       .join(' ')}

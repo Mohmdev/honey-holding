@@ -1,19 +1,24 @@
 'use client'
+
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import Image from 'next/image'
 
+import { Page } from '@payload-types.js'
+
+import { ArrowIcon } from '@icons/ArrowIcon/index.js'
+import { CrosshairIcon } from '@icons/CrosshairIcon/index.js'
 import { BackgroundGrid } from '@components/BackgroundGrid/index.js'
 import { BlockWrapper, PaddingProps } from '@components/BlockWrapper/index.js'
 import { CMSLink } from '@components/CMSLink/index.js'
 import { Gutter } from '@components/Gutter/index.js'
 import { RichText } from '@components/RichText/index.js'
-import { ArrowIcon } from '@root/icons/ArrowIcon/index.js'
-import { CrosshairIcon } from '@root/icons/CrosshairIcon/index.js'
-import { Page } from '@root/payload-types.js'
 
 import classes from './index.module.scss'
 
-export type HoverCardsProps = Extract<Page['layout'][0], { blockType: 'hoverCards' }> & {
+export type HoverCardsProps = Extract<
+  Page['layout'][0],
+  { blockType: 'hoverCards' }
+> & {
   padding: PaddingProps
   hideBackground?: boolean
 }
@@ -41,13 +46,14 @@ const Card: React.FC<{
   )
 }
 
-export const HoverCards: React.FC<HoverCardsProps> = props => {
+export const HoverCards: React.FC<HoverCardsProps> = (props) => {
   const { hoverCardsFields, padding, hideBackground } = props
   const [activeGradient, setActiveGradient] = useState(1)
 
   const gradients = [1, 2, 3, 4, 5]
 
-  const hasCards = Array.isArray(hoverCardsFields.cards) && hoverCardsFields.cards.length > 0
+  const hasCards =
+    Array.isArray(hoverCardsFields.cards) && hoverCardsFields.cards.length > 0
 
   return (
     <BlockWrapper
@@ -59,12 +65,15 @@ export const HoverCards: React.FC<HoverCardsProps> = props => {
       <BackgroundGrid zIndex={1} />
       {!hideBackground && !hoverCardsFields.hideBackground && (
         <div className={classes.noiseWrapper}>
-          {gradients.map(gradient => {
+          {gradients.map((gradient) => {
             return (
               <Image
                 key={gradient}
                 alt=""
-                className={[classes.bg, activeGradient === gradient && classes.activeBg]
+                className={[
+                  classes.bg,
+                  activeGradient === gradient && classes.activeBg
+                ]
                   .filter(Boolean)
                   .join(' ')}
                 width={1920}
@@ -76,10 +85,14 @@ export const HoverCards: React.FC<HoverCardsProps> = props => {
         </div>
       )}
       <Gutter>
-        <div className={[classes.introWrapper, 'grid'].filter(Boolean).join(' ')}>
+        <div
+          className={[classes.introWrapper, 'grid'].filter(Boolean).join(' ')}
+        >
           {hoverCardsFields.richText && (
             <RichText
-              className={[classes.richText, 'cols-12 cols-m-8'].filter(Boolean).join(' ')}
+              className={[classes.richText, 'cols-12 cols-m-8']
+                .filter(Boolean)
+                .join(' ')}
               content={hoverCardsFields.richText}
             />
           )}
@@ -87,13 +100,21 @@ export const HoverCards: React.FC<HoverCardsProps> = props => {
 
         {hasCards && (
           <div className={classes.cards}>
-            <div className={['grid', classes.cardsWrapper].filter(Boolean).join(' ')}>
+            <div
+              className={['grid', classes.cardsWrapper]
+                .filter(Boolean)
+                .join(' ')}
+            >
               <BackgroundGrid className={classes.backgroundGrid} ignoreGutter />
               {hoverCardsFields.cards &&
                 hoverCardsFields.cards.map((card, index) => {
                   return (
                     <div key={card.id} className={'cols-4 cols-s-8'}>
-                      <Card card={card} leader={++index} setHover={setActiveGradient} />
+                      <Card
+                        card={card}
+                        leader={++index}
+                        setHover={setActiveGradient}
+                      />
                     </div>
                   )
                 })}

@@ -1,13 +1,14 @@
 import React from 'react'
 
+import { Page } from '@payload-types.js'
+
 import { BackgroundGrid } from '@components/BackgroundGrid/index.js'
 import { BlockWrapper, PaddingProps } from '@components/BlockWrapper/index.js'
 import { Gutter } from '@components/Gutter/index.js'
-import { Page } from '@root/payload-types.js'
-import { DesktopMediaContentAccordion } from './Desktop/index.js'
-import { MobileMediaContentAccordion } from './Mobile/index.js'
 
+import { DesktopMediaContentAccordion } from './Desktop/index.js'
 import classes from './index.module.scss'
+import { MobileMediaContentAccordion } from './Mobile/index.js'
 
 export type MediaContentAccordionProps = Extract<
   Page['layout'][0],
@@ -20,7 +21,7 @@ export type MediaContentAccordionProps = Extract<
 export const MediaContentAccordion: React.FC<MediaContentAccordionProps> = ({
   mediaContentAccordionFields,
   padding,
-  hideBackground,
+  hideBackground
 }) => {
   const { settings } = mediaContentAccordionFields || {}
 

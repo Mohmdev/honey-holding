@@ -1,22 +1,24 @@
 'use client'
+
 import React, { createRef, Fragment, useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
+
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleGroup,
-  CollapsibleToggler,
+  CollapsibleToggler
 } from '@faceless-ui/collapsibles'
-import Image from 'next/image'
+import { Page } from '@payload-types.js'
 
+import { ArrowRightIcon } from '@icons/ArrowRightIcon/index.js'
+import { ChevronDownIcon } from '@icons/ChevronDownIcon/index.js'
+import { CrosshairIcon } from '@icons/CrosshairIcon/index.js'
 import { BackgroundScanline } from '@components/BackgroundScanline/index.js'
 import { CMSLink } from '@components/CMSLink/index.js'
 import { Media } from '@components/Media/index.js'
 import { RichText } from '@components/RichText/index.js'
 import SplitAnimate from '@components/SplitAnimate/index.js'
-import { ArrowRightIcon } from '@root/icons/ArrowRightIcon/index.js'
-import { ChevronDownIcon } from '@root/icons/ChevronDownIcon/index.js'
-import { CrosshairIcon } from '@root/icons/CrosshairIcon/index.js'
-import { Page } from '@root/payload-types.js'
 
 import classes from './index.module.scss'
 
@@ -27,10 +29,9 @@ export type MediaContentAccordionProps = Extract<
   className?: string
 }
 
-export const MobileMediaContentAccordion: React.FC<MediaContentAccordionProps> = ({
-  mediaContentAccordionFields,
-  className,
-}) => {
+export const MobileMediaContentAccordion: React.FC<
+  MediaContentAccordionProps
+> = ({ mediaContentAccordionFields, className }) => {
   const { leader, heading, accordion } = mediaContentAccordionFields || {}
 
   const mediaRefs = useRef<Array<React.RefObject<HTMLDivElement>>>([])
@@ -42,8 +43,14 @@ export const MobileMediaContentAccordion: React.FC<MediaContentAccordionProps> =
     setActiveAccordion(index)
   }
 
-  if (accordion && accordion.length > 0 && mediaRefs.current.length !== accordion.length) {
-    mediaRefs.current = accordion.map((_, i) => mediaRefs.current[i] || createRef())
+  if (
+    accordion &&
+    accordion.length > 0 &&
+    mediaRefs.current.length !== accordion.length
+  ) {
+    mediaRefs.current = accordion.map(
+      (_, i) => mediaRefs.current[i] || createRef()
+    )
   }
 
   useEffect(() => {
@@ -57,7 +64,7 @@ export const MobileMediaContentAccordion: React.FC<MediaContentAccordionProps> =
 
     updateContainerHeight()
 
-    const resizeObserver = new ResizeObserver(entries => {
+    const resizeObserver = new ResizeObserver((entries) => {
       updateContainerHeight()
     })
 
@@ -71,7 +78,9 @@ export const MobileMediaContentAccordion: React.FC<MediaContentAccordionProps> =
 
   return (
     <div
-      className={[classes.mobileAccordionWrapper, className && className].filter(Boolean).join(' ')}
+      className={[classes.mobileAccordionWrapper, className && className]
+        .filter(Boolean)
+        .join(' ')}
     >
       <div className={[classes.introWrapper].filter(Boolean).join(' ')}>
         {leader && <div className={classes.leader}>{leader}</div>}
@@ -100,39 +109,59 @@ export const MobileMediaContentAccordion: React.FC<MediaContentAccordionProps> =
                         src={`/images/gradients/1.jpg`}
                       />
                       <CrosshairIcon
-                        className={[classes.crosshairTopOne].filter(Boolean).join(' ')}
+                        className={[classes.crosshairTopOne]
+                          .filter(Boolean)
+                          .join(' ')}
                       />
                       <CrosshairIcon
-                        className={[classes.crosshairTopTwo].filter(Boolean).join(' ')}
+                        className={[classes.crosshairTopTwo]
+                          .filter(Boolean)
+                          .join(' ')}
                       />
                       <CrosshairIcon
-                        className={[classes.crosshairBottomOne].filter(Boolean).join(' ')}
+                        className={[classes.crosshairBottomOne]
+                          .filter(Boolean)
+                          .join(' ')}
                       />
                       <CrosshairIcon
-                        className={[classes.crosshairBottomTwo].filter(Boolean).join(' ')}
+                        className={[classes.crosshairBottomTwo]
+                          .filter(Boolean)
+                          .join(' ')}
                       />
                     </Fragment>
                   )}
                   {item.background === 'scanlines' && (
                     <Fragment>
                       <BackgroundScanline
-                        className={[classes.scanlineMobile].filter(Boolean).join(' ')}
+                        className={[classes.scanlineMobile]
+                          .filter(Boolean)
+                          .join(' ')}
                       />
                       <CrosshairIcon
-                        className={[classes.crosshairTopOne].filter(Boolean).join(' ')}
+                        className={[classes.crosshairTopOne]
+                          .filter(Boolean)
+                          .join(' ')}
                       />
                       <CrosshairIcon
-                        className={[classes.crosshairTopTwo].filter(Boolean).join(' ')}
+                        className={[classes.crosshairTopTwo]
+                          .filter(Boolean)
+                          .join(' ')}
                       />
                       <CrosshairIcon
-                        className={[classes.crosshairBottomOne].filter(Boolean).join(' ')}
+                        className={[classes.crosshairBottomOne]
+                          .filter(Boolean)
+                          .join(' ')}
                       />
                       <CrosshairIcon
-                        className={[classes.crosshairBottomTwo].filter(Boolean).join(' ')}
+                        className={[classes.crosshairBottomTwo]
+                          .filter(Boolean)
+                          .join(' ')}
                       />
                     </Fragment>
                   )}
-                  {item.background === 'none' && <div className={classes.transparentBg} />}
+                  {item.background === 'none' && (
+                    <div className={classes.transparentBg} />
+                  )}
                 </>
               )}
             </Fragment>
@@ -154,14 +183,18 @@ export const MobileMediaContentAccordion: React.FC<MediaContentAccordionProps> =
         </div>
       </div>
       <div>
-        <CollapsibleGroup allowMultiple={false} transTime={500} transCurve="ease-in-out">
+        <CollapsibleGroup
+          allowMultiple={false}
+          transTime={500}
+          transCurve="ease-in-out"
+        >
           {hasAccordion &&
             accordion.map((item, index) => (
               <div
                 key={item.id || index}
                 className={[
                   classes.collapsibleWrapper,
-                  activeAccordion === index ? classes.activeLeftBorder : '',
+                  activeAccordion === index ? classes.activeLeftBorder : ''
                 ]
                   .filter(Boolean)
                   .join(' ')}
@@ -173,17 +206,19 @@ export const MobileMediaContentAccordion: React.FC<MediaContentAccordionProps> =
                   <CollapsibleToggler
                     className={[
                       classes.collapsibleToggler,
-                      activeAccordion === index ? classes.activeItem : '',
+                      activeAccordion === index ? classes.activeItem : ''
                     ]
                       .filter(Boolean)
                       .join(' ')}
                     onClick={() => toggleAccordion(index)}
                   >
-                    <div className={classes.togglerTitle}>{item.mediaLabel}</div>
+                    <div className={classes.togglerTitle}>
+                      {item.mediaLabel}
+                    </div>
                     <ChevronDownIcon
                       className={[
                         classes.chevronDownIcon,
-                        activeAccordion === index ? classes.rotateChevron : '',
+                        activeAccordion === index ? classes.rotateChevron : ''
                       ]
                         .filter(Boolean)
                         .join(' ')}

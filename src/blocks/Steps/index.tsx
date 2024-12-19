@@ -1,12 +1,13 @@
 import React from 'react'
 
-import { Page } from '@root/payload-types.js'
-import { Step } from './Step/index.js'
+import { Page } from '@payload-types.js'
 
-import classes from './index.module.scss'
+import { BackgroundGrid } from '@components/BackgroundGrid/index.js'
 import { BlockWrapper } from '@components/BlockWrapper/index.js'
 import { Gutter } from '@components/Gutter'
-import { BackgroundGrid } from '@components/BackgroundGrid/index.js'
+
+import classes from './index.module.scss'
+import { Step } from './Step/index.js'
 
 type Props = Extract<Page['layout'][0], { blockType: 'steps' }>
 

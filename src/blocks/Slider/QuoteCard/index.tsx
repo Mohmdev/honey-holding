@@ -1,13 +1,18 @@
 import * as React from 'react'
-import { Page } from '@root/payload-types.js'
+
+import { Page } from '@payload-types.js'
+
+import { ArrowIcon } from '@icons/ArrowIcon'
+import { CMSLink } from '@components/CMSLink'
+import { Media } from '@components/Media'
 
 import classes from './index.module.scss'
-import { Media } from '@components/Media'
-import { CMSLink } from '@components/CMSLink'
-import { ArrowIcon } from '@icons/ArrowIcon'
 
 type Props = NonNullable<
-  Extract<Page['layout'][0], { blockType: 'slider' }>['sliderFields']['quoteSlides']
+  Extract<
+    Page['layout'][0],
+    { blockType: 'slider' }
+  >['sliderFields']['quoteSlides']
 >[0] & {
   isActive: boolean
 }
@@ -19,12 +24,16 @@ export const QuoteCard: React.FC<Props> = ({
   logo,
   isActive,
   link,
-  enableLink,
+  enableLink
 }) => {
   if (!quote) return null
 
   return (
-    <div className={[classes.quoteCard, isActive && classes.isActive].filter(Boolean).join(' ')}>
+    <div
+      className={[classes.quoteCard, isActive && classes.isActive]
+        .filter(Boolean)
+        .join(' ')}
+    >
       <h3 className={classes.quote}>
         <span className={classes.closingQuote}>“</span>
         {quote}
@@ -40,7 +49,9 @@ export const QuoteCard: React.FC<Props> = ({
         )}
         {enableLink && (
           <CMSLink className={classes.arrowWrap} {...link} label={null}>
-            {link?.label && <span className={classes.linkLabel}>{link.label}</span>}
+            {link?.label && (
+              <span className={classes.linkLabel}>{link.label}</span>
+            )}
             <div className={classes.arrow}>
               <ArrowIcon />
             </div>

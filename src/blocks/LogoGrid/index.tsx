@@ -2,14 +2,15 @@
 
 import React, { useEffect, useState } from 'react'
 
+import { Media as MediaType, Page } from '@payload-types.js'
+
+import { CrosshairIcon } from '@icons/CrosshairIcon/index.js'
 import { BackgroundGrid } from '@components/BackgroundGrid/index.js'
 import { BlockWrapper, PaddingProps } from '@components/BlockWrapper/index.js'
 import { CMSLink } from '@components/CMSLink/index.js'
 import { Gutter } from '@components/Gutter/index.js'
 import { Media } from '@components/Media/index.js'
 import { RichText } from '@components/RichText/index.js'
-import { CrosshairIcon } from '@root/icons/CrosshairIcon/index.js'
-import { Media as MediaType, Page } from '@root/payload-types.js'
 
 import classes from './index.module.scss'
 
@@ -24,7 +25,10 @@ type PositionedLogo = {
   isVisible: boolean
 }
 
-export type LogoGridProps = Extract<Page['layout'][0], { blockType: 'logoGrid' }> & {
+export type LogoGridProps = Extract<
+  Page['layout'][0],
+  { blockType: 'logoGrid' }
+> & {
   padding?: PaddingProps
   hideBackground?: boolean
 }
@@ -41,16 +45,22 @@ const getRandomPosition = (excludePositions: number[]) => {
   return newPos
 }
 
-export const LogoGrid: React.FC<LogoGridProps> = ({ logoGridFields, padding, hideBackground }) => {
+export const LogoGrid: React.FC<LogoGridProps> = ({
+  logoGridFields,
+  padding,
+  hideBackground
+}) => {
   const { richText, enableLink, link, logos, settings } = logoGridFields
 
   const [logoPositions, setLogoPositions] = useState<PositionedLogo[]>([])
-  const [currentAnimatingIndex, setCurrentAnimatingIndex] = useState<number | null>(null)
+  const [currentAnimatingIndex, setCurrentAnimatingIndex] = useState<
+    number | null
+  >(null)
 
   useEffect(() => {
     if (logos) {
       let occupiedPositions: number[] = []
-      const initialPositions = logos.map(logo => {
+      const initialPositions = logos.map((logo) => {
         const position = getRandomPosition(occupiedPositions)
         occupiedPositions.push(position)
         return { logo, position, isVisible: true }
@@ -65,38 +75,47 @@ export const LogoGrid: React.FC<LogoGridProps> = ({ logoGridFields, padding, hid
     /* eslint-disable function-paren-newline */
     const animateLogo = () => {
       const logoIndex =
-        currentAnimatingIndex !== null ? (currentAnimatingIndex + 1) % logos.length : 0
+        currentAnimatingIndex !== null
+          ? (currentAnimatingIndex + 1) % logos.length
+          : 0
       setCurrentAnimatingIndex(logoIndex)
 
-      setLogoPositions(prevPositions =>
-        prevPositions.map((pos, idx) => (idx === logoIndex ? { ...pos, isVisible: false } : pos)),
+      setLogoPositions((prevPositions) =>
+        prevPositions.map((pos, idx) =>
+          idx === logoIndex ? { ...pos, isVisible: false } : pos
+        )
       )
 
       setTimeout(() => {
-        setLogoPositions(prevPositions => {
-          const occupiedPositions = prevPositions.map(p => p.position)
+        setLogoPositions((prevPositions) => {
+          const occupiedPositions = prevPositions.map((p) => p.position)
           let newPosition
           do {
             newPosition = getRandomPosition(occupiedPositions)
           } while (newPosition === prevPositions[logoIndex].position)
 
           return prevPositions.map((pos, idx) =>
-            idx === logoIndex ? { ...pos, position: newPosition, isVisible: false } : pos,
+            idx === logoIndex
+              ? { ...pos, position: newPosition, isVisible: false }
+              : pos
           )
         })
 
         setTimeout(() => {
-          setLogoPositions(prevPositions =>
+          setLogoPositions((prevPositions) =>
             prevPositions.map((pos, idx) =>
-              idx === logoIndex ? { ...pos, isVisible: true } : pos,
-            ),
+              idx === logoIndex ? { ...pos, isVisible: true } : pos
+            )
           )
         }, 100)
       }, ANIMATION_DURATION + 500)
     }
     /* eslint-enable function-paren-newline */
 
-    const interval = setInterval(animateLogo, ANIMATION_DELAY + ANIMATION_DURATION)
+    const interval = setInterval(
+      animateLogo,
+      ANIMATION_DELAY + ANIMATION_DURATION
+    )
     return () => clearInterval(interval)
   }, [logoPositions, currentAnimatingIndex, logos])
 
@@ -109,8 +128,16 @@ export const LogoGrid: React.FC<LogoGridProps> = ({ logoGridFields, padding, hid
     >
       <Gutter>
         <BackgroundGrid className={classes.backgroundGrid} zIndex={0} />
-        <div className={[classes.logoGridContentWrapper, 'grid'].filter(Boolean).join(' ')}>
-          <div className={[classes.richTextWrapper, 'cols-8 start-1'].filter(Boolean).join(' ')}>
+        <div
+          className={[classes.logoGridContentWrapper, 'grid']
+            .filter(Boolean)
+            .join(' ')}
+        >
+          <div
+            className={[classes.richTextWrapper, 'cols-8 start-1']
+              .filter(Boolean)
+              .join(' ')}
+          >
             <RichText className={classes.richText} content={richText} />
             {enableLink && link && (
               <div className={classes.link}>
@@ -120,17 +147,24 @@ export const LogoGrid: React.FC<LogoGridProps> = ({ logoGridFields, padding, hid
                   fullWidth
                   buttonProps={{
                     icon: 'arrow',
-                    hideHorizontalBorders: true,
+                    hideHorizontalBorders: true
                   }}
                 />
               </div>
             )}
           </div>
           <div
-            className={[classes.logoWrapper, 'cols-8 start-9 start-m-1'].filter(Boolean).join(' ')}
+            className={[classes.logoWrapper, 'cols-8 start-9 start-m-1']
+              .filter(Boolean)
+              .join(' ')}
           >
             <div className={classes.logoShowcase}>
-              <div className={[classes.horizontalLine, classes.topHorizontalLine].join(' ')} />
+              <div
+                className={[
+                  classes.horizontalLine,
+                  classes.topHorizontalLine
+                ].join(' ')}
+              />
               <div className={classes.horizontalLine} style={{ top: '50%' }} />
               {[...Array(3)].map((_, idx) => {
                 if (idx === 1) return null
@@ -142,41 +176,56 @@ export const LogoGrid: React.FC<LogoGridProps> = ({ logoGridFields, padding, hid
                   />
                 )
               })}
-              <div className={[classes.horizontalLine, classes.bottomHorizontalLine].join(' ')} />
+              <div
+                className={[
+                  classes.horizontalLine,
+                  classes.bottomHorizontalLine
+                ].join(' ')}
+              />
               {Array.from({ length: TOTAL_CELLS }).map((_, index) => {
                 const hasLogo = logoPositions.some(
-                  item => item.position === index && item.isVisible,
+                  (item) => item.position === index && item.isVisible
                 )
                 return (
                   <div
-                    className={[classes.logoShowcaseItem, hasLogo ? classes.logoPresent : '']
+                    className={[
+                      classes.logoShowcaseItem,
+                      hasLogo ? classes.logoPresent : ''
+                    ]
                       .filter(Boolean)
                       .join(' ')}
                     key={index}
                   >
                     <div className={classes.contentWrapper}>
                       {logoPositions
-                        .filter(item => item.position === index)
+                        .filter((item) => item.position === index)
                         .map(({ logo, isVisible }, idx) => (
                           <div
                             key={idx}
                             style={{
                               opacity: isVisible ? 1 : 0,
                               transition: `opacity ${ANIMATION_DURATION}ms ease, filter ${ANIMATION_DURATION}ms ease`,
-                              filter: isVisible ? 'blur(0px)' : 'blur(8px)',
+                              filter: isVisible ? 'blur(0px)' : 'blur(8px)'
                             }}
                           >
-                            {typeof logo.logoMedia === 'object' && logo.logoMedia !== null && (
-                              <Media resource={logo.logoMedia} />
-                            )}
+                            {typeof logo.logoMedia === 'object' &&
+                              logo.logoMedia !== null && (
+                                <Media resource={logo.logoMedia} />
+                              )}
                           </div>
                         ))}
                     </div>
                   </div>
                 )
               })}
-              <CrosshairIcon className={[classes.crosshair, classes.crosshairLeft].join(' ')} />
-              <CrosshairIcon className={[classes.crosshair, classes.crosshairRight].join(' ')} />
+              <CrosshairIcon
+                className={[classes.crosshair, classes.crosshairLeft].join(' ')}
+              />
+              <CrosshairIcon
+                className={[classes.crosshair, classes.crosshairRight].join(
+                  ' '
+                )}
+              />
             </div>
           </div>
         </div>
