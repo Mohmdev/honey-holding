@@ -1,116 +1,164 @@
 'use client'
 
-import React, {
+import {
   createContext,
   useCallback,
   useContext,
   useEffect,
-  useRef,
   useState
 } from 'react'
 
 import { User } from '@payload-types'
-
-import { ME_QUERY, USER } from '@data/me'
-
-type ResetPassword = (args: {
-  password: string
-  passwordConfirm: string
-  token: string
-}) => Promise<void>
-
-type ForgotPassword = (args: { email: string }) => Promise<void>
 
 type Create = (args: {
   email: string
   password: string
   passwordConfirm: string
 }) => Promise<void>
-
 type Login = (args: { email: string; password: string }) => Promise<User>
-
 type Logout = () => Promise<void>
-
+type ForgotPassword = (args: { email: string }) => Promise<void>
+type ResetPassword = (args: {
+  password: string
+  passwordConfirm: string
+  token: string
+}) => Promise<void>
 type AuthContext = {
-  user?: User | null
-  updateUser: (user: Partial<User>) => void
-  setUser: (user: User | null) => void
-  logout: Logout
+  create: Create
   login: Login
-  resetPassword: ResetPassword
+  logout: Logout
   forgotPassword: ForgotPassword
+  resetPassword: ResetPassword
+  status: 'loggedIn' | 'loggedOut' | undefined
+  user?: User | null
+  setUser: (user: User | null) => void
+  updateUser: (user: Partial<User>) => void
 }
 
-const Context = createContext({} as AuthContext)
+const AuthContext = createContext({} as AuthContext)
 
-const DASHBOARD_CONNECTION_ERROR =
-  'An error occurred while attempting to connect to your dashboard'
+const DASHBOARD_CONNECTION_ERROR = 'Error connecting to dashboard'
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children
 }) => {
-  const [user, setUser] = useState<User | null | undefined>(undefined)
-  const fetchedMe = useRef(false)
+  // used to track the single event of logging in or logging out
+  // useful for `useEffect` hooks that should only run once
+  const [status, setStatus] = useState<'loggedIn' | 'loggedOut' | undefined>()
+  const [user, setUser] = useState<User | null>()
 
-  const login = useCallback<Login>(async (args) => {
+  useEffect(() => {
+    const fetchMe = async () => {
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/me`,
+          {
+            credentials: 'include',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            method: 'GET'
+          }
+        )
+
+        if (res.ok) {
+          const { user: meUser } = await res.json()
+          setUser(meUser || null)
+          setStatus(meUser ? 'loggedIn' : undefined)
+        } else {
+          throw new Error('An error occurred while fetching your account.')
+        }
+      } catch (e) {
+        setUser(null)
+        throw new Error('An error occurred while fetching your account.')
+      }
+    }
+
+    void fetchMe()
+  }, [])
+
+  const create = useCallback<Create>(async (args) => {
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/graphql`,
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/create`,
         {
-          method: 'POST',
+          body: JSON.stringify({
+            email: args.email,
+            password: args.password,
+            passwordConfirm: args.passwordConfirm
+          }),
           credentials: 'include',
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({
-            query: `mutation {
-              loginUser(email: "${args.email}", password: "${args.password}") {
-                user {
-                  ${USER}
-                }
-                exp
-              }
-            }`
-          })
+          method: 'POST'
         }
       )
 
-      const { data, errors } = await res.json()
-
       if (res.ok) {
+        const { data, errors } = await res.json()
         if (errors) throw new Error(errors[0].message)
         setUser(data?.loginUser?.user)
-        return data?.loginUser?.user
+        setStatus('loggedIn')
+      } else {
+        throw new Error('Invalid login')
       }
-
-      throw new Error(
-        errors?.[0]?.message || 'An error occurred while attempting to login.'
-      )
     } catch (e) {
-      throw new Error(`${DASHBOARD_CONNECTION_ERROR}: ${e.message}`)
+      throw new Error('An error occurred while attempting to login.')
     }
   }, [])
+
+  const login = useCallback<Login>(
+    async (args) => {
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/login`,
+          {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              email: args.email,
+              password: args.password
+            })
+          }
+        )
+
+        if (res.ok) {
+          const { errors, user } = await res.json()
+          if (errors) throw new Error(errors[0].message)
+          setUser(user as User)
+          setStatus('loggedIn')
+          return user as User
+        }
+
+        throw new Error('An error occurred while attempting to login.')
+      } catch (e) {
+        console.error(e)
+        throw new Error(`${DASHBOARD_CONNECTION_ERROR}: ${e.message}`)
+      }
+    },
+    [setUser, setStatus]
+  )
 
   const logout = useCallback<Logout>(async () => {
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/graphql`,
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/logout`,
         {
-          method: 'POST',
           credentials: 'include',
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({
-            query: `mutation {
-            logoutUser
-          }`
-          })
+          method: 'POST'
         }
       )
 
       if (res.ok) {
         setUser(null)
+        setStatus('loggedOut')
       } else {
         throw new Error('An error occurred while attempting to logout.')
       }
@@ -119,160 +167,89 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   }, [])
 
-  useEffect(() => {
-    if (fetchedMe.current) return
-    fetchedMe.current = true
-
-    const fetchMe = async () => {
-      try {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/graphql`,
-          {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              query: ME_QUERY
-            })
-          }
-        )
-
-        const { data, errors } = await res.json()
-
-        if (res.ok) {
-          setUser(data?.meUser?.user || null)
-        } else {
-          throw new Error(
-            errors?.[0]?.message ||
-              'An error occurred while attempting to fetch user.'
-          )
-        }
-      } catch (e) {
-        setUser(null)
-        throw new Error(`${DASHBOARD_CONNECTION_ERROR}: ${e.message}`)
-      }
-    }
-
-    fetchMe()
-  }, [])
-
   const forgotPassword = useCallback<ForgotPassword>(async (args) => {
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/graphql`,
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/forgot-password`,
         {
-          method: 'POST',
+          body: JSON.stringify({
+            email: args.email
+          }),
           credentials: 'include',
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({
-            query: `mutation {
-              forgotPasswordUser(email: "${args.email}") {
-                user {
-                  ${USER}
-                }
-                exp
-              }
-            }`
-          })
+          method: 'POST'
         }
       )
 
-      const { data, errors } = await res.json()
-
       if (res.ok) {
+        const { data, errors } = await res.json()
         if (errors) throw new Error(errors[0].message)
         setUser(data?.loginUser?.user)
       } else {
-        throw new Error(
-          errors?.[0]?.message ||
-            'An error occurred while attempting to reset your password.'
-        )
+        throw new Error('Invalid login')
       }
     } catch (e) {
-      throw new Error(`${DASHBOARD_CONNECTION_ERROR}: ${e.message}`)
+      throw new Error('An error occurred while attempting to login.')
     }
   }, [])
 
   const resetPassword = useCallback<ResetPassword>(async (args) => {
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/graphql`,
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/reset-password`,
         {
-          method: 'POST',
+          body: JSON.stringify({
+            password: args.password,
+            passwordConfirm: args.passwordConfirm,
+            token: args.token
+          }),
           credentials: 'include',
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({
-            query: `mutation {
-              resetPasswordUser(password: "${args.password}", token: "${args.token}") {
-                user {
-                  ${USER}
-                }
-              }
-            }`
-          })
+          method: 'POST'
         }
       )
 
-      const { data, errors } = await res.json()
-
       if (res.ok) {
+        const { data, errors } = await res.json()
         if (errors) throw new Error(errors[0].message)
-        setUser(data?.resetPasswordUser?.user)
+        setUser(data?.loginUser?.user)
+        setStatus(data?.loginUser?.user ? 'loggedIn' : undefined)
       } else {
-        throw new Error(errors?.[0]?.message || 'Invalid login')
+        throw new Error('Invalid login')
       }
     } catch (e) {
-      throw new Error(`${DASHBOARD_CONNECTION_ERROR}: ${e.message}`)
+      throw new Error('An error occurred while attempting to login.')
     }
   }, [])
 
-  const updateUser = useCallback(
-    async (incomingUser: Partial<User>) => {
+  const updateUser = useCallback<(updates: Partial<User>) => Promise<void>>(
+    async (updates) => {
       try {
-        if (!user || !incomingUser) throw new Error('No user found to update.')
-
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/graphql`,
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/${user?.id}`,
           {
-            method: 'POST',
-            credentials: 'include',
+            method: 'PATCH',
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-              query: `mutation {
-              updateUser(
-                id: "${user?.id}",
-                data: {
-                  ${Object.entries(incomingUser)
-                    .filter(([key, value]) => value !== undefined)
-                    .map(([key, value]) => `${key}: "${value}"`)
-                    .join(', ')}
-                }
-              ) {
-                ${USER}
-              }
-            }`
-            })
+            credentials: 'include',
+            body: JSON.stringify(updates)
           }
         )
 
-        const { data, errors } = await res.json()
+        const result = await response.json()
 
-        if (res.ok) {
-          if (errors) throw new Error(errors[0].message)
-          setUser(data?.updateUser)
+        if (result?.doc) {
+          setUser({
+            ...user,
+            ...result.doc
+          })
         } else {
-          throw new Error(
-            errors?.[0]?.message ||
-              'An error occurred while updating your account.'
-          )
+          throw new Error('Failed to update user')
         }
       } catch (e) {
         throw new Error(`${DASHBOARD_CONNECTION_ERROR}: ${e.message}`)
@@ -282,22 +259,22 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   )
 
   return (
-    <Context.Provider
+    <AuthContext.Provider
       value={{
         user,
+        create,
         setUser,
+        updateUser,
+        status,
         login,
         logout,
-        resetPassword,
         forgotPassword,
-        updateUser
+        resetPassword
       }}
     >
       {children}
-    </Context.Provider>
+    </AuthContext.Provider>
   )
 }
-
 type UseAuth<T = User> = () => AuthContext
-
-export const useAuth: UseAuth = () => useContext(Context)
+export const useAuth: UseAuth = () => useContext(AuthContext)

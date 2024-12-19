@@ -40,7 +40,6 @@ export const Users: CollectionConfig<'users'> = {
     photo: true
   },
   auth: {
-    // verify: false,
     cookies: {
       // cross-domain authentication
       domain: process.env.COOKIE_DOMAIN,
@@ -59,6 +58,7 @@ export const Users: CollectionConfig<'users'> = {
           : undefined
     },
     tokenExpiration: 28800, // 8 hours
+    // verify: false,
     forgotPassword: {
       generateEmailHTML: generateForgotPasswordEmail,
       generateEmailSubject: () => 'Reset your password'
