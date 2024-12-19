@@ -1,9 +1,15 @@
 'use client'
 
-import React, { createContext, useCallback, useContext, useEffect, useState } from 'react'
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState
+} from 'react'
 
-import canUseDom from '@root/utilities/can-use-dom.js'
-import { locate, LocateResponse } from '../../../functions-api.js'
+import { locate, LocateResponse } from '@providers/Privacy/functions-api'
+import canUseDom from '@utils/canUseDOM'
 
 type Privacy = {
   showConsent?: boolean
@@ -16,7 +22,7 @@ const Context = createContext<Privacy>({
   showConsent: undefined,
   cookieConsent: undefined,
   updateCookieConsent: () => false,
-  country: undefined,
+  country: undefined
 })
 
 type CookieConsent = {
@@ -27,13 +33,18 @@ type CookieConsent = {
 }
 
 const getLocaleStorage = (): CookieConsent =>
-  canUseDom && JSON.parse(window.localStorage.getItem('cookieConsent') || 'null')
-const setLocaleStorage = (accepted: boolean, rejected: boolean, country: string) => {
+  canUseDom &&
+  JSON.parse(window.localStorage.getItem('cookieConsent') || 'null')
+const setLocaleStorage = (
+  accepted: boolean,
+  rejected: boolean,
+  country: string
+) => {
   const cookieConsent: CookieConsent = {
     accepted,
     rejected,
     country,
-    at: new Date().toISOString(),
+    at: new Date().toISOString()
   }
   window.localStorage.setItem('cookieConsent', JSON.stringify(cookieConsent))
 }
@@ -51,7 +62,7 @@ type PrivacyProviderProps = {
   children: React.ReactNode
 }
 
-const PrivacyProvider: React.FC<PrivacyProviderProps> = props => {
+const PrivacyProvider: React.FC<PrivacyProviderProps> = (props) => {
   const { children } = props
   const [showConsent, setShowConsent] = useState<boolean | undefined>()
   const [cookieConsent, setCookieConsent] = useState<boolean | undefined>()
@@ -62,7 +73,7 @@ const PrivacyProvider: React.FC<PrivacyProviderProps> = props => {
       setCookieConsent(accepted)
       setLocaleStorage(accepted, rejected, country || '')
     },
-    [country],
+    [country]
   )
 
   useEffect(() => {
@@ -87,8 +98,8 @@ const PrivacyProvider: React.FC<PrivacyProviderProps> = props => {
 
   useEffect(() => {
     import('react-facebook-pixel')
-      .then(x => x.default)
-      .then(ReactPixel => {
+      .then((x) => x.default)
+      .then((ReactPixel) => {
         if (cookieConsent) {
           ReactPixel.grantConsent()
         } else {
@@ -103,7 +114,7 @@ const PrivacyProvider: React.FC<PrivacyProviderProps> = props => {
         showConsent,
         cookieConsent,
         updateCookieConsent,
-        country,
+        country
       }}
     >
       {children}

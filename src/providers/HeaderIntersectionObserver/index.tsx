@@ -1,11 +1,13 @@
 'use client'
 
 import * as React from 'react'
-import { useWindowInfo } from '@faceless-ui/window-info'
 import { usePathname } from 'next/navigation'
 
-import { useThemePreference } from '@root/providers/Theme/index.js'
-import { Theme } from '@root/providers/Theme/types.js'
+import { useWindowInfo } from '@faceless-ui/window-info'
+
+import { useThemePreference } from '@providers/Theme'
+
+import type { Theme } from '@providers/Theme/types'
 
 import classes from './index.module.scss'
 
@@ -19,7 +21,7 @@ const Context = React.createContext<ContextT>({
   addObservable: () => {},
   headerTheme: null,
   setHeaderTheme: () => {},
-  debug: false,
+  debug: false
 })
 export const useHeaderObserver = (): ContextT => React.useContext(Context)
 
@@ -27,14 +29,17 @@ type HeaderIntersectionObserverProps = {
   children: React.ReactNode
   debug?: boolean
 }
-export const HeaderIntersectionObserver: React.FC<HeaderIntersectionObserverProps> = ({
-  children,
-  debug = false,
-}) => {
+export const HeaderIntersectionObserver: React.FC<
+  HeaderIntersectionObserverProps
+> = ({ children, debug = false }) => {
   const { height: windowHeight, width: windowWidth } = useWindowInfo()
   const { theme } = useThemePreference()
-  const [headerTheme, setHeaderTheme] = React.useState<Theme | null | undefined>(theme)
-  const [observer, setObserver] = React.useState<IntersectionObserver | undefined>(undefined)
+  const [headerTheme, setHeaderTheme] = React.useState<
+    Theme | null | undefined
+  >(theme)
+  const [observer, setObserver] = React.useState<
+    IntersectionObserver | undefined
+  >(undefined)
   const [tick, setTick] = React.useState<number | undefined>(undefined)
   const pathname = usePathname()
 
@@ -44,15 +49,17 @@ export const HeaderIntersectionObserver: React.FC<HeaderIntersectionObserverProp
         observer.observe(el)
       }
     },
-    [observer],
+    [observer]
   )
 
   React.useEffect(() => {
     let observerRef: IntersectionObserver | undefined
 
     const cssHeaderHeight = parseInt(
-      getComputedStyle(document.documentElement).getPropertyValue('--header-height'),
-      10,
+      getComputedStyle(document.documentElement).getPropertyValue(
+        '--header-height'
+      ),
+      10
     )
 
     let tickTimeout: NodeJS.Timeout | undefined
@@ -70,11 +77,15 @@ export const HeaderIntersectionObserver: React.FC<HeaderIntersectionObserverProp
       const halfHeaderHeight = windowHeight - Math.ceil(cssHeaderHeight / 2)
 
       observerRef = new IntersectionObserver(
-        entries => {
-          const intersectingElement = entries.find(entry => entry.isIntersecting)
+        (entries) => {
+          const intersectingElement = entries.find(
+            (entry) => entry.isIntersecting
+          )
 
           if (intersectingElement) {
-            setHeaderTheme(intersectingElement.target.getAttribute('data-theme') as Theme)
+            setHeaderTheme(
+              intersectingElement.target.getAttribute('data-theme') as Theme
+            )
           }
         },
         {
@@ -82,8 +93,8 @@ export const HeaderIntersectionObserver: React.FC<HeaderIntersectionObserverProp
           // when the sticky element which is offset from the top by 50% of the header height
           // is intersecting the intersection area
           rootMargin: `0px 0px -${halfHeaderHeight}px 0px`,
-          threshold: 0,
-        },
+          threshold: 0
+        }
       )
 
       setObserver(observerRef)
@@ -107,7 +118,7 @@ export const HeaderIntersectionObserver: React.FC<HeaderIntersectionObserverProp
         addObservable,
         headerTheme,
         debug,
-        setHeaderTheme,
+        setHeaderTheme
       }}
     >
       <>

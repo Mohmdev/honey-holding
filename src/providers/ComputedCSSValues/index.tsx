@@ -1,15 +1,20 @@
 import * as React from 'react'
-import { useResize } from '@utilities/use-resize.js'
+
+import { useResize } from '@utils/use-resize'
 
 interface IComputedCSSValues {
   gutterH: number
 }
-export const Context = React.createContext<IComputedCSSValues | undefined>(undefined)
+export const Context = React.createContext<IComputedCSSValues | undefined>(
+  undefined
+)
 export const useComputedCSSValues = (): IComputedCSSValues => {
   const context = React.useContext(Context)
 
   if (context === undefined) {
-    throw new Error('useComputedCSSValues must be used within a ComputedCSSValuesProvider')
+    throw new Error(
+      'useComputedCSSValues must be used within a ComputedCSSValuesProvider'
+    )
   }
 
   return context
@@ -25,7 +30,7 @@ export const ComputedCSSValuesProvider: React.FC<Props> = ({ children }) => {
   return (
     <Context.Provider
       value={{
-        gutterH: resize.size?.width ?? 0,
+        gutterH: resize.size?.width ?? 0
       }}
     >
       {children}
