@@ -6,8 +6,8 @@ import type { Block } from 'payload'
 export const PortfolioCards: Block = {
   slug: 'portfolioCards',
   labels: {
-    singular: 'Porfolio Cards',
-    plural: 'Porfolio Cards'
+    singular: 'Portfolio Cards',
+    plural: 'Portfolio Cards'
   },
   fields: [
     blockFields({

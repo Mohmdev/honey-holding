@@ -10,7 +10,7 @@ import {
   RichText as RichTextWithoutBlocks
 } from '@payloadcms/richtext-lexical/react'
 import { CallToActionBlock } from '@blocks/_basic/CallToAction/Component'
-import { BannerBlock } from '@blocks/BannerBlock/Component'
+import { BannerBlock } from '@blocks/Banner/Component'
 import { CodeBlock, CodeBlockProps } from '@blocks/Code/Component'
 import { MediaBlock } from '@blocks/MediaBlock'
 

@@ -1,8 +1,9 @@
-import { blockFields } from '@fields/blockFields'
-import link from '@fields/link'
-import linkGroup from '@fields/linkGroup'
+import link from '@root/fields/link'
+import linkGroup from '@root/fields/linkGroup'
 
 import type { Block } from 'payload'
+
+import { blockFields } from '../../fields/blockFields'
 
 export const Slider: Block = {
   slug: 'slider',

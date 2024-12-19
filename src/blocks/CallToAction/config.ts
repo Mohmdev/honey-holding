@@ -1,7 +1,7 @@
-import { blockFields } from '@fields/blockFields'
-import link from '@fields/link'
-import linkGroup from '@fields/linkGroup'
-import richText from '@fields/richText'
+import { blockFields } from '@root/fields/blockFields'
+import link from '@root/fields/link'
+import linkGroup from '@root/fields/linkGroup'
+import richText from '@root/fields/richText'
 
 import type { Block } from 'payload'
 

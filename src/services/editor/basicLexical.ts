@@ -8,7 +8,7 @@ import {
   InlineToolbarFeature,
   lexicalEditor
 } from '@payloadcms/richtext-lexical'
-import { Banner } from '@blocks/BannerBlock/basic'
+import { Banner } from '@blocks/Banner/basic'
 import { Code } from '@blocks/Code/config'
 import { MediaBlock } from '@blocks/MediaBlock/config'
 

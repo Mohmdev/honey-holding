@@ -1,9 +1,9 @@
-import { blockFields } from '@fields/blockFields'
-import codeBlips from '@fields/codeBlips'
-import link from '@fields/link'
-import richText from '@fields/richText'
-
 import type { Block } from 'payload'
+
+import { blockFields } from '../../fields/blockFields'
+import codeBlips from '../../fields/codeBlips'
+import link from '../../fields/link'
+import richText from '../../fields/richText'
 
 export const StickyHighlights: Block = {
   slug: 'stickyHighlights',

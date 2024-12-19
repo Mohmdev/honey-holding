@@ -1,33 +1,40 @@
 import type { Block } from 'payload'
 
+import { blockFields } from '../../fields/blockFields'
+import codeBlips from '../../fields/codeBlips'
+
 export const Code: Block = {
   slug: 'code',
-  interfaceName: 'CodeBlock',
   fields: [
-    {
-      name: 'language',
-      type: 'select',
-      defaultValue: 'typescript',
-      options: [
+    blockFields({
+      name: 'codeFields',
+      fields: [
         {
-          label: 'Typescript',
-          value: 'typescript'
+          name: 'language',
+          type: 'select',
+          defaultValue: 'none',
+          options: [
+            {
+              label: 'None',
+              value: 'none'
+            },
+            {
+              label: 'JavaScript',
+              value: 'js'
+            },
+            {
+              label: 'TypeScript',
+              value: 'ts'
+            }
+          ]
         },
         {
-          label: 'Javascript',
-          value: 'javascript'
+          name: 'code',
+          type: 'code',
+          required: true
         },
-        {
-          label: 'CSS',
-          value: 'css'
-        }
+        codeBlips
       ]
-    },
-    {
-      name: 'code',
-      type: 'code',
-      label: false,
-      required: true
-    }
+    })
   ]
 }
