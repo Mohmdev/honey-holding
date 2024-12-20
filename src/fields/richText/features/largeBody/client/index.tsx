@@ -1,18 +1,22 @@
 'use client'
+
 import {
   createClientFeature,
   getSelectedNode,
-  toolbarTextDropdownGroupWithItems,
+  toolbarTextDropdownGroupWithItems
 } from '@payloadcms/richtext-lexical/client'
-import { $getSelection, $isRangeSelection } from '@payloadcms/richtext-lexical/lexical'
+import {
+  $getSelection,
+  $isRangeSelection
+} from '@payloadcms/richtext-lexical/lexical'
 import { $setBlocksType } from '@payloadcms/richtext-lexical/lexical/selection'
 import { $findMatchingParent } from '@payloadcms/richtext-lexical/lexical/utils'
+import { LargeBodyIcon } from '@fields/richText/features/largeBody/client/icon'
 import {
   $createLargeBodyNode,
   $isLargeBodyNode,
-  LargeBodyNode,
-} from '@root/fields/richText/features/largeBody/LargeBodyNode'
-import { LargeBodyIcon } from '@root/fields/richText/features/largeBody/client/icon'
+  LargeBodyNode
+} from '@fields/richText/features/largeBody/LargeBodyNode'
 
 import './styles.scss'
 
@@ -32,13 +36,13 @@ export const LargeBodyFeatureClient = createClientFeature({
               if ($isRangeSelection(selection)) {
                 $setBlocksType(selection, () => $createLargeBodyNode())
               }
-            },
-          },
+            }
+          }
         ],
         key: 'Basic',
-        label: 'Basic',
-      },
-    ],
+        label: 'Basic'
+      }
+    ]
   },
   toolbarInline: {
     groups: [
@@ -48,7 +52,10 @@ export const LargeBodyFeatureClient = createClientFeature({
           isActive: ({ selection }) => {
             if ($isRangeSelection(selection)) {
               const selectedNode = getSelectedNode(selection)
-              const largeBodyParent = $findMatchingParent(selectedNode, $isLargeBodyNode)
+              const largeBodyParent = $findMatchingParent(
+                selectedNode,
+                $isLargeBodyNode
+              )
               return largeBodyParent != null
             }
             return false
@@ -63,9 +70,9 @@ export const LargeBodyFeatureClient = createClientFeature({
               }
             })
           },
-          order: 290,
-        },
-      ]),
-    ],
-  },
+          order: 290
+        }
+      ])
+    ]
+  }
 })

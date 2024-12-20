@@ -1,104 +1,124 @@
-'use client'
+import * as React from 'react'
 
-import React from 'react'
-import { useRouter } from 'next/navigation'
+import { ChevronIcon } from '@icons/ChevronIcon'
 
-import { cn } from '@utils/cn'
-
-import {
-  Pagination as PaginationComponent,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious
-} from '@ui/pagination'
+import classes from './index.module.scss'
 
 export const Pagination: React.FC<{
-  className?: string
   page: number
+  setPage: (page: number) => void
   totalPages: number
-}> = (props) => {
-  const router = useRouter()
+  className?: string
+}> = ({ page, setPage, totalPages, className }) => {
+  const [indexToShow, setIndexToShow] = React.useState([0, 1, 2, 3, 4])
+  const showFirstPage = totalPages > 5 && page >= 2
+  const showLastPage = totalPages > 5 && page <= totalPages - 3
 
-  const { className, page, totalPages } = props
-  const hasNextPage = page < totalPages
-  const hasPrevPage = page > 1
+  React.useEffect(() => {
+    if (showFirstPage && showLastPage) {
+      setIndexToShow([1, 2, 3])
+    }
 
-  const hasExtraPrevPages = page - 1 > 1
-  const hasExtraNextPages = page + 1 < totalPages
+    if (showFirstPage && !showLastPage) {
+      setIndexToShow([2, 3, 4])
+    }
+
+    if (!showFirstPage && showLastPage) {
+      setIndexToShow([0, 1, 2])
+    }
+
+    if (!showFirstPage && !showLastPage) {
+      setIndexToShow([0, 1, 2, 3, 4])
+    }
+  }, [showFirstPage, showLastPage])
 
   return (
-    <div className={cn('my-12', className)}>
-      <PaginationComponent>
-        <PaginationContent>
-          <PaginationItem>
-            <PaginationPrevious
-              disabled={!hasPrevPage}
-              onClick={() => {
-                router.push(`/posts/page/${page - 1}`)
-              }}
-            />
-          </PaginationItem>
+    <div className={[classes.pagination, className].filter(Boolean).join(' ')}>
+      {showFirstPage && (
+        <>
+          <button
+            type="button"
+            className={classes.paginationButton}
+            onClick={() => {
+              window.scrollTo(0, 0)
+              setPage(1)
+            }}
+          >
+            1
+          </button>
+          <div className={classes.dash}>&mdash;</div>
+        </>
+      )}
+      {[...Array(totalPages)].map((_, index) => {
+        const currentPage = index + 1
+        const isCurrent = page === currentPage
 
-          {hasExtraPrevPages && (
-            <PaginationItem>
-              <PaginationEllipsis />
-            </PaginationItem>
-          )}
-
-          {hasPrevPage && (
-            <PaginationItem>
-              <PaginationLink
+        if (indexToShow.includes(index))
+          return (
+            <div key={index}>
+              <button
+                type="button"
+                className={[
+                  classes.paginationButton,
+                  isCurrent && classes.paginationButtonActive,
+                  isCurrent && classes.disabled
+                ]
+                  .filter(Boolean)
+                  .join(' ')}
                 onClick={() => {
-                  router.push(`/posts/page/${page - 1}`)
+                  window.scrollTo(0, 0)
+                  setPage(currentPage)
                 }}
               >
-                {page - 1}
-              </PaginationLink>
-            </PaginationItem>
-          )}
+                {currentPage}
+              </button>
+            </div>
+          )
+      })}
+      {showLastPage && (
+        <>
+          <div className={classes.dash}>&mdash;</div>
+          <button
+            type="button"
+            className={classes.paginationButton}
+            onClick={() => {
+              setTimeout(() => {
+                window.scrollTo(0, 0)
+              }, 0)
+              setPage(totalPages)
+            }}
+          >
+            {totalPages}
+          </button>
+        </>
+      )}
+      <button
+        disabled={page - 1 < 1}
+        onClick={() => {
+          if (page - 1 < 1) return
+          window.scrollTo(0, 0)
+          setPage(page > 1 ? page - 1 : 1)
+        }}
+        className={[classes.button, page - 1 < 1 && classes.disabled]
+          .filter(Boolean)
+          .join(' ')}
+      >
+        <ChevronIcon rotation={180} />
+      </button>
+      <button
+        disabled={page + 1 > totalPages}
+        onClick={() => {
+          if (page + 1 > totalPages) return
 
-          <PaginationItem>
-            <PaginationLink
-              isActive
-              onClick={() => {
-                router.push(`/posts/page/${page}`)
-              }}
-            >
-              {page}
-            </PaginationLink>
-          </PaginationItem>
-
-          {hasNextPage && (
-            <PaginationItem>
-              <PaginationLink
-                onClick={() => {
-                  router.push(`/posts/page/${page + 1}`)
-                }}
-              >
-                {page + 1}
-              </PaginationLink>
-            </PaginationItem>
-          )}
-
-          {hasExtraNextPages && (
-            <PaginationItem>
-              <PaginationEllipsis />
-            </PaginationItem>
-          )}
-
-          <PaginationItem>
-            <PaginationNext
-              disabled={!hasNextPage}
-              onClick={() => {
-                router.push(`/posts/page/${page + 1}`)
-              }}
-            />
-          </PaginationItem>
-        </PaginationContent>
-      </PaginationComponent>
+          window.scrollTo(0, 0)
+          setPage(page + 1)
+        }}
+        className={[classes.button, page + 1 > totalPages && classes.disabled]
+          .filter(Boolean)
+          .join(' ')}
+      >
+        <ChevronIcon />
+      </button>
     </div>
   )
 }

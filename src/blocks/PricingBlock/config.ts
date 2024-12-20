@@ -3,7 +3,7 @@ import link from '@fields/link'
 
 import type { Block } from 'payload'
 
-export const Pricing: Block = {
+export const PricingBlock: Block = {
   slug: 'pricing',
   fields: [
     blockFields({

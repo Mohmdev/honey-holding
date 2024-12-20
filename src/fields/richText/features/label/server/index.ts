@@ -3,8 +3,7 @@ import { LabelNode } from '@fields/richText/features/label/LabelNode'
 
 export const LabelFeature = createServerFeature({
   feature: {
-    ClientFeature:
-      '@root/fields/richText/features/label/client#LabelFeatureClient',
+    ClientFeature: '@fields/richText/features/label/client#LabelFeatureClient',
     nodes: [
       {
         node: LabelNode

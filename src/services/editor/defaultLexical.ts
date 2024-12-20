@@ -9,7 +9,7 @@ import {
   UnderlineFeature
 } from '@payloadcms/richtext-lexical'
 
-import { ENABLED_COLLECTIONS } from '@constants'
+import { LINKABLE_COLLECTIONS } from '@constants'
 
 export const defaultLexical: Config['editor'] = lexicalEditor({
   features: () => {
@@ -19,7 +19,7 @@ export const defaultLexical: Config['editor'] = lexicalEditor({
       BoldFeature(),
       ItalicFeature(),
       LinkFeature({
-        enabledCollections: ENABLED_COLLECTIONS,
+        enabledCollections: LINKABLE_COLLECTIONS,
         fields: ({ defaultFields }) => {
           const defaultFieldsWithoutUrl = defaultFields.filter((field) => {
             if ('name' in field && field.name === 'url') return false

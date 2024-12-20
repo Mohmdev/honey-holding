@@ -3,7 +3,7 @@ import deepMerge from '@utils/deepMerge'
 import type { ButtonProps } from '@ui/button'
 import type { Field } from 'payload'
 
-import { ENABLED_COLLECTIONS } from '@constants'
+import { LINKABLE_COLLECTIONS } from '@constants'
 
 type ButtonVariants = NonNullable<ButtonProps['variant']>
 
@@ -104,7 +104,7 @@ const link: LinkType = ({
         condition: (_, siblingData) => siblingData?.type === 'reference'
       },
       label: 'Document to link to',
-      relationTo: ENABLED_COLLECTIONS,
+      relationTo: LINKABLE_COLLECTIONS,
       required: true
     },
     {

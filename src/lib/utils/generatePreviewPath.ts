@@ -1,10 +1,10 @@
 import { CollectionSlug, PayloadRequest } from 'payload'
 
-import { ENABLED_COLLECTIONS } from '../constants'
+import { PREVIEWABLE_COLLECTIONS } from '../constants'
 
 // Dynamic collection prefix map
 const collectionPrefixMap: Partial<Record<CollectionSlug, string>> =
-  ENABLED_COLLECTIONS.reduce(
+  PREVIEWABLE_COLLECTIONS.reduce(
     (acc, collection) => ({
       ...acc,
       [collection]: collection === 'pages' ? '' : `/${collection}`

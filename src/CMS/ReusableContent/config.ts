@@ -9,7 +9,7 @@ import { CodeFeature } from '@blocks/CodeFeature/config'
 import { Content } from '@blocks/Content/config'
 import { ContentGrid } from '@blocks/ContentGrid/config'
 import { ExampleTabs } from '@blocks/ExampleTabs/config'
-import { Form } from '@blocks/FormBlock/config'
+import { FormBlock } from '@blocks/FormBlock/config'
 import { HoverCards } from '@blocks/HoverCards/config'
 import { HoverHighlights } from '@blocks/HoverHighlights/config'
 import { LinkGrid } from '@blocks/LinkGrid/config'
@@ -20,7 +20,7 @@ import { MediaContentAccordion } from '@blocks/MediaContentAccordion/config'
 import { PortfolioCards } from '@blocks/Portfolio/Cards/config'
 import { PortfolioHighlight } from '@blocks/Portfolio/Highlight/config'
 import { PortfolioParallax } from '@blocks/Portfolio/Parallax/config'
-import { Pricing } from '@blocks/Pricing/config'
+import { PricingBlock } from '@blocks/PricingBlock/config'
 import { Slider } from '@blocks/Slider/config'
 import { Statement } from '@blocks/Statement/config'
 import { Steps } from '@blocks/Steps/config'
@@ -30,6 +30,8 @@ import { isAdminOrEditor } from '@access/isAdminOrEditor'
 import { isAdminOrSelf } from '@access/isAdminOrSelf'
 
 import type { CollectionConfig } from 'payload'
+
+import { ENABLED_REUSABLE_BLOCKS } from '@constants'
 
 export const ReusableContent: CollectionConfig = {
   slug: 'reusable-content',
@@ -57,33 +59,39 @@ export const ReusableContent: CollectionConfig = {
       name: 'layout',
       type: 'blocks',
       blocks: [
-        Banner,
-        BlogContent,
-        BlogMarkdown,
-        Callout,
-        CallToAction,
-        CardGrid,
-        PortfolioCards,
-        PortfolioHighlight,
-        PortfolioParallax,
-        Code,
-        CodeFeature,
-        Content,
-        ContentGrid,
-        ExampleTabs,
-        Form,
-        HoverCards,
-        HoverHighlights,
-        LinkGrid,
-        LogoGrid,
-        MediaBlock,
-        MediaContent,
-        MediaContentAccordion,
-        Pricing,
-        Slider,
-        Statement,
-        Steps,
-        StickyHighlights
+        ...(ENABLED_REUSABLE_BLOCKS.Banner ? [Banner] : []),
+        ...(ENABLED_REUSABLE_BLOCKS.BlogContent ? [BlogContent] : []),
+        ...(ENABLED_REUSABLE_BLOCKS.BlogMarkdown ? [BlogMarkdown] : []),
+        ...(ENABLED_REUSABLE_BLOCKS.Callout ? [Callout] : []),
+        ...(ENABLED_REUSABLE_BLOCKS.CallToAction ? [CallToAction] : []),
+        ...(ENABLED_REUSABLE_BLOCKS.CardGrid ? [CardGrid] : []),
+        ...(ENABLED_REUSABLE_BLOCKS.PortfolioCards ? [PortfolioCards] : []),
+        ...(ENABLED_REUSABLE_BLOCKS.PortfolioHighlight
+          ? [PortfolioHighlight]
+          : []),
+        ...(ENABLED_REUSABLE_BLOCKS.PortfolioParallax
+          ? [PortfolioParallax]
+          : []),
+        ...(ENABLED_REUSABLE_BLOCKS.Code ? [Code] : []),
+        ...(ENABLED_REUSABLE_BLOCKS.CodeFeature ? [CodeFeature] : []),
+        ...(ENABLED_REUSABLE_BLOCKS.Content ? [Content] : []),
+        ...(ENABLED_REUSABLE_BLOCKS.ContentGrid ? [ContentGrid] : []),
+        ...(ENABLED_REUSABLE_BLOCKS.ExampleTabs ? [ExampleTabs] : []),
+        ...(ENABLED_REUSABLE_BLOCKS.FormBlock ? [FormBlock] : []),
+        ...(ENABLED_REUSABLE_BLOCKS.HoverCards ? [HoverCards] : []),
+        ...(ENABLED_REUSABLE_BLOCKS.HoverHighlights ? [HoverHighlights] : []),
+        ...(ENABLED_REUSABLE_BLOCKS.LinkGrid ? [LinkGrid] : []),
+        ...(ENABLED_REUSABLE_BLOCKS.LogoGrid ? [LogoGrid] : []),
+        ...(ENABLED_REUSABLE_BLOCKS.MediaBlock ? [MediaBlock] : []),
+        ...(ENABLED_REUSABLE_BLOCKS.MediaContent ? [MediaContent] : []),
+        ...(ENABLED_REUSABLE_BLOCKS.MediaContentAccordion
+          ? [MediaContentAccordion]
+          : []),
+        ...(ENABLED_REUSABLE_BLOCKS.PricingBlock ? [PricingBlock] : []),
+        ...(ENABLED_REUSABLE_BLOCKS.Slider ? [Slider] : []),
+        ...(ENABLED_REUSABLE_BLOCKS.Statement ? [Statement] : []),
+        ...(ENABLED_REUSABLE_BLOCKS.Steps ? [Steps] : []),
+        ...(ENABLED_REUSABLE_BLOCKS.StickyHighlights ? [StickyHighlights] : [])
       ],
       required: true
     }

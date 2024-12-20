@@ -3,7 +3,7 @@ import richText from '@fields/richText'
 
 import type { Block } from 'payload'
 
-export const Form: Block = {
+export const FormBlock: Block = {
   slug: 'form',
   labels: {
     singular: 'Form Block',

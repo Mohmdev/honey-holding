@@ -4,8 +4,6 @@ import sharp from 'sharp'
 import { getServerSideURL } from '@utils/getURL'
 import { collectionGroup, globalGroup } from '@utils/groupContent'
 
-import { Pages } from '@CMS/_basic/Pages/config'
-import { Posts } from '@CMS/_basic/Posts/config'
 import { Assets } from '@CMS/Assets/config'
 import { Categories } from '@CMS/Categories/config'
 import { Docs } from '@CMS/Docs/config'
@@ -29,7 +27,7 @@ export default buildConfig({
     ...collectionGroup('Content', [
       // Pages,
       //  Posts,
-      Categories,
+      // Categories,
       ReusableContent
     ]),
     ...collectionGroup('Uploads', [Media, Assets]),

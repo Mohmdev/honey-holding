@@ -4,7 +4,7 @@ import type React from 'react'
 import { getCachedDocument } from '@utils/getDocument'
 import { getCachedRedirects } from '@utils/getRedirects'
 
-import type { Page, Post } from '@payload-types'
+import type { Page, Portfolio, Post } from '@payload-types'
 
 interface Props {
   disableNotFound?: boolean
@@ -16,9 +16,11 @@ export const PayloadRedirects: React.FC<Props> = async ({
   disableNotFound,
   url
 }) => {
+  const slug = url.startsWith('/') ? url : `${url}`
+
   const redirects = await getCachedRedirects()()
 
-  const redirectItem = redirects.find((redirect) => redirect.from === url)
+  const redirectItem = redirects.find((redirect) => redirect.from === slug)
 
   if (redirectItem) {
     if (redirectItem.to?.url) {
@@ -31,24 +33,25 @@ export const PayloadRedirects: React.FC<Props> = async ({
       const collection = redirectItem.to?.reference?.relationTo
       const id = redirectItem.to?.reference?.value
 
-      const document = (await getCachedDocument(collection, id)()) as
-        | Page
-        | Post
-      redirectUrl = `${redirectItem.to?.reference?.relationTo !== 'pages' ? `/${redirectItem.to?.reference?.relationTo}` : ''}/${
-        document?.slug
-      }`
+      const document = await getCachedDocument(collection, id)()
+      redirectUrl =
+        redirectItem.to?.reference?.relationTo === 'posts'
+          ? '/blog/'
+          : redirectItem.to?.reference?.relationTo === 'portfolio'
+            ? '/portfolio/'
+            : `${'breadcrumbs' in document && document.breadcrumbs?.at(-1)?.url}`
     } else {
-      redirectUrl = `${redirectItem.to?.reference?.relationTo !== 'pages' ? `/${redirectItem.to?.reference?.relationTo}` : ''}/${
-        typeof redirectItem.to?.reference?.value === 'object'
-          ? redirectItem.to?.reference?.value?.slug
-          : ''
-      }`
+      redirectUrl =
+        redirectItem.to?.reference?.relationTo === 'posts'
+          ? `/blog/${redirectItem.to?.reference?.value?.slug}`
+          : redirectItem.to?.reference?.relationTo === 'portfolio'
+            ? `/portfolio/${redirectItem.to?.reference?.value?.slug}`
+            : `${redirectItem.to?.reference?.value?.breadcrumbs?.at(-1)?.url}`
     }
 
     if (redirectUrl) redirect(redirectUrl)
   }
 
   if (disableNotFound) return null
-
-  notFound()
+  return notFound()
 }
