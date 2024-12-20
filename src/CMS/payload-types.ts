@@ -12,6 +12,7 @@ export interface Config {
   };
   collections: {
     portfolio: Portfolio;
+    posts: Post;
     'reusable-content': ReusableContent;
     media: Media;
     assets: Asset;
@@ -28,6 +29,7 @@ export interface Config {
   collectionsJoins: {};
   collectionsSelect: {
     portfolio: PortfolioSelect<false> | PortfolioSelect<true>;
+    posts: PostsSelect<false> | PostsSelect<true>;
     'reusable-content': ReusableContentSelect<false> | ReusableContentSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     assets: AssetsSelect<false> | AssetsSelect<true>;
@@ -86,6 +88,21 @@ export interface UserAuthOperations {
 export interface Portfolio {
   id: number;
   title: string;
+  introContent: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
   industry?: string | null;
   useCase?: string | null;
   featuredImage: number | Media;
@@ -292,6 +309,211 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts".
+ */
+export interface Post {
+  id: number;
+  title: string;
+  image: number | Media;
+  useVideo?: boolean | null;
+  videoUrl?: string | null;
+  excerpt: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  content: (
+    | {
+        bannerFields: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+            background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+          };
+          type?: ('default' | 'success' | 'warning' | 'error') | null;
+          addCheckmark?: boolean | null;
+          content: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'banner';
+      }
+    | {
+        blogContentFields: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+            background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+          };
+          richText: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'blogContent';
+      }
+    | {
+        codeFields: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+            background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+          };
+          language?: ('none' | 'js' | 'ts') | null;
+          code: string;
+          codeBlips?:
+            | {
+                row: number;
+                label: string;
+                feature: {
+                  root: {
+                    type: string;
+                    children: {
+                      type: string;
+                      version: number;
+                      [k: string]: unknown;
+                    }[];
+                    direction: ('ltr' | 'rtl') | null;
+                    format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                    indent: number;
+                    version: number;
+                  };
+                  [k: string]: unknown;
+                };
+                enableLink?: boolean | null;
+                link?: {
+                  type?: ('reference' | 'custom') | null;
+                  newTab?: boolean | null;
+                  reference?: {
+                    relationTo: 'portfolio';
+                    value: number | Portfolio;
+                  } | null;
+                  url?: string | null;
+                  label: string;
+                  customId?: string | null;
+                };
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'code';
+      }
+    | {
+        blogMarkdownFields: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+            background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+          };
+          markdown: string;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'blogMarkdown';
+      }
+    | {
+        mediaBlockFields: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+            background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+          };
+          position?: ('default' | 'wide') | null;
+          media: number | Media;
+          caption?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'mediaBlock';
+      }
+    | {
+        reusableContentBlockFields: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+            background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+          };
+          reusableContent: number | ReusableContent;
+          customId?: string | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'reusableContentBlock';
+      }
+  )[];
+  lexicalContent?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  relatedPosts?: (number | Post)[] | null;
+  slug: string;
+  slugLock?: boolean | null;
+  authors: (number | User)[];
+  publishedOn: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "reusable-content".
  */
 export interface ReusableContent {
@@ -330,27 +552,6 @@ export interface ReusableContent {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "assets".
- */
-export interface Asset {
-  id: number;
-  darkModeFallback?: (number | null) | Media;
-  alt: string;
-  prefix?: string | null;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
@@ -372,6 +573,27 @@ export interface User {
   loginAttempts?: number | null;
   lockUntil?: string | null;
   password?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "assets".
+ */
+export interface Asset {
+  id: number;
+  darkModeFallback?: (number | null) | Media;
+  alt: string;
+  prefix?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -604,6 +826,10 @@ export interface PayloadLockedDocument {
         value: number | Portfolio;
       } | null)
     | ({
+        relationTo: 'posts';
+        value: number | Post;
+      } | null)
+    | ({
         relationTo: 'reusable-content';
         value: number | ReusableContent;
       } | null)
@@ -687,6 +913,7 @@ export interface PayloadMigration {
  */
 export interface PortfolioSelect<T extends boolean = true> {
   title?: T;
+  introContent?: T;
   industry?: T;
   useCase?: T;
   featuredImage?: T;
@@ -775,6 +1002,157 @@ export interface PortfolioSelect<T extends boolean = true> {
   slug?: T;
   slugLock?: T;
   url?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts_select".
+ */
+export interface PostsSelect<T extends boolean = true> {
+  title?: T;
+  image?: T;
+  useVideo?: T;
+  videoUrl?: T;
+  excerpt?: T;
+  content?:
+    | T
+    | {
+        banner?:
+          | T
+          | {
+              bannerFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    type?: T;
+                    addCheckmark?: T;
+                    content?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        blogContent?:
+          | T
+          | {
+              blogContentFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    richText?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        code?:
+          | T
+          | {
+              codeFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    language?: T;
+                    code?: T;
+                    codeBlips?:
+                      | T
+                      | {
+                          row?: T;
+                          label?: T;
+                          feature?: T;
+                          enableLink?: T;
+                          link?:
+                            | T
+                            | {
+                                type?: T;
+                                newTab?: T;
+                                reference?: T;
+                                url?: T;
+                                label?: T;
+                                customId?: T;
+                              };
+                          id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        blogMarkdown?:
+          | T
+          | {
+              blogMarkdownFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    markdown?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        mediaBlock?:
+          | T
+          | {
+              mediaBlockFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    position?: T;
+                    media?: T;
+                    caption?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        reusableContentBlock?:
+          | T
+          | {
+              reusableContentBlockFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    reusableContent?: T;
+                    customId?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+      };
+  lexicalContent?: T;
+  relatedPosts?: T;
+  slug?: T;
+  slugLock?: T;
+  authors?: T;
+  publishedOn?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;

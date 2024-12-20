@@ -11,6 +11,7 @@ import { Footer } from '@CMS/Footer/config'
 import { MainMenu } from '@CMS/MainMenu/config'
 import { Media } from '@CMS/Media/config'
 import { Portfolio } from '@CMS/Portfolio/config'
+import { Posts } from '@CMS/Posts/config'
 import { ReusableContent } from '@CMS/ReusableContent/config'
 import { Tickets } from '@CMS/Tickets/config'
 //
@@ -26,7 +27,7 @@ export default buildConfig({
     ...collectionGroup('Portfolio', [Portfolio]),
     ...collectionGroup('Content', [
       // Pages,
-      //  Posts,
+      Posts,
       // Categories,
       ReusableContent
     ]),

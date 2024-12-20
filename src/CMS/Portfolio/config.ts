@@ -68,9 +68,9 @@ export const Portfolio: CollectionConfig<'portfolio'> = {
       type: 'text',
       required: true
     },
-    // richText({
-    //   name: 'introContent'
-    // }),
+    richText({
+      name: 'introContent'
+    }),
     {
       type: 'row',
       fields: [
