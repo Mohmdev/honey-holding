@@ -31,6 +31,8 @@ export const Posts: CollectionConfig<'posts'> = {
     readVersions: isAdminOrEditor
   },
   admin: {
+    useAsTitle: 'title',
+    defaultColumns: ['title', 'authors', 'slug', 'createdAt', 'updatedAt'],
     livePreview: getLivePreviewUrl('posts'),
     preview: getPreviewUrl('posts')
   },

@@ -5,6 +5,8 @@ import type { Plugin } from 'payload'
 import { NESTED_COLLECTIONS } from '@constants'
 
 export const nestedDocsPluginConfig: Plugin = nestedDocsPlugin({
-  // collections: 'categories'
-  collections: NESTED_COLLECTIONS // This will receive an empty array. What will happen?
+  collections: NESTED_COLLECTIONS,
+  generateLabel: (_, doc) => doc.title as string,
+  generateURL: (docs) =>
+    docs.reduce((url, doc) => `${url}/${doc.slug as string}`, '')
 })

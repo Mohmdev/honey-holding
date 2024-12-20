@@ -24,7 +24,7 @@ export const ENABLED_PLUGINS = {
   formBuilder: true,
   seo: true,
   redirects: true,
-  nestedDocs: false,
+  nestedDocs: true,
   search: false
 } as const
 export const REDIRECTABLE_COLLECTIONS: CollectionSlug[] = [
@@ -34,7 +34,8 @@ export const REDIRECTABLE_COLLECTIONS: CollectionSlug[] = [
 ] as const
 export const NESTED_COLLECTIONS: CollectionSlug[] = [
   //
-  'categories'
+  'pages'
+  // 'categories'
 ] as const
 export const INDEXED_COLLECTIONS: CollectionSlug[] = [
   //
@@ -74,6 +75,33 @@ export const ENABLED_REUSABLE_BLOCKS = {
 export const ENABLED_PORTFOLIO_BLOCKS = {
   Callout: true,
   CallToAction: true,
+  CardGrid: false,
+  PortfolioCards: false,
+  PortfolioHighlight: false,
+  PortfolioParallax: false,
+  CodeFeature: false,
+  Content: false,
+  ContentGrid: false,
+  FormBlock: false,
+  HoverCards: false,
+  HoverHighlights: false,
+  LinkGrid: false,
+  LogoGrid: false,
+  MediaBlock: false,
+  MediaContent: false,
+  MediaContentAccordion: false,
+  PricingBlock: false,
+  ReusableContent: false,
+  Slider: false,
+  Statement: false,
+  Steps: false,
+  StickyHighlights: false,
+  ExampleTabs: false
+} as const
+
+export const ENABLED_PAGE_BLOCKS = {
+  Callout: true,
+  CallToAction: false,
   CardGrid: false,
   PortfolioCards: false,
   PortfolioHighlight: false,

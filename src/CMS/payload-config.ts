@@ -10,11 +10,11 @@ import { Docs } from '@CMS/Docs/config'
 import { Footer } from '@CMS/Footer/config'
 import { MainMenu } from '@CMS/MainMenu/config'
 import { Media } from '@CMS/Media/config'
+import { Pages } from '@CMS/Pages/config'
 import { Portfolio } from '@CMS/Portfolio/config'
 import { Posts } from '@CMS/Posts/config'
 import { ReusableContent } from '@CMS/ReusableContent/config'
 import { Tickets } from '@CMS/Tickets/config'
-//
 import { Users } from '@CMS/Users/config'
 import { adminConfig } from '@services/admin/config'
 import { databaseAdapter } from '@services/database/config'
@@ -26,7 +26,7 @@ export default buildConfig({
   collections: [
     ...collectionGroup('Portfolio', [Portfolio]),
     ...collectionGroup('Content', [
-      // Pages,
+      Pages,
       Posts,
       // Categories,
       ReusableContent

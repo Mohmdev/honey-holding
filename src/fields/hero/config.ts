@@ -1,9 +1,9 @@
 import type { Field } from 'payload'
 
-import { themeField } from './blockFields'
-import link from './link'
-import linkGroup from './linkGroup'
-import livestreamFields from './livestreamFields'
+import { themeField } from '../blockFields'
+import link from '../link'
+import linkGroup from '../linkGroup'
+import livestreamFields from '../livestreamFields'
 
 export const hero: Field = {
   name: 'hero',
