@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 
-import { useResize } from '@utilities/use-resize.js'
+import { useResize } from '@utils/use-resize'
 
 import { Page } from '@payload-types'
 
@@ -10,7 +10,7 @@ import { QuoteIconAlt } from '@icons/QuoteIconAlt'
 import { BackgroundGrid } from '@components/Background/Grid'
 import { BackgroundScanline } from '@components/Background/Scanline'
 import { BlockWrapper, PaddingProps } from '@components/BlockWrapper'
-import { Button } from '@components/Button'
+import { Button } from '@components/ButtonComponent'
 import { Gutter } from '@components/Gutter'
 import { Media } from '@components/Media'
 import MediaParallax from '@components/MediaParallax'
@@ -19,7 +19,7 @@ import classes from './index.module.scss'
 
 type ContentProps = Extract<
   Page['layout'][0],
-  { blockType: 'caseStudyParallax' }
+  { blockType: 'portfolioParallax' }
 >
 
 type Props = ContentProps & {
@@ -60,22 +60,22 @@ export const QuoteBlock: React.FC<QuoteProps> = (props) => {
         className={[classes.authorWrapper, 'cols-12'].filter(Boolean).join(' ')}
       >
         <div className={classes.media}>
-          {typeof item.logo !== 'string' && (
+          {typeof item.logo !== 'number' && (
             <Media className={classes.logo} resource={item.logo} />
           )}
         </div>
         <div className={classes.author}>{item.author}</div>
       </div>
 
-      {typeof item.caseStudy !== 'string' && item?.caseStudy?.slug && (
+      {typeof item.portfolio !== 'number' && item?.portfolio?.slug && (
         <div className={['cols-8 cols-m-4 cols-s-8'].filter(Boolean).join(' ')}>
           <Button
-            label={'Read the case study'}
+            label={'View'}
             hideHorizontalBorders
             appearance={'default'}
             icon="arrow"
-            className={classes.caseStudyButton}
-            href={`/case-studies/${item?.caseStudy?.slug}`}
+            className={classes.portfolioButton}
+            href={`/portfolio/${item?.portfolio?.slug}`}
             el="a"
             aria-hidden={!isVisible}
             disabled={!isVisible}
@@ -87,11 +87,11 @@ export const QuoteBlock: React.FC<QuoteProps> = (props) => {
 }
 
 export const QuoteStickyBlock: React.FC<StickyBlockProps> = (props) => {
-  const { caseStudyParallaxFields, currentIndex } = props
+  const { portfolioParallaxFields, currentIndex } = props
 
   if (
-    caseStudyParallaxFields?.items &&
-    caseStudyParallaxFields?.items?.length > 0
+    portfolioParallaxFields?.items &&
+    portfolioParallaxFields?.items?.length > 0
   ) {
     return (
       <div
@@ -99,7 +99,7 @@ export const QuoteStickyBlock: React.FC<StickyBlockProps> = (props) => {
           .filter(Boolean)
           .join(' ')}
       >
-        {caseStudyParallaxFields?.items.map((item, index) => {
+        {portfolioParallaxFields?.items.map((item, index) => {
           const isVisible = index === currentIndex
 
           return (
@@ -117,8 +117,8 @@ export const QuoteStickyBlock: React.FC<StickyBlockProps> = (props) => {
   return null
 }
 
-export const CaseStudyParallax: React.FC<Props> = (props) => {
-  const { caseStudyParallaxFields, padding, hideBackground } = props
+export const PortfolioParallax: React.FC<Props> = (props) => {
+  const { portfolioParallaxFields, padding, hideBackground } = props
   const activeIndex = React.useRef(0)
   const [scrollProgress, setScrollProgress] = React.useState<number>(0)
   const [delayNavScroll, setDelayNavScroll] = React.useState<boolean>(false)
@@ -250,12 +250,12 @@ export const CaseStudyParallax: React.FC<Props> = (props) => {
   } as React.CSSProperties
 
   if (
-    caseStudyParallaxFields?.items &&
-    caseStudyParallaxFields?.items?.length > 0
+    portfolioParallaxFields?.items &&
+    portfolioParallaxFields?.items?.length > 0
   ) {
     return (
       <BlockWrapper
-        settings={caseStudyParallaxFields.settings}
+        settings={portfolioParallaxFields.settings}
         padding={padding}
         hideBackground={hideBackground}
         className={classes.wrapper}
@@ -278,7 +278,7 @@ export const CaseStudyParallax: React.FC<Props> = (props) => {
             ref={containerRef}
           >
             <QuoteStickyBlock currentIndex={activeIndex.current} {...props} />
-            {caseStudyParallaxFields?.items.map((item, index) => {
+            {portfolioParallaxFields?.items.map((item, index) => {
               const isVisible = index === activeIndex.current
               return (
                 <div
@@ -334,7 +334,7 @@ export const CaseStudyParallax: React.FC<Props> = (props) => {
                       .filter(Boolean)
                       .join(' ')}
                   />
-                  {caseStudyParallaxFields?.items.map((item, index) => {
+                  {portfolioParallaxFields?.items.map((item, index) => {
                     return (
                       <div
                         key={index}
@@ -345,7 +345,7 @@ export const CaseStudyParallax: React.FC<Props> = (props) => {
                           if (el) navButtonsRef.current[index] = el
                         }}
                       >
-                        {typeof item.caseStudy !== 'string' && (
+                        {typeof item.portfolio !== 'number' && (
                           <Button
                             icon="arrow"
                             label={item.tabLabel}

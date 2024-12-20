@@ -45,8 +45,8 @@ const RenderForm = ({
     submitButtonLabel,
     confirmationType,
     redirect: formRedirect,
-    confirmationMessage,
-    customID
+    confirmationMessage
+    // customID
   } = form
 
   const [isLoading, setIsLoading] = React.useState(false)
@@ -98,7 +98,7 @@ const RenderForm = ({
             }
           )
 
-          const res = await reqon()
+          const res = await req.json()
 
           if (req.status >= 400) {
             setIsLoading(false)
@@ -163,7 +163,11 @@ const RenderForm = ({
       {error && <div>{`${error.status || '500'}: ${error.message || ''}`}</div>}
       {!hasSubmitted && (
         <React.Fragment>
-          <Form onSubmit={onSubmit} initialState={initialState} formId={formID}>
+          <Form
+            onSubmit={onSubmit}
+            initialState={initialState}
+            formId={formID.toString()}
+          >
             <div className={classes.formFieldsWrap}>
               {form.fields?.map((field, index) => {
                 const Field: React.FC<any> = fields?.[field.blockType]
@@ -207,7 +211,7 @@ const RenderForm = ({
               iconRotation={45}
               icon={isLoading ? 'loading' : 'arrow'}
               iconSize={isLoading ? 'large' : 'medium'}
-              id={customID ?? formID}
+              id={formID.toString()}
             />
           </Form>
         </React.Fragment>
@@ -217,12 +221,12 @@ const RenderForm = ({
 }
 
 export const CMSForm: React.FC<{
-  form?: string | FormType | null
+  form?: number | FormType | null
   hiddenFields?: string[]
 }> = (props) => {
   const { form, hiddenFields } = props
 
-  if (!form || typeof form === 'string') return null
+  if (!form || typeof form === 'number') return null
 
   return <RenderForm form={form} hiddenFields={hiddenFields ?? []} />
 }

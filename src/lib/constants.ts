@@ -1,4 +1,4 @@
-import type { CollectionSlug } from 'payload'
+import type { CollectionSlug, GlobalSlug } from 'payload'
 
 export const ROLES_WITH_ADMIN_ACCESS = ['admin', 'editor'] as const
 export const DASHBOARD_SLUG = 'dashboard'
@@ -14,8 +14,8 @@ export const PREVIEWABLE_COLLECTIONS: CollectionSlug[] = [
   'portfolio'
 ] as const
 export const LINKABLE_COLLECTIONS: CollectionSlug[] = [
-  // 'pages',
-  // 'posts',
+  'pages',
+  'posts',
   'portfolio'
 ] as const
 
@@ -41,19 +41,32 @@ export const INDEXED_COLLECTIONS: CollectionSlug[] = [
   //
   'posts'
 ] as const
+export const SEO_ENABLED_COLLECTIONS: CollectionSlug[] = [
+  'portfolio',
+  'pages',
+  'posts'
+] as const
+export const SEO_ENABLED_GLOBALS: GlobalSlug[] = [
+  // 'get-started',
+] as const
 
 export const ENABLED_REUSABLE_BLOCKS = {
   Banner: true,
-  BlogContent: false,
-  BlogMarkdown: false,
+  BlogContent: true,
+  Code: true,
+  CodeFeature: true,
+  Slider: true,
+  Statement: true,
+  StickyHighlights: true,
+  BlogMarkdown: true,
+  MediaBlock: true,
+  //
   Callout: false,
   CallToAction: false,
   CardGrid: false,
   PortfolioCards: false,
   PortfolioHighlight: false,
   PortfolioParallax: false,
-  Code: false,
-  CodeFeature: false,
   Content: false,
   ContentGrid: false,
   ExampleTabs: false,
@@ -62,24 +75,24 @@ export const ENABLED_REUSABLE_BLOCKS = {
   HoverHighlights: false,
   LinkGrid: false,
   LogoGrid: false,
-  MediaBlock: false,
   MediaContent: false,
   MediaContentAccordion: false,
   PricingBlock: false,
-  Slider: false,
-  Statement: false,
-  Steps: false,
-  StickyHighlights: false
+  Steps: false
 } as const
 
 export const ENABLED_PORTFOLIO_BLOCKS = {
   Callout: true,
   CallToAction: true,
-  CardGrid: false,
+  CardGrid: true,
+  CodeFeature: true,
+  Slider: true,
+  Statement: true,
+  StickyHighlights: true,
+  //
   PortfolioCards: false,
   PortfolioHighlight: false,
   PortfolioParallax: false,
-  CodeFeature: false,
   Content: false,
   ContentGrid: false,
   FormBlock: false,
@@ -92,36 +105,34 @@ export const ENABLED_PORTFOLIO_BLOCKS = {
   MediaContentAccordion: false,
   PricingBlock: false,
   ReusableContent: false,
-  Slider: false,
-  Statement: false,
   Steps: false,
-  StickyHighlights: false,
   ExampleTabs: false
 } as const
 
 export const ENABLED_PAGE_BLOCKS = {
+  CardGrid: true,
+  Slider: true,
+  Statement: true,
+  CodeFeature: true,
+  StickyHighlights: true,
   Callout: true,
-  CallToAction: false,
-  CardGrid: false,
-  PortfolioCards: false,
-  PortfolioHighlight: false,
-  PortfolioParallax: false,
-  CodeFeature: false,
-  Content: false,
-  ContentGrid: false,
-  FormBlock: false,
-  HoverCards: false,
-  HoverHighlights: false,
-  LinkGrid: false,
-  LogoGrid: false,
-  MediaBlock: false,
-  MediaContent: false,
-  MediaContentAccordion: false,
-  PricingBlock: false,
-  ReusableContent: false,
-  Slider: false,
-  Statement: false,
-  Steps: false,
-  StickyHighlights: false,
-  ExampleTabs: false
+  Steps: true,
+  CallToAction: true,
+  Content: true,
+  ContentGrid: true,
+  FormBlock: true,
+  HoverCards: true,
+  HoverHighlights: true,
+  LinkGrid: true,
+  MediaContent: true,
+  MediaContentAccordion: true,
+  LogoGrid: true,
+  PortfolioCards: true,
+  PortfolioHighlight: true,
+  PortfolioParallax: true,
+  PricingBlock: true,
+  ReusableContent: true,
+  //
+  MediaBlock: true,
+  ExampleTabs: true
 } as const

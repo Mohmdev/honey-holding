@@ -1,8 +1,11 @@
 import { getServerSideURL } from '@utils/getURL'
-import { seoPlugin } from '@payloadcms/plugin-seo'
-import type { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
 
+import { seoPlugin } from '@payloadcms/plugin-seo'
+
+import type { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
 import type { Plugin } from 'payload'
+
+import { SEO_ENABLED_COLLECTIONS, SEO_ENABLED_GLOBALS } from '@constants'
 
 const generateURL: GenerateURL = ({ doc }) => {
   const url = getServerSideURL()
@@ -21,5 +24,7 @@ export type GenerateTitle2<T = unknown> = (args: {
 export const seoPluginConfig: Plugin = seoPlugin({
   generateTitle,
   generateURL,
+  collections: SEO_ENABLED_COLLECTIONS,
+  globals: SEO_ENABLED_GLOBALS,
   uploadsCollection: 'media'
 })

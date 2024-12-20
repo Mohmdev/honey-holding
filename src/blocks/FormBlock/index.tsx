@@ -58,7 +58,7 @@ export const FormBlock: React.FC<FormBlockProps> = (props) => {
       window.removeEventListener('resize', updateOuterBackgroundWidth)
   }, [])
 
-  if (typeof form === 'string') return null
+  if (typeof form === 'number') return null
 
   return (
     <BlockWrapper

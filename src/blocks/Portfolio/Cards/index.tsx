@@ -15,35 +15,35 @@ import { RichText } from '@components/RichText'
 
 import classes from './index.module.scss'
 
-type Props = Extract<Page['layout'][0], { blockType: 'caseStudyCards' }> & {
+type Props = Extract<Page['layout'][0], { blockType: 'portfolioCards' }> & {
   padding?: PaddingProps
   hideBackground?: boolean
 }
 
-export const CaseStudyCards: React.FC<Props> = (props) => {
-  const { caseStudyCardFields, padding, hideBackground } = props
+export const PortfolioCards: React.FC<Props> = (props) => {
+  const { portfolioCardFields, padding, hideBackground } = props
 
-  if (caseStudyCardFields?.cards && caseStudyCardFields?.cards?.length > 0) {
+  if (portfolioCardFields?.cards && portfolioCardFields?.cards?.length > 0) {
     return (
       <BlockWrapper
-        className={classes.caseStudyCards}
-        settings={caseStudyCardFields.settings}
+        className={classes.portfolioCards}
+        settings={portfolioCardFields.settings}
         hideBackground={hideBackground}
         padding={padding}
       >
         <BackgroundGrid />
         <Gutter className={classes.gutter}>
           <BackgroundScanline className={classes.scanline} />
-          {caseStudyCardFields?.cards?.length > 0 && (
+          {portfolioCardFields?.cards?.length > 0 && (
             <div className={classes.cards}>
-              {caseStudyCardFields.cards.map((card, i) => {
+              {portfolioCardFields.cards.map((card, i) => {
                 if (
-                  typeof card.caseStudy === 'object' &&
-                  card.caseStudy !== null
+                  typeof card.portfolio === 'object' &&
+                  card.portfolio !== null
                 ) {
                   return (
                     <Link
-                      href={`/case-studies/${card.caseStudy.slug}`}
+                      href={`/portfolio/${card.portfolio.slug}`}
                       key={i}
                       className={classes.card}
                       prefetch={false}
@@ -53,8 +53,8 @@ export const CaseStudyCards: React.FC<Props> = (props) => {
                         content={card.richText}
                       />
                       <div className={classes.media}>
-                        {typeof card.caseStudy.featuredImage !== 'string' && (
-                          <Media resource={card.caseStudy.featuredImage} fill />
+                        {typeof card.portfolio.featuredImage !== 'number' && (
+                          <Media resource={card.portfolio.featuredImage} fill />
                         )}
                       </div>
                     </Link>

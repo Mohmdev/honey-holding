@@ -59,7 +59,7 @@ export const FeaturedBlogPost: React.FC<Partial<Post>> = (props) => {
           .join(' ')}
       />
       <div className={classes.contentWrapper}>
-        {typeof media !== 'string' && (
+        {typeof media !== 'number' && (
           <Media resource={media} className={classes.media} />
         )}
         <div className={classes.content}>

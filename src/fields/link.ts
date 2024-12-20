@@ -1,48 +1,30 @@
 import deepMerge from '@utils/deepMerge'
 
-import type { ButtonProps } from '@ui/button'
-import type { Field } from 'payload'
+import type { Field, GroupField } from 'payload'
 
 import { LINKABLE_COLLECTIONS } from '@constants'
 
-type ButtonVariants = NonNullable<ButtonProps['variant']>
-
-export type LinkAppearances = 'default' | 'outline' | ButtonVariants
-
-export const appearanceOptions: Record<
-  LinkAppearances,
-  { label: string; value: string }
-> = {
+export const appearanceOptions = {
   default: {
     label: 'Default',
     value: 'default'
   },
-  outline: {
-    label: 'Outline',
-    value: 'outline'
+  primary: {
+    label: 'Primary Button',
+    value: 'primary'
   },
   secondary: {
-    label: 'Secondary',
+    label: 'Secondary Button',
     value: 'secondary'
-  },
-  destructive: {
-    label: 'Destructive',
-    value: 'destructive'
-  },
-  ghost: {
-    label: 'Ghost',
-    value: 'ghost'
-  },
-  link: {
-    label: 'Link',
-    value: 'link'
   }
 }
+
+export type LinkAppearances = 'default' | 'primary' | 'secondary'
 
 type LinkType = (options?: {
   appearances?: LinkAppearances[] | false
   disableLabel?: boolean
-  overrides?: Record<string, unknown>
+  overrides?: Partial<GroupField>
 }) => Field
 
 const link: LinkType = ({
@@ -104,6 +86,7 @@ const link: LinkType = ({
         condition: (_, siblingData) => siblingData?.type === 'reference'
       },
       label: 'Document to link to',
+      maxDepth: 2,
       relationTo: LINKABLE_COLLECTIONS,
       required: true
     },
@@ -119,14 +102,6 @@ const link: LinkType = ({
   ]
 
   if (!disableLabel) {
-    linkTypes.map((linkType) => ({
-      ...linkType,
-      admin: {
-        ...linkType.admin,
-        width: '50%'
-      }
-    }))
-
     linkResult.fields.push({
       type: 'row',
       fields: [
@@ -135,7 +110,7 @@ const link: LinkType = ({
           name: 'label',
           type: 'text',
           admin: {
-            width: '50%'
+            width: '25%'
           },
           label: 'Label',
           required: true
@@ -164,7 +139,11 @@ const link: LinkType = ({
   }
 
   if (appearances !== false) {
-    let appearanceOptionsToUse = Object.values(appearanceOptions)
+    let appearanceOptionsToUse = [
+      appearanceOptions.default,
+      appearanceOptions.primary,
+      appearanceOptions.secondary
+    ]
 
     if (appearances) {
       appearanceOptionsToUse = appearances.map(

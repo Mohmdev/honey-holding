@@ -1,3 +1,5 @@
+// TODO: investigate the string types
+
 function extractChildren(node: any): string {
   if (node.props && node.props.children) {
     if (typeof node.props.children === 'string') {

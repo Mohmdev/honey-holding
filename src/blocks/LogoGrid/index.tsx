@@ -15,7 +15,7 @@ import { RichText } from '@components/RichText'
 import classes from './index.module.scss'
 
 type LogoItem = {
-  logoMedia: string | MediaType
+  logoMedia: number | MediaType
   id?: string | null
 }
 

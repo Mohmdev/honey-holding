@@ -46,10 +46,10 @@ export const StickyHighlightComponent: React.FC<Props> = ({
   const [visible, setVisible] = useState(false)
   const [centerCodeMedia, setCenterCodeMedia] = useState(false)
   const [init, setInit] = useState(false)
-  const ref = useRef(null)
-  const codeMediaWrapRef = useRef(null)
-  const codeMediaInnerRef = useRef(null)
-  const nodeRef = useRef(null)
+  const ref = useRef<HTMLDivElement>(null)
+  const codeMediaWrapRef = useRef<HTMLDivElement>(null)
+  const codeMediaInnerRef = useRef<HTMLDivElement>(null)
+  const nodeRef = useRef<HTMLDivElement>(null)
   const { data, isOpen } = CodeBlip.useCodeBlip()
 
   const codeMediaClasses = [
@@ -88,7 +88,6 @@ export const StickyHighlightComponent: React.FC<Props> = ({
         resizeObserver = new ResizeObserver((entries) => {
           entries.forEach((entry) => {
             setCenterCodeMedia(
-              // @ts-expect-error
               entry.contentRect.height >
                 (codeMediaInnerRef?.current?.clientHeight || 0)
             )

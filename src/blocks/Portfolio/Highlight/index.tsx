@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 import { useMouseInfo } from '@faceless-ui/mouse-info'
 
-import { CaseStudy, ReusableContent } from '@payload-types'
+import { Portfolio, ReusableContent } from '@payload-types'
 
 import { PayloadIcon } from '@graphics/PayloadIcon'
 import { Gutter } from '@components/Gutter'
@@ -16,28 +16,28 @@ import classes from './index.module.scss'
 
 type Props = Extract<
   ReusableContent['layout'][0],
-  { blockType: 'caseStudiesHighlight' }
+  { blockType: 'portfolioHighlight' }
 >
 
-export const CaseStudiesHighlightBlock: React.FC<Props> = ({
-  caseStudiesHighlightFields: { richText, caseStudies: allCaseStudies }
+export const PortfolioHighlightBlock: React.FC<Props> = ({
+  portfolioHighlightFields: { richText, portfolio: allPortfolio }
 }) => {
   const { xPercentage } = useMouseInfo()
 
-  const [caseStudyRows] = useState(() => {
-    const caseStudies: CaseStudy[] = [...(allCaseStudies as CaseStudy[])]
+  const [portfolioRows] = useState(() => {
+    const portfolio: Portfolio[] = [...(allPortfolio as Portfolio[])]
 
     let i = 0
 
-    while (caseStudies.length < 6) {
-      caseStudies.push(caseStudies[i])
+    while (portfolio.length < 6) {
+      portfolio.push(portfolio[i])
       i += 1
     }
 
-    const rows: CaseStudy[][] = []
+    const rows: Portfolio[][] = []
 
-    for (let n = 0; n < caseStudies.length; n += 3) {
-      rows.push((caseStudies as CaseStudy[]).slice(n, n + 3))
+    for (let n = 0; n < portfolio.length; n += 3) {
+      rows.push((portfolio as Portfolio[]).slice(n, n + 3))
     }
 
     return rows
@@ -62,11 +62,11 @@ export const CaseStudiesHighlightBlock: React.FC<Props> = ({
           }}
         >
           <div data-theme="darks">
-            {caseStudyRows.map((row, i) => {
+            {portfolioRows.map((row, i) => {
               return (
                 <ul key={i} className={classes.row}>
-                  {row.map((caseStudy) => {
-                    const { slug, featuredImage } = caseStudy
+                  {row.map((portfolio) => {
+                    const { slug, featuredImage } = portfolio
 
                     let url
                     let alt
@@ -82,7 +82,7 @@ export const CaseStudiesHighlightBlock: React.FC<Props> = ({
                     return (
                       <li key={slug} className={classes.imageWrap}>
                         <Link
-                          href={`/case-studies/${slug}`}
+                          href={`/portfolio/${slug}`}
                           className={classes.image}
                           prefetch={false}
                         >

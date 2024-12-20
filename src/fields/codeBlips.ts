@@ -26,7 +26,7 @@ const codeBlips: ArrayField = {
       appearances: false,
       overrides: {
         admin: {
-          condition: (_, { enableLink } = {}) => Boolean(enableLink)
+          condition: (_, { enableLink }) => Boolean(enableLink)
         }
       }
     })

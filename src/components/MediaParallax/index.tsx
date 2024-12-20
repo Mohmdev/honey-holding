@@ -67,7 +67,7 @@ const MediaParallax: React.FC<ParallaxProps> = ({
                   })
             }}
           >
-            {typeof image.image === 'object' && (
+            {typeof image.image !== 'number' && (
               <>
                 <Media resource={image.image} {...mediaProps} />
               </>

@@ -10,17 +10,17 @@ const relationSlugs = {
 }
 
 type PageReference = {
-  value: string | Page
+  value: number | Page
   relationTo: 'pages'
 }
 
 type PostsReference = {
-  value: string | Post
+  value: number | Post
   relationTo: 'posts'
 }
 
 type PortfolioReference = {
-  value: string | Portfolio
+  value: number | Portfolio
   relationTo: (typeof relationSlugs)['portfolio']
 }
 
@@ -63,30 +63,35 @@ const generateHref = (args: GenerateSlugType): string => {
     return url
   }
 
-  if (
-    type === 'reference' &&
-    reference?.value &&
-    typeof reference.value !== 'string'
-  ) {
-    if (reference.relationTo === 'pages') {
-      const value = reference.value as Page
-      const breadcrumbs = value?.breadcrumbs
-      const hasBreadcrumbs =
-        breadcrumbs && Array.isArray(breadcrumbs) && breadcrumbs.length > 0
-      if (hasBreadcrumbs) {
-        return breadcrumbs[breadcrumbs.length - 1]?.url as string
+  if (type === 'reference' && reference?.value) {
+    // Check both number and object types
+    if (typeof reference.value === 'number') {
+      // Handle ID-only case (when value is just the ID number)
+      return `/${reference.relationTo}/${reference.value}`
+    }
+
+    // Handle populated reference case (when value is the full object)
+    if (typeof reference.value === 'object') {
+      if (reference.relationTo === 'pages') {
+        const value = reference.value as Page
+        const breadcrumbs = value?.breadcrumbs
+        const hasBreadcrumbs =
+          breadcrumbs && Array.isArray(breadcrumbs) && breadcrumbs.length > 0
+        if (hasBreadcrumbs) {
+          return breadcrumbs[breadcrumbs.length - 1]?.url as string
+        }
       }
-    }
 
-    if (reference.relationTo === 'posts') {
-      return `/blog/${reference.value.slug}`
-    }
+      if (reference.relationTo === 'posts') {
+        return `/blog/${reference.value.slug}`
+      }
 
-    if (reference.relationTo === 'portfolio') {
-      return `/portfolio/${reference.value.slug}`
-    }
+      if (reference.relationTo === 'portfolio') {
+        return `/portfolio/${reference.value.slug}`
+      }
 
-    return `/${reference.relationTo}/${reference.value.slug}`
+      return `/${reference.relationTo}/${reference.value.slug}`
+    }
   }
 
   return ''

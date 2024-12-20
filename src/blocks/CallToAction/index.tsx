@@ -157,7 +157,7 @@ export const CallToAction: React.FC<CallToActionProps> = (props) => {
                 <ArrowRightIcon />
               </span>
             </div>
-            {bannerImage && typeof bannerImage !== 'string' && (
+            {bannerImage && typeof bannerImage !== 'number' && (
               <div
                 className={[classes.bannerImage, 'cols-8']
                   .filter(Boolean)

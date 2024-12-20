@@ -67,7 +67,7 @@ export const Callout: React.FC<CalloutProps> = (props) => {
                   .join(' ')}
               >
                 <div className={classes.logo}>
-                  {logo && typeof logo !== 'string' && (
+                  {logo && typeof logo !== 'number' && (
                     <Media resource={logo} />
                   )}
                 </div>

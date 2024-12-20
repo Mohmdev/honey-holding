@@ -56,7 +56,7 @@ export const HoverHighlights: React.FC<HoverHighlightProps> = (props) => {
                         />
                       </CMSLink>
                       <div className={classes.highlightMediaTop}>
-                        {top && typeof top !== 'string' && (
+                        {top && typeof top !== 'number' && (
                           <Media
                             resource={top}
                             className={[classes.media, classes.mediaTop].join(
@@ -66,7 +66,7 @@ export const HoverHighlights: React.FC<HoverHighlightProps> = (props) => {
                         )}
                       </div>
                       <div className={classes.highlightMediaBottom}>
-                        {bottom && typeof bottom !== 'string' && (
+                        {bottom && typeof bottom !== 'number' && (
                           <Media
                             resource={bottom}
                             className={[

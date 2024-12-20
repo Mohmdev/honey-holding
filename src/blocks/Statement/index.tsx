@@ -90,7 +90,7 @@ export const Statement: React.FC<StatementProps> = (props) => {
           <div className={[classes.assetWrap, 'grid'].join(' ')}>
             {assetType === 'media'
               ? media &&
-                typeof media !== 'string' && (
+                typeof media !== 'number' && (
                   <div
                     className={[
                       mediaWidthClass,
