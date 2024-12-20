@@ -59,6 +59,7 @@ export const LogoGrid: React.FC<LogoGridProps> = ({
 
   useEffect(() => {
     if (logos) {
+      // eslint-disable-next-line
       let occupiedPositions: number[] = []
       const initialPositions = logos.map((logo) => {
         const position = getRandomPosition(occupiedPositions)
@@ -72,7 +73,6 @@ export const LogoGrid: React.FC<LogoGridProps> = ({
   useEffect(() => {
     if (!logos || logos.length === 0 || logos.length > TOTAL_CELLS) return
 
-    /* eslint-disable function-paren-newline */
     const animateLogo = () => {
       const logoIndex =
         currentAnimatingIndex !== null
@@ -110,7 +110,6 @@ export const LogoGrid: React.FC<LogoGridProps> = ({
         }, 100)
       }, ANIMATION_DURATION + 500)
     }
-    /* eslint-enable function-paren-newline */
 
     const interval = setInterval(
       animateLogo,

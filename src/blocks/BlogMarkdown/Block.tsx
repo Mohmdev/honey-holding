@@ -22,11 +22,9 @@ const BlogMarkdown: React.FC<Props> = ({
   blogMarkdownFields: { markdown }
 }) => {
   return (
-    <ReactMarkdown
-      children={markdown}
-      remarkPlugins={remarkPlugins}
-      components={components}
-    />
+    <ReactMarkdown remarkPlugins={remarkPlugins} components={components}>
+      {markdown}
+    </ReactMarkdown>
   )
 }
 
