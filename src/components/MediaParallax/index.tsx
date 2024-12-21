@@ -10,7 +10,7 @@ import { Props as MediaProps } from '@components/Media/types'
 import classes from './index.module.scss'
 
 type ParallaxProps = {
-  media: { image: number | MediaType }[]
+  media: { image: string | MediaType }[]
   className?: string
 } & {
   priority?: MediaProps['priority']
@@ -67,7 +67,7 @@ const MediaParallax: React.FC<ParallaxProps> = ({
                   })
             }}
           >
-            {typeof image.image !== 'number' && (
+            {typeof image.image !== 'string' && (
               <>
                 <Media resource={image.image} {...mediaProps} />
               </>

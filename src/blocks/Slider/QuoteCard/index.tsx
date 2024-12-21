@@ -44,7 +44,7 @@ export const QuoteCard: React.FC<Props> = ({
         {role && <span>, {role}</span>}
       </div>
       <div className={classes.logoWrap}>
-        {logo && typeof logo !== 'number' && (
+        {logo && typeof logo !== 'string' && (
           <Media resource={logo} className={classes.logo} alt={author} />
         )}
         {enableLink && (

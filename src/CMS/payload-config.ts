@@ -17,7 +17,7 @@ import { ReusableContent } from '@CMS/ReusableContent/config'
 import { Tickets } from '@CMS/Tickets/config'
 import { Users } from '@CMS/Users/config'
 import { adminConfig } from '@services/admin/config'
-import { databaseAdapter } from '@services/database/config'
+import { MongooseAdapter } from '@services/database/config'
 import { defaultLexical } from '@services/editor/defaultLexical'
 import { emailAdapter } from '@services/email/config'
 import { plugins } from '@services/plugins'
@@ -35,7 +35,7 @@ export default buildConfig({
   sharp,
   admin: adminConfig,
   email: emailAdapter,
-  db: databaseAdapter,
+  db: MongooseAdapter,
   plugins: [...plugins],
   editor: defaultLexical,
   secret: process.env.PAYLOAD_SECRET,

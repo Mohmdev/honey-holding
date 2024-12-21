@@ -222,12 +222,12 @@ const RenderForm = ({
 }
 
 export const CMSForm: React.FC<{
-  form?: number | FormType | null
+  form?: string | FormType | null
   hiddenFields?: string[]
 }> = (props) => {
   const { form, hiddenFields } = props
 
-  if (!form || typeof form === 'number') return null
+  if (!form || typeof form === 'string') return null
 
   return <RenderForm form={form} hiddenFields={hiddenFields ?? []} />
 }

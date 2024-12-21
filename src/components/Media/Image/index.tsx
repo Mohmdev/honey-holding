@@ -42,7 +42,7 @@ export const Image: React.FC<Props> = (props) => {
     resource.darkModeFallback !== null &&
     typeof resource.darkModeFallback.filename === 'string'
 
-  if (!src && resource && typeof resource !== 'number') {
+  if (!src && resource && typeof resource !== 'string') {
     width = resource.width
     height = resource.height
     alt = resource.alt

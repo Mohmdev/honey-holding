@@ -52,7 +52,7 @@ export interface Config {
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
   };
   db: {
-    defaultIDType: number;
+    defaultIDType: string;
   };
   globals: {
     'main-menu': MainMenu;
@@ -94,7 +94,7 @@ export interface UserAuthOperations {
  * via the `definition` "portfolio".
  */
 export interface Portfolio {
-  id: number;
+  id: string;
   title: string;
   introContent: {
     root: {
@@ -113,7 +113,7 @@ export interface Portfolio {
   };
   industry?: string | null;
   useCase?: string | null;
-  featuredImage: number | Media;
+  featuredImage: string | Media;
   layout?:
     | (
         | {
@@ -140,12 +140,12 @@ export interface Portfolio {
                 };
                 [k: string]: unknown;
               };
-              logo: number | Media;
+              logo: string | Media;
               author?: string | null;
               role?: string | null;
               images?:
                 | {
-                    image: number | Media;
+                    image: string | Media;
                     id?: string | null;
                   }[]
                 | null;
@@ -192,15 +192,15 @@ export interface Portfolio {
                       reference?:
                         | ({
                             relationTo: 'pages';
-                            value: number | Page;
+                            value: string | Page;
                           } | null)
                         | ({
                             relationTo: 'posts';
-                            value: number | Post;
+                            value: string | Post;
                           } | null)
                         | ({
                             relationTo: 'portfolio';
-                            value: number | Portfolio;
+                            value: string | Portfolio;
                           } | null);
                       url?: string | null;
                       label: string;
@@ -215,21 +215,21 @@ export interface Portfolio {
                 reference?:
                   | ({
                       relationTo: 'pages';
-                      value: number | Page;
+                      value: string | Page;
                     } | null)
                   | ({
                       relationTo: 'posts';
-                      value: number | Post;
+                      value: string | Post;
                     } | null)
                   | ({
                       relationTo: 'portfolio';
-                      value: number | Portfolio;
+                      value: string | Portfolio;
                     } | null);
                 url?: string | null;
                 label: string;
                 customId?: string | null;
               };
-              bannerImage?: (number | null) | Media;
+              bannerImage?: (string | null) | Media;
               gradientBackground?: boolean | null;
             };
             id?: string | null;
@@ -271,15 +271,15 @@ export interface Portfolio {
                       reference?:
                         | ({
                             relationTo: 'pages';
-                            value: number | Page;
+                            value: string | Page;
                           } | null)
                         | ({
                             relationTo: 'posts';
-                            value: number | Post;
+                            value: string | Post;
                           } | null)
                         | ({
                             relationTo: 'portfolio';
-                            value: number | Portfolio;
+                            value: string | Portfolio;
                           } | null);
                       url?: string | null;
                       label: string;
@@ -300,15 +300,15 @@ export interface Portfolio {
                       reference?:
                         | ({
                             relationTo: 'pages';
-                            value: number | Page;
+                            value: string | Page;
                           } | null)
                         | ({
                             relationTo: 'posts';
-                            value: number | Post;
+                            value: string | Post;
                           } | null)
                         | ({
                             relationTo: 'portfolio';
-                            value: number | Portfolio;
+                            value: string | Portfolio;
                           } | null);
                       url?: string | null;
                       customId?: string | null;
@@ -362,15 +362,15 @@ export interface Portfolio {
                       reference?:
                         | ({
                             relationTo: 'pages';
-                            value: number | Page;
+                            value: string | Page;
                           } | null)
                         | ({
                             relationTo: 'posts';
-                            value: number | Post;
+                            value: string | Post;
                           } | null)
                         | ({
                             relationTo: 'portfolio';
-                            value: number | Portfolio;
+                            value: string | Portfolio;
                           } | null);
                       url?: string | null;
                       label: string;
@@ -410,15 +410,15 @@ export interface Portfolio {
                             reference?:
                               | ({
                                   relationTo: 'pages';
-                                  value: number | Page;
+                                  value: string | Page;
                                 } | null)
                               | ({
                                   relationTo: 'posts';
-                                  value: number | Post;
+                                  value: string | Post;
                                 } | null)
                               | ({
                                   relationTo: 'portfolio';
-                                  value: number | Portfolio;
+                                  value: string | Portfolio;
                                 } | null);
                             url?: string | null;
                             label: string;
@@ -467,15 +467,15 @@ export interface Portfolio {
                       reference?:
                         | ({
                             relationTo: 'pages';
-                            value: number | Page;
+                            value: string | Page;
                           } | null)
                         | ({
                             relationTo: 'posts';
-                            value: number | Post;
+                            value: string | Post;
                           } | null)
                         | ({
                             relationTo: 'portfolio';
-                            value: number | Portfolio;
+                            value: string | Portfolio;
                           } | null);
                       url?: string | null;
                       label: string;
@@ -492,7 +492,7 @@ export interface Portfolio {
                 quote: string;
                 author: string;
                 role?: string | null;
-                logo?: (number | null) | Media;
+                logo?: (string | null) | Media;
                 enableLink?: boolean | null;
                 link?: {
                   type?: ('reference' | 'custom') | null;
@@ -500,15 +500,15 @@ export interface Portfolio {
                   reference?:
                     | ({
                         relationTo: 'pages';
-                        value: number | Page;
+                        value: string | Page;
                       } | null)
                     | ({
                         relationTo: 'posts';
-                        value: number | Post;
+                        value: string | Post;
                       } | null)
                     | ({
                         relationTo: 'portfolio';
-                        value: number | Portfolio;
+                        value: string | Portfolio;
                       } | null);
                   url?: string | null;
                   label: string;
@@ -553,15 +553,15 @@ export interface Portfolio {
                       reference?:
                         | ({
                             relationTo: 'pages';
-                            value: number | Page;
+                            value: string | Page;
                           } | null)
                         | ({
                             relationTo: 'posts';
-                            value: number | Post;
+                            value: string | Post;
                           } | null)
                         | ({
                             relationTo: 'portfolio';
-                            value: number | Portfolio;
+                            value: string | Portfolio;
                           } | null);
                       url?: string | null;
                       label: string;
@@ -571,7 +571,7 @@ export interface Portfolio {
                   }[]
                 | null;
               assetType?: ('media' | 'code') | null;
-              media?: (number | null) | Media;
+              media?: (string | null) | Media;
               code?: string | null;
               mediaWidth?: ('small' | 'medium' | 'large' | 'full') | null;
               backgroundGlow?: ('none' | 'colorful' | 'white') | null;
@@ -614,15 +614,15 @@ export interface Portfolio {
                       reference?:
                         | ({
                             relationTo: 'pages';
-                            value: number | Page;
+                            value: string | Page;
                           } | null)
                         | ({
                             relationTo: 'posts';
-                            value: number | Post;
+                            value: string | Post;
                           } | null)
                         | ({
                             relationTo: 'portfolio';
-                            value: number | Portfolio;
+                            value: string | Portfolio;
                           } | null);
                       url?: string | null;
                       label: string;
@@ -656,15 +656,15 @@ export interface Portfolio {
                             reference?:
                               | ({
                                   relationTo: 'pages';
-                                  value: number | Page;
+                                  value: string | Page;
                                 } | null)
                               | ({
                                   relationTo: 'posts';
-                                  value: number | Post;
+                                  value: string | Post;
                                 } | null)
                               | ({
                                   relationTo: 'portfolio';
-                                  value: number | Portfolio;
+                                  value: string | Portfolio;
                                 } | null);
                             url?: string | null;
                             label: string;
@@ -673,7 +673,7 @@ export interface Portfolio {
                           id?: string | null;
                         }[]
                       | null;
-                    media?: (number | null) | Media;
+                    media?: (string | null) | Media;
                     id?: string | null;
                   }[]
                 | null;
@@ -693,7 +693,7 @@ export interface Portfolio {
     /**
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
-    image?: (number | null) | Media;
+    image?: (string | null) | Media;
   };
   updatedAt: string;
   createdAt: string;
@@ -704,11 +704,11 @@ export interface Portfolio {
  * via the `definition` "media".
  */
 export interface Media {
-  id: number;
+  id: string;
   /**
    * Choose an upload to render if the visitor is using dark mode.
    */
-  darkModeFallback?: (number | null) | Media;
+  darkModeFallback?: (string | null) | Media;
   alt: string;
   /**
    * Optional
@@ -804,7 +804,7 @@ export interface Media {
  * via the `definition` "pages".
  */
 export interface Page {
-  id: number;
+  id: string;
   title: string;
   fullTitle?: string | null;
   noindex?: boolean | null;
@@ -833,15 +833,15 @@ export interface Page {
             reference?:
               | ({
                   relationTo: 'pages';
-                  value: number | Page;
+                  value: string | Page;
                 } | null)
               | ({
                   relationTo: 'posts';
-                  value: number | Post;
+                  value: string | Post;
                 } | null)
               | ({
                   relationTo: 'portfolio';
-                  value: number | Portfolio;
+                  value: string | Portfolio;
                 } | null);
             url?: string | null;
             label: string;
@@ -873,7 +873,7 @@ export interface Page {
         | {
             name?: string | null;
             link?: string | null;
-            image?: (number | null) | Media;
+            image?: (string | null) | Media;
             id?: string | null;
           }[]
         | null;
@@ -885,15 +885,15 @@ export interface Page {
       reference?:
         | ({
             relationTo: 'pages';
-            value: number | Page;
+            value: string | Page;
           } | null)
         | ({
             relationTo: 'posts';
-            value: number | Post;
+            value: string | Post;
           } | null)
         | ({
             relationTo: 'portfolio';
-            value: number | Portfolio;
+            value: string | Portfolio;
           } | null);
       url?: string | null;
       label: string;
@@ -941,15 +941,15 @@ export interface Page {
             reference?:
               | ({
                   relationTo: 'pages';
-                  value: number | Page;
+                  value: string | Page;
                 } | null)
               | ({
                   relationTo: 'posts';
-                  value: number | Post;
+                  value: string | Post;
                 } | null)
               | ({
                   relationTo: 'portfolio';
-                  value: number | Portfolio;
+                  value: string | Portfolio;
                 } | null);
             url?: string | null;
             label: string;
@@ -996,15 +996,15 @@ export interface Page {
             reference?:
               | ({
                   relationTo: 'pages';
-                  value: number | Page;
+                  value: string | Page;
                 } | null)
               | ({
                   relationTo: 'posts';
-                  value: number | Post;
+                  value: string | Post;
                 } | null)
               | ({
                   relationTo: 'portfolio';
-                  value: number | Portfolio;
+                  value: string | Portfolio;
                 } | null);
             url?: string | null;
             label: string;
@@ -1031,15 +1031,15 @@ export interface Page {
                 reference?:
                   | ({
                       relationTo: 'pages';
-                      value: number | Page;
+                      value: string | Page;
                     } | null)
                   | ({
                       relationTo: 'posts';
-                      value: number | Post;
+                      value: string | Post;
                     } | null)
                   | ({
                       relationTo: 'portfolio';
-                      value: number | Portfolio;
+                      value: string | Portfolio;
                     } | null);
                 url?: string | null;
                 label: string;
@@ -1069,15 +1069,15 @@ export interface Page {
             reference?:
               | ({
                   relationTo: 'pages';
-                  value: number | Page;
+                  value: string | Page;
                 } | null)
               | ({
                   relationTo: 'posts';
-                  value: number | Post;
+                  value: string | Post;
                 } | null)
               | ({
                   relationTo: 'portfolio';
-                  value: number | Portfolio;
+                  value: string | Portfolio;
                 } | null);
             url?: string | null;
             label: string;
@@ -1088,18 +1088,18 @@ export interface Page {
       | null;
     images?:
       | {
-          image: number | Media;
+          image: string | Media;
           id?: string | null;
         }[]
       | null;
     enableMedia?: boolean | null;
-    media?: (number | null) | Media;
-    secondaryMedia?: (number | null) | Media;
-    featureVideo?: (number | null) | Media;
-    form?: (number | null) | Form;
+    media?: (string | null) | Media;
+    secondaryMedia?: (string | null) | Media;
+    featureVideo?: (string | null) | Media;
+    form?: (string | null) | Form;
     logos?:
       | {
-          logoMedia: number | Media;
+          logoMedia: string | Media;
           id?: string | null;
         }[]
       | null;
@@ -1118,7 +1118,7 @@ export interface Page {
       };
       [k: string]: unknown;
     } | null;
-    logoShowcase?: (number | Media)[] | null;
+    logoShowcase?: (string | Media)[] | null;
   };
   layout: (
     | {
@@ -1145,12 +1145,12 @@ export interface Page {
             };
             [k: string]: unknown;
           };
-          logo: number | Media;
+          logo: string | Media;
           author?: string | null;
           role?: string | null;
           images?:
             | {
-                image: number | Media;
+                image: string | Media;
                 id?: string | null;
               }[]
             | null;
@@ -1197,15 +1197,15 @@ export interface Page {
                   reference?:
                     | ({
                         relationTo: 'pages';
-                        value: number | Page;
+                        value: string | Page;
                       } | null)
                     | ({
                         relationTo: 'posts';
-                        value: number | Post;
+                        value: string | Post;
                       } | null)
                     | ({
                         relationTo: 'portfolio';
-                        value: number | Portfolio;
+                        value: string | Portfolio;
                       } | null);
                   url?: string | null;
                   label: string;
@@ -1220,21 +1220,21 @@ export interface Page {
             reference?:
               | ({
                   relationTo: 'pages';
-                  value: number | Page;
+                  value: string | Page;
                 } | null)
               | ({
                   relationTo: 'posts';
-                  value: number | Post;
+                  value: string | Post;
                 } | null)
               | ({
                   relationTo: 'portfolio';
-                  value: number | Portfolio;
+                  value: string | Portfolio;
                 } | null);
             url?: string | null;
             label: string;
             customId?: string | null;
           };
-          bannerImage?: (number | null) | Media;
+          bannerImage?: (string | null) | Media;
           gradientBackground?: boolean | null;
         };
         id?: string | null;
@@ -1276,15 +1276,15 @@ export interface Page {
                   reference?:
                     | ({
                         relationTo: 'pages';
-                        value: number | Page;
+                        value: string | Page;
                       } | null)
                     | ({
                         relationTo: 'posts';
-                        value: number | Post;
+                        value: string | Post;
                       } | null)
                     | ({
                         relationTo: 'portfolio';
-                        value: number | Portfolio;
+                        value: string | Portfolio;
                       } | null);
                   url?: string | null;
                   label: string;
@@ -1305,15 +1305,15 @@ export interface Page {
                   reference?:
                     | ({
                         relationTo: 'pages';
-                        value: number | Page;
+                        value: string | Page;
                       } | null)
                     | ({
                         relationTo: 'posts';
-                        value: number | Post;
+                        value: string | Post;
                       } | null)
                     | ({
                         relationTo: 'portfolio';
-                        value: number | Portfolio;
+                        value: string | Portfolio;
                       } | null);
                   url?: string | null;
                   customId?: string | null;
@@ -1353,7 +1353,7 @@ export interface Page {
                   };
                   [k: string]: unknown;
                 };
-                portfolio: number | Portfolio;
+                portfolio: string | Portfolio;
                 id?: string | null;
               }[]
             | null;
@@ -1386,7 +1386,7 @@ export interface Page {
             };
             [k: string]: unknown;
           };
-          portfolio: (number | Portfolio)[];
+          portfolio: (string | Portfolio)[];
         };
         id?: string | null;
         blockName?: string | null;
@@ -1405,10 +1405,10 @@ export interface Page {
             | {
                 quote: string;
                 author?: string | null;
-                logo: number | Media;
+                logo: string | Media;
                 images?:
                   | {
-                      image: number | Media;
+                      image: string | Media;
                       id?: string | null;
                     }[]
                   | null;
@@ -1416,7 +1416,7 @@ export interface Page {
                  * A label for the navigation tab at the bottom of the parallax
                  */
                 tabLabel: string;
-                portfolio: number | Portfolio;
+                portfolio: string | Portfolio;
                 id?: string | null;
               }[]
             | null;
@@ -1466,15 +1466,15 @@ export interface Page {
                   reference?:
                     | ({
                         relationTo: 'pages';
-                        value: number | Page;
+                        value: string | Page;
                       } | null)
                     | ({
                         relationTo: 'posts';
-                        value: number | Post;
+                        value: string | Post;
                       } | null)
                     | ({
                         relationTo: 'portfolio';
-                        value: number | Portfolio;
+                        value: string | Portfolio;
                       } | null);
                   url?: string | null;
                   label: string;
@@ -1514,15 +1514,15 @@ export interface Page {
                         reference?:
                           | ({
                               relationTo: 'pages';
-                              value: number | Page;
+                              value: string | Page;
                             } | null)
                           | ({
                               relationTo: 'posts';
-                              value: number | Post;
+                              value: string | Post;
                             } | null)
                           | ({
                               relationTo: 'portfolio';
-                              value: number | Portfolio;
+                              value: string | Portfolio;
                             } | null);
                         url?: string | null;
                         label: string;
@@ -1649,15 +1649,15 @@ export interface Page {
                   reference?:
                     | ({
                         relationTo: 'pages';
-                        value: number | Page;
+                        value: string | Page;
                       } | null)
                     | ({
                         relationTo: 'posts';
-                        value: number | Post;
+                        value: string | Post;
                       } | null)
                     | ({
                         relationTo: 'portfolio';
-                        value: number | Portfolio;
+                        value: string | Portfolio;
                       } | null);
                   url?: string | null;
                   label: string;
@@ -1715,7 +1715,7 @@ export interface Page {
             };
             [k: string]: unknown;
           };
-          form: number | Form;
+          form: string | Form;
         };
         id?: string | null;
         blockName?: string | null;
@@ -1756,15 +1756,15 @@ export interface Page {
                   reference?:
                     | ({
                         relationTo: 'pages';
-                        value: number | Page;
+                        value: string | Page;
                       } | null)
                     | ({
                         relationTo: 'posts';
-                        value: number | Post;
+                        value: string | Post;
                       } | null)
                     | ({
                         relationTo: 'portfolio';
-                        value: number | Portfolio;
+                        value: string | Portfolio;
                       } | null);
                   url?: string | null;
                   customId?: string | null;
@@ -1791,8 +1791,8 @@ export interface Page {
             | {
                 text: string;
                 media?: {
-                  top?: (number | null) | Media;
-                  bottom?: (number | null) | Media;
+                  top?: (string | null) | Media;
+                  bottom?: (string | null) | Media;
                 };
                 link?: {
                   type?: ('reference' | 'custom') | null;
@@ -1800,15 +1800,15 @@ export interface Page {
                   reference?:
                     | ({
                         relationTo: 'pages';
-                        value: number | Page;
+                        value: string | Page;
                       } | null)
                     | ({
                         relationTo: 'posts';
-                        value: number | Post;
+                        value: string | Post;
                       } | null)
                     | ({
                         relationTo: 'portfolio';
-                        value: number | Portfolio;
+                        value: string | Portfolio;
                       } | null);
                   url?: string | null;
                   customId?: string | null;
@@ -1823,15 +1823,15 @@ export interface Page {
             reference?:
               | ({
                   relationTo: 'pages';
-                  value: number | Page;
+                  value: string | Page;
                 } | null)
               | ({
                   relationTo: 'posts';
-                  value: number | Post;
+                  value: string | Post;
                 } | null)
               | ({
                   relationTo: 'portfolio';
-                  value: number | Portfolio;
+                  value: string | Portfolio;
                 } | null);
             url?: string | null;
             label: string;
@@ -1859,15 +1859,15 @@ export interface Page {
                   reference?:
                     | ({
                         relationTo: 'pages';
-                        value: number | Page;
+                        value: string | Page;
                       } | null)
                     | ({
                         relationTo: 'posts';
-                        value: number | Post;
+                        value: string | Post;
                       } | null)
                     | ({
                         relationTo: 'portfolio';
-                        value: number | Portfolio;
+                        value: string | Portfolio;
                       } | null);
                   url?: string | null;
                   label: string;
@@ -1912,15 +1912,15 @@ export interface Page {
             reference?:
               | ({
                   relationTo: 'pages';
-                  value: number | Page;
+                  value: string | Page;
                 } | null)
               | ({
                   relationTo: 'posts';
-                  value: number | Post;
+                  value: string | Post;
                 } | null)
               | ({
                   relationTo: 'portfolio';
-                  value: number | Portfolio;
+                  value: string | Portfolio;
                 } | null);
             url?: string | null;
             label: string;
@@ -1928,7 +1928,7 @@ export interface Page {
           };
           logos?:
             | {
-                logoMedia: number | Media;
+                logoMedia: string | Media;
                 id?: string | null;
               }[]
             | null;
@@ -1947,7 +1947,7 @@ export interface Page {
             background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
           };
           position?: ('default' | 'wide') | null;
-          media: number | Media;
+          media: string | Media;
           caption?: {
             root: {
               type: string;
@@ -2007,15 +2007,15 @@ export interface Page {
             reference?:
               | ({
                   relationTo: 'pages';
-                  value: number | Page;
+                  value: string | Page;
                 } | null)
               | ({
                   relationTo: 'posts';
-                  value: number | Post;
+                  value: string | Post;
                 } | null)
               | ({
                   relationTo: 'portfolio';
-                  value: number | Portfolio;
+                  value: string | Portfolio;
                 } | null);
             url?: string | null;
             label: string;
@@ -2023,7 +2023,7 @@ export interface Page {
           };
           images?:
             | {
-                image: number | Media;
+                image: string | Media;
                 id?: string | null;
               }[]
             | null;
@@ -2080,21 +2080,21 @@ export interface Page {
                   reference?:
                     | ({
                         relationTo: 'pages';
-                        value: number | Page;
+                        value: string | Page;
                       } | null)
                     | ({
                         relationTo: 'posts';
-                        value: number | Post;
+                        value: string | Post;
                       } | null)
                     | ({
                         relationTo: 'portfolio';
-                        value: number | Portfolio;
+                        value: string | Portfolio;
                       } | null);
                   url?: string | null;
                   label: string;
                   customId?: string | null;
                 };
-                media: number | Media;
+                media: string | Media;
                 id?: string | null;
               }[]
             | null;
@@ -2127,15 +2127,15 @@ export interface Page {
                   reference?:
                     | ({
                         relationTo: 'pages';
-                        value: number | Page;
+                        value: string | Page;
                       } | null)
                     | ({
                         relationTo: 'posts';
-                        value: number | Post;
+                        value: string | Post;
                       } | null)
                     | ({
                         relationTo: 'portfolio';
-                        value: number | Portfolio;
+                        value: string | Portfolio;
                       } | null);
                   url?: string | null;
                   label: string;
@@ -2166,7 +2166,7 @@ export interface Page {
             theme?: ('light' | 'dark') | null;
             background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
           };
-          reusableContent: number | ReusableContent;
+          reusableContent: string | ReusableContent;
           /**
            * This is a custom ID that can be used to target this block with CSS or JavaScript.
            */
@@ -2208,15 +2208,15 @@ export interface Page {
                   reference?:
                     | ({
                         relationTo: 'pages';
-                        value: number | Page;
+                        value: string | Page;
                       } | null)
                     | ({
                         relationTo: 'posts';
-                        value: number | Post;
+                        value: string | Post;
                       } | null)
                     | ({
                         relationTo: 'portfolio';
-                        value: number | Portfolio;
+                        value: string | Portfolio;
                       } | null);
                   url?: string | null;
                   label: string;
@@ -2233,7 +2233,7 @@ export interface Page {
             quote: string;
             author: string;
             role?: string | null;
-            logo?: (number | null) | Media;
+            logo?: (string | null) | Media;
             enableLink?: boolean | null;
             link?: {
               type?: ('reference' | 'custom') | null;
@@ -2241,15 +2241,15 @@ export interface Page {
               reference?:
                 | ({
                     relationTo: 'pages';
-                    value: number | Page;
+                    value: string | Page;
                   } | null)
                 | ({
                     relationTo: 'posts';
-                    value: number | Post;
+                    value: string | Post;
                   } | null)
                 | ({
                     relationTo: 'portfolio';
-                    value: number | Portfolio;
+                    value: string | Portfolio;
                   } | null);
               url?: string | null;
               label: string;
@@ -2294,15 +2294,15 @@ export interface Page {
                   reference?:
                     | ({
                         relationTo: 'pages';
-                        value: number | Page;
+                        value: string | Page;
                       } | null)
                     | ({
                         relationTo: 'posts';
-                        value: number | Post;
+                        value: string | Post;
                       } | null)
                     | ({
                         relationTo: 'portfolio';
-                        value: number | Portfolio;
+                        value: string | Portfolio;
                       } | null);
                   url?: string | null;
                   label: string;
@@ -2312,7 +2312,7 @@ export interface Page {
               }[]
             | null;
           assetType?: ('media' | 'code') | null;
-          media?: (number | null) | Media;
+          media?: (string | null) | Media;
           code?: string | null;
           mediaWidth?: ('small' | 'medium' | 'large' | 'full') | null;
           backgroundGlow?: ('none' | 'colorful' | 'white') | null;
@@ -2356,15 +2356,15 @@ export interface Page {
                   reference?:
                     | ({
                         relationTo: 'pages';
-                        value: number | Page;
+                        value: string | Page;
                       } | null)
                     | ({
                         relationTo: 'posts';
-                        value: number | Post;
+                        value: string | Post;
                       } | null)
                     | ({
                         relationTo: 'portfolio';
-                        value: number | Portfolio;
+                        value: string | Portfolio;
                       } | null);
                   url?: string | null;
                   label: string;
@@ -2398,15 +2398,15 @@ export interface Page {
                         reference?:
                           | ({
                               relationTo: 'pages';
-                              value: number | Page;
+                              value: string | Page;
                             } | null)
                           | ({
                               relationTo: 'posts';
-                              value: number | Post;
+                              value: string | Post;
                             } | null)
                           | ({
                               relationTo: 'portfolio';
-                              value: number | Portfolio;
+                              value: string | Portfolio;
                             } | null);
                         url?: string | null;
                         label: string;
@@ -2415,7 +2415,7 @@ export interface Page {
                       id?: string | null;
                     }[]
                   | null;
-                media?: (number | null) | Media;
+                media?: (string | null) | Media;
                 id?: string | null;
               }[]
             | null;
@@ -2428,19 +2428,19 @@ export interface Page {
   )[];
   slug: string;
   slugLock?: boolean | null;
-  authors: (number | User)[];
+  authors: (string | User)[];
   meta?: {
     title?: string | null;
     description?: string | null;
     /**
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
-    image?: (number | null) | Media;
+    image?: (string | null) | Media;
   };
-  parent?: (number | null) | Page;
+  parent?: (string | null) | Page;
   breadcrumbs?:
     | {
-        doc?: (number | null) | Page;
+        doc?: (string | null) | Page;
         url?: string | null;
         label?: string | null;
         id?: string | null;
@@ -2455,9 +2455,9 @@ export interface Page {
  * via the `definition` "posts".
  */
 export interface Post {
-  id: number;
+  id: string;
   title: string;
-  image: number | Media;
+  image: string | Media;
   useVideo?: boolean | null;
   videoUrl?: string | null;
   excerpt: {
@@ -2573,15 +2573,15 @@ export interface Post {
                   reference?:
                     | ({
                         relationTo: 'pages';
-                        value: number | Page;
+                        value: string | Page;
                       } | null)
                     | ({
                         relationTo: 'posts';
-                        value: number | Post;
+                        value: string | Post;
                       } | null)
                     | ({
                         relationTo: 'portfolio';
-                        value: number | Portfolio;
+                        value: string | Portfolio;
                       } | null);
                   url?: string | null;
                   label: string;
@@ -2620,7 +2620,7 @@ export interface Post {
             background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
           };
           position?: ('default' | 'wide') | null;
-          media: number | Media;
+          media: string | Media;
           caption?: {
             root: {
               type: string;
@@ -2650,7 +2650,7 @@ export interface Post {
             theme?: ('light' | 'dark') | null;
             background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
           };
-          reusableContent: number | ReusableContent;
+          reusableContent: string | ReusableContent;
           /**
            * This is a custom ID that can be used to target this block with CSS or JavaScript.
            */
@@ -2676,11 +2676,11 @@ export interface Post {
     };
     [k: string]: unknown;
   } | null;
-  relatedPosts?: (number | Post)[] | null;
-  categories?: (number | Category)[] | null;
+  relatedPosts?: (string | Post)[] | null;
+  categories?: (string | Category)[] | null;
   slug: string;
   slugLock?: boolean | null;
-  authors: (number | User)[];
+  authors: (string | User)[];
   publishedOn: string;
   meta?: {
     title?: string | null;
@@ -2688,7 +2688,7 @@ export interface Post {
     /**
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
-    image?: (number | null) | Media;
+    image?: (string | null) | Media;
   };
   updatedAt: string;
   createdAt: string;
@@ -2699,7 +2699,7 @@ export interface Post {
  * via the `definition` "reusable-content".
  */
 export interface ReusableContent {
-  id: number;
+  id: string;
   title: string;
   layout: (
     | {
@@ -2814,15 +2814,15 @@ export interface ReusableContent {
                   reference?:
                     | ({
                         relationTo: 'pages';
-                        value: number | Page;
+                        value: string | Page;
                       } | null)
                     | ({
                         relationTo: 'posts';
-                        value: number | Post;
+                        value: string | Post;
                       } | null)
                     | ({
                         relationTo: 'portfolio';
-                        value: number | Portfolio;
+                        value: string | Portfolio;
                       } | null);
                   url?: string | null;
                   label: string;
@@ -2877,15 +2877,15 @@ export interface ReusableContent {
                   reference?:
                     | ({
                         relationTo: 'pages';
-                        value: number | Page;
+                        value: string | Page;
                       } | null)
                     | ({
                         relationTo: 'posts';
-                        value: number | Post;
+                        value: string | Post;
                       } | null)
                     | ({
                         relationTo: 'portfolio';
-                        value: number | Portfolio;
+                        value: string | Portfolio;
                       } | null);
                   url?: string | null;
                   label: string;
@@ -2925,15 +2925,15 @@ export interface ReusableContent {
                         reference?:
                           | ({
                               relationTo: 'pages';
-                              value: number | Page;
+                              value: string | Page;
                             } | null)
                           | ({
                               relationTo: 'posts';
-                              value: number | Post;
+                              value: string | Post;
                             } | null)
                           | ({
                               relationTo: 'portfolio';
-                              value: number | Portfolio;
+                              value: string | Portfolio;
                             } | null);
                         url?: string | null;
                         label: string;
@@ -2960,7 +2960,7 @@ export interface ReusableContent {
             background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
           };
           position?: ('default' | 'wide') | null;
-          media: number | Media;
+          media: string | Media;
           caption?: {
             root: {
               type: string;
@@ -3013,15 +3013,15 @@ export interface ReusableContent {
                   reference?:
                     | ({
                         relationTo: 'pages';
-                        value: number | Page;
+                        value: string | Page;
                       } | null)
                     | ({
                         relationTo: 'posts';
-                        value: number | Post;
+                        value: string | Post;
                       } | null)
                     | ({
                         relationTo: 'portfolio';
-                        value: number | Portfolio;
+                        value: string | Portfolio;
                       } | null);
                   url?: string | null;
                   label: string;
@@ -3038,7 +3038,7 @@ export interface ReusableContent {
             quote: string;
             author: string;
             role?: string | null;
-            logo?: (number | null) | Media;
+            logo?: (string | null) | Media;
             enableLink?: boolean | null;
             link?: {
               type?: ('reference' | 'custom') | null;
@@ -3046,15 +3046,15 @@ export interface ReusableContent {
               reference?:
                 | ({
                     relationTo: 'pages';
-                    value: number | Page;
+                    value: string | Page;
                   } | null)
                 | ({
                     relationTo: 'posts';
-                    value: number | Post;
+                    value: string | Post;
                   } | null)
                 | ({
                     relationTo: 'portfolio';
-                    value: number | Portfolio;
+                    value: string | Portfolio;
                   } | null);
               url?: string | null;
               label: string;
@@ -3099,15 +3099,15 @@ export interface ReusableContent {
                   reference?:
                     | ({
                         relationTo: 'pages';
-                        value: number | Page;
+                        value: string | Page;
                       } | null)
                     | ({
                         relationTo: 'posts';
-                        value: number | Post;
+                        value: string | Post;
                       } | null)
                     | ({
                         relationTo: 'portfolio';
-                        value: number | Portfolio;
+                        value: string | Portfolio;
                       } | null);
                   url?: string | null;
                   label: string;
@@ -3117,7 +3117,7 @@ export interface ReusableContent {
               }[]
             | null;
           assetType?: ('media' | 'code') | null;
-          media?: (number | null) | Media;
+          media?: (string | null) | Media;
           code?: string | null;
           mediaWidth?: ('small' | 'medium' | 'large' | 'full') | null;
           backgroundGlow?: ('none' | 'colorful' | 'white') | null;
@@ -3160,15 +3160,15 @@ export interface ReusableContent {
                   reference?:
                     | ({
                         relationTo: 'pages';
-                        value: number | Page;
+                        value: string | Page;
                       } | null)
                     | ({
                         relationTo: 'posts';
-                        value: number | Post;
+                        value: string | Post;
                       } | null)
                     | ({
                         relationTo: 'portfolio';
-                        value: number | Portfolio;
+                        value: string | Portfolio;
                       } | null);
                   url?: string | null;
                   label: string;
@@ -3202,15 +3202,15 @@ export interface ReusableContent {
                         reference?:
                           | ({
                               relationTo: 'pages';
-                              value: number | Page;
+                              value: string | Page;
                             } | null)
                           | ({
                               relationTo: 'posts';
-                              value: number | Post;
+                              value: string | Post;
                             } | null)
                           | ({
                               relationTo: 'portfolio';
-                              value: number | Portfolio;
+                              value: string | Portfolio;
                             } | null);
                         url?: string | null;
                         label: string;
@@ -3219,7 +3219,7 @@ export interface ReusableContent {
                       id?: string | null;
                     }[]
                   | null;
-                media?: (number | null) | Media;
+                media?: (string | null) | Media;
                 id?: string | null;
               }[]
             | null;
@@ -3237,16 +3237,16 @@ export interface ReusableContent {
  * via the `definition` "categories".
  */
 export interface Category {
-  id: number;
+  id: string;
   title: string;
   postsInCategory?: {
-    docs?: (number | Post)[] | null;
+    docs?: (string | Post)[] | null;
     hasNextPage?: boolean | null;
   } | null;
-  parent?: (number | null) | Category;
+  parent?: (string | null) | Category;
   breadcrumbs?:
     | {
-        doc?: (number | null) | Category;
+        doc?: (string | null) | Category;
         url?: string | null;
         label?: string | null;
         id?: string | null;
@@ -3260,14 +3260,14 @@ export interface Category {
  * via the `definition` "users".
  */
 export interface User {
-  id: number;
+  id: string;
   firstName: string;
   lastName: string;
   /**
    * Example: `nexwebdev`
    */
   twitter?: string | null;
-  photo?: (number | null) | Media;
+  photo?: (string | null) | Media;
   role: 'admin' | 'editor' | 'public';
   updatedAt: string;
   createdAt: string;
@@ -3287,7 +3287,7 @@ export interface User {
  * via the `definition` "forms".
  */
 export interface Form {
-  id: number;
+  id: string;
   title: string;
   fields?:
     | (
@@ -3484,7 +3484,7 @@ export interface StepsBlock {
         };
         [k: string]: unknown;
       };
-      media?: (number | null) | Media;
+      media?: (string | null) | Media;
       id?: string | null;
     }[];
   };
@@ -3551,7 +3551,7 @@ export interface CodeExampleBlock {
  * via the `definition` "MediaExampleBlock".
  */
 export interface MediaExampleBlock {
-  media: number | Media;
+  media: string | Media;
   id?: string | null;
   blockName?: string | null;
   blockType: 'MediaExampleBlock';
@@ -3561,11 +3561,11 @@ export interface MediaExampleBlock {
  * via the `definition` "assets".
  */
 export interface Asset {
-  id: number;
+  id: string;
   /**
    * Choose an upload to render if the visitor is using dark mode.
    */
-  darkModeFallback?: (number | null) | Media;
+  darkModeFallback?: (string | null) | Media;
   alt: string;
   prefix?: string | null;
   updatedAt: string;
@@ -3585,7 +3585,7 @@ export interface Asset {
  * via the `definition` "docs".
  */
 export interface Doc {
-  id: number;
+  id: string;
   dummy?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -3595,7 +3595,7 @@ export interface Doc {
  * via the `definition` "tickets".
  */
 export interface Ticket {
-  id: number;
+  id: string;
   dummy?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -3605,8 +3605,8 @@ export interface Ticket {
  * via the `definition` "form-submissions".
  */
 export interface FormSubmission {
-  id: number;
-  form: number | Form;
+  id: string;
+  form: string | Form;
   submissionData?:
     | {
         field: string;
@@ -3622,7 +3622,7 @@ export interface FormSubmission {
  * via the `definition` "redirects".
  */
 export interface Redirect {
-  id: number;
+  id: string;
   /**
    * You will need to rebuild the website when changing this field.
    */
@@ -3632,15 +3632,15 @@ export interface Redirect {
     reference?:
       | ({
           relationTo: 'pages';
-          value: number | Page;
+          value: string | Page;
         } | null)
       | ({
           relationTo: 'posts';
-          value: number | Post;
+          value: string | Post;
         } | null)
       | ({
           relationTo: 'portfolio';
-          value: number | Portfolio;
+          value: string | Portfolio;
         } | null);
     url?: string | null;
   };
@@ -3652,64 +3652,64 @@ export interface Redirect {
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
-  id: number;
+  id: string;
   document?:
     | ({
         relationTo: 'portfolio';
-        value: number | Portfolio;
+        value: string | Portfolio;
       } | null)
     | ({
         relationTo: 'pages';
-        value: number | Page;
+        value: string | Page;
       } | null)
     | ({
         relationTo: 'posts';
-        value: number | Post;
+        value: string | Post;
       } | null)
     | ({
         relationTo: 'categories';
-        value: number | Category;
+        value: string | Category;
       } | null)
     | ({
         relationTo: 'reusable-content';
-        value: number | ReusableContent;
+        value: string | ReusableContent;
       } | null)
     | ({
         relationTo: 'media';
-        value: number | Media;
+        value: string | Media;
       } | null)
     | ({
         relationTo: 'assets';
-        value: number | Asset;
+        value: string | Asset;
       } | null)
     | ({
         relationTo: 'users';
-        value: number | User;
+        value: string | User;
       } | null)
     | ({
         relationTo: 'docs';
-        value: number | Doc;
+        value: string | Doc;
       } | null)
     | ({
         relationTo: 'tickets';
-        value: number | Ticket;
+        value: string | Ticket;
       } | null)
     | ({
         relationTo: 'forms';
-        value: number | Form;
+        value: string | Form;
       } | null)
     | ({
         relationTo: 'form-submissions';
-        value: number | FormSubmission;
+        value: string | FormSubmission;
       } | null)
     | ({
         relationTo: 'redirects';
-        value: number | Redirect;
+        value: string | Redirect;
       } | null);
   globalSlug?: string | null;
   user: {
     relationTo: 'users';
-    value: number | User;
+    value: string | User;
   };
   updatedAt: string;
   createdAt: string;
@@ -3719,10 +3719,10 @@ export interface PayloadLockedDocument {
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: number;
+  id: string;
   user: {
     relationTo: 'users';
-    value: number | User;
+    value: string | User;
   };
   key?: string | null;
   value?:
@@ -3742,7 +3742,7 @@ export interface PayloadPreference {
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: number;
+  id: string;
   name?: string | null;
   batch?: number | null;
   updatedAt: string;
@@ -6035,7 +6035,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  * via the `definition` "main-menu".
  */
 export interface MainMenu {
-  id: number;
+  id: string;
   tabs?:
     | {
         label: string;
@@ -6047,15 +6047,15 @@ export interface MainMenu {
           reference?:
             | ({
                 relationTo: 'pages';
-                value: number | Page;
+                value: string | Page;
               } | null)
             | ({
                 relationTo: 'posts';
-                value: number | Post;
+                value: string | Post;
               } | null)
             | ({
                 relationTo: 'portfolio';
-                value: number | Portfolio;
+                value: string | Portfolio;
               } | null);
           url?: string | null;
           customId?: string | null;
@@ -6069,15 +6069,15 @@ export interface MainMenu {
                 reference?:
                   | ({
                       relationTo: 'pages';
-                      value: number | Page;
+                      value: string | Page;
                     } | null)
                   | ({
                       relationTo: 'posts';
-                      value: number | Post;
+                      value: string | Post;
                     } | null)
                   | ({
                       relationTo: 'portfolio';
-                      value: number | Portfolio;
+                      value: string | Portfolio;
                     } | null);
                 url?: string | null;
                 label: string;
@@ -6096,15 +6096,15 @@ export interface MainMenu {
                   reference?:
                     | ({
                         relationTo: 'pages';
-                        value: number | Page;
+                        value: string | Page;
                       } | null)
                     | ({
                         relationTo: 'posts';
-                        value: number | Post;
+                        value: string | Post;
                       } | null)
                     | ({
                         relationTo: 'portfolio';
-                        value: number | Portfolio;
+                        value: string | Portfolio;
                       } | null);
                   url?: string | null;
                   label: string;
@@ -6137,15 +6137,15 @@ export interface MainMenu {
                         reference?:
                           | ({
                               relationTo: 'pages';
-                              value: number | Page;
+                              value: string | Page;
                             } | null)
                           | ({
                               relationTo: 'posts';
-                              value: number | Post;
+                              value: string | Post;
                             } | null)
                           | ({
                               relationTo: 'portfolio';
-                              value: number | Portfolio;
+                              value: string | Portfolio;
                             } | null);
                         url?: string | null;
                         label: string;
@@ -6165,15 +6165,15 @@ export interface MainMenu {
                         reference?:
                           | ({
                               relationTo: 'pages';
-                              value: number | Page;
+                              value: string | Page;
                             } | null)
                           | ({
                               relationTo: 'posts';
-                              value: number | Post;
+                              value: string | Post;
                             } | null)
                           | ({
                               relationTo: 'portfolio';
-                              value: number | Portfolio;
+                              value: string | Portfolio;
                             } | null);
                         url?: string | null;
                         label: string;
@@ -6195,15 +6195,15 @@ export interface MainMenu {
     reference?:
       | ({
           relationTo: 'pages';
-          value: number | Page;
+          value: string | Page;
         } | null)
       | ({
           relationTo: 'posts';
-          value: number | Post;
+          value: string | Post;
         } | null)
       | ({
           relationTo: 'portfolio';
-          value: number | Portfolio;
+          value: string | Portfolio;
         } | null);
     url?: string | null;
     label: string;
@@ -6217,7 +6217,7 @@ export interface MainMenu {
  * via the `definition` "footer".
  */
 export interface Footer {
-  id: number;
+  id: string;
   coloumns?:
     | {
         label: string;
@@ -6229,15 +6229,15 @@ export interface Footer {
                 reference?:
                   | ({
                       relationTo: 'pages';
-                      value: number | Page;
+                      value: string | Page;
                     } | null)
                   | ({
                       relationTo: 'posts';
-                      value: number | Post;
+                      value: string | Post;
                     } | null)
                   | ({
                       relationTo: 'portfolio';
-                      value: number | Portfolio;
+                      value: string | Portfolio;
                     } | null);
                 url?: string | null;
                 label: string;

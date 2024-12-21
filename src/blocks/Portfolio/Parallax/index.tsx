@@ -60,14 +60,14 @@ export const QuoteBlock: React.FC<QuoteProps> = (props) => {
         className={[classes.authorWrapper, 'cols-12'].filter(Boolean).join(' ')}
       >
         <div className={classes.media}>
-          {typeof item.logo !== 'number' && (
+          {typeof item.logo !== 'string' && (
             <Media className={classes.logo} resource={item.logo} />
           )}
         </div>
         <div className={classes.author}>{item.author}</div>
       </div>
 
-      {typeof item.portfolio !== 'number' && item?.portfolio?.slug && (
+      {typeof item.portfolio !== 'string' && item?.portfolio?.slug && (
         <div className={['cols-8 cols-m-4 cols-s-8'].filter(Boolean).join(' ')}>
           <Button
             label={'View'}
@@ -165,7 +165,6 @@ export const PortfolioParallax: React.FC<Props> = (props) => {
         }
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [scrollProgress, navButtonsRef, navGridRef, delayNavScroll])
 
   React.useEffect(() => {
@@ -345,7 +344,7 @@ export const PortfolioParallax: React.FC<Props> = (props) => {
                           if (el) navButtonsRef.current[index] = el
                         }}
                       >
-                        {typeof item.portfolio !== 'number' && (
+                        {typeof item.portfolio !== 'string' && (
                           <Button
                             icon="arrow"
                             label={item.tabLabel}

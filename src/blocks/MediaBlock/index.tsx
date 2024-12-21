@@ -31,7 +31,7 @@ export const MediaBlock: React.FC<
 }) => {
   const { media, caption, position, settings } = mediaBlockFields
 
-  if (typeof media === 'number') return null
+  if (typeof media === 'string') return null
 
   return (
     <BlockWrapper

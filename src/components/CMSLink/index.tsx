@@ -1,9 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 
-import { getServerSideURL } from '@utils/getURL'
-
-import type { Page, Portfolio, Post } from '@payload-types'
+import { Page, Portfolio, Post } from '@payload-types'
 
 import { Button, ButtonProps } from '@components/ButtonComponent'
 
@@ -12,17 +10,17 @@ const relationSlugs = {
 }
 
 type PageReference = {
-  value: number | Page
+  value: string | Page
   relationTo: 'pages'
 }
 
 type PostsReference = {
-  value: number | Post
+  value: string | Post
   relationTo: 'posts'
 }
 
 type PortfolioReference = {
-  value: number | Portfolio
+  value: string | Portfolio
   relationTo: (typeof relationSlugs)['portfolio']
 }
 
@@ -65,37 +63,30 @@ const generateHref = (args: GenerateSlugType): string => {
     return url
   }
 
-  // TODO: Refactor the hardcoded slugs to become dynamic
-
-  if (type === 'reference' && reference?.value) {
-    // Check both number and object types
-    if (typeof reference.value === 'number') {
-      // Handle ID-only case (when value is just the ID number)
-      return `/${reference.relationTo}/${reference.value}`
+  if (
+    type === 'reference' &&
+    reference?.value &&
+    typeof reference.value !== 'string'
+  ) {
+    if (reference.relationTo === 'pages') {
+      const value = reference.value as Page
+      const breadcrumbs = value?.breadcrumbs
+      const hasBreadcrumbs =
+        breadcrumbs && Array.isArray(breadcrumbs) && breadcrumbs.length > 0
+      if (hasBreadcrumbs) {
+        return breadcrumbs[breadcrumbs.length - 1]?.url as string
+      }
     }
 
-    // Handle populated reference case (when value is the full object)
-    if (typeof reference.value === 'object') {
-      if (reference.relationTo === 'pages') {
-        const value = reference.value as Page
-        const breadcrumbs = value?.breadcrumbs
-        const hasBreadcrumbs =
-          breadcrumbs && Array.isArray(breadcrumbs) && breadcrumbs.length > 0
-        if (hasBreadcrumbs) {
-          return breadcrumbs[breadcrumbs.length - 1]?.url as string
-        }
-      }
-
-      if (reference.relationTo === 'posts') {
-        return `/blog/${reference.value.slug}`
-      }
-
-      if (reference.relationTo === 'portfolio') {
-        return `/portfolio/${reference.value.slug}`
-      }
-
-      return `/${reference.relationTo}/${reference.value.slug}`
+    if (reference.relationTo === 'posts') {
+      return `/blog/${reference.value.slug}`
     }
+
+    if (reference.relationTo === 'portfolio') {
+      return `/portfolio/${reference.value.slug}`
+    }
+
+    return `/${reference.relationTo}/${reference.value.slug}`
   }
 
   return ''
@@ -143,8 +134,8 @@ export const CMSLink: React.FC<CMSLinkType> = ({
     if (!hrefIsLocal && href !== '#') {
       try {
         const objectURL = new URL(href)
-        if (objectURL.origin === getServerSideURL()) {
-          href = objectURL.href.replace(getServerSideURL(), '')
+        if (objectURL.origin === process.env.NEXT_PUBLIC_SITE_URL) {
+          href = objectURL.href.replace(process.env.NEXT_PUBLIC_SITE_URL, '')
         }
       } catch (e) {
         // Do not throw error if URL is invalid

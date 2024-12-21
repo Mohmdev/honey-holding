@@ -53,7 +53,7 @@ export const PortfolioCards: React.FC<Props> = (props) => {
                         content={card.richText}
                       />
                       <div className={classes.media}>
-                        {typeof card.portfolio.featuredImage !== 'number' && (
+                        {typeof card.portfolio.featuredImage !== 'string' && (
                           <Media resource={card.portfolio.featuredImage} fill />
                         )}
                       </div>
