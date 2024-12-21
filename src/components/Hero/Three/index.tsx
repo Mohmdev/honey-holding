@@ -4,8 +4,8 @@ import { BlocksProp } from '@blocks/RenderBlocks'
 
 import { Page } from '@payload-types'
 
+import BackgroundGradient from '@components/Background/Gradient'
 import { BackgroundGrid } from '@components/Background/Grid'
-import BackgroundGradient from '@components/BackgroundGradient'
 import { BlockWrapper } from '@components/BlockWrapper'
 import { CMSLink } from '@components/CMSLink'
 import CreatePayloadApp from '@components/CreatePayloadApp'

@@ -14,7 +14,7 @@ export const Footer: GlobalConfig = {
   fields: [
     {
       type: 'array',
-      name: 'coloumns',
+      name: 'columns',
       maxRows: 3,
       minRows: 1,
       fields: [

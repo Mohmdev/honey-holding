@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { Page } from '@payload-types'
+import { RenderBlocks } from '@blocks/RenderBlocks'
 
-import { RenderBlocks } from '@components/RenderBlocks'
+import { Page } from '@payload-types'
 
 export type Props = Extract<
   Page['layout'][0],

@@ -6446,7 +6446,7 @@ export interface MainMenu {
  */
 export interface Footer {
   id: string;
-  coloumns?:
+  columns?:
     | {
         label: string;
         navItems?:
@@ -6599,7 +6599,7 @@ export interface MainMenuSelect<T extends boolean = true> {
  * via the `definition` "footer_select".
  */
 export interface FooterSelect<T extends boolean = true> {
-  coloumns?:
+  columns?:
     | T
     | {
         label?: T;
