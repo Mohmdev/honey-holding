@@ -10,7 +10,6 @@ import { isAdminOrSelf, isAdminOrSelfFieldLevel } from '@access/isAdminOrSelf'
 import type { CollectionConfig } from 'payload'
 
 import { ensureFirstUserIsAdmin } from './ensureFirstUserIsAdmin'
-import { protectRoles } from './protectRoles'
 
 import { ROLES_WITH_ADMIN_ACCESS } from '@constants'
 
@@ -77,7 +76,7 @@ export const Users: CollectionConfig<'users'> = {
       hasMany: false, // setting this to `true` makes the roles field type definition an array. Keep it false.
       saveToJWT: true,
       hooks: {
-        beforeChange: [ensureFirstUserIsAdmin, protectRoles]
+        beforeChange: [ensureFirstUserIsAdmin]
       }
     }
   ],
