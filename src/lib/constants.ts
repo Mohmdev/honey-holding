@@ -25,7 +25,7 @@ export const ENABLED_PLUGINS = {
   seo: true,
   redirects: true,
   nestedDocs: true,
-  search: false
+  search: true
 } as const
 export const REDIRECTABLE_COLLECTIONS: CollectionSlug[] = [
   'pages',
@@ -39,7 +39,8 @@ export const NESTED_COLLECTIONS: CollectionSlug[] = [
 ] as const
 export const INDEXED_COLLECTIONS: CollectionSlug[] = [
   //
-  'posts'
+  'posts',
+  'portfolio'
 ] as const
 export const INDEXED_TAXONOMY_COLLECTIONS: CollectionSlug[] = [
   //
@@ -66,23 +67,23 @@ export const ENABLED_REUSABLE_BLOCKS = {
   MediaBlock: true,
   HoverHighlights: true,
   //
-  HoverCards: false,
-  Callout: false,
-  CallToAction: false,
-  CardGrid: false,
-  PortfolioCards: false,
-  PortfolioHighlight: false,
-  PortfolioParallax: false,
-  Content: false,
-  ContentGrid: false,
-  ExampleTabs: false,
-  FormBlock: false,
-  LinkGrid: false,
-  LogoGrid: false,
-  MediaContent: false,
-  MediaContentAccordion: false,
-  PricingBlock: false,
-  Steps: false
+  HoverCards: true,
+  Callout: true,
+  CallToAction: true,
+  CardGrid: true,
+  PortfolioCards: true,
+  PortfolioHighlight: true,
+  PortfolioParallax: true,
+  Content: true,
+  ContentGrid: true,
+  ExampleTabs: true,
+  FormBlock: true,
+  LinkGrid: true,
+  LogoGrid: true,
+  MediaContent: true,
+  MediaContentAccordion: true,
+  PricingBlock: true,
+  Steps: true
 } as const
 
 export const ENABLED_PORTFOLIO_BLOCKS = {
@@ -95,22 +96,22 @@ export const ENABLED_PORTFOLIO_BLOCKS = {
   StickyHighlights: true,
   HoverHighlights: true,
   //
-  HoverCards: false,
-  PortfolioCards: false,
-  PortfolioHighlight: false,
-  PortfolioParallax: false,
-  Content: false,
-  ContentGrid: false,
-  FormBlock: false,
-  LinkGrid: false,
-  LogoGrid: false,
-  MediaBlock: false,
-  MediaContent: false,
-  MediaContentAccordion: false,
-  PricingBlock: false,
-  ReusableContent: false,
-  Steps: false,
-  ExampleTabs: false
+  HoverCards: true,
+  PortfolioCards: true,
+  PortfolioHighlight: true,
+  PortfolioParallax: true,
+  Content: true,
+  ContentGrid: true,
+  FormBlock: true,
+  LinkGrid: true,
+  LogoGrid: true,
+  MediaBlock: true,
+  MediaContent: true,
+  MediaContentAccordion: true,
+  PricingBlock: true,
+  ReusableContent: true,
+  Steps: true,
+  ExampleTabs: true
 } as const
 
 export const ENABLED_PAGE_BLOCKS = {

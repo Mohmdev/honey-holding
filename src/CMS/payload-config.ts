@@ -24,8 +24,13 @@ import { plugins } from '@services/plugins'
 
 export default buildConfig({
   collections: [
-    ...collectionGroup('', [Portfolio]),
-    ...collectionGroup('Content', [Pages, Posts, Categories, ReusableContent]),
+    ...collectionGroup('Content', [
+      Pages,
+      Portfolio,
+      Posts,
+      Categories,
+      ReusableContent
+    ]),
     ...collectionGroup('Uploads', [Media, Assets]),
     ...collectionGroup('Settings', [Users]),
     ...collectionGroup('Support', [Docs, Tickets])

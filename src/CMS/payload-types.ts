@@ -11,8 +11,8 @@ export interface Config {
     users: UserAuthOperations;
   };
   collections: {
-    portfolio: Portfolio;
     pages: Page;
+    portfolio: Portfolio;
     posts: Post;
     categories: Category;
     'reusable-content': ReusableContent;
@@ -24,6 +24,7 @@ export interface Config {
     forms: Form;
     'form-submissions': FormSubmission;
     redirects: Redirect;
+    search: Search;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -34,8 +35,8 @@ export interface Config {
     };
   };
   collectionsSelect: {
-    portfolio: PortfolioSelect<false> | PortfolioSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
+    portfolio: PortfolioSelect<false> | PortfolioSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     'reusable-content': ReusableContentSelect<false> | ReusableContentSelect<true>;
@@ -47,6 +48,7 @@ export interface Config {
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
+    search: SearchSelect<false> | SearchSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -87,781 +89,6 @@ export interface UserAuthOperations {
   unlock: {
     email: string;
     password: string;
-  };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "portfolio".
- */
-export interface Portfolio {
-  id: string;
-  title: string;
-  introContent: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  industry?: string | null;
-  useCase?: string | null;
-  featuredImage: string | Media;
-  layout?:
-    | (
-        | {
-            calloutFields: {
-              settings?: {
-                /**
-                 * Leave blank for system default
-                 */
-                theme?: ('light' | 'dark') | null;
-                background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
-              };
-              richText: {
-                root: {
-                  type: string;
-                  children: {
-                    type: string;
-                    version: number;
-                    [k: string]: unknown;
-                  }[];
-                  direction: ('ltr' | 'rtl') | null;
-                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                  indent: number;
-                  version: number;
-                };
-                [k: string]: unknown;
-              };
-              logo: string | Media;
-              author?: string | null;
-              role?: string | null;
-              images?:
-                | {
-                    image: string | Media;
-                    id?: string | null;
-                  }[]
-                | null;
-            };
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'callout';
-          }
-        | {
-            ctaFields: {
-              settings?: {
-                /**
-                 * Leave blank for system default
-                 */
-                theme?: ('light' | 'dark') | null;
-                background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
-              };
-              style?: ('buttons' | 'banner') | null;
-              richText: {
-                root: {
-                  type: string;
-                  children: {
-                    type: string;
-                    version: number;
-                    [k: string]: unknown;
-                  }[];
-                  direction: ('ltr' | 'rtl') | null;
-                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                  indent: number;
-                  version: number;
-                };
-                [k: string]: unknown;
-              };
-              commandLine?: string | null;
-              links?:
-                | {
-                    type?: ('link' | 'npmCta') | null;
-                    npmCta?: {
-                      label: string;
-                    };
-                    link?: {
-                      type?: ('reference' | 'custom') | null;
-                      newTab?: boolean | null;
-                      reference?:
-                        | ({
-                            relationTo: 'pages';
-                            value: string | Page;
-                          } | null)
-                        | ({
-                            relationTo: 'posts';
-                            value: string | Post;
-                          } | null)
-                        | ({
-                            relationTo: 'portfolio';
-                            value: string | Portfolio;
-                          } | null);
-                      url?: string | null;
-                      label: string;
-                      customId?: string | null;
-                    };
-                    id?: string | null;
-                  }[]
-                | null;
-              bannerLink?: {
-                type?: ('reference' | 'custom') | null;
-                newTab?: boolean | null;
-                reference?:
-                  | ({
-                      relationTo: 'pages';
-                      value: string | Page;
-                    } | null)
-                  | ({
-                      relationTo: 'posts';
-                      value: string | Post;
-                    } | null)
-                  | ({
-                      relationTo: 'portfolio';
-                      value: string | Portfolio;
-                    } | null);
-                url?: string | null;
-                label: string;
-                customId?: string | null;
-              };
-              bannerImage?: (string | null) | Media;
-              gradientBackground?: boolean | null;
-            };
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'cta';
-          }
-        | {
-            cardGridFields: {
-              settings?: {
-                /**
-                 * Leave blank for system default
-                 */
-                theme?: ('light' | 'dark') | null;
-                background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
-              };
-              richText: {
-                root: {
-                  type: string;
-                  children: {
-                    type: string;
-                    version: number;
-                    [k: string]: unknown;
-                  }[];
-                  direction: ('ltr' | 'rtl') | null;
-                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                  indent: number;
-                  version: number;
-                };
-                [k: string]: unknown;
-              };
-              /**
-               * These links will be placed above the card grid as calls-to-action.
-               */
-              links?:
-                | {
-                    link: {
-                      type?: ('reference' | 'custom') | null;
-                      newTab?: boolean | null;
-                      reference?:
-                        | ({
-                            relationTo: 'pages';
-                            value: string | Page;
-                          } | null)
-                        | ({
-                            relationTo: 'posts';
-                            value: string | Post;
-                          } | null)
-                        | ({
-                            relationTo: 'portfolio';
-                            value: string | Portfolio;
-                          } | null);
-                      url?: string | null;
-                      label: string;
-                      customId?: string | null;
-                    };
-                    id?: string | null;
-                  }[]
-                | null;
-              revealDescription?: boolean | null;
-              cards?:
-                | {
-                    title: string;
-                    description?: string | null;
-                    enableLink?: boolean | null;
-                    link?: {
-                      type?: ('reference' | 'custom') | null;
-                      newTab?: boolean | null;
-                      reference?:
-                        | ({
-                            relationTo: 'pages';
-                            value: string | Page;
-                          } | null)
-                        | ({
-                            relationTo: 'posts';
-                            value: string | Post;
-                          } | null)
-                        | ({
-                            relationTo: 'portfolio';
-                            value: string | Portfolio;
-                          } | null);
-                      url?: string | null;
-                      customId?: string | null;
-                    };
-                    id?: string | null;
-                  }[]
-                | null;
-            };
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'cardGrid';
-          }
-        | {
-            codeFeatureFields: {
-              settings?: {
-                /**
-                 * Leave blank for system default
-                 */
-                theme?: ('light' | 'dark') | null;
-                background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
-              };
-              /**
-               * Check this box to force this block to have a dark background.
-               */
-              forceDarkBackground?: boolean | null;
-              /**
-               * Choose how to align the content for this block.
-               */
-              alignment?: ('contentCode' | 'codeContent') | null;
-              heading?: string | null;
-              richText: {
-                root: {
-                  type: string;
-                  children: {
-                    type: string;
-                    version: number;
-                    [k: string]: unknown;
-                  }[];
-                  direction: ('ltr' | 'rtl') | null;
-                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                  indent: number;
-                  version: number;
-                };
-                [k: string]: unknown;
-              };
-              links?:
-                | {
-                    link: {
-                      type?: ('reference' | 'custom') | null;
-                      newTab?: boolean | null;
-                      reference?:
-                        | ({
-                            relationTo: 'pages';
-                            value: string | Page;
-                          } | null)
-                        | ({
-                            relationTo: 'posts';
-                            value: string | Post;
-                          } | null)
-                        | ({
-                            relationTo: 'portfolio';
-                            value: string | Portfolio;
-                          } | null);
-                      url?: string | null;
-                      label: string;
-                      customId?: string | null;
-                    };
-                    id?: string | null;
-                  }[]
-                | null;
-              codeTabs?:
-                | {
-                    language?: ('none' | 'js' | 'ts') | null;
-                    label: string;
-                    code: string;
-                    codeBlips?:
-                      | {
-                          row: number;
-                          label: string;
-                          feature: {
-                            root: {
-                              type: string;
-                              children: {
-                                type: string;
-                                version: number;
-                                [k: string]: unknown;
-                              }[];
-                              direction: ('ltr' | 'rtl') | null;
-                              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                              indent: number;
-                              version: number;
-                            };
-                            [k: string]: unknown;
-                          };
-                          enableLink?: boolean | null;
-                          link?: {
-                            type?: ('reference' | 'custom') | null;
-                            newTab?: boolean | null;
-                            reference?:
-                              | ({
-                                  relationTo: 'pages';
-                                  value: string | Page;
-                                } | null)
-                              | ({
-                                  relationTo: 'posts';
-                                  value: string | Post;
-                                } | null)
-                              | ({
-                                  relationTo: 'portfolio';
-                                  value: string | Portfolio;
-                                } | null);
-                            url?: string | null;
-                            label: string;
-                            customId?: string | null;
-                          };
-                          id?: string | null;
-                        }[]
-                      | null;
-                    id?: string | null;
-                  }[]
-                | null;
-            };
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'codeFeature';
-          }
-        | {
-            hoverHighlightsFields: {
-              settings?: {
-                /**
-                 * Leave blank for system default
-                 */
-                theme?: ('light' | 'dark') | null;
-                background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
-              };
-              beforeHighlights?: string | null;
-              highlights?:
-                | {
-                    text: string;
-                    media?: {
-                      top?: (string | null) | Media;
-                      bottom?: (string | null) | Media;
-                    };
-                    link?: {
-                      type?: ('reference' | 'custom') | null;
-                      newTab?: boolean | null;
-                      reference?:
-                        | ({
-                            relationTo: 'pages';
-                            value: string | Page;
-                          } | null)
-                        | ({
-                            relationTo: 'posts';
-                            value: string | Post;
-                          } | null)
-                        | ({
-                            relationTo: 'portfolio';
-                            value: string | Portfolio;
-                          } | null);
-                      url?: string | null;
-                      customId?: string | null;
-                    };
-                    id?: string | null;
-                  }[]
-                | null;
-              afterHighlights?: string | null;
-              link: {
-                type?: ('reference' | 'custom') | null;
-                newTab?: boolean | null;
-                reference?:
-                  | ({
-                      relationTo: 'pages';
-                      value: string | Page;
-                    } | null)
-                  | ({
-                      relationTo: 'posts';
-                      value: string | Post;
-                    } | null)
-                  | ({
-                      relationTo: 'portfolio';
-                      value: string | Portfolio;
-                    } | null);
-                url?: string | null;
-                label: string;
-                customId?: string | null;
-              };
-            };
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'hoverHighlights';
-          }
-        | {
-            sliderFields: {
-              settings?: {
-                /**
-                 * Leave blank for system default
-                 */
-                theme?: ('light' | 'dark') | null;
-                background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
-              };
-              introContent?: {
-                root: {
-                  type: string;
-                  children: {
-                    type: string;
-                    version: number;
-                    [k: string]: unknown;
-                  }[];
-                  direction: ('ltr' | 'rtl') | null;
-                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                  indent: number;
-                  version: number;
-                };
-                [k: string]: unknown;
-              } | null;
-              links?:
-                | {
-                    link: {
-                      type?: ('reference' | 'custom') | null;
-                      newTab?: boolean | null;
-                      reference?:
-                        | ({
-                            relationTo: 'pages';
-                            value: string | Page;
-                          } | null)
-                        | ({
-                            relationTo: 'posts';
-                            value: string | Post;
-                          } | null)
-                        | ({
-                            relationTo: 'portfolio';
-                            value: string | Portfolio;
-                          } | null);
-                      url?: string | null;
-                      label: string;
-                      customId?: string | null;
-                      /**
-                       * Choose how the link should be rendered.
-                       */
-                      appearance?: ('default' | 'primary' | 'secondary') | null;
-                    };
-                    id?: string | null;
-                  }[]
-                | null;
-              quoteSlides: {
-                quote: string;
-                author: string;
-                role?: string | null;
-                logo?: (string | null) | Media;
-                enableLink?: boolean | null;
-                link?: {
-                  type?: ('reference' | 'custom') | null;
-                  newTab?: boolean | null;
-                  reference?:
-                    | ({
-                        relationTo: 'pages';
-                        value: string | Page;
-                      } | null)
-                    | ({
-                        relationTo: 'posts';
-                        value: string | Post;
-                      } | null)
-                    | ({
-                        relationTo: 'portfolio';
-                        value: string | Portfolio;
-                      } | null);
-                  url?: string | null;
-                  label: string;
-                  customId?: string | null;
-                };
-                id?: string | null;
-              }[];
-            };
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'slider';
-          }
-        | {
-            statementFields: {
-              settings?: {
-                /**
-                 * Leave blank for system default
-                 */
-                theme?: ('light' | 'dark') | null;
-                background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
-              };
-              richText: {
-                root: {
-                  type: string;
-                  children: {
-                    type: string;
-                    version: number;
-                    [k: string]: unknown;
-                  }[];
-                  direction: ('ltr' | 'rtl') | null;
-                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                  indent: number;
-                  version: number;
-                };
-                [k: string]: unknown;
-              };
-              links?:
-                | {
-                    link: {
-                      type?: ('reference' | 'custom') | null;
-                      newTab?: boolean | null;
-                      reference?:
-                        | ({
-                            relationTo: 'pages';
-                            value: string | Page;
-                          } | null)
-                        | ({
-                            relationTo: 'posts';
-                            value: string | Post;
-                          } | null)
-                        | ({
-                            relationTo: 'portfolio';
-                            value: string | Portfolio;
-                          } | null);
-                      url?: string | null;
-                      label: string;
-                      customId?: string | null;
-                    };
-                    id?: string | null;
-                  }[]
-                | null;
-              assetType?: ('media' | 'code') | null;
-              media?: (string | null) | Media;
-              code?: string | null;
-              mediaWidth?: ('small' | 'medium' | 'large' | 'full') | null;
-              backgroundGlow?: ('none' | 'colorful' | 'white') | null;
-              assetCaption?: string | null;
-            };
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'statement';
-          }
-        | {
-            stickyHighlightsFields?: {
-              settings?: {
-                /**
-                 * Leave blank for system default
-                 */
-                theme?: ('light' | 'dark') | null;
-                background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
-              };
-              highlights?:
-                | {
-                    richText: {
-                      root: {
-                        type: string;
-                        children: {
-                          type: string;
-                          version: number;
-                          [k: string]: unknown;
-                        }[];
-                        direction: ('ltr' | 'rtl') | null;
-                        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                        indent: number;
-                        version: number;
-                      };
-                      [k: string]: unknown;
-                    };
-                    enableLink?: boolean | null;
-                    link?: {
-                      type?: ('reference' | 'custom') | null;
-                      newTab?: boolean | null;
-                      reference?:
-                        | ({
-                            relationTo: 'pages';
-                            value: string | Page;
-                          } | null)
-                        | ({
-                            relationTo: 'posts';
-                            value: string | Post;
-                          } | null)
-                        | ({
-                            relationTo: 'portfolio';
-                            value: string | Portfolio;
-                          } | null);
-                      url?: string | null;
-                      label: string;
-                      customId?: string | null;
-                    };
-                    type?: ('code' | 'media') | null;
-                    code?: string | null;
-                    codeBlips?:
-                      | {
-                          row: number;
-                          label: string;
-                          feature: {
-                            root: {
-                              type: string;
-                              children: {
-                                type: string;
-                                version: number;
-                                [k: string]: unknown;
-                              }[];
-                              direction: ('ltr' | 'rtl') | null;
-                              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                              indent: number;
-                              version: number;
-                            };
-                            [k: string]: unknown;
-                          };
-                          enableLink?: boolean | null;
-                          link?: {
-                            type?: ('reference' | 'custom') | null;
-                            newTab?: boolean | null;
-                            reference?:
-                              | ({
-                                  relationTo: 'pages';
-                                  value: string | Page;
-                                } | null)
-                              | ({
-                                  relationTo: 'posts';
-                                  value: string | Post;
-                                } | null)
-                              | ({
-                                  relationTo: 'portfolio';
-                                  value: string | Portfolio;
-                                } | null);
-                            url?: string | null;
-                            label: string;
-                            customId?: string | null;
-                          };
-                          id?: string | null;
-                        }[]
-                      | null;
-                    media?: (string | null) | Media;
-                    id?: string | null;
-                  }[]
-                | null;
-            };
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'stickyHighlights';
-          }
-      )[]
-    | null;
-  slug: string;
-  slugLock?: boolean | null;
-  url?: string | null;
-  meta?: {
-    title?: string | null;
-    description?: string | null;
-    /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-     */
-    image?: (string | null) | Media;
-  };
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
- */
-export interface Media {
-  id: string;
-  /**
-   * Choose an upload to render if the visitor is using dark mode.
-   */
-  darkModeFallback?: (string | null) | Media;
-  alt: string;
-  /**
-   * Optional
-   */
-  caption?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  prefix?: string | null;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
-  sizes?: {
-    thumbnail?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    square?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    small?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    medium?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    large?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    xlarge?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    og?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
   };
 }
 /**
@@ -2761,528 +1988,1244 @@ export interface Post {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "reusable-content".
+ * via the `definition` "media".
  */
-export interface ReusableContent {
+export interface Media {
+  id: string;
+  /**
+   * Choose an upload to render if the visitor is using dark mode.
+   */
+  darkModeFallback?: (string | null) | Media;
+  alt: string;
+  /**
+   * Optional
+   */
+  caption?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  prefix?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    square?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    small?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    medium?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    large?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    xlarge?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    og?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "portfolio".
+ */
+export interface Portfolio {
   id: string;
   title: string;
-  layout: (
-    | {
-        bannerFields: {
-          settings?: {
-            /**
-             * Leave blank for system default
-             */
-            theme?: ('light' | 'dark') | null;
-            background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
-          };
-          type?: ('default' | 'success' | 'warning' | 'error') | null;
-          addCheckmark?: boolean | null;
-          content: {
-            root: {
-              type: string;
-              children: {
-                type: string;
-                version: number;
-                [k: string]: unknown;
-              }[];
-              direction: ('ltr' | 'rtl') | null;
-              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-              indent: number;
-              version: number;
-            };
-            [k: string]: unknown;
-          };
-        };
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'banner';
-      }
-    | {
-        blogContentFields: {
-          settings?: {
-            /**
-             * Leave blank for system default
-             */
-            theme?: ('light' | 'dark') | null;
-            background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
-          };
-          richText: {
-            root: {
-              type: string;
-              children: {
-                type: string;
-                version: number;
-                [k: string]: unknown;
-              }[];
-              direction: ('ltr' | 'rtl') | null;
-              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-              indent: number;
-              version: number;
-            };
-            [k: string]: unknown;
-          };
-        };
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'blogContent';
-      }
-    | {
-        blogMarkdownFields: {
-          settings?: {
-            /**
-             * Leave blank for system default
-             */
-            theme?: ('light' | 'dark') | null;
-            background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
-          };
-          markdown: string;
-        };
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'blogMarkdown';
-      }
-    | {
-        codeFields: {
-          settings?: {
-            /**
-             * Leave blank for system default
-             */
-            theme?: ('light' | 'dark') | null;
-            background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
-          };
-          language?: ('none' | 'js' | 'ts') | null;
-          code: string;
-          codeBlips?:
-            | {
-                row: number;
-                label: string;
-                feature: {
-                  root: {
+  introContent: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  industry?: string | null;
+  useCase?: string | null;
+  featuredImage: string | Media;
+  layout?:
+    | (
+        | {
+            calloutFields: {
+              settings?: {
+                /**
+                 * Leave blank for system default
+                 */
+                theme?: ('light' | 'dark') | null;
+                background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+              };
+              richText: {
+                root: {
+                  type: string;
+                  children: {
                     type: string;
-                    children: {
-                      type: string;
-                      version: number;
-                      [k: string]: unknown;
-                    }[];
-                    direction: ('ltr' | 'rtl') | null;
-                    format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                    indent: number;
                     version: number;
-                  };
-                  [k: string]: unknown;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
                 };
-                enableLink?: boolean | null;
-                link?: {
-                  type?: ('reference' | 'custom') | null;
-                  newTab?: boolean | null;
-                  reference?:
-                    | ({
-                        relationTo: 'pages';
-                        value: string | Page;
-                      } | null)
-                    | ({
-                        relationTo: 'posts';
-                        value: string | Post;
-                      } | null)
-                    | ({
-                        relationTo: 'portfolio';
-                        value: string | Portfolio;
-                      } | null);
-                  url?: string | null;
-                  label: string;
-                  customId?: string | null;
-                };
-                id?: string | null;
-              }[]
-            | null;
-        };
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'code';
-      }
-    | {
-        codeFeatureFields: {
-          settings?: {
-            /**
-             * Leave blank for system default
-             */
-            theme?: ('light' | 'dark') | null;
-            background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
-          };
-          /**
-           * Check this box to force this block to have a dark background.
-           */
-          forceDarkBackground?: boolean | null;
-          /**
-           * Choose how to align the content for this block.
-           */
-          alignment?: ('contentCode' | 'codeContent') | null;
-          heading?: string | null;
-          richText: {
-            root: {
-              type: string;
-              children: {
-                type: string;
-                version: number;
                 [k: string]: unknown;
-              }[];
-              direction: ('ltr' | 'rtl') | null;
-              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-              indent: number;
-              version: number;
+              };
+              logo: string | Media;
+              author?: string | null;
+              role?: string | null;
+              images?:
+                | {
+                    image: string | Media;
+                    id?: string | null;
+                  }[]
+                | null;
             };
-            [k: string]: unknown;
-          };
-          links?:
-            | {
-                link: {
-                  type?: ('reference' | 'custom') | null;
-                  newTab?: boolean | null;
-                  reference?:
-                    | ({
-                        relationTo: 'pages';
-                        value: string | Page;
-                      } | null)
-                    | ({
-                        relationTo: 'posts';
-                        value: string | Post;
-                      } | null)
-                    | ({
-                        relationTo: 'portfolio';
-                        value: string | Portfolio;
-                      } | null);
-                  url?: string | null;
-                  label: string;
-                  customId?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'callout';
+          }
+        | {
+            ctaFields: {
+              settings?: {
+                /**
+                 * Leave blank for system default
+                 */
+                theme?: ('light' | 'dark') | null;
+                background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+              };
+              style?: ('buttons' | 'banner') | null;
+              richText: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
                 };
-                id?: string | null;
-              }[]
-            | null;
-          codeTabs?:
-            | {
-                language?: ('none' | 'js' | 'ts') | null;
-                label: string;
-                code: string;
-                codeBlips?:
-                  | {
-                      row: number;
+                [k: string]: unknown;
+              };
+              commandLine?: string | null;
+              links?:
+                | {
+                    type?: ('link' | 'npmCta') | null;
+                    npmCta?: {
                       label: string;
-                      feature: {
-                        root: {
+                    };
+                    link?: {
+                      type?: ('reference' | 'custom') | null;
+                      newTab?: boolean | null;
+                      reference?:
+                        | ({
+                            relationTo: 'pages';
+                            value: string | Page;
+                          } | null)
+                        | ({
+                            relationTo: 'posts';
+                            value: string | Post;
+                          } | null)
+                        | ({
+                            relationTo: 'portfolio';
+                            value: string | Portfolio;
+                          } | null);
+                      url?: string | null;
+                      label: string;
+                      customId?: string | null;
+                    };
+                    id?: string | null;
+                  }[]
+                | null;
+              bannerLink?: {
+                type?: ('reference' | 'custom') | null;
+                newTab?: boolean | null;
+                reference?:
+                  | ({
+                      relationTo: 'pages';
+                      value: string | Page;
+                    } | null)
+                  | ({
+                      relationTo: 'posts';
+                      value: string | Post;
+                    } | null)
+                  | ({
+                      relationTo: 'portfolio';
+                      value: string | Portfolio;
+                    } | null);
+                url?: string | null;
+                label: string;
+                customId?: string | null;
+              };
+              bannerImage?: (string | null) | Media;
+              gradientBackground?: boolean | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'cta';
+          }
+        | {
+            cardGridFields: {
+              settings?: {
+                /**
+                 * Leave blank for system default
+                 */
+                theme?: ('light' | 'dark') | null;
+                background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+              };
+              richText: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              };
+              /**
+               * These links will be placed above the card grid as calls-to-action.
+               */
+              links?:
+                | {
+                    link: {
+                      type?: ('reference' | 'custom') | null;
+                      newTab?: boolean | null;
+                      reference?:
+                        | ({
+                            relationTo: 'pages';
+                            value: string | Page;
+                          } | null)
+                        | ({
+                            relationTo: 'posts';
+                            value: string | Post;
+                          } | null)
+                        | ({
+                            relationTo: 'portfolio';
+                            value: string | Portfolio;
+                          } | null);
+                      url?: string | null;
+                      label: string;
+                      customId?: string | null;
+                    };
+                    id?: string | null;
+                  }[]
+                | null;
+              revealDescription?: boolean | null;
+              cards?:
+                | {
+                    title: string;
+                    description?: string | null;
+                    enableLink?: boolean | null;
+                    link?: {
+                      type?: ('reference' | 'custom') | null;
+                      newTab?: boolean | null;
+                      reference?:
+                        | ({
+                            relationTo: 'pages';
+                            value: string | Page;
+                          } | null)
+                        | ({
+                            relationTo: 'posts';
+                            value: string | Post;
+                          } | null)
+                        | ({
+                            relationTo: 'portfolio';
+                            value: string | Portfolio;
+                          } | null);
+                      url?: string | null;
+                      customId?: string | null;
+                    };
+                    id?: string | null;
+                  }[]
+                | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'cardGrid';
+          }
+        | {
+            portfolioCardFields?: {
+              settings?: {
+                /**
+                 * Leave blank for system default
+                 */
+                theme?: ('light' | 'dark') | null;
+                background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+              };
+              pixels?: boolean | null;
+              cards?:
+                | {
+                    richText: {
+                      root: {
+                        type: string;
+                        children: {
                           type: string;
-                          children: {
-                            type: string;
-                            version: number;
-                            [k: string]: unknown;
-                          }[];
-                          direction: ('ltr' | 'rtl') | null;
-                          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                          indent: number;
                           version: number;
-                        };
-                        [k: string]: unknown;
+                          [k: string]: unknown;
+                        }[];
+                        direction: ('ltr' | 'rtl') | null;
+                        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                        indent: number;
+                        version: number;
                       };
-                      enableLink?: boolean | null;
-                      link?: {
-                        type?: ('reference' | 'custom') | null;
-                        newTab?: boolean | null;
-                        reference?:
-                          | ({
-                              relationTo: 'pages';
-                              value: string | Page;
-                            } | null)
-                          | ({
-                              relationTo: 'posts';
-                              value: string | Post;
-                            } | null)
-                          | ({
-                              relationTo: 'portfolio';
-                              value: string | Portfolio;
-                            } | null);
-                        url?: string | null;
-                        label: string;
-                        customId?: string | null;
+                      [k: string]: unknown;
+                    };
+                    portfolio: string | Portfolio;
+                    id?: string | null;
+                  }[]
+                | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'portfolioCards';
+          }
+        | {
+            portfolioHighlightFields: {
+              settings?: {
+                /**
+                 * Leave blank for system default
+                 */
+                theme?: ('light' | 'dark') | null;
+                background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+              };
+              richText: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              };
+              portfolio: (string | Portfolio)[];
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'portfolioHighlight';
+          }
+        | {
+            portfolioParallaxFields?: {
+              settings?: {
+                /**
+                 * Leave blank for system default
+                 */
+                theme?: ('light' | 'dark') | null;
+                background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+              };
+              items?:
+                | {
+                    quote: string;
+                    author?: string | null;
+                    logo: string | Media;
+                    images?:
+                      | {
+                          image: string | Media;
+                          id?: string | null;
+                        }[]
+                      | null;
+                    /**
+                     * A label for the navigation tab at the bottom of the parallax
+                     */
+                    tabLabel: string;
+                    portfolio: string | Portfolio;
+                    id?: string | null;
+                  }[]
+                | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'portfolioParallax';
+          }
+        | {
+            codeFeatureFields: {
+              settings?: {
+                /**
+                 * Leave blank for system default
+                 */
+                theme?: ('light' | 'dark') | null;
+                background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+              };
+              /**
+               * Check this box to force this block to have a dark background.
+               */
+              forceDarkBackground?: boolean | null;
+              /**
+               * Choose how to align the content for this block.
+               */
+              alignment?: ('contentCode' | 'codeContent') | null;
+              heading?: string | null;
+              richText: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              };
+              links?:
+                | {
+                    link: {
+                      type?: ('reference' | 'custom') | null;
+                      newTab?: boolean | null;
+                      reference?:
+                        | ({
+                            relationTo: 'pages';
+                            value: string | Page;
+                          } | null)
+                        | ({
+                            relationTo: 'posts';
+                            value: string | Post;
+                          } | null)
+                        | ({
+                            relationTo: 'portfolio';
+                            value: string | Portfolio;
+                          } | null);
+                      url?: string | null;
+                      label: string;
+                      customId?: string | null;
+                    };
+                    id?: string | null;
+                  }[]
+                | null;
+              codeTabs?:
+                | {
+                    language?: ('none' | 'js' | 'ts') | null;
+                    label: string;
+                    code: string;
+                    codeBlips?:
+                      | {
+                          row: number;
+                          label: string;
+                          feature: {
+                            root: {
+                              type: string;
+                              children: {
+                                type: string;
+                                version: number;
+                                [k: string]: unknown;
+                              }[];
+                              direction: ('ltr' | 'rtl') | null;
+                              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                              indent: number;
+                              version: number;
+                            };
+                            [k: string]: unknown;
+                          };
+                          enableLink?: boolean | null;
+                          link?: {
+                            type?: ('reference' | 'custom') | null;
+                            newTab?: boolean | null;
+                            reference?:
+                              | ({
+                                  relationTo: 'pages';
+                                  value: string | Page;
+                                } | null)
+                              | ({
+                                  relationTo: 'posts';
+                                  value: string | Post;
+                                } | null)
+                              | ({
+                                  relationTo: 'portfolio';
+                                  value: string | Portfolio;
+                                } | null);
+                            url?: string | null;
+                            label: string;
+                            customId?: string | null;
+                          };
+                          id?: string | null;
+                        }[]
+                      | null;
+                    id?: string | null;
+                  }[]
+                | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'codeFeature';
+          }
+        | {
+            contentFields: {
+              settings?: {
+                /**
+                 * Leave blank for system default
+                 */
+                theme?: ('light' | 'dark') | null;
+                background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+              };
+              useLeadingHeader?: boolean | null;
+              leadingHeader?: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              } | null;
+              layout?: ('oneColumn' | 'twoColumns' | 'twoThirdsOneThird' | 'halfAndHalf' | 'threeColumns') | null;
+              columnOne: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              };
+              columnTwo?: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              } | null;
+              columnThree?: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              } | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'content';
+          }
+        | {
+            contentGridFields?: {
+              settings?: {
+                /**
+                 * Leave blank for system default
+                 */
+                theme?: ('light' | 'dark') | null;
+                background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+              };
+              style?: ('gridBelow' | 'sideBySide') | null;
+              showNumbers?: boolean | null;
+              content?: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              } | null;
+              links?:
+                | {
+                    link: {
+                      type?: ('reference' | 'custom') | null;
+                      newTab?: boolean | null;
+                      reference?:
+                        | ({
+                            relationTo: 'pages';
+                            value: string | Page;
+                          } | null)
+                        | ({
+                            relationTo: 'posts';
+                            value: string | Post;
+                          } | null)
+                        | ({
+                            relationTo: 'portfolio';
+                            value: string | Portfolio;
+                          } | null);
+                      url?: string | null;
+                      label: string;
+                      customId?: string | null;
+                    };
+                    id?: string | null;
+                  }[]
+                | null;
+              cells?:
+                | {
+                    content: {
+                      root: {
+                        type: string;
+                        children: {
+                          type: string;
+                          version: number;
+                          [k: string]: unknown;
+                        }[];
+                        direction: ('ltr' | 'rtl') | null;
+                        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                        indent: number;
+                        version: number;
                       };
-                      id?: string | null;
-                    }[]
-                  | null;
-                id?: string | null;
-              }[]
-            | null;
-        };
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'codeFeature';
-      }
-    | {
-        hoverHighlightsFields: {
-          settings?: {
-            /**
-             * Leave blank for system default
-             */
-            theme?: ('light' | 'dark') | null;
-            background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
-          };
-          beforeHighlights?: string | null;
-          highlights?:
-            | {
-                text: string;
-                media?: {
-                  top?: (string | null) | Media;
-                  bottom?: (string | null) | Media;
-                };
-                link?: {
-                  type?: ('reference' | 'custom') | null;
-                  newTab?: boolean | null;
-                  reference?:
-                    | ({
-                        relationTo: 'pages';
-                        value: string | Page;
-                      } | null)
-                    | ({
-                        relationTo: 'posts';
-                        value: string | Post;
-                      } | null)
-                    | ({
-                        relationTo: 'portfolio';
-                        value: string | Portfolio;
-                      } | null);
-                  url?: string | null;
-                  customId?: string | null;
-                };
-                id?: string | null;
-              }[]
-            | null;
-          afterHighlights?: string | null;
-          link: {
-            type?: ('reference' | 'custom') | null;
-            newTab?: boolean | null;
-            reference?:
-              | ({
-                  relationTo: 'pages';
-                  value: string | Page;
-                } | null)
-              | ({
-                  relationTo: 'posts';
-                  value: string | Post;
-                } | null)
-              | ({
-                  relationTo: 'portfolio';
-                  value: string | Portfolio;
-                } | null);
-            url?: string | null;
-            label: string;
-            customId?: string | null;
-          };
-        };
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'hoverHighlights';
-      }
-    | {
-        mediaBlockFields: {
-          settings?: {
-            /**
-             * Leave blank for system default
-             */
-            theme?: ('light' | 'dark') | null;
-            background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
-          };
-          position?: ('default' | 'wide') | null;
-          media: string | Media;
-          caption?: {
-            root: {
-              type: string;
-              children: {
-                type: string;
-                version: number;
-                [k: string]: unknown;
-              }[];
-              direction: ('ltr' | 'rtl') | null;
-              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-              indent: number;
-              version: number;
+                      [k: string]: unknown;
+                    };
+                    id?: string | null;
+                  }[]
+                | null;
             };
-            [k: string]: unknown;
-          } | null;
-        };
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'mediaBlock';
-      }
-    | {
-        sliderFields: {
-          settings?: {
-            /**
-             * Leave blank for system default
-             */
-            theme?: ('light' | 'dark') | null;
-            background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
-          };
-          introContent?: {
-            root: {
-              type: string;
-              children: {
-                type: string;
-                version: number;
-                [k: string]: unknown;
-              }[];
-              direction: ('ltr' | 'rtl') | null;
-              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-              indent: number;
-              version: number;
-            };
-            [k: string]: unknown;
-          } | null;
-          links?:
-            | {
-                link: {
-                  type?: ('reference' | 'custom') | null;
-                  newTab?: boolean | null;
-                  reference?:
-                    | ({
-                        relationTo: 'pages';
-                        value: string | Page;
-                      } | null)
-                    | ({
-                        relationTo: 'posts';
-                        value: string | Post;
-                      } | null)
-                    | ({
-                        relationTo: 'portfolio';
-                        value: string | Portfolio;
-                      } | null);
-                  url?: string | null;
-                  label: string;
-                  customId?: string | null;
-                  /**
-                   * Choose how the link should be rendered.
-                   */
-                  appearance?: ('default' | 'primary' | 'secondary') | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'contentGrid';
+          }
+        | {
+            formFields: {
+              settings?: {
+                /**
+                 * Leave blank for system default
+                 */
+                theme?: ('light' | 'dark') | null;
+                background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+              };
+              richText: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
                 };
-                id?: string | null;
-              }[]
-            | null;
-          quoteSlides: {
-            quote: string;
-            author: string;
-            role?: string | null;
-            logo?: (string | null) | Media;
-            enableLink?: boolean | null;
-            link?: {
-              type?: ('reference' | 'custom') | null;
-              newTab?: boolean | null;
-              reference?:
-                | ({
-                    relationTo: 'pages';
-                    value: string | Page;
-                  } | null)
-                | ({
-                    relationTo: 'posts';
-                    value: string | Post;
-                  } | null)
-                | ({
-                    relationTo: 'portfolio';
-                    value: string | Portfolio;
-                  } | null);
-              url?: string | null;
-              label: string;
+                [k: string]: unknown;
+              };
+              form: string | Form;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'form';
+          }
+        | {
+            hoverCardsFields: {
+              settings?: {
+                /**
+                 * Leave blank for system default
+                 */
+                theme?: ('light' | 'dark') | null;
+                background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+              };
+              hideBackground?: boolean | null;
+              richText: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              };
+              cards?:
+                | {
+                    title: string;
+                    description?: string | null;
+                    link?: {
+                      type?: ('reference' | 'custom') | null;
+                      newTab?: boolean | null;
+                      reference?:
+                        | ({
+                            relationTo: 'pages';
+                            value: string | Page;
+                          } | null)
+                        | ({
+                            relationTo: 'posts';
+                            value: string | Post;
+                          } | null)
+                        | ({
+                            relationTo: 'portfolio';
+                            value: string | Portfolio;
+                          } | null);
+                      url?: string | null;
+                      customId?: string | null;
+                    };
+                    id?: string | null;
+                  }[]
+                | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'hoverCards';
+          }
+        | {
+            hoverHighlightsFields: {
+              settings?: {
+                /**
+                 * Leave blank for system default
+                 */
+                theme?: ('light' | 'dark') | null;
+                background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+              };
+              beforeHighlights?: string | null;
+              highlights?:
+                | {
+                    text: string;
+                    media?: {
+                      top?: (string | null) | Media;
+                      bottom?: (string | null) | Media;
+                    };
+                    link?: {
+                      type?: ('reference' | 'custom') | null;
+                      newTab?: boolean | null;
+                      reference?:
+                        | ({
+                            relationTo: 'pages';
+                            value: string | Page;
+                          } | null)
+                        | ({
+                            relationTo: 'posts';
+                            value: string | Post;
+                          } | null)
+                        | ({
+                            relationTo: 'portfolio';
+                            value: string | Portfolio;
+                          } | null);
+                      url?: string | null;
+                      customId?: string | null;
+                    };
+                    id?: string | null;
+                  }[]
+                | null;
+              afterHighlights?: string | null;
+              link: {
+                type?: ('reference' | 'custom') | null;
+                newTab?: boolean | null;
+                reference?:
+                  | ({
+                      relationTo: 'pages';
+                      value: string | Page;
+                    } | null)
+                  | ({
+                      relationTo: 'posts';
+                      value: string | Post;
+                    } | null)
+                  | ({
+                      relationTo: 'portfolio';
+                      value: string | Portfolio;
+                    } | null);
+                url?: string | null;
+                label: string;
+                customId?: string | null;
+              };
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'hoverHighlights';
+          }
+        | {
+            linkGridFields?: {
+              settings?: {
+                /**
+                 * Leave blank for system default
+                 */
+                theme?: ('light' | 'dark') | null;
+                background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+              };
+              links?:
+                | {
+                    link: {
+                      type?: ('reference' | 'custom') | null;
+                      newTab?: boolean | null;
+                      reference?:
+                        | ({
+                            relationTo: 'pages';
+                            value: string | Page;
+                          } | null)
+                        | ({
+                            relationTo: 'posts';
+                            value: string | Post;
+                          } | null)
+                        | ({
+                            relationTo: 'portfolio';
+                            value: string | Portfolio;
+                          } | null);
+                      url?: string | null;
+                      label: string;
+                      customId?: string | null;
+                    };
+                    id?: string | null;
+                  }[]
+                | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'linkGrid';
+          }
+        | {
+            logoGridFields: {
+              settings?: {
+                /**
+                 * Leave blank for system default
+                 */
+                theme?: ('light' | 'dark') | null;
+                background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+              };
+              richText: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              };
+              enableLink?: boolean | null;
+              link?: {
+                type?: ('reference' | 'custom') | null;
+                newTab?: boolean | null;
+                reference?:
+                  | ({
+                      relationTo: 'pages';
+                      value: string | Page;
+                    } | null)
+                  | ({
+                      relationTo: 'posts';
+                      value: string | Post;
+                    } | null)
+                  | ({
+                      relationTo: 'portfolio';
+                      value: string | Portfolio;
+                    } | null);
+                url?: string | null;
+                label: string;
+                customId?: string | null;
+              };
+              logos?:
+                | {
+                    logoMedia: string | Media;
+                    id?: string | null;
+                  }[]
+                | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'logoGrid';
+          }
+        | {
+            mediaBlockFields: {
+              settings?: {
+                /**
+                 * Leave blank for system default
+                 */
+                theme?: ('light' | 'dark') | null;
+                background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+              };
+              position?: ('default' | 'wide') | null;
+              media: string | Media;
+              caption?: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              } | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'mediaBlock';
+          }
+        | {
+            mediaContentFields: {
+              settings?: {
+                /**
+                 * Leave blank for system default
+                 */
+                theme?: ('light' | 'dark') | null;
+                background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+              };
+              /**
+               * Choose how to align the content for this block.
+               */
+              alignment?: ('contentMedia' | 'mediaContent') | null;
+              /**
+               * Choose how wide the media should be.
+               */
+              mediaWidth?: ('stretch' | 'fit') | null;
+              richText: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              };
+              enableLink?: boolean | null;
+              link?: {
+                type?: ('reference' | 'custom') | null;
+                newTab?: boolean | null;
+                reference?:
+                  | ({
+                      relationTo: 'pages';
+                      value: string | Page;
+                    } | null)
+                  | ({
+                      relationTo: 'posts';
+                      value: string | Post;
+                    } | null)
+                  | ({
+                      relationTo: 'portfolio';
+                      value: string | Portfolio;
+                    } | null);
+                url?: string | null;
+                label: string;
+                customId?: string | null;
+              };
+              images?:
+                | {
+                    image: string | Media;
+                    id?: string | null;
+                  }[]
+                | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'mediaContent';
+          }
+        | {
+            mediaContentAccordionFields?: {
+              settings?: {
+                /**
+                 * Leave blank for system default
+                 */
+                theme?: ('light' | 'dark') | null;
+                background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+              };
+              /**
+               * Choose how to align the content for this block.
+               */
+              alignment?: ('contentMedia' | 'mediaContent') | null;
+              leader?: string | null;
+              heading?: string | null;
+              accordion?:
+                | {
+                    /**
+                     * Choose how to position the media itself.
+                     */
+                    position?: ('normal' | 'inset' | 'wide') | null;
+                    /**
+                     * Select the background you want to sit behind the media.
+                     */
+                    background?: ('none' | 'gradient' | 'scanlines') | null;
+                    mediaLabel: string;
+                    mediaDescription: {
+                      root: {
+                        type: string;
+                        children: {
+                          type: string;
+                          version: number;
+                          [k: string]: unknown;
+                        }[];
+                        direction: ('ltr' | 'rtl') | null;
+                        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                        indent: number;
+                        version: number;
+                      };
+                      [k: string]: unknown;
+                    };
+                    enableLink?: boolean | null;
+                    link?: {
+                      type?: ('reference' | 'custom') | null;
+                      newTab?: boolean | null;
+                      reference?:
+                        | ({
+                            relationTo: 'pages';
+                            value: string | Page;
+                          } | null)
+                        | ({
+                            relationTo: 'posts';
+                            value: string | Post;
+                          } | null)
+                        | ({
+                            relationTo: 'portfolio';
+                            value: string | Portfolio;
+                          } | null);
+                      url?: string | null;
+                      label: string;
+                      customId?: string | null;
+                    };
+                    media: string | Media;
+                    id?: string | null;
+                  }[]
+                | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'mediaContentAccordion';
+          }
+        | {
+            pricingFields?: {
+              settings?: {
+                /**
+                 * Leave blank for system default
+                 */
+                theme?: ('light' | 'dark') | null;
+                background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+              };
+              plans?:
+                | {
+                    name: string;
+                    hasPrice?: boolean | null;
+                    enableCreatePayload?: boolean | null;
+                    price?: string | null;
+                    title?: string | null;
+                    description?: string | null;
+                    enableLink?: boolean | null;
+                    link?: {
+                      type?: ('reference' | 'custom') | null;
+                      newTab?: boolean | null;
+                      reference?:
+                        | ({
+                            relationTo: 'pages';
+                            value: string | Page;
+                          } | null)
+                        | ({
+                            relationTo: 'posts';
+                            value: string | Post;
+                          } | null)
+                        | ({
+                            relationTo: 'portfolio';
+                            value: string | Portfolio;
+                          } | null);
+                      url?: string | null;
+                      label: string;
+                      customId?: string | null;
+                    };
+                    features?:
+                      | {
+                          icon?: ('check' | 'x') | null;
+                          feature?: string | null;
+                          id?: string | null;
+                        }[]
+                      | null;
+                    id?: string | null;
+                  }[]
+                | null;
+              disclaimer?: string | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'pricing';
+          }
+        | {
+            reusableContentBlockFields: {
+              settings?: {
+                /**
+                 * Leave blank for system default
+                 */
+                theme?: ('light' | 'dark') | null;
+                background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+              };
+              reusableContent: string | ReusableContent;
+              /**
+               * This is a custom ID that can be used to target this block with CSS or JavaScript.
+               */
               customId?: string | null;
             };
             id?: string | null;
-          }[];
-        };
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'slider';
-      }
-    | {
-        statementFields: {
-          settings?: {
-            /**
-             * Leave blank for system default
-             */
-            theme?: ('light' | 'dark') | null;
-            background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
-          };
-          richText: {
-            root: {
-              type: string;
-              children: {
-                type: string;
-                version: number;
-                [k: string]: unknown;
-              }[];
-              direction: ('ltr' | 'rtl') | null;
-              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-              indent: number;
-              version: number;
-            };
-            [k: string]: unknown;
-          };
-          links?:
-            | {
-                link: {
-                  type?: ('reference' | 'custom') | null;
-                  newTab?: boolean | null;
-                  reference?:
-                    | ({
-                        relationTo: 'pages';
-                        value: string | Page;
-                      } | null)
-                    | ({
-                        relationTo: 'posts';
-                        value: string | Post;
-                      } | null)
-                    | ({
-                        relationTo: 'portfolio';
-                        value: string | Portfolio;
-                      } | null);
-                  url?: string | null;
-                  label: string;
-                  customId?: string | null;
-                };
-                id?: string | null;
-              }[]
-            | null;
-          assetType?: ('media' | 'code') | null;
-          media?: (string | null) | Media;
-          code?: string | null;
-          mediaWidth?: ('small' | 'medium' | 'large' | 'full') | null;
-          backgroundGlow?: ('none' | 'colorful' | 'white') | null;
-          assetCaption?: string | null;
-        };
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'statement';
-      }
-    | {
-        stickyHighlightsFields?: {
-          settings?: {
-            /**
-             * Leave blank for system default
-             */
-            theme?: ('light' | 'dark') | null;
-            background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
-          };
-          highlights?:
-            | {
-                richText: {
-                  root: {
+            blockName?: string | null;
+            blockType: 'reusableContentBlock';
+          }
+        | {
+            sliderFields: {
+              settings?: {
+                /**
+                 * Leave blank for system default
+                 */
+                theme?: ('light' | 'dark') | null;
+                background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+              };
+              introContent?: {
+                root: {
+                  type: string;
+                  children: {
                     type: string;
-                    children: {
-                      type: string;
-                      version: number;
-                      [k: string]: unknown;
-                    }[];
-                    direction: ('ltr' | 'rtl') | null;
-                    format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                    indent: number;
                     version: number;
-                  };
-                  [k: string]: unknown;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
                 };
+                [k: string]: unknown;
+              } | null;
+              links?:
+                | {
+                    link: {
+                      type?: ('reference' | 'custom') | null;
+                      newTab?: boolean | null;
+                      reference?:
+                        | ({
+                            relationTo: 'pages';
+                            value: string | Page;
+                          } | null)
+                        | ({
+                            relationTo: 'posts';
+                            value: string | Post;
+                          } | null)
+                        | ({
+                            relationTo: 'portfolio';
+                            value: string | Portfolio;
+                          } | null);
+                      url?: string | null;
+                      label: string;
+                      customId?: string | null;
+                      /**
+                       * Choose how the link should be rendered.
+                       */
+                      appearance?: ('default' | 'primary' | 'secondary') | null;
+                    };
+                    id?: string | null;
+                  }[]
+                | null;
+              quoteSlides: {
+                quote: string;
+                author: string;
+                role?: string | null;
+                logo?: (string | null) | Media;
                 enableLink?: boolean | null;
                 link?: {
                   type?: ('reference' | 'custom') | null;
@@ -3304,113 +3247,194 @@ export interface ReusableContent {
                   label: string;
                   customId?: string | null;
                 };
-                type?: ('code' | 'media') | null;
-                code?: string | null;
-                codeBlips?:
-                  | {
-                      row: number;
-                      label: string;
-                      feature: {
-                        root: {
-                          type: string;
-                          children: {
-                            type: string;
-                            version: number;
-                            [k: string]: unknown;
-                          }[];
-                          direction: ('ltr' | 'rtl') | null;
-                          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                          indent: number;
-                          version: number;
-                        };
-                        [k: string]: unknown;
-                      };
-                      enableLink?: boolean | null;
-                      link?: {
-                        type?: ('reference' | 'custom') | null;
-                        newTab?: boolean | null;
-                        reference?:
-                          | ({
-                              relationTo: 'pages';
-                              value: string | Page;
-                            } | null)
-                          | ({
-                              relationTo: 'posts';
-                              value: string | Post;
-                            } | null)
-                          | ({
-                              relationTo: 'portfolio';
-                              value: string | Portfolio;
-                            } | null);
-                        url?: string | null;
-                        label: string;
-                        customId?: string | null;
-                      };
-                      id?: string | null;
-                    }[]
-                  | null;
-                media?: (string | null) | Media;
                 id?: string | null;
-              }[]
-            | null;
-        };
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'stickyHighlights';
-      }
-  )[];
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "categories".
- */
-export interface Category {
-  id: string;
-  title: string;
-  postsInCategory?: {
-    docs?: (string | Post)[] | null;
-    hasNextPage?: boolean | null;
-  } | null;
-  parent?: (string | null) | Category;
-  breadcrumbs?:
-    | {
-        doc?: (string | null) | Category;
-        url?: string | null;
-        label?: string | null;
-        id?: string | null;
-      }[]
+              }[];
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'slider';
+          }
+        | {
+            statementFields: {
+              settings?: {
+                /**
+                 * Leave blank for system default
+                 */
+                theme?: ('light' | 'dark') | null;
+                background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+              };
+              richText: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              };
+              links?:
+                | {
+                    link: {
+                      type?: ('reference' | 'custom') | null;
+                      newTab?: boolean | null;
+                      reference?:
+                        | ({
+                            relationTo: 'pages';
+                            value: string | Page;
+                          } | null)
+                        | ({
+                            relationTo: 'posts';
+                            value: string | Post;
+                          } | null)
+                        | ({
+                            relationTo: 'portfolio';
+                            value: string | Portfolio;
+                          } | null);
+                      url?: string | null;
+                      label: string;
+                      customId?: string | null;
+                    };
+                    id?: string | null;
+                  }[]
+                | null;
+              assetType?: ('media' | 'code') | null;
+              media?: (string | null) | Media;
+              code?: string | null;
+              mediaWidth?: ('small' | 'medium' | 'large' | 'full') | null;
+              backgroundGlow?: ('none' | 'colorful' | 'white') | null;
+              assetCaption?: string | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'statement';
+          }
+        | StepsBlock
+        | {
+            stickyHighlightsFields?: {
+              settings?: {
+                /**
+                 * Leave blank for system default
+                 */
+                theme?: ('light' | 'dark') | null;
+                background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+              };
+              highlights?:
+                | {
+                    richText: {
+                      root: {
+                        type: string;
+                        children: {
+                          type: string;
+                          version: number;
+                          [k: string]: unknown;
+                        }[];
+                        direction: ('ltr' | 'rtl') | null;
+                        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                        indent: number;
+                        version: number;
+                      };
+                      [k: string]: unknown;
+                    };
+                    enableLink?: boolean | null;
+                    link?: {
+                      type?: ('reference' | 'custom') | null;
+                      newTab?: boolean | null;
+                      reference?:
+                        | ({
+                            relationTo: 'pages';
+                            value: string | Page;
+                          } | null)
+                        | ({
+                            relationTo: 'posts';
+                            value: string | Post;
+                          } | null)
+                        | ({
+                            relationTo: 'portfolio';
+                            value: string | Portfolio;
+                          } | null);
+                      url?: string | null;
+                      label: string;
+                      customId?: string | null;
+                    };
+                    type?: ('code' | 'media') | null;
+                    code?: string | null;
+                    codeBlips?:
+                      | {
+                          row: number;
+                          label: string;
+                          feature: {
+                            root: {
+                              type: string;
+                              children: {
+                                type: string;
+                                version: number;
+                                [k: string]: unknown;
+                              }[];
+                              direction: ('ltr' | 'rtl') | null;
+                              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                              indent: number;
+                              version: number;
+                            };
+                            [k: string]: unknown;
+                          };
+                          enableLink?: boolean | null;
+                          link?: {
+                            type?: ('reference' | 'custom') | null;
+                            newTab?: boolean | null;
+                            reference?:
+                              | ({
+                                  relationTo: 'pages';
+                                  value: string | Page;
+                                } | null)
+                              | ({
+                                  relationTo: 'posts';
+                                  value: string | Post;
+                                } | null)
+                              | ({
+                                  relationTo: 'portfolio';
+                                  value: string | Portfolio;
+                                } | null);
+                            url?: string | null;
+                            label: string;
+                            customId?: string | null;
+                          };
+                          id?: string | null;
+                        }[]
+                      | null;
+                    media?: (string | null) | Media;
+                    id?: string | null;
+                  }[]
+                | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'stickyHighlights';
+          }
+        | ExampleTabsBlock
+      )[]
     | null;
+  relatedPosts?: (string | Post)[] | null;
+  categories?: (string | Category)[] | null;
+  slug: string;
+  slugLock?: boolean | null;
+  url?: string | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+  };
   updatedAt: string;
   createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users".
- */
-export interface User {
-  id: string;
-  firstName: string;
-  lastName: string;
-  /**
-   * Example: `nexwebdev`
-   */
-  twitter?: string | null;
-  photo?: (string | null) | Media;
-  role: 'admin' | 'editor' | 'public';
-  updatedAt: string;
-  createdAt: string;
-  email: string;
-  resetPasswordToken?: string | null;
-  resetPasswordExpiration?: string | null;
-  salt?: string | null;
-  hash?: string | null;
-  _verified?: boolean | null;
-  _verificationToken?: string | null;
-  loginAttempts?: number | null;
-  lockUntil?: string | null;
-  password?: string | null;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3587,40 +3611,1434 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "StepsBlock".
+ * via the `definition` "reusable-content".
  */
-export interface StepsBlock {
-  stepsFields: {
-    settings?: {
-      /**
-       * Leave blank for system default
-       */
-      theme?: ('light' | 'dark') | null;
-      background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
-    };
-    steps: {
-      content: {
-        root: {
-          type: string;
-          children: {
-            type: string;
-            version: number;
+export interface ReusableContent {
+  id: string;
+  title: string;
+  layout: (
+    | {
+        bannerFields: {
+          settings?: {
+            /**
+             * Leave blank for system default
+             */
+            theme?: ('light' | 'dark') | null;
+            background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+          };
+          type?: ('default' | 'success' | 'warning' | 'error') | null;
+          addCheckmark?: boolean | null;
+          content: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
             [k: string]: unknown;
-          }[];
-          direction: ('ltr' | 'rtl') | null;
-          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-          indent: number;
-          version: number;
+          };
         };
-        [k: string]: unknown;
-      };
-      media?: (string | null) | Media;
-      id?: string | null;
-    }[];
-  };
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'steps';
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'banner';
+      }
+    | {
+        blogContentFields: {
+          settings?: {
+            /**
+             * Leave blank for system default
+             */
+            theme?: ('light' | 'dark') | null;
+            background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+          };
+          richText: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'blogContent';
+      }
+    | {
+        blogMarkdownFields: {
+          settings?: {
+            /**
+             * Leave blank for system default
+             */
+            theme?: ('light' | 'dark') | null;
+            background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+          };
+          markdown: string;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'blogMarkdown';
+      }
+    | {
+        calloutFields: {
+          settings?: {
+            /**
+             * Leave blank for system default
+             */
+            theme?: ('light' | 'dark') | null;
+            background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+          };
+          richText: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+          logo: string | Media;
+          author?: string | null;
+          role?: string | null;
+          images?:
+            | {
+                image: string | Media;
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'callout';
+      }
+    | {
+        ctaFields: {
+          settings?: {
+            /**
+             * Leave blank for system default
+             */
+            theme?: ('light' | 'dark') | null;
+            background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+          };
+          style?: ('buttons' | 'banner') | null;
+          richText: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+          commandLine?: string | null;
+          links?:
+            | {
+                type?: ('link' | 'npmCta') | null;
+                npmCta?: {
+                  label: string;
+                };
+                link?: {
+                  type?: ('reference' | 'custom') | null;
+                  newTab?: boolean | null;
+                  reference?:
+                    | ({
+                        relationTo: 'pages';
+                        value: string | Page;
+                      } | null)
+                    | ({
+                        relationTo: 'posts';
+                        value: string | Post;
+                      } | null)
+                    | ({
+                        relationTo: 'portfolio';
+                        value: string | Portfolio;
+                      } | null);
+                  url?: string | null;
+                  label: string;
+                  customId?: string | null;
+                };
+                id?: string | null;
+              }[]
+            | null;
+          bannerLink?: {
+            type?: ('reference' | 'custom') | null;
+            newTab?: boolean | null;
+            reference?:
+              | ({
+                  relationTo: 'pages';
+                  value: string | Page;
+                } | null)
+              | ({
+                  relationTo: 'posts';
+                  value: string | Post;
+                } | null)
+              | ({
+                  relationTo: 'portfolio';
+                  value: string | Portfolio;
+                } | null);
+            url?: string | null;
+            label: string;
+            customId?: string | null;
+          };
+          bannerImage?: (string | null) | Media;
+          gradientBackground?: boolean | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'cta';
+      }
+    | {
+        cardGridFields: {
+          settings?: {
+            /**
+             * Leave blank for system default
+             */
+            theme?: ('light' | 'dark') | null;
+            background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+          };
+          richText: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+          /**
+           * These links will be placed above the card grid as calls-to-action.
+           */
+          links?:
+            | {
+                link: {
+                  type?: ('reference' | 'custom') | null;
+                  newTab?: boolean | null;
+                  reference?:
+                    | ({
+                        relationTo: 'pages';
+                        value: string | Page;
+                      } | null)
+                    | ({
+                        relationTo: 'posts';
+                        value: string | Post;
+                      } | null)
+                    | ({
+                        relationTo: 'portfolio';
+                        value: string | Portfolio;
+                      } | null);
+                  url?: string | null;
+                  label: string;
+                  customId?: string | null;
+                };
+                id?: string | null;
+              }[]
+            | null;
+          revealDescription?: boolean | null;
+          cards?:
+            | {
+                title: string;
+                description?: string | null;
+                enableLink?: boolean | null;
+                link?: {
+                  type?: ('reference' | 'custom') | null;
+                  newTab?: boolean | null;
+                  reference?:
+                    | ({
+                        relationTo: 'pages';
+                        value: string | Page;
+                      } | null)
+                    | ({
+                        relationTo: 'posts';
+                        value: string | Post;
+                      } | null)
+                    | ({
+                        relationTo: 'portfolio';
+                        value: string | Portfolio;
+                      } | null);
+                  url?: string | null;
+                  customId?: string | null;
+                };
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'cardGrid';
+      }
+    | {
+        portfolioCardFields?: {
+          settings?: {
+            /**
+             * Leave blank for system default
+             */
+            theme?: ('light' | 'dark') | null;
+            background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+          };
+          pixels?: boolean | null;
+          cards?:
+            | {
+                richText: {
+                  root: {
+                    type: string;
+                    children: {
+                      type: string;
+                      version: number;
+                      [k: string]: unknown;
+                    }[];
+                    direction: ('ltr' | 'rtl') | null;
+                    format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                    indent: number;
+                    version: number;
+                  };
+                  [k: string]: unknown;
+                };
+                portfolio: string | Portfolio;
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'portfolioCards';
+      }
+    | {
+        portfolioHighlightFields: {
+          settings?: {
+            /**
+             * Leave blank for system default
+             */
+            theme?: ('light' | 'dark') | null;
+            background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+          };
+          richText: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+          portfolio: (string | Portfolio)[];
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'portfolioHighlight';
+      }
+    | {
+        portfolioParallaxFields?: {
+          settings?: {
+            /**
+             * Leave blank for system default
+             */
+            theme?: ('light' | 'dark') | null;
+            background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+          };
+          items?:
+            | {
+                quote: string;
+                author?: string | null;
+                logo: string | Media;
+                images?:
+                  | {
+                      image: string | Media;
+                      id?: string | null;
+                    }[]
+                  | null;
+                /**
+                 * A label for the navigation tab at the bottom of the parallax
+                 */
+                tabLabel: string;
+                portfolio: string | Portfolio;
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'portfolioParallax';
+      }
+    | {
+        codeFields: {
+          settings?: {
+            /**
+             * Leave blank for system default
+             */
+            theme?: ('light' | 'dark') | null;
+            background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+          };
+          language?: ('none' | 'js' | 'ts') | null;
+          code: string;
+          codeBlips?:
+            | {
+                row: number;
+                label: string;
+                feature: {
+                  root: {
+                    type: string;
+                    children: {
+                      type: string;
+                      version: number;
+                      [k: string]: unknown;
+                    }[];
+                    direction: ('ltr' | 'rtl') | null;
+                    format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                    indent: number;
+                    version: number;
+                  };
+                  [k: string]: unknown;
+                };
+                enableLink?: boolean | null;
+                link?: {
+                  type?: ('reference' | 'custom') | null;
+                  newTab?: boolean | null;
+                  reference?:
+                    | ({
+                        relationTo: 'pages';
+                        value: string | Page;
+                      } | null)
+                    | ({
+                        relationTo: 'posts';
+                        value: string | Post;
+                      } | null)
+                    | ({
+                        relationTo: 'portfolio';
+                        value: string | Portfolio;
+                      } | null);
+                  url?: string | null;
+                  label: string;
+                  customId?: string | null;
+                };
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'code';
+      }
+    | {
+        codeFeatureFields: {
+          settings?: {
+            /**
+             * Leave blank for system default
+             */
+            theme?: ('light' | 'dark') | null;
+            background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+          };
+          /**
+           * Check this box to force this block to have a dark background.
+           */
+          forceDarkBackground?: boolean | null;
+          /**
+           * Choose how to align the content for this block.
+           */
+          alignment?: ('contentCode' | 'codeContent') | null;
+          heading?: string | null;
+          richText: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+          links?:
+            | {
+                link: {
+                  type?: ('reference' | 'custom') | null;
+                  newTab?: boolean | null;
+                  reference?:
+                    | ({
+                        relationTo: 'pages';
+                        value: string | Page;
+                      } | null)
+                    | ({
+                        relationTo: 'posts';
+                        value: string | Post;
+                      } | null)
+                    | ({
+                        relationTo: 'portfolio';
+                        value: string | Portfolio;
+                      } | null);
+                  url?: string | null;
+                  label: string;
+                  customId?: string | null;
+                };
+                id?: string | null;
+              }[]
+            | null;
+          codeTabs?:
+            | {
+                language?: ('none' | 'js' | 'ts') | null;
+                label: string;
+                code: string;
+                codeBlips?:
+                  | {
+                      row: number;
+                      label: string;
+                      feature: {
+                        root: {
+                          type: string;
+                          children: {
+                            type: string;
+                            version: number;
+                            [k: string]: unknown;
+                          }[];
+                          direction: ('ltr' | 'rtl') | null;
+                          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                          indent: number;
+                          version: number;
+                        };
+                        [k: string]: unknown;
+                      };
+                      enableLink?: boolean | null;
+                      link?: {
+                        type?: ('reference' | 'custom') | null;
+                        newTab?: boolean | null;
+                        reference?:
+                          | ({
+                              relationTo: 'pages';
+                              value: string | Page;
+                            } | null)
+                          | ({
+                              relationTo: 'posts';
+                              value: string | Post;
+                            } | null)
+                          | ({
+                              relationTo: 'portfolio';
+                              value: string | Portfolio;
+                            } | null);
+                        url?: string | null;
+                        label: string;
+                        customId?: string | null;
+                      };
+                      id?: string | null;
+                    }[]
+                  | null;
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'codeFeature';
+      }
+    | {
+        contentFields: {
+          settings?: {
+            /**
+             * Leave blank for system default
+             */
+            theme?: ('light' | 'dark') | null;
+            background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+          };
+          useLeadingHeader?: boolean | null;
+          leadingHeader?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          layout?: ('oneColumn' | 'twoColumns' | 'twoThirdsOneThird' | 'halfAndHalf' | 'threeColumns') | null;
+          columnOne: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+          columnTwo?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          columnThree?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'content';
+      }
+    | {
+        contentGridFields?: {
+          settings?: {
+            /**
+             * Leave blank for system default
+             */
+            theme?: ('light' | 'dark') | null;
+            background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+          };
+          style?: ('gridBelow' | 'sideBySide') | null;
+          showNumbers?: boolean | null;
+          content?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          links?:
+            | {
+                link: {
+                  type?: ('reference' | 'custom') | null;
+                  newTab?: boolean | null;
+                  reference?:
+                    | ({
+                        relationTo: 'pages';
+                        value: string | Page;
+                      } | null)
+                    | ({
+                        relationTo: 'posts';
+                        value: string | Post;
+                      } | null)
+                    | ({
+                        relationTo: 'portfolio';
+                        value: string | Portfolio;
+                      } | null);
+                  url?: string | null;
+                  label: string;
+                  customId?: string | null;
+                };
+                id?: string | null;
+              }[]
+            | null;
+          cells?:
+            | {
+                content: {
+                  root: {
+                    type: string;
+                    children: {
+                      type: string;
+                      version: number;
+                      [k: string]: unknown;
+                    }[];
+                    direction: ('ltr' | 'rtl') | null;
+                    format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                    indent: number;
+                    version: number;
+                  };
+                  [k: string]: unknown;
+                };
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'contentGrid';
+      }
+    | ExampleTabsBlock
+    | {
+        formFields: {
+          settings?: {
+            /**
+             * Leave blank for system default
+             */
+            theme?: ('light' | 'dark') | null;
+            background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+          };
+          richText: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+          form: string | Form;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'form';
+      }
+    | {
+        hoverCardsFields: {
+          settings?: {
+            /**
+             * Leave blank for system default
+             */
+            theme?: ('light' | 'dark') | null;
+            background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+          };
+          hideBackground?: boolean | null;
+          richText: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+          cards?:
+            | {
+                title: string;
+                description?: string | null;
+                link?: {
+                  type?: ('reference' | 'custom') | null;
+                  newTab?: boolean | null;
+                  reference?:
+                    | ({
+                        relationTo: 'pages';
+                        value: string | Page;
+                      } | null)
+                    | ({
+                        relationTo: 'posts';
+                        value: string | Post;
+                      } | null)
+                    | ({
+                        relationTo: 'portfolio';
+                        value: string | Portfolio;
+                      } | null);
+                  url?: string | null;
+                  customId?: string | null;
+                };
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'hoverCards';
+      }
+    | {
+        hoverHighlightsFields: {
+          settings?: {
+            /**
+             * Leave blank for system default
+             */
+            theme?: ('light' | 'dark') | null;
+            background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+          };
+          beforeHighlights?: string | null;
+          highlights?:
+            | {
+                text: string;
+                media?: {
+                  top?: (string | null) | Media;
+                  bottom?: (string | null) | Media;
+                };
+                link?: {
+                  type?: ('reference' | 'custom') | null;
+                  newTab?: boolean | null;
+                  reference?:
+                    | ({
+                        relationTo: 'pages';
+                        value: string | Page;
+                      } | null)
+                    | ({
+                        relationTo: 'posts';
+                        value: string | Post;
+                      } | null)
+                    | ({
+                        relationTo: 'portfolio';
+                        value: string | Portfolio;
+                      } | null);
+                  url?: string | null;
+                  customId?: string | null;
+                };
+                id?: string | null;
+              }[]
+            | null;
+          afterHighlights?: string | null;
+          link: {
+            type?: ('reference' | 'custom') | null;
+            newTab?: boolean | null;
+            reference?:
+              | ({
+                  relationTo: 'pages';
+                  value: string | Page;
+                } | null)
+              | ({
+                  relationTo: 'posts';
+                  value: string | Post;
+                } | null)
+              | ({
+                  relationTo: 'portfolio';
+                  value: string | Portfolio;
+                } | null);
+            url?: string | null;
+            label: string;
+            customId?: string | null;
+          };
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'hoverHighlights';
+      }
+    | {
+        linkGridFields?: {
+          settings?: {
+            /**
+             * Leave blank for system default
+             */
+            theme?: ('light' | 'dark') | null;
+            background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+          };
+          links?:
+            | {
+                link: {
+                  type?: ('reference' | 'custom') | null;
+                  newTab?: boolean | null;
+                  reference?:
+                    | ({
+                        relationTo: 'pages';
+                        value: string | Page;
+                      } | null)
+                    | ({
+                        relationTo: 'posts';
+                        value: string | Post;
+                      } | null)
+                    | ({
+                        relationTo: 'portfolio';
+                        value: string | Portfolio;
+                      } | null);
+                  url?: string | null;
+                  label: string;
+                  customId?: string | null;
+                };
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'linkGrid';
+      }
+    | {
+        logoGridFields: {
+          settings?: {
+            /**
+             * Leave blank for system default
+             */
+            theme?: ('light' | 'dark') | null;
+            background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+          };
+          richText: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+          enableLink?: boolean | null;
+          link?: {
+            type?: ('reference' | 'custom') | null;
+            newTab?: boolean | null;
+            reference?:
+              | ({
+                  relationTo: 'pages';
+                  value: string | Page;
+                } | null)
+              | ({
+                  relationTo: 'posts';
+                  value: string | Post;
+                } | null)
+              | ({
+                  relationTo: 'portfolio';
+                  value: string | Portfolio;
+                } | null);
+            url?: string | null;
+            label: string;
+            customId?: string | null;
+          };
+          logos?:
+            | {
+                logoMedia: string | Media;
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'logoGrid';
+      }
+    | {
+        mediaBlockFields: {
+          settings?: {
+            /**
+             * Leave blank for system default
+             */
+            theme?: ('light' | 'dark') | null;
+            background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+          };
+          position?: ('default' | 'wide') | null;
+          media: string | Media;
+          caption?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'mediaBlock';
+      }
+    | {
+        mediaContentFields: {
+          settings?: {
+            /**
+             * Leave blank for system default
+             */
+            theme?: ('light' | 'dark') | null;
+            background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+          };
+          /**
+           * Choose how to align the content for this block.
+           */
+          alignment?: ('contentMedia' | 'mediaContent') | null;
+          /**
+           * Choose how wide the media should be.
+           */
+          mediaWidth?: ('stretch' | 'fit') | null;
+          richText: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+          enableLink?: boolean | null;
+          link?: {
+            type?: ('reference' | 'custom') | null;
+            newTab?: boolean | null;
+            reference?:
+              | ({
+                  relationTo: 'pages';
+                  value: string | Page;
+                } | null)
+              | ({
+                  relationTo: 'posts';
+                  value: string | Post;
+                } | null)
+              | ({
+                  relationTo: 'portfolio';
+                  value: string | Portfolio;
+                } | null);
+            url?: string | null;
+            label: string;
+            customId?: string | null;
+          };
+          images?:
+            | {
+                image: string | Media;
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'mediaContent';
+      }
+    | {
+        mediaContentAccordionFields?: {
+          settings?: {
+            /**
+             * Leave blank for system default
+             */
+            theme?: ('light' | 'dark') | null;
+            background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+          };
+          /**
+           * Choose how to align the content for this block.
+           */
+          alignment?: ('contentMedia' | 'mediaContent') | null;
+          leader?: string | null;
+          heading?: string | null;
+          accordion?:
+            | {
+                /**
+                 * Choose how to position the media itself.
+                 */
+                position?: ('normal' | 'inset' | 'wide') | null;
+                /**
+                 * Select the background you want to sit behind the media.
+                 */
+                background?: ('none' | 'gradient' | 'scanlines') | null;
+                mediaLabel: string;
+                mediaDescription: {
+                  root: {
+                    type: string;
+                    children: {
+                      type: string;
+                      version: number;
+                      [k: string]: unknown;
+                    }[];
+                    direction: ('ltr' | 'rtl') | null;
+                    format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                    indent: number;
+                    version: number;
+                  };
+                  [k: string]: unknown;
+                };
+                enableLink?: boolean | null;
+                link?: {
+                  type?: ('reference' | 'custom') | null;
+                  newTab?: boolean | null;
+                  reference?:
+                    | ({
+                        relationTo: 'pages';
+                        value: string | Page;
+                      } | null)
+                    | ({
+                        relationTo: 'posts';
+                        value: string | Post;
+                      } | null)
+                    | ({
+                        relationTo: 'portfolio';
+                        value: string | Portfolio;
+                      } | null);
+                  url?: string | null;
+                  label: string;
+                  customId?: string | null;
+                };
+                media: string | Media;
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'mediaContentAccordion';
+      }
+    | {
+        pricingFields?: {
+          settings?: {
+            /**
+             * Leave blank for system default
+             */
+            theme?: ('light' | 'dark') | null;
+            background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+          };
+          plans?:
+            | {
+                name: string;
+                hasPrice?: boolean | null;
+                enableCreatePayload?: boolean | null;
+                price?: string | null;
+                title?: string | null;
+                description?: string | null;
+                enableLink?: boolean | null;
+                link?: {
+                  type?: ('reference' | 'custom') | null;
+                  newTab?: boolean | null;
+                  reference?:
+                    | ({
+                        relationTo: 'pages';
+                        value: string | Page;
+                      } | null)
+                    | ({
+                        relationTo: 'posts';
+                        value: string | Post;
+                      } | null)
+                    | ({
+                        relationTo: 'portfolio';
+                        value: string | Portfolio;
+                      } | null);
+                  url?: string | null;
+                  label: string;
+                  customId?: string | null;
+                };
+                features?:
+                  | {
+                      icon?: ('check' | 'x') | null;
+                      feature?: string | null;
+                      id?: string | null;
+                    }[]
+                  | null;
+                id?: string | null;
+              }[]
+            | null;
+          disclaimer?: string | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'pricing';
+      }
+    | {
+        sliderFields: {
+          settings?: {
+            /**
+             * Leave blank for system default
+             */
+            theme?: ('light' | 'dark') | null;
+            background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+          };
+          introContent?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          links?:
+            | {
+                link: {
+                  type?: ('reference' | 'custom') | null;
+                  newTab?: boolean | null;
+                  reference?:
+                    | ({
+                        relationTo: 'pages';
+                        value: string | Page;
+                      } | null)
+                    | ({
+                        relationTo: 'posts';
+                        value: string | Post;
+                      } | null)
+                    | ({
+                        relationTo: 'portfolio';
+                        value: string | Portfolio;
+                      } | null);
+                  url?: string | null;
+                  label: string;
+                  customId?: string | null;
+                  /**
+                   * Choose how the link should be rendered.
+                   */
+                  appearance?: ('default' | 'primary' | 'secondary') | null;
+                };
+                id?: string | null;
+              }[]
+            | null;
+          quoteSlides: {
+            quote: string;
+            author: string;
+            role?: string | null;
+            logo?: (string | null) | Media;
+            enableLink?: boolean | null;
+            link?: {
+              type?: ('reference' | 'custom') | null;
+              newTab?: boolean | null;
+              reference?:
+                | ({
+                    relationTo: 'pages';
+                    value: string | Page;
+                  } | null)
+                | ({
+                    relationTo: 'posts';
+                    value: string | Post;
+                  } | null)
+                | ({
+                    relationTo: 'portfolio';
+                    value: string | Portfolio;
+                  } | null);
+              url?: string | null;
+              label: string;
+              customId?: string | null;
+            };
+            id?: string | null;
+          }[];
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'slider';
+      }
+    | {
+        statementFields: {
+          settings?: {
+            /**
+             * Leave blank for system default
+             */
+            theme?: ('light' | 'dark') | null;
+            background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+          };
+          richText: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+          links?:
+            | {
+                link: {
+                  type?: ('reference' | 'custom') | null;
+                  newTab?: boolean | null;
+                  reference?:
+                    | ({
+                        relationTo: 'pages';
+                        value: string | Page;
+                      } | null)
+                    | ({
+                        relationTo: 'posts';
+                        value: string | Post;
+                      } | null)
+                    | ({
+                        relationTo: 'portfolio';
+                        value: string | Portfolio;
+                      } | null);
+                  url?: string | null;
+                  label: string;
+                  customId?: string | null;
+                };
+                id?: string | null;
+              }[]
+            | null;
+          assetType?: ('media' | 'code') | null;
+          media?: (string | null) | Media;
+          code?: string | null;
+          mediaWidth?: ('small' | 'medium' | 'large' | 'full') | null;
+          backgroundGlow?: ('none' | 'colorful' | 'white') | null;
+          assetCaption?: string | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'statement';
+      }
+    | StepsBlock
+    | {
+        stickyHighlightsFields?: {
+          settings?: {
+            /**
+             * Leave blank for system default
+             */
+            theme?: ('light' | 'dark') | null;
+            background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+          };
+          highlights?:
+            | {
+                richText: {
+                  root: {
+                    type: string;
+                    children: {
+                      type: string;
+                      version: number;
+                      [k: string]: unknown;
+                    }[];
+                    direction: ('ltr' | 'rtl') | null;
+                    format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                    indent: number;
+                    version: number;
+                  };
+                  [k: string]: unknown;
+                };
+                enableLink?: boolean | null;
+                link?: {
+                  type?: ('reference' | 'custom') | null;
+                  newTab?: boolean | null;
+                  reference?:
+                    | ({
+                        relationTo: 'pages';
+                        value: string | Page;
+                      } | null)
+                    | ({
+                        relationTo: 'posts';
+                        value: string | Post;
+                      } | null)
+                    | ({
+                        relationTo: 'portfolio';
+                        value: string | Portfolio;
+                      } | null);
+                  url?: string | null;
+                  label: string;
+                  customId?: string | null;
+                };
+                type?: ('code' | 'media') | null;
+                code?: string | null;
+                codeBlips?:
+                  | {
+                      row: number;
+                      label: string;
+                      feature: {
+                        root: {
+                          type: string;
+                          children: {
+                            type: string;
+                            version: number;
+                            [k: string]: unknown;
+                          }[];
+                          direction: ('ltr' | 'rtl') | null;
+                          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                          indent: number;
+                          version: number;
+                        };
+                        [k: string]: unknown;
+                      };
+                      enableLink?: boolean | null;
+                      link?: {
+                        type?: ('reference' | 'custom') | null;
+                        newTab?: boolean | null;
+                        reference?:
+                          | ({
+                              relationTo: 'pages';
+                              value: string | Page;
+                            } | null)
+                          | ({
+                              relationTo: 'posts';
+                              value: string | Post;
+                            } | null)
+                          | ({
+                              relationTo: 'portfolio';
+                              value: string | Portfolio;
+                            } | null);
+                        url?: string | null;
+                        label: string;
+                        customId?: string | null;
+                      };
+                      id?: string | null;
+                    }[]
+                  | null;
+                media?: (string | null) | Media;
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'stickyHighlights';
+      }
+  )[];
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3685,6 +5103,93 @@ export interface MediaExampleBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'MediaExampleBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StepsBlock".
+ */
+export interface StepsBlock {
+  stepsFields: {
+    settings?: {
+      /**
+       * Leave blank for system default
+       */
+      theme?: ('light' | 'dark') | null;
+      background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+    };
+    steps: {
+      content: {
+        root: {
+          type: string;
+          children: {
+            type: string;
+            version: number;
+            [k: string]: unknown;
+          }[];
+          direction: ('ltr' | 'rtl') | null;
+          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+          indent: number;
+          version: number;
+        };
+        [k: string]: unknown;
+      };
+      media?: (string | null) | Media;
+      id?: string | null;
+    }[];
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'steps';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories".
+ */
+export interface Category {
+  id: string;
+  title: string;
+  postsInCategory?: {
+    docs?: (string | Post)[] | null;
+    hasNextPage?: boolean | null;
+  } | null;
+  parent?: (string | null) | Category;
+  breadcrumbs?:
+    | {
+        doc?: (string | null) | Category;
+        url?: string | null;
+        label?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users".
+ */
+export interface User {
+  id: string;
+  firstName: string;
+  lastName: string;
+  /**
+   * Example: `nexwebdev`
+   */
+  twitter?: string | null;
+  photo?: (string | null) | Media;
+  role: 'admin' | 'editor' | 'public';
+  updatedAt: string;
+  createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  _verified?: boolean | null;
+  _verificationToken?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  password?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3778,6 +5283,41 @@ export interface Redirect {
   createdAt: string;
 }
 /**
+ * This is a collection of automatically created search results. These results are used by the global site search and will be updated automatically as documents in the CMS are created or updated.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "search".
+ */
+export interface Search {
+  id: string;
+  title?: string | null;
+  priority?: number | null;
+  doc:
+    | {
+        relationTo: 'posts';
+        value: string | Post;
+      }
+    | {
+        relationTo: 'portfolio';
+        value: string | Portfolio;
+      };
+  slug?: string | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    image?: (string | null) | Media;
+  };
+  categories?:
+    | {
+        relationTo?: string | null;
+        id?: string | null;
+        title?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
@@ -3785,12 +5325,12 @@ export interface PayloadLockedDocument {
   id: string;
   document?:
     | ({
-        relationTo: 'portfolio';
-        value: string | Portfolio;
-      } | null)
-    | ({
         relationTo: 'pages';
         value: string | Page;
+      } | null)
+    | ({
+        relationTo: 'portfolio';
+        value: string | Portfolio;
       } | null)
     | ({
         relationTo: 'posts';
@@ -3835,6 +5375,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'redirects';
         value: string | Redirect;
+      } | null)
+    | ({
+        relationTo: 'search';
+        value: string | Search;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -3877,419 +5421,6 @@ export interface PayloadMigration {
   batch?: number | null;
   updatedAt: string;
   createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "portfolio_select".
- */
-export interface PortfolioSelect<T extends boolean = true> {
-  title?: T;
-  introContent?: T;
-  industry?: T;
-  useCase?: T;
-  featuredImage?: T;
-  layout?:
-    | T
-    | {
-        callout?:
-          | T
-          | {
-              calloutFields?:
-                | T
-                | {
-                    settings?:
-                      | T
-                      | {
-                          theme?: T;
-                          background?: T;
-                        };
-                    richText?: T;
-                    logo?: T;
-                    author?: T;
-                    role?: T;
-                    images?:
-                      | T
-                      | {
-                          image?: T;
-                          id?: T;
-                        };
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        cta?:
-          | T
-          | {
-              ctaFields?:
-                | T
-                | {
-                    settings?:
-                      | T
-                      | {
-                          theme?: T;
-                          background?: T;
-                        };
-                    style?: T;
-                    richText?: T;
-                    commandLine?: T;
-                    links?:
-                      | T
-                      | {
-                          type?: T;
-                          npmCta?:
-                            | T
-                            | {
-                                label?: T;
-                              };
-                          link?:
-                            | T
-                            | {
-                                type?: T;
-                                newTab?: T;
-                                reference?: T;
-                                url?: T;
-                                label?: T;
-                                customId?: T;
-                              };
-                          id?: T;
-                        };
-                    bannerLink?:
-                      | T
-                      | {
-                          type?: T;
-                          newTab?: T;
-                          reference?: T;
-                          url?: T;
-                          label?: T;
-                          customId?: T;
-                        };
-                    bannerImage?: T;
-                    gradientBackground?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        cardGrid?:
-          | T
-          | {
-              cardGridFields?:
-                | T
-                | {
-                    settings?:
-                      | T
-                      | {
-                          theme?: T;
-                          background?: T;
-                        };
-                    richText?: T;
-                    links?:
-                      | T
-                      | {
-                          link?:
-                            | T
-                            | {
-                                type?: T;
-                                newTab?: T;
-                                reference?: T;
-                                url?: T;
-                                label?: T;
-                                customId?: T;
-                              };
-                          id?: T;
-                        };
-                    revealDescription?: T;
-                    cards?:
-                      | T
-                      | {
-                          title?: T;
-                          description?: T;
-                          enableLink?: T;
-                          link?:
-                            | T
-                            | {
-                                type?: T;
-                                newTab?: T;
-                                reference?: T;
-                                url?: T;
-                                customId?: T;
-                              };
-                          id?: T;
-                        };
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        codeFeature?:
-          | T
-          | {
-              codeFeatureFields?:
-                | T
-                | {
-                    settings?:
-                      | T
-                      | {
-                          theme?: T;
-                          background?: T;
-                        };
-                    forceDarkBackground?: T;
-                    alignment?: T;
-                    heading?: T;
-                    richText?: T;
-                    links?:
-                      | T
-                      | {
-                          link?:
-                            | T
-                            | {
-                                type?: T;
-                                newTab?: T;
-                                reference?: T;
-                                url?: T;
-                                label?: T;
-                                customId?: T;
-                              };
-                          id?: T;
-                        };
-                    codeTabs?:
-                      | T
-                      | {
-                          language?: T;
-                          label?: T;
-                          code?: T;
-                          codeBlips?:
-                            | T
-                            | {
-                                row?: T;
-                                label?: T;
-                                feature?: T;
-                                enableLink?: T;
-                                link?:
-                                  | T
-                                  | {
-                                      type?: T;
-                                      newTab?: T;
-                                      reference?: T;
-                                      url?: T;
-                                      label?: T;
-                                      customId?: T;
-                                    };
-                                id?: T;
-                              };
-                          id?: T;
-                        };
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        hoverHighlights?:
-          | T
-          | {
-              hoverHighlightsFields?:
-                | T
-                | {
-                    settings?:
-                      | T
-                      | {
-                          theme?: T;
-                          background?: T;
-                        };
-                    beforeHighlights?: T;
-                    highlights?:
-                      | T
-                      | {
-                          text?: T;
-                          media?:
-                            | T
-                            | {
-                                top?: T;
-                                bottom?: T;
-                              };
-                          link?:
-                            | T
-                            | {
-                                type?: T;
-                                newTab?: T;
-                                reference?: T;
-                                url?: T;
-                                customId?: T;
-                              };
-                          id?: T;
-                        };
-                    afterHighlights?: T;
-                    link?:
-                      | T
-                      | {
-                          type?: T;
-                          newTab?: T;
-                          reference?: T;
-                          url?: T;
-                          label?: T;
-                          customId?: T;
-                        };
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        slider?:
-          | T
-          | {
-              sliderFields?:
-                | T
-                | {
-                    settings?:
-                      | T
-                      | {
-                          theme?: T;
-                          background?: T;
-                        };
-                    introContent?: T;
-                    links?:
-                      | T
-                      | {
-                          link?:
-                            | T
-                            | {
-                                type?: T;
-                                newTab?: T;
-                                reference?: T;
-                                url?: T;
-                                label?: T;
-                                customId?: T;
-                                appearance?: T;
-                              };
-                          id?: T;
-                        };
-                    quoteSlides?:
-                      | T
-                      | {
-                          quote?: T;
-                          author?: T;
-                          role?: T;
-                          logo?: T;
-                          enableLink?: T;
-                          link?:
-                            | T
-                            | {
-                                type?: T;
-                                newTab?: T;
-                                reference?: T;
-                                url?: T;
-                                label?: T;
-                                customId?: T;
-                              };
-                          id?: T;
-                        };
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        statement?:
-          | T
-          | {
-              statementFields?:
-                | T
-                | {
-                    settings?:
-                      | T
-                      | {
-                          theme?: T;
-                          background?: T;
-                        };
-                    richText?: T;
-                    links?:
-                      | T
-                      | {
-                          link?:
-                            | T
-                            | {
-                                type?: T;
-                                newTab?: T;
-                                reference?: T;
-                                url?: T;
-                                label?: T;
-                                customId?: T;
-                              };
-                          id?: T;
-                        };
-                    assetType?: T;
-                    media?: T;
-                    code?: T;
-                    mediaWidth?: T;
-                    backgroundGlow?: T;
-                    assetCaption?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        stickyHighlights?:
-          | T
-          | {
-              stickyHighlightsFields?:
-                | T
-                | {
-                    settings?:
-                      | T
-                      | {
-                          theme?: T;
-                          background?: T;
-                        };
-                    highlights?:
-                      | T
-                      | {
-                          richText?: T;
-                          enableLink?: T;
-                          link?:
-                            | T
-                            | {
-                                type?: T;
-                                newTab?: T;
-                                reference?: T;
-                                url?: T;
-                                label?: T;
-                                customId?: T;
-                              };
-                          type?: T;
-                          code?: T;
-                          codeBlips?:
-                            | T
-                            | {
-                                row?: T;
-                                label?: T;
-                                feature?: T;
-                                enableLink?: T;
-                                link?:
-                                  | T
-                                  | {
-                                      type?: T;
-                                      newTab?: T;
-                                      reference?: T;
-                                      url?: T;
-                                      label?: T;
-                                      customId?: T;
-                                    };
-                                id?: T;
-                              };
-                          media?: T;
-                          id?: T;
-                        };
-                  };
-              id?: T;
-              blockName?: T;
-            };
-      };
-  slug?: T;
-  slugLock?: T;
-  url?: T;
-  meta?:
-    | T
-    | {
-        title?: T;
-        description?: T;
-        image?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -5352,6 +6483,835 @@ export interface MediaExampleBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "portfolio_select".
+ */
+export interface PortfolioSelect<T extends boolean = true> {
+  title?: T;
+  introContent?: T;
+  industry?: T;
+  useCase?: T;
+  featuredImage?: T;
+  layout?:
+    | T
+    | {
+        callout?:
+          | T
+          | {
+              calloutFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    richText?: T;
+                    logo?: T;
+                    author?: T;
+                    role?: T;
+                    images?:
+                      | T
+                      | {
+                          image?: T;
+                          id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        cta?:
+          | T
+          | {
+              ctaFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    style?: T;
+                    richText?: T;
+                    commandLine?: T;
+                    links?:
+                      | T
+                      | {
+                          type?: T;
+                          npmCta?:
+                            | T
+                            | {
+                                label?: T;
+                              };
+                          link?:
+                            | T
+                            | {
+                                type?: T;
+                                newTab?: T;
+                                reference?: T;
+                                url?: T;
+                                label?: T;
+                                customId?: T;
+                              };
+                          id?: T;
+                        };
+                    bannerLink?:
+                      | T
+                      | {
+                          type?: T;
+                          newTab?: T;
+                          reference?: T;
+                          url?: T;
+                          label?: T;
+                          customId?: T;
+                        };
+                    bannerImage?: T;
+                    gradientBackground?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        cardGrid?:
+          | T
+          | {
+              cardGridFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    richText?: T;
+                    links?:
+                      | T
+                      | {
+                          link?:
+                            | T
+                            | {
+                                type?: T;
+                                newTab?: T;
+                                reference?: T;
+                                url?: T;
+                                label?: T;
+                                customId?: T;
+                              };
+                          id?: T;
+                        };
+                    revealDescription?: T;
+                    cards?:
+                      | T
+                      | {
+                          title?: T;
+                          description?: T;
+                          enableLink?: T;
+                          link?:
+                            | T
+                            | {
+                                type?: T;
+                                newTab?: T;
+                                reference?: T;
+                                url?: T;
+                                customId?: T;
+                              };
+                          id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        portfolioCards?:
+          | T
+          | {
+              portfolioCardFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    pixels?: T;
+                    cards?:
+                      | T
+                      | {
+                          richText?: T;
+                          portfolio?: T;
+                          id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        portfolioHighlight?:
+          | T
+          | {
+              portfolioHighlightFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    richText?: T;
+                    portfolio?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        portfolioParallax?:
+          | T
+          | {
+              portfolioParallaxFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    items?:
+                      | T
+                      | {
+                          quote?: T;
+                          author?: T;
+                          logo?: T;
+                          images?:
+                            | T
+                            | {
+                                image?: T;
+                                id?: T;
+                              };
+                          tabLabel?: T;
+                          portfolio?: T;
+                          id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        codeFeature?:
+          | T
+          | {
+              codeFeatureFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    forceDarkBackground?: T;
+                    alignment?: T;
+                    heading?: T;
+                    richText?: T;
+                    links?:
+                      | T
+                      | {
+                          link?:
+                            | T
+                            | {
+                                type?: T;
+                                newTab?: T;
+                                reference?: T;
+                                url?: T;
+                                label?: T;
+                                customId?: T;
+                              };
+                          id?: T;
+                        };
+                    codeTabs?:
+                      | T
+                      | {
+                          language?: T;
+                          label?: T;
+                          code?: T;
+                          codeBlips?:
+                            | T
+                            | {
+                                row?: T;
+                                label?: T;
+                                feature?: T;
+                                enableLink?: T;
+                                link?:
+                                  | T
+                                  | {
+                                      type?: T;
+                                      newTab?: T;
+                                      reference?: T;
+                                      url?: T;
+                                      label?: T;
+                                      customId?: T;
+                                    };
+                                id?: T;
+                              };
+                          id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        content?:
+          | T
+          | {
+              contentFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    useLeadingHeader?: T;
+                    leadingHeader?: T;
+                    layout?: T;
+                    columnOne?: T;
+                    columnTwo?: T;
+                    columnThree?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        contentGrid?:
+          | T
+          | {
+              contentGridFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    style?: T;
+                    showNumbers?: T;
+                    content?: T;
+                    links?:
+                      | T
+                      | {
+                          link?:
+                            | T
+                            | {
+                                type?: T;
+                                newTab?: T;
+                                reference?: T;
+                                url?: T;
+                                label?: T;
+                                customId?: T;
+                              };
+                          id?: T;
+                        };
+                    cells?:
+                      | T
+                      | {
+                          content?: T;
+                          id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        form?:
+          | T
+          | {
+              formFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    richText?: T;
+                    form?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        hoverCards?:
+          | T
+          | {
+              hoverCardsFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    hideBackground?: T;
+                    richText?: T;
+                    cards?:
+                      | T
+                      | {
+                          title?: T;
+                          description?: T;
+                          link?:
+                            | T
+                            | {
+                                type?: T;
+                                newTab?: T;
+                                reference?: T;
+                                url?: T;
+                                customId?: T;
+                              };
+                          id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        hoverHighlights?:
+          | T
+          | {
+              hoverHighlightsFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    beforeHighlights?: T;
+                    highlights?:
+                      | T
+                      | {
+                          text?: T;
+                          media?:
+                            | T
+                            | {
+                                top?: T;
+                                bottom?: T;
+                              };
+                          link?:
+                            | T
+                            | {
+                                type?: T;
+                                newTab?: T;
+                                reference?: T;
+                                url?: T;
+                                customId?: T;
+                              };
+                          id?: T;
+                        };
+                    afterHighlights?: T;
+                    link?:
+                      | T
+                      | {
+                          type?: T;
+                          newTab?: T;
+                          reference?: T;
+                          url?: T;
+                          label?: T;
+                          customId?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        linkGrid?:
+          | T
+          | {
+              linkGridFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    links?:
+                      | T
+                      | {
+                          link?:
+                            | T
+                            | {
+                                type?: T;
+                                newTab?: T;
+                                reference?: T;
+                                url?: T;
+                                label?: T;
+                                customId?: T;
+                              };
+                          id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        logoGrid?:
+          | T
+          | {
+              logoGridFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    richText?: T;
+                    enableLink?: T;
+                    link?:
+                      | T
+                      | {
+                          type?: T;
+                          newTab?: T;
+                          reference?: T;
+                          url?: T;
+                          label?: T;
+                          customId?: T;
+                        };
+                    logos?:
+                      | T
+                      | {
+                          logoMedia?: T;
+                          id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        mediaBlock?:
+          | T
+          | {
+              mediaBlockFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    position?: T;
+                    media?: T;
+                    caption?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        mediaContent?:
+          | T
+          | {
+              mediaContentFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    alignment?: T;
+                    mediaWidth?: T;
+                    richText?: T;
+                    enableLink?: T;
+                    link?:
+                      | T
+                      | {
+                          type?: T;
+                          newTab?: T;
+                          reference?: T;
+                          url?: T;
+                          label?: T;
+                          customId?: T;
+                        };
+                    images?:
+                      | T
+                      | {
+                          image?: T;
+                          id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        mediaContentAccordion?:
+          | T
+          | {
+              mediaContentAccordionFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    alignment?: T;
+                    leader?: T;
+                    heading?: T;
+                    accordion?:
+                      | T
+                      | {
+                          position?: T;
+                          background?: T;
+                          mediaLabel?: T;
+                          mediaDescription?: T;
+                          enableLink?: T;
+                          link?:
+                            | T
+                            | {
+                                type?: T;
+                                newTab?: T;
+                                reference?: T;
+                                url?: T;
+                                label?: T;
+                                customId?: T;
+                              };
+                          media?: T;
+                          id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        pricing?:
+          | T
+          | {
+              pricingFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    plans?:
+                      | T
+                      | {
+                          name?: T;
+                          hasPrice?: T;
+                          enableCreatePayload?: T;
+                          price?: T;
+                          title?: T;
+                          description?: T;
+                          enableLink?: T;
+                          link?:
+                            | T
+                            | {
+                                type?: T;
+                                newTab?: T;
+                                reference?: T;
+                                url?: T;
+                                label?: T;
+                                customId?: T;
+                              };
+                          features?:
+                            | T
+                            | {
+                                icon?: T;
+                                feature?: T;
+                                id?: T;
+                              };
+                          id?: T;
+                        };
+                    disclaimer?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        reusableContentBlock?:
+          | T
+          | {
+              reusableContentBlockFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    reusableContent?: T;
+                    customId?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        slider?:
+          | T
+          | {
+              sliderFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    introContent?: T;
+                    links?:
+                      | T
+                      | {
+                          link?:
+                            | T
+                            | {
+                                type?: T;
+                                newTab?: T;
+                                reference?: T;
+                                url?: T;
+                                label?: T;
+                                customId?: T;
+                                appearance?: T;
+                              };
+                          id?: T;
+                        };
+                    quoteSlides?:
+                      | T
+                      | {
+                          quote?: T;
+                          author?: T;
+                          role?: T;
+                          logo?: T;
+                          enableLink?: T;
+                          link?:
+                            | T
+                            | {
+                                type?: T;
+                                newTab?: T;
+                                reference?: T;
+                                url?: T;
+                                label?: T;
+                                customId?: T;
+                              };
+                          id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        statement?:
+          | T
+          | {
+              statementFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    richText?: T;
+                    links?:
+                      | T
+                      | {
+                          link?:
+                            | T
+                            | {
+                                type?: T;
+                                newTab?: T;
+                                reference?: T;
+                                url?: T;
+                                label?: T;
+                                customId?: T;
+                              };
+                          id?: T;
+                        };
+                    assetType?: T;
+                    media?: T;
+                    code?: T;
+                    mediaWidth?: T;
+                    backgroundGlow?: T;
+                    assetCaption?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        steps?: T | StepsBlockSelect<T>;
+        stickyHighlights?:
+          | T
+          | {
+              stickyHighlightsFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    highlights?:
+                      | T
+                      | {
+                          richText?: T;
+                          enableLink?: T;
+                          link?:
+                            | T
+                            | {
+                                type?: T;
+                                newTab?: T;
+                                reference?: T;
+                                url?: T;
+                                label?: T;
+                                customId?: T;
+                              };
+                          type?: T;
+                          code?: T;
+                          codeBlips?:
+                            | T
+                            | {
+                                row?: T;
+                                label?: T;
+                                feature?: T;
+                                enableLink?: T;
+                                link?:
+                                  | T
+                                  | {
+                                      type?: T;
+                                      newTab?: T;
+                                      reference?: T;
+                                      url?: T;
+                                      label?: T;
+                                      customId?: T;
+                                    };
+                                id?: T;
+                              };
+                          media?: T;
+                          id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        exampleTabs?: T | ExampleTabsBlockSelect<T>;
+      };
+  relatedPosts?: T;
+  categories?: T;
+  slug?: T;
+  slugLock?: T;
+  url?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "posts_select".
  */
 export interface PostsSelect<T extends boolean = true> {
@@ -5590,6 +7550,208 @@ export interface ReusableContentSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        callout?:
+          | T
+          | {
+              calloutFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    richText?: T;
+                    logo?: T;
+                    author?: T;
+                    role?: T;
+                    images?:
+                      | T
+                      | {
+                          image?: T;
+                          id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        cta?:
+          | T
+          | {
+              ctaFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    style?: T;
+                    richText?: T;
+                    commandLine?: T;
+                    links?:
+                      | T
+                      | {
+                          type?: T;
+                          npmCta?:
+                            | T
+                            | {
+                                label?: T;
+                              };
+                          link?:
+                            | T
+                            | {
+                                type?: T;
+                                newTab?: T;
+                                reference?: T;
+                                url?: T;
+                                label?: T;
+                                customId?: T;
+                              };
+                          id?: T;
+                        };
+                    bannerLink?:
+                      | T
+                      | {
+                          type?: T;
+                          newTab?: T;
+                          reference?: T;
+                          url?: T;
+                          label?: T;
+                          customId?: T;
+                        };
+                    bannerImage?: T;
+                    gradientBackground?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        cardGrid?:
+          | T
+          | {
+              cardGridFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    richText?: T;
+                    links?:
+                      | T
+                      | {
+                          link?:
+                            | T
+                            | {
+                                type?: T;
+                                newTab?: T;
+                                reference?: T;
+                                url?: T;
+                                label?: T;
+                                customId?: T;
+                              };
+                          id?: T;
+                        };
+                    revealDescription?: T;
+                    cards?:
+                      | T
+                      | {
+                          title?: T;
+                          description?: T;
+                          enableLink?: T;
+                          link?:
+                            | T
+                            | {
+                                type?: T;
+                                newTab?: T;
+                                reference?: T;
+                                url?: T;
+                                customId?: T;
+                              };
+                          id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        portfolioCards?:
+          | T
+          | {
+              portfolioCardFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    pixels?: T;
+                    cards?:
+                      | T
+                      | {
+                          richText?: T;
+                          portfolio?: T;
+                          id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        portfolioHighlight?:
+          | T
+          | {
+              portfolioHighlightFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    richText?: T;
+                    portfolio?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        portfolioParallax?:
+          | T
+          | {
+              portfolioParallaxFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    items?:
+                      | T
+                      | {
+                          quote?: T;
+                          author?: T;
+                          logo?: T;
+                          images?:
+                            | T
+                            | {
+                                image?: T;
+                                id?: T;
+                              };
+                          tabLabel?: T;
+                          portfolio?: T;
+                          id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
         code?:
           | T
           | {
@@ -5689,6 +7851,121 @@ export interface ReusableContentSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        content?:
+          | T
+          | {
+              contentFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    useLeadingHeader?: T;
+                    leadingHeader?: T;
+                    layout?: T;
+                    columnOne?: T;
+                    columnTwo?: T;
+                    columnThree?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        contentGrid?:
+          | T
+          | {
+              contentGridFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    style?: T;
+                    showNumbers?: T;
+                    content?: T;
+                    links?:
+                      | T
+                      | {
+                          link?:
+                            | T
+                            | {
+                                type?: T;
+                                newTab?: T;
+                                reference?: T;
+                                url?: T;
+                                label?: T;
+                                customId?: T;
+                              };
+                          id?: T;
+                        };
+                    cells?:
+                      | T
+                      | {
+                          content?: T;
+                          id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        exampleTabs?: T | ExampleTabsBlockSelect<T>;
+        form?:
+          | T
+          | {
+              formFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    richText?: T;
+                    form?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        hoverCards?:
+          | T
+          | {
+              hoverCardsFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    hideBackground?: T;
+                    richText?: T;
+                    cards?:
+                      | T
+                      | {
+                          title?: T;
+                          description?: T;
+                          link?:
+                            | T
+                            | {
+                                type?: T;
+                                newTab?: T;
+                                reference?: T;
+                                url?: T;
+                                customId?: T;
+                              };
+                          id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
         hoverHighlights?:
           | T
           | {
@@ -5738,6 +8015,71 @@ export interface ReusableContentSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        linkGrid?:
+          | T
+          | {
+              linkGridFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    links?:
+                      | T
+                      | {
+                          link?:
+                            | T
+                            | {
+                                type?: T;
+                                newTab?: T;
+                                reference?: T;
+                                url?: T;
+                                label?: T;
+                                customId?: T;
+                              };
+                          id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        logoGrid?:
+          | T
+          | {
+              logoGridFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    richText?: T;
+                    enableLink?: T;
+                    link?:
+                      | T
+                      | {
+                          type?: T;
+                          newTab?: T;
+                          reference?: T;
+                          url?: T;
+                          label?: T;
+                          customId?: T;
+                        };
+                    logos?:
+                      | T
+                      | {
+                          logoMedia?: T;
+                          id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
         mediaBlock?:
           | T
           | {
@@ -5753,6 +8095,128 @@ export interface ReusableContentSelect<T extends boolean = true> {
                     position?: T;
                     media?: T;
                     caption?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        mediaContent?:
+          | T
+          | {
+              mediaContentFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    alignment?: T;
+                    mediaWidth?: T;
+                    richText?: T;
+                    enableLink?: T;
+                    link?:
+                      | T
+                      | {
+                          type?: T;
+                          newTab?: T;
+                          reference?: T;
+                          url?: T;
+                          label?: T;
+                          customId?: T;
+                        };
+                    images?:
+                      | T
+                      | {
+                          image?: T;
+                          id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        mediaContentAccordion?:
+          | T
+          | {
+              mediaContentAccordionFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    alignment?: T;
+                    leader?: T;
+                    heading?: T;
+                    accordion?:
+                      | T
+                      | {
+                          position?: T;
+                          background?: T;
+                          mediaLabel?: T;
+                          mediaDescription?: T;
+                          enableLink?: T;
+                          link?:
+                            | T
+                            | {
+                                type?: T;
+                                newTab?: T;
+                                reference?: T;
+                                url?: T;
+                                label?: T;
+                                customId?: T;
+                              };
+                          media?: T;
+                          id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        pricing?:
+          | T
+          | {
+              pricingFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    plans?:
+                      | T
+                      | {
+                          name?: T;
+                          hasPrice?: T;
+                          enableCreatePayload?: T;
+                          price?: T;
+                          title?: T;
+                          description?: T;
+                          enableLink?: T;
+                          link?:
+                            | T
+                            | {
+                                type?: T;
+                                newTab?: T;
+                                reference?: T;
+                                url?: T;
+                                label?: T;
+                                customId?: T;
+                              };
+                          features?:
+                            | T
+                            | {
+                                icon?: T;
+                                feature?: T;
+                                id?: T;
+                              };
+                          id?: T;
+                        };
+                    disclaimer?: T;
                   };
               id?: T;
               blockName?: T;
@@ -5848,6 +8312,7 @@ export interface ReusableContentSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        steps?: T | StepsBlockSelect<T>;
         stickyHighlights?:
           | T
           | {
@@ -6222,6 +8687,32 @@ export interface RedirectsSelect<T extends boolean = true> {
         type?: T;
         reference?: T;
         url?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "search_select".
+ */
+export interface SearchSelect<T extends boolean = true> {
+  title?: T;
+  priority?: T;
+  doc?: T;
+  slug?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
+  categories?:
+    | T
+    | {
+        relationTo?: T;
+        id?: T;
+        title?: T;
       };
   updatedAt?: T;
   createdAt?: T;

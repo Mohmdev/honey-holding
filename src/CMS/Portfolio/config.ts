@@ -128,6 +128,28 @@ export const Portfolio: CollectionConfig<'portfolio'> = {
         ...(ENABLED_PORTFOLIO_BLOCKS.ExampleTabs ? [ExampleTabs] : [])
       ]
     },
+    {
+      name: 'relatedPosts',
+      type: 'relationship',
+      filterOptions: ({ id }) => {
+        return {
+          id: {
+            not_in: [id]
+          }
+        }
+      },
+      hasMany: true,
+      relationTo: 'posts'
+    },
+    {
+      name: 'categories',
+      type: 'relationship',
+      admin: {
+        position: 'sidebar'
+      },
+      hasMany: true,
+      relationTo: 'categories'
+    },
     ...slugField(),
     {
       name: 'url',
