@@ -19,4 +19,5 @@ export interface Props {
   ref?: Ref<null | HTMLImageElement | HTMLVideoElement>
   width?: number | null
   height?: number | null
+  loading?: 'lazy' | 'eager' // for NextImage only
 }

@@ -25,7 +25,8 @@ export const Image: React.FC<Props> = (props) => {
     src: srcFromProps,
     alt: altFromProps,
     width: widthFromProps,
-    height: heightFromProps
+    height: heightFromProps,
+    loading: loadingFromProps
   } = props
 
   const [isLoading, setIsLoading] = useState(true)
@@ -48,6 +49,8 @@ export const Image: React.FC<Props> = (props) => {
     src = resource.url
   }
 
+  const loading = loadingFromProps || (!priority ? 'lazy' : undefined)
+
   // NOTE: this is used by the browser to determine which image to download at different screen sizes
   const sizes =
     sizesFromProps ||
@@ -68,9 +71,14 @@ export const Image: React.FC<Props> = (props) => {
   return (
     <React.Fragment>
       <NextImage
-        className={cn(baseClasses, classes.themeDark)}
         src={src || ''}
         alt={alt || ''}
+        fill={fill}
+        width={!fill ? (width ?? undefined) : undefined}
+        height={!fill ? (height ?? undefined) : undefined}
+        sizes={sizes}
+        priority={priority}
+        quality={90}
         onClick={onClick}
         onLoad={() => {
           setIsLoading(false)
@@ -78,12 +86,8 @@ export const Image: React.FC<Props> = (props) => {
             onLoadFromProps()
           }
         }}
-        fill={fill}
-        width={!fill ? (width ?? undefined) : undefined}
-        height={!fill ? (height ?? undefined) : undefined}
-        sizes={sizes}
-        priority={priority}
-        quality={90}
+        loading={loading}
+        className={cn(baseClasses, classes.themeDark)}
       />
       {hasDarkModeFallback &&
         typeof resource.darkModeFallback === 'object' &&
@@ -92,18 +96,19 @@ export const Image: React.FC<Props> = (props) => {
             quality={90}
             src={resource.darkModeFallback.url || ''}
             alt={alt || ''}
-            onClick={onClick}
             sizes={sizes}
             priority={priority}
             fill={fill}
             width={!fill ? (width ?? undefined) : undefined}
             height={!fill ? (height ?? undefined) : undefined}
+            onClick={onClick}
             onLoad={() => {
               setIsLoading(false)
               if (typeof onLoadFromProps === 'function') {
                 onLoadFromProps()
               }
             }}
+            loading={loading}
             className={cn(baseClasses, classes.themeDark)}
           />
         )}

@@ -24,18 +24,14 @@ import { plugins } from '@services/plugins'
 
 export default buildConfig({
   collections: [
-    ...collectionGroup('Portfolio', [Portfolio]),
-    ...collectionGroup('Content', [
-      Pages,
-      Posts,
-      // Categories,
-      ReusableContent
-    ]),
+    ...collectionGroup('', [Portfolio]),
+    ...collectionGroup('Content', [Pages, Posts, Categories, ReusableContent]),
     ...collectionGroup('Uploads', [Media, Assets]),
     ...collectionGroup('Settings', [Users]),
     ...collectionGroup('Support', [Docs, Tickets])
   ],
   globals: [...globalGroup('Navigation', [MainMenu, Footer])],
+  defaultDepth: 1,
   sharp,
   admin: adminConfig,
   email: emailAdapter,

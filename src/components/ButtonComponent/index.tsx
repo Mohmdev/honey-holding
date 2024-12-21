@@ -88,6 +88,8 @@ const generateHref = (args: GenerateSlugType): string => {
     return url
   }
 
+  // TODO: Refactor the hardcoded slugs to become dynamic
+
   if (
     type === 'reference' &&
     reference?.value &&

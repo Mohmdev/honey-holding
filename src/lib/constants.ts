@@ -28,18 +28,22 @@ export const ENABLED_PLUGINS = {
   search: false
 } as const
 export const REDIRECTABLE_COLLECTIONS: CollectionSlug[] = [
-  // 'pages',
-  // 'posts',
+  'pages',
+  'posts',
   'portfolio'
 ] as const
 export const NESTED_COLLECTIONS: CollectionSlug[] = [
   //
-  'pages'
-  // 'categories'
+  'pages',
+  'categories'
 ] as const
 export const INDEXED_COLLECTIONS: CollectionSlug[] = [
   //
   'posts'
+] as const
+export const INDEXED_TAXONOMY_COLLECTIONS: CollectionSlug[] = [
+  //
+  'categories'
 ] as const
 export const SEO_ENABLED_COLLECTIONS: CollectionSlug[] = [
   'portfolio',

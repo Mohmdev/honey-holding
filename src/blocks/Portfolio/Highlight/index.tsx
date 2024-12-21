@@ -6,6 +6,8 @@ import Link from 'next/link'
 
 import { useMouseInfo } from '@faceless-ui/mouse-info'
 
+import { getClientSideURL } from '@utils/getURL'
+
 import { Portfolio, ReusableContent } from '@payload-types'
 
 import { PayloadIcon } from '@graphics/PayloadIcon'
@@ -87,7 +89,7 @@ export const PortfolioHighlightBlock: React.FC<Props> = ({
                           prefetch={false}
                         >
                           <Image
-                            src={`${process.env.NEXT_PUBLIC_CMS_URL}${url}`}
+                            src={`${getClientSideURL()}${url}`}
                             fill
                             alt={alt}
                           />

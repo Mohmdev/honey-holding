@@ -4,6 +4,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 
 import { getCookie } from '@utils/get-cookie'
+import { getClientSideURL, getServerSideURL } from '@utils/getURL'
 
 import { Text } from '@forms/fields/Text'
 import FormComponent from '@forms/Form'
@@ -69,11 +70,11 @@ export const NewsletterSignUp: React.FC<NewsletterSignUpProps> = (props) => {
       try {
         const formID = process.env.NEXT_PUBLIC_NEWSLETTER_FORM_ID
         const hubspotCookie = getCookie('hubspotutk')
-        const pageUri = `${process.env.NEXT_PUBLIC_SITE_URL}${pathname}`
+        const pageUri = `${getServerSideURL()}${pathname}`
         const slugParts = pathname?.split('/')
         const pageName = slugParts?.at(-1) === '' ? 'Home' : slugParts?.at(-1)
         toast.promise(
-          fetch(`${process.env.NEXT_PUBLIC_CMS_URL}/api/form-submissions`, {
+          fetch(`${getClientSideURL()}/api/form-submissions`, {
             body: JSON.stringify({
               form: formID,
               hubspotCookie,

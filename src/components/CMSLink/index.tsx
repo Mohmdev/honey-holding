@@ -1,6 +1,8 @@
 import React from 'react'
 import Link from 'next/link'
 
+import { getServerSideURL } from '@utils/getURL'
+
 import type { Page, Portfolio, Post } from '@payload-types'
 
 import { Button, ButtonProps } from '@components/ButtonComponent'
@@ -62,6 +64,8 @@ const generateHref = (args: GenerateSlugType): string => {
   if ((type === 'custom' || type === undefined) && url) {
     return url
   }
+
+  // TODO: Refactor the hardcoded slugs to become dynamic
 
   if (type === 'reference' && reference?.value) {
     // Check both number and object types
@@ -139,8 +143,8 @@ export const CMSLink: React.FC<CMSLinkType> = ({
     if (!hrefIsLocal && href !== '#') {
       try {
         const objectURL = new URL(href)
-        if (objectURL.origin === process.env.NEXT_PUBLIC_SITE_URL) {
-          href = objectURL.href.replace(process.env.NEXT_PUBLIC_SITE_URL, '')
+        if (objectURL.origin === getServerSideURL()) {
+          href = objectURL.href.replace(getServerSideURL(), '')
         }
       } catch (e) {
         // Do not throw error if URL is invalid

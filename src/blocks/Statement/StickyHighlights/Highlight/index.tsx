@@ -238,3 +238,4 @@ export const StickyHighlight: React.FC<Props> = React.memo((props) => {
     </CodeBlip.Provider>
   )
 })
+StickyHighlight.displayName = 'StickyHighlight'

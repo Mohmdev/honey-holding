@@ -8,6 +8,8 @@ import {
   useState
 } from 'react'
 
+import { getClientSideURL } from '@utils/getURL'
+
 import { User } from '@payload-types'
 
 type Create = (args: {
@@ -50,16 +52,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   useEffect(() => {
     const fetchMe = async () => {
       try {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/me`,
-          {
-            credentials: 'include',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            method: 'GET'
-          }
-        )
+        const res = await fetch(`${getClientSideURL()}/api/users/me`, {
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          method: 'GET'
+        })
 
         if (res.ok) {
           const { user: meUser } = await res.json()
@@ -79,21 +78,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const create = useCallback<Create>(async (args) => {
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/create`,
-        {
-          body: JSON.stringify({
-            email: args.email,
-            password: args.password,
-            passwordConfirm: args.passwordConfirm
-          }),
-          credentials: 'include',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          method: 'POST'
-        }
-      )
+      const res = await fetch(`${getClientSideURL()}/api/users/create`, {
+        body: JSON.stringify({
+          email: args.email,
+          password: args.password,
+          passwordConfirm: args.passwordConfirm
+        }),
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: 'POST'
+      })
 
       if (res.ok) {
         const { data, errors } = await res.json()
@@ -111,20 +107,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const login = useCallback<Login>(
     async (args) => {
       try {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/login`,
-          {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              email: args.email,
-              password: args.password
-            })
-          }
-        )
+        const res = await fetch(`${getClientSideURL()}/api/users/login`, {
+          method: 'POST',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            email: args.email,
+            password: args.password
+          })
+        })
 
         if (res.ok) {
           const { errors, user } = await res.json()
@@ -145,16 +138,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const logout = useCallback<Logout>(async () => {
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/logout`,
-        {
-          credentials: 'include',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          method: 'POST'
-        }
-      )
+      const res = await fetch(`${getClientSideURL()}/api/users/logout`, {
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: 'POST'
+      })
 
       if (res.ok) {
         setUser(null)
@@ -170,7 +160,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const forgotPassword = useCallback<ForgotPassword>(async (args) => {
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/forgot-password`,
+        `${getClientSideURL()}/api/users/forgot-password`,
         {
           body: JSON.stringify({
             email: args.email
@@ -198,7 +188,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const resetPassword = useCallback<ResetPassword>(async (args) => {
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/reset-password`,
+        `${getClientSideURL()}/api/users/reset-password`,
         {
           body: JSON.stringify({
             password: args.password,
@@ -230,7 +220,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     async (updates) => {
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/${user?.id}`,
+          `${getClientSideURL()}/api/users/${user?.id}`,
           {
             method: 'PATCH',
             headers: {

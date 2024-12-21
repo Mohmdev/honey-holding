@@ -11,6 +11,8 @@ interface Props {
   url: string
 }
 
+// TODO: Refactor this to be dynamic instead of hardcoded
+
 /* This component helps us with SSR based dynamic redirects */
 export const PayloadRedirects: React.FC<Props> = async ({
   disableNotFound,
@@ -21,6 +23,10 @@ export const PayloadRedirects: React.FC<Props> = async ({
   const redirects = await getCachedRedirects()()
 
   const redirectItem = redirects.find((redirect) => redirect.from === slug)
+
+  const isDocument = (value: any): value is Page | Post | Portfolio => {
+    return typeof value === 'object' && value !== null
+  }
 
   if (redirectItem) {
     if (redirectItem.to?.url) {
@@ -33,7 +39,11 @@ export const PayloadRedirects: React.FC<Props> = async ({
       const collection = redirectItem.to?.reference?.relationTo
       const id = redirectItem.to?.reference?.value
 
-      const document = await getCachedDocument(collection, id)()
+      const document = (await getCachedDocument(collection, id)()) as
+        | Page
+        | Post
+        | Portfolio
+
       redirectUrl =
         redirectItem.to?.reference?.relationTo === 'posts'
           ? '/blog/'
@@ -43,10 +53,13 @@ export const PayloadRedirects: React.FC<Props> = async ({
     } else {
       redirectUrl =
         redirectItem.to?.reference?.relationTo === 'posts'
-          ? `/blog/${redirectItem.to?.reference?.value?.slug}`
+          ? `/blog/${isDocument(redirectItem.to?.reference?.value) ? redirectItem.to?.reference?.value?.slug : ''}`
           : redirectItem.to?.reference?.relationTo === 'portfolio'
-            ? `/portfolio/${redirectItem.to?.reference?.value?.slug}`
-            : `${redirectItem.to?.reference?.value?.breadcrumbs?.at(-1)?.url}`
+            ? `/portfolio/${isDocument(redirectItem.to?.reference?.value) ? redirectItem.to?.reference?.value?.slug : ''}`
+            : isDocument(redirectItem.to?.reference?.value) &&
+                'breadcrumbs' in redirectItem.to?.reference?.value
+              ? `${redirectItem.to?.reference?.value?.breadcrumbs?.at(-1)?.url}`
+              : '/'
     }
 
     if (redirectUrl) redirect(redirectUrl)

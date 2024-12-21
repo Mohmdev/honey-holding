@@ -124,7 +124,7 @@ export const Pricing: React.FC<Props> = ({
                       open={isToggled}
                     >
                       <CollapsibleToggler className={classes.toggler}>
-                        What's included
+                        What&apos;s included
                         <ChevronIcon
                           className={[
                             classes.chevron,

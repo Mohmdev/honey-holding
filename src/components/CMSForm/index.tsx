@@ -6,6 +6,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 
 import { getCookie } from '@utils/get-cookie'
+import { getClientSideURL, getServerSideURL } from '@utils/getURL'
 
 import { Form as FormType } from '@payload-types'
 
@@ -77,11 +78,11 @@ const RenderForm = ({
 
         try {
           const hubspotCookie = getCookie('hubspotutk')
-          const pageUri = `${process.env.NEXT_PUBLIC_SITE_URL}${pathname}`
+          const pageUri = `${getServerSideURL()}${pathname}`
           const slugParts = pathname?.split('/')
           const pageName = slugParts?.at(-1) === '' ? 'Home' : slugParts?.at(-1)
           const req = await fetch(
-            `${process.env.NEXT_PUBLIC_CMS_URL}/api/form-submissions`,
+            `${getClientSideURL()}/api/form-submissions`,
             {
               method: 'POST',
               credentials: 'include',
@@ -116,12 +117,12 @@ const RenderForm = ({
 
             if (!url) return
 
-            const redirectUrl = new URL(url, process.env.NEXT_PUBLIC_SITE_URL)
+            const redirectUrl = new URL(url, getServerSideURL())
 
             try {
               if (
                 url.startsWith('/') ||
-                redirectUrl.origin === process.env.NEXT_PUBLIC_SITE_URL
+                redirectUrl.origin === getServerSideURL()
               ) {
                 router.push(redirectUrl.href)
               } else {

@@ -1,5 +1,7 @@
 import { BeforeSync, DocToSync } from '@payloadcms/plugin-search/types'
 
+import { INDEXED_TAXONOMY_COLLECTIONS } from '@constants'
+
 export const beforeSyncWithSearch: BeforeSync = async ({
   originalDoc,
   searchDoc,
@@ -23,14 +25,16 @@ export const beforeSyncWithSearch: BeforeSync = async ({
     categories: []
   }
 
+  // Checks if document has categories
   if (categories && Array.isArray(categories) && categories.length > 0) {
     // get full categories and keep a flattened copy of their most important properties
     try {
+      // Maps each category to a simplified format
       const mappedCategories = categories.map((category) => {
         const { id, title } = category
 
         return {
-          relationTo: 'categories',
+          relationTo: INDEXED_TAXONOMY_COLLECTIONS,
           id,
           title
         }

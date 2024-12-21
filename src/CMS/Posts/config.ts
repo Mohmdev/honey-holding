@@ -37,11 +37,16 @@ export const Posts: CollectionConfig<'posts'> = {
     preview: getPreviewUrl('posts')
   },
   defaultPopulate: {
+    title: true,
     slug: true,
+    categories: true,
     authors: true,
     image: true,
     publishedOn: true,
-    title: true
+    meta: {
+      image: true,
+      description: true
+    }
   },
   fields: [
     {
@@ -100,6 +105,15 @@ export const Posts: CollectionConfig<'posts'> = {
       },
       hasMany: true,
       relationTo: 'posts'
+    },
+    {
+      name: 'categories',
+      type: 'relationship',
+      admin: {
+        position: 'sidebar'
+      },
+      hasMany: true,
+      relationTo: 'categories'
     },
     ...slugField(),
     {

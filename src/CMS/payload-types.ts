@@ -14,6 +14,7 @@ export interface Config {
     portfolio: Portfolio;
     pages: Page;
     posts: Post;
+    categories: Category;
     'reusable-content': ReusableContent;
     media: Media;
     assets: Asset;
@@ -27,11 +28,16 @@ export interface Config {
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  collectionsJoins: {};
+  collectionsJoins: {
+    categories: {
+      postsInCategory: 'posts';
+    };
+  };
   collectionsSelect: {
     portfolio: PortfolioSelect<false> | PortfolioSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
+    categories: CategoriesSelect<false> | CategoriesSelect<true>;
     'reusable-content': ReusableContentSelect<false> | ReusableContentSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     assets: AssetsSelect<false> | AssetsSelect<true>;
@@ -113,6 +119,9 @@ export interface Portfolio {
         | {
             calloutFields: {
               settings?: {
+                /**
+                 * Leave blank for system default
+                 */
                 theme?: ('light' | 'dark') | null;
                 background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
               };
@@ -148,6 +157,9 @@ export interface Portfolio {
         | {
             ctaFields: {
               settings?: {
+                /**
+                 * Leave blank for system default
+                 */
                 theme?: ('light' | 'dark') | null;
                 background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
               };
@@ -227,6 +239,9 @@ export interface Portfolio {
         | {
             cardGridFields: {
               settings?: {
+                /**
+                 * Leave blank for system default
+                 */
                 theme?: ('light' | 'dark') | null;
                 background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
               };
@@ -245,6 +260,9 @@ export interface Portfolio {
                 };
                 [k: string]: unknown;
               };
+              /**
+               * These links will be placed above the card grid as calls-to-action.
+               */
               links?:
                 | {
                     link: {
@@ -306,10 +324,19 @@ export interface Portfolio {
         | {
             codeFeatureFields: {
               settings?: {
+                /**
+                 * Leave blank for system default
+                 */
                 theme?: ('light' | 'dark') | null;
                 background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
               };
+              /**
+               * Check this box to force this block to have a dark background.
+               */
               forceDarkBackground?: boolean | null;
+              /**
+               * Choose how to align the content for this block.
+               */
               alignment?: ('contentCode' | 'codeContent') | null;
               heading?: string | null;
               richText: {
@@ -411,6 +438,9 @@ export interface Portfolio {
         | {
             sliderFields: {
               settings?: {
+                /**
+                 * Leave blank for system default
+                 */
                 theme?: ('light' | 'dark') | null;
                 background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
               };
@@ -450,6 +480,9 @@ export interface Portfolio {
                       url?: string | null;
                       label: string;
                       customId?: string | null;
+                      /**
+                       * Choose how the link should be rendered.
+                       */
                       appearance?: ('default' | 'primary' | 'secondary') | null;
                     };
                     id?: string | null;
@@ -491,6 +524,9 @@ export interface Portfolio {
         | {
             statementFields: {
               settings?: {
+                /**
+                 * Leave blank for system default
+                 */
                 theme?: ('light' | 'dark') | null;
                 background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
               };
@@ -548,6 +584,9 @@ export interface Portfolio {
         | {
             stickyHighlightsFields?: {
               settings?: {
+                /**
+                 * Leave blank for system default
+                 */
                 theme?: ('light' | 'dark') | null;
                 background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
               };
@@ -651,6 +690,9 @@ export interface Portfolio {
   meta?: {
     title?: string | null;
     description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
     image?: (number | null) | Media;
   };
   updatedAt: string;
@@ -663,8 +705,14 @@ export interface Portfolio {
  */
 export interface Media {
   id: number;
+  /**
+   * Choose an upload to render if the visitor is using dark mode.
+   */
   darkModeFallback?: (number | null) | Media;
   alt: string;
+  /**
+   * Optional
+   */
   caption?: {
     root: {
       type: string;
@@ -772,6 +820,9 @@ export interface Page {
       | 'gradient'
       | 'three';
     fullBackground?: boolean | null;
+    /**
+     * Leave blank for system default
+     */
     theme?: ('light' | 'dark') | null;
     enableBreadcrumbsBar?: boolean | null;
     breadcrumbsBarLinks?:
@@ -958,6 +1009,9 @@ export interface Page {
             url?: string | null;
             label: string;
             customId?: string | null;
+            /**
+             * Choose how the link should be rendered.
+             */
             appearance?: ('default' | 'primary' | 'secondary') | null;
           };
           id?: string | null;
@@ -990,6 +1044,9 @@ export interface Page {
                 url?: string | null;
                 label: string;
                 customId?: string | null;
+                /**
+                 * Choose how the link should be rendered.
+                 */
                 appearance?: ('default' | 'primary' | 'secondary') | null;
               };
               id?: string | null;
@@ -1067,6 +1124,9 @@ export interface Page {
     | {
         calloutFields: {
           settings?: {
+            /**
+             * Leave blank for system default
+             */
             theme?: ('light' | 'dark') | null;
             background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
           };
@@ -1102,6 +1162,9 @@ export interface Page {
     | {
         ctaFields: {
           settings?: {
+            /**
+             * Leave blank for system default
+             */
             theme?: ('light' | 'dark') | null;
             background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
           };
@@ -1181,6 +1244,9 @@ export interface Page {
     | {
         cardGridFields: {
           settings?: {
+            /**
+             * Leave blank for system default
+             */
             theme?: ('light' | 'dark') | null;
             background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
           };
@@ -1199,6 +1265,9 @@ export interface Page {
             };
             [k: string]: unknown;
           };
+          /**
+           * These links will be placed above the card grid as calls-to-action.
+           */
           links?:
             | {
                 link: {
@@ -1260,6 +1329,9 @@ export interface Page {
     | {
         portfolioCardFields?: {
           settings?: {
+            /**
+             * Leave blank for system default
+             */
             theme?: ('light' | 'dark') | null;
             background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
           };
@@ -1293,6 +1365,9 @@ export interface Page {
     | {
         portfolioHighlightFields: {
           settings?: {
+            /**
+             * Leave blank for system default
+             */
             theme?: ('light' | 'dark') | null;
             background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
           };
@@ -1320,6 +1395,9 @@ export interface Page {
     | {
         portfolioParallaxFields?: {
           settings?: {
+            /**
+             * Leave blank for system default
+             */
             theme?: ('light' | 'dark') | null;
             background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
           };
@@ -1334,6 +1412,9 @@ export interface Page {
                       id?: string | null;
                     }[]
                   | null;
+                /**
+                 * A label for the navigation tab at the bottom of the parallax
+                 */
                 tabLabel: string;
                 portfolio: number | Portfolio;
                 id?: string | null;
@@ -1347,10 +1428,19 @@ export interface Page {
     | {
         codeFeatureFields: {
           settings?: {
+            /**
+             * Leave blank for system default
+             */
             theme?: ('light' | 'dark') | null;
             background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
           };
+          /**
+           * Check this box to force this block to have a dark background.
+           */
           forceDarkBackground?: boolean | null;
+          /**
+           * Choose how to align the content for this block.
+           */
           alignment?: ('contentCode' | 'codeContent') | null;
           heading?: string | null;
           richText: {
@@ -1452,6 +1542,9 @@ export interface Page {
     | {
         contentFields: {
           settings?: {
+            /**
+             * Leave blank for system default
+             */
             theme?: ('light' | 'dark') | null;
             background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
           };
@@ -1525,6 +1618,9 @@ export interface Page {
     | {
         contentGridFields?: {
           settings?: {
+            /**
+             * Leave blank for system default
+             */
             theme?: ('light' | 'dark') | null;
             background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
           };
@@ -1598,6 +1694,9 @@ export interface Page {
     | {
         formFields: {
           settings?: {
+            /**
+             * Leave blank for system default
+             */
             theme?: ('light' | 'dark') | null;
             background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
           };
@@ -1625,6 +1724,9 @@ export interface Page {
     | {
         hoverCardsFields: {
           settings?: {
+            /**
+             * Leave blank for system default
+             */
             theme?: ('light' | 'dark') | null;
             background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
           };
@@ -1678,6 +1780,9 @@ export interface Page {
     | {
         hoverHighlightsFields: {
           settings?: {
+            /**
+             * Leave blank for system default
+             */
             theme?: ('light' | 'dark') | null;
             background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
           };
@@ -1740,6 +1845,9 @@ export interface Page {
     | {
         linkGridFields?: {
           settings?: {
+            /**
+             * Leave blank for system default
+             */
             theme?: ('light' | 'dark') | null;
             background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
           };
@@ -1776,6 +1884,9 @@ export interface Page {
     | {
         logoGridFields: {
           settings?: {
+            /**
+             * Leave blank for system default
+             */
             theme?: ('light' | 'dark') | null;
             background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
           };
@@ -1829,6 +1940,9 @@ export interface Page {
     | {
         mediaBlockFields: {
           settings?: {
+            /**
+             * Leave blank for system default
+             */
             theme?: ('light' | 'dark') | null;
             background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
           };
@@ -1857,10 +1971,19 @@ export interface Page {
     | {
         mediaContentFields: {
           settings?: {
+            /**
+             * Leave blank for system default
+             */
             theme?: ('light' | 'dark') | null;
             background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
           };
+          /**
+           * Choose how to align the content for this block.
+           */
           alignment?: ('contentMedia' | 'mediaContent') | null;
+          /**
+           * Choose how wide the media should be.
+           */
           mediaWidth?: ('stretch' | 'fit') | null;
           richText: {
             root: {
@@ -1912,15 +2035,27 @@ export interface Page {
     | {
         mediaContentAccordionFields?: {
           settings?: {
+            /**
+             * Leave blank for system default
+             */
             theme?: ('light' | 'dark') | null;
             background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
           };
+          /**
+           * Choose how to align the content for this block.
+           */
           alignment?: ('contentMedia' | 'mediaContent') | null;
           leader?: string | null;
           heading?: string | null;
           accordion?:
             | {
+                /**
+                 * Choose how to position the media itself.
+                 */
                 position?: ('normal' | 'inset' | 'wide') | null;
+                /**
+                 * Select the background you want to sit behind the media.
+                 */
                 background?: ('none' | 'gradient' | 'scanlines') | null;
                 mediaLabel: string;
                 mediaDescription: {
@@ -1971,6 +2106,9 @@ export interface Page {
     | {
         pricingFields?: {
           settings?: {
+            /**
+             * Leave blank for system default
+             */
             theme?: ('light' | 'dark') | null;
             background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
           };
@@ -2022,10 +2160,16 @@ export interface Page {
     | {
         reusableContentBlockFields: {
           settings?: {
+            /**
+             * Leave blank for system default
+             */
             theme?: ('light' | 'dark') | null;
             background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
           };
           reusableContent: number | ReusableContent;
+          /**
+           * This is a custom ID that can be used to target this block with CSS or JavaScript.
+           */
           customId?: string | null;
         };
         id?: string | null;
@@ -2035,6 +2179,9 @@ export interface Page {
     | {
         sliderFields: {
           settings?: {
+            /**
+             * Leave blank for system default
+             */
             theme?: ('light' | 'dark') | null;
             background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
           };
@@ -2074,6 +2221,9 @@ export interface Page {
                   url?: string | null;
                   label: string;
                   customId?: string | null;
+                  /**
+                   * Choose how the link should be rendered.
+                   */
                   appearance?: ('default' | 'primary' | 'secondary') | null;
                 };
                 id?: string | null;
@@ -2115,6 +2265,9 @@ export interface Page {
     | {
         statementFields: {
           settings?: {
+            /**
+             * Leave blank for system default
+             */
             theme?: ('light' | 'dark') | null;
             background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
           };
@@ -2173,6 +2326,9 @@ export interface Page {
     | {
         stickyHighlightsFields?: {
           settings?: {
+            /**
+             * Leave blank for system default
+             */
             theme?: ('light' | 'dark') | null;
             background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
           };
@@ -2276,6 +2432,9 @@ export interface Page {
   meta?: {
     title?: string | null;
     description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
     image?: (number | null) | Media;
   };
   parent?: (number | null) | Page;
@@ -2320,6 +2479,9 @@ export interface Post {
     | {
         bannerFields: {
           settings?: {
+            /**
+             * Leave blank for system default
+             */
             theme?: ('light' | 'dark') | null;
             background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
           };
@@ -2348,6 +2510,9 @@ export interface Post {
     | {
         blogContentFields: {
           settings?: {
+            /**
+             * Leave blank for system default
+             */
             theme?: ('light' | 'dark') | null;
             background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
           };
@@ -2374,6 +2539,9 @@ export interface Post {
     | {
         codeFields: {
           settings?: {
+            /**
+             * Leave blank for system default
+             */
             theme?: ('light' | 'dark') | null;
             background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
           };
@@ -2430,6 +2598,9 @@ export interface Post {
     | {
         blogMarkdownFields: {
           settings?: {
+            /**
+             * Leave blank for system default
+             */
             theme?: ('light' | 'dark') | null;
             background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
           };
@@ -2442,6 +2613,9 @@ export interface Post {
     | {
         mediaBlockFields: {
           settings?: {
+            /**
+             * Leave blank for system default
+             */
             theme?: ('light' | 'dark') | null;
             background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
           };
@@ -2470,10 +2644,16 @@ export interface Post {
     | {
         reusableContentBlockFields: {
           settings?: {
+            /**
+             * Leave blank for system default
+             */
             theme?: ('light' | 'dark') | null;
             background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
           };
           reusableContent: number | ReusableContent;
+          /**
+           * This is a custom ID that can be used to target this block with CSS or JavaScript.
+           */
           customId?: string | null;
         };
         id?: string | null;
@@ -2497,6 +2677,7 @@ export interface Post {
     [k: string]: unknown;
   } | null;
   relatedPosts?: (number | Post)[] | null;
+  categories?: (number | Category)[] | null;
   slug: string;
   slugLock?: boolean | null;
   authors: (number | User)[];
@@ -2504,6 +2685,9 @@ export interface Post {
   meta?: {
     title?: string | null;
     description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
     image?: (number | null) | Media;
   };
   updatedAt: string;
@@ -2521,6 +2705,9 @@ export interface ReusableContent {
     | {
         bannerFields: {
           settings?: {
+            /**
+             * Leave blank for system default
+             */
             theme?: ('light' | 'dark') | null;
             background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
           };
@@ -2549,6 +2736,9 @@ export interface ReusableContent {
     | {
         blogContentFields: {
           settings?: {
+            /**
+             * Leave blank for system default
+             */
             theme?: ('light' | 'dark') | null;
             background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
           };
@@ -2575,6 +2765,9 @@ export interface ReusableContent {
     | {
         blogMarkdownFields: {
           settings?: {
+            /**
+             * Leave blank for system default
+             */
             theme?: ('light' | 'dark') | null;
             background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
           };
@@ -2587,6 +2780,9 @@ export interface ReusableContent {
     | {
         codeFields: {
           settings?: {
+            /**
+             * Leave blank for system default
+             */
             theme?: ('light' | 'dark') | null;
             background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
           };
@@ -2643,10 +2839,19 @@ export interface ReusableContent {
     | {
         codeFeatureFields: {
           settings?: {
+            /**
+             * Leave blank for system default
+             */
             theme?: ('light' | 'dark') | null;
             background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
           };
+          /**
+           * Check this box to force this block to have a dark background.
+           */
           forceDarkBackground?: boolean | null;
+          /**
+           * Choose how to align the content for this block.
+           */
           alignment?: ('contentCode' | 'codeContent') | null;
           heading?: string | null;
           richText: {
@@ -2748,6 +2953,9 @@ export interface ReusableContent {
     | {
         mediaBlockFields: {
           settings?: {
+            /**
+             * Leave blank for system default
+             */
             theme?: ('light' | 'dark') | null;
             background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
           };
@@ -2776,6 +2984,9 @@ export interface ReusableContent {
     | {
         sliderFields: {
           settings?: {
+            /**
+             * Leave blank for system default
+             */
             theme?: ('light' | 'dark') | null;
             background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
           };
@@ -2815,6 +3026,9 @@ export interface ReusableContent {
                   url?: string | null;
                   label: string;
                   customId?: string | null;
+                  /**
+                   * Choose how the link should be rendered.
+                   */
                   appearance?: ('default' | 'primary' | 'secondary') | null;
                 };
                 id?: string | null;
@@ -2856,6 +3070,9 @@ export interface ReusableContent {
     | {
         statementFields: {
           settings?: {
+            /**
+             * Leave blank for system default
+             */
             theme?: ('light' | 'dark') | null;
             background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
           };
@@ -2913,6 +3130,9 @@ export interface ReusableContent {
     | {
         stickyHighlightsFields?: {
           settings?: {
+            /**
+             * Leave blank for system default
+             */
             theme?: ('light' | 'dark') | null;
             background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
           };
@@ -3014,12 +3234,38 @@ export interface ReusableContent {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories".
+ */
+export interface Category {
+  id: number;
+  title: string;
+  postsInCategory?: {
+    docs?: (number | Post)[] | null;
+    hasNextPage?: boolean | null;
+  } | null;
+  parent?: (number | null) | Category;
+  breadcrumbs?:
+    | {
+        doc?: (number | null) | Category;
+        url?: string | null;
+        label?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
   id: number;
   firstName: string;
   lastName: string;
+  /**
+   * Example: `nexwebdev`
+   */
   twitter?: string | null;
   photo?: (number | null) | Media;
   role: 'admin' | 'editor' | 'public';
@@ -3152,6 +3398,9 @@ export interface Form {
       )[]
     | null;
   submitButtonLabel?: string | null;
+  /**
+   * Choose whether to display an on-page message or redirect to a different page after they submit the form.
+   */
   confirmationType?: ('message' | 'redirect') | null;
   confirmationMessage?: {
     root: {
@@ -3171,6 +3420,9 @@ export interface Form {
   redirect?: {
     url: string;
   };
+  /**
+   * Send custom emails when the form submits. Use comma separated lists to send the same email to multiple recipients. To reference a value from this form, wrap that field's name with double curly brackets, i.e. {{firstName}}. You can use a wildcard {{*}} to output all data and {{*:table}} to format it as an HTML table in the email.
+   */
   emails?:
     | {
         emailTo?: string | null;
@@ -3179,6 +3431,9 @@ export interface Form {
         replyTo?: string | null;
         emailFrom?: string | null;
         subject: string;
+        /**
+         * Enter the message that should be sent in this email.
+         */
         message?: {
           root: {
             type: string;
@@ -3207,6 +3462,9 @@ export interface Form {
 export interface StepsBlock {
   stepsFields: {
     settings?: {
+      /**
+       * Leave blank for system default
+       */
       theme?: ('light' | 'dark') | null;
       background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
     };
@@ -3304,6 +3562,9 @@ export interface MediaExampleBlock {
  */
 export interface Asset {
   id: number;
+  /**
+   * Choose an upload to render if the visitor is using dark mode.
+   */
   darkModeFallback?: (number | null) | Media;
   alt: string;
   prefix?: string | null;
@@ -3362,13 +3623,25 @@ export interface FormSubmission {
  */
 export interface Redirect {
   id: number;
+  /**
+   * You will need to rebuild the website when changing this field.
+   */
   from: string;
   to?: {
     type?: ('reference' | 'custom') | null;
-    reference?: {
-      relationTo: 'portfolio';
-      value: number | Portfolio;
-    } | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: number | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: number | Post;
+        } | null)
+      | ({
+          relationTo: 'portfolio';
+          value: number | Portfolio;
+        } | null);
     url?: string | null;
   };
   updatedAt: string;
@@ -3392,6 +3665,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'posts';
         value: number | Post;
+      } | null)
+    | ({
+        relationTo: 'categories';
+        value: number | Category;
       } | null)
     | ({
         relationTo: 'reusable-content';
@@ -5037,6 +5314,7 @@ export interface PostsSelect<T extends boolean = true> {
       };
   lexicalContent?: T;
   relatedPosts?: T;
+  categories?: T;
   slug?: T;
   slugLock?: T;
   authors?: T;
@@ -5051,6 +5329,25 @@ export interface PostsSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories_select".
+ */
+export interface CategoriesSelect<T extends boolean = true> {
+  title?: T;
+  postsInCategory?: T;
+  parent?: T;
+  breadcrumbs?:
+    | T
+    | {
+        doc?: T;
+        url?: T;
+        label?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
