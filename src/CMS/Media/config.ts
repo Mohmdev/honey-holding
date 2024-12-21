@@ -1,7 +1,7 @@
 import path from 'path'
 import { fileURLToPath } from 'url'
 
-import { bareboneLexical } from '@services/editor/bareboneLexical'
+import { basicLexical } from '@services/editor/basicLexical'
 import { uploadDarkModeFallback } from '@fields/uploadDarkModeFallback'
 import { anyone } from '@access/anyone'
 import { isAdminOrEditor } from '@access/isAdminOrEditor'
@@ -43,7 +43,7 @@ export const Media: CollectionConfig<'media'> = {
     {
       name: 'caption',
       type: 'richText',
-      editor: bareboneLexical,
+      editor: basicLexical,
       admin: {
         description: 'Optional'
       }

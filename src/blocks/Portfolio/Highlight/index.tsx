@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useState } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 
 import { useMouseInfo } from '@faceless-ui/mouse-info'
@@ -12,6 +11,7 @@ import { Portfolio, ReusableContent } from '@payload-types'
 
 import { PayloadIcon } from '@graphics/PayloadIcon'
 import { Gutter } from '@components/Gutter'
+import { Media } from '@components/Media'
 import { RichText } from '@components/RichText'
 
 import classes from './index.module.scss'
@@ -88,7 +88,7 @@ export const PortfolioHighlightBlock: React.FC<Props> = ({
                           className={classes.image}
                           prefetch={false}
                         >
-                          <Image
+                          <Media
                             src={`${getClientSideURL()}${url}`}
                             fill
                             alt={alt}

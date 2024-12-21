@@ -436,6 +436,71 @@ export interface Portfolio {
             blockType: 'codeFeature';
           }
         | {
+            hoverHighlightsFields: {
+              settings?: {
+                /**
+                 * Leave blank for system default
+                 */
+                theme?: ('light' | 'dark') | null;
+                background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+              };
+              beforeHighlights?: string | null;
+              highlights?:
+                | {
+                    text: string;
+                    media?: {
+                      top?: (string | null) | Media;
+                      bottom?: (string | null) | Media;
+                    };
+                    link?: {
+                      type?: ('reference' | 'custom') | null;
+                      newTab?: boolean | null;
+                      reference?:
+                        | ({
+                            relationTo: 'pages';
+                            value: string | Page;
+                          } | null)
+                        | ({
+                            relationTo: 'posts';
+                            value: string | Post;
+                          } | null)
+                        | ({
+                            relationTo: 'portfolio';
+                            value: string | Portfolio;
+                          } | null);
+                      url?: string | null;
+                      customId?: string | null;
+                    };
+                    id?: string | null;
+                  }[]
+                | null;
+              afterHighlights?: string | null;
+              link: {
+                type?: ('reference' | 'custom') | null;
+                newTab?: boolean | null;
+                reference?:
+                  | ({
+                      relationTo: 'pages';
+                      value: string | Page;
+                    } | null)
+                  | ({
+                      relationTo: 'posts';
+                      value: string | Post;
+                    } | null)
+                  | ({
+                      relationTo: 'portfolio';
+                      value: string | Portfolio;
+                    } | null);
+                url?: string | null;
+                label: string;
+                customId?: string | null;
+              };
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'hoverHighlights';
+          }
+        | {
             sliderFields: {
               settings?: {
                 /**
@@ -2951,6 +3016,71 @@ export interface ReusableContent {
         blockType: 'codeFeature';
       }
     | {
+        hoverHighlightsFields: {
+          settings?: {
+            /**
+             * Leave blank for system default
+             */
+            theme?: ('light' | 'dark') | null;
+            background?: ('solid' | 'transparent' | 'gradientUp' | 'gradientDown') | null;
+          };
+          beforeHighlights?: string | null;
+          highlights?:
+            | {
+                text: string;
+                media?: {
+                  top?: (string | null) | Media;
+                  bottom?: (string | null) | Media;
+                };
+                link?: {
+                  type?: ('reference' | 'custom') | null;
+                  newTab?: boolean | null;
+                  reference?:
+                    | ({
+                        relationTo: 'pages';
+                        value: string | Page;
+                      } | null)
+                    | ({
+                        relationTo: 'posts';
+                        value: string | Post;
+                      } | null)
+                    | ({
+                        relationTo: 'portfolio';
+                        value: string | Portfolio;
+                      } | null);
+                  url?: string | null;
+                  customId?: string | null;
+                };
+                id?: string | null;
+              }[]
+            | null;
+          afterHighlights?: string | null;
+          link: {
+            type?: ('reference' | 'custom') | null;
+            newTab?: boolean | null;
+            reference?:
+              | ({
+                  relationTo: 'pages';
+                  value: string | Page;
+                } | null)
+              | ({
+                  relationTo: 'posts';
+                  value: string | Post;
+                } | null)
+              | ({
+                  relationTo: 'portfolio';
+                  value: string | Portfolio;
+                } | null);
+            url?: string | null;
+            label: string;
+            customId?: string | null;
+          };
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'hoverHighlights';
+      }
+    | {
         mediaBlockFields: {
           settings?: {
             /**
@@ -3946,6 +4076,55 @@ export interface PortfolioSelect<T extends boolean = true> {
                                 id?: T;
                               };
                           id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        hoverHighlights?:
+          | T
+          | {
+              hoverHighlightsFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    beforeHighlights?: T;
+                    highlights?:
+                      | T
+                      | {
+                          text?: T;
+                          media?:
+                            | T
+                            | {
+                                top?: T;
+                                bottom?: T;
+                              };
+                          link?:
+                            | T
+                            | {
+                                type?: T;
+                                newTab?: T;
+                                reference?: T;
+                                url?: T;
+                                customId?: T;
+                              };
+                          id?: T;
+                        };
+                    afterHighlights?: T;
+                    link?:
+                      | T
+                      | {
+                          type?: T;
+                          newTab?: T;
+                          reference?: T;
+                          url?: T;
+                          label?: T;
+                          customId?: T;
                         };
                   };
               id?: T;
@@ -5505,6 +5684,55 @@ export interface ReusableContentSelect<T extends boolean = true> {
                                 id?: T;
                               };
                           id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        hoverHighlights?:
+          | T
+          | {
+              hoverHighlightsFields?:
+                | T
+                | {
+                    settings?:
+                      | T
+                      | {
+                          theme?: T;
+                          background?: T;
+                        };
+                    beforeHighlights?: T;
+                    highlights?:
+                      | T
+                      | {
+                          text?: T;
+                          media?:
+                            | T
+                            | {
+                                top?: T;
+                                bottom?: T;
+                              };
+                          link?:
+                            | T
+                            | {
+                                type?: T;
+                                newTab?: T;
+                                reference?: T;
+                                url?: T;
+                                customId?: T;
+                              };
+                          id?: T;
+                        };
+                    afterHighlights?: T;
+                    link?:
+                      | T
+                      | {
+                          type?: T;
+                          newTab?: T;
+                          reference?: T;
+                          url?: T;
+                          label?: T;
+                          customId?: T;
                         };
                   };
               id?: T;

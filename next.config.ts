@@ -22,7 +22,7 @@ const nextConfig: NextConfig = withBundleAnalyzer({
     ignoreDuringBuilds: true
   },
   typescript: {
-    ignoreBuildErrors: true
+    ignoreBuildErrors: false
   },
   reactStrictMode: true,
   redirects,
