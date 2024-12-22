@@ -13,8 +13,39 @@ export const adminConfig: Config['admin'] = {
     Component: '@admin-components/AdminAvatar'
   },
   components: {
-    beforeLogin: ['@admin-components/BeforeLogin']
+    graphics: {
+      // icon in the navigation
+      Icon: '@graphics/Nexweb/SquareLogo#SquareLogo',
+      // logo on the login page
+      Logo: '@graphics/Nexweb/NamedLogo#NamedLogo'
+    }
+    // beforeLogin: ['@admin-components/BeforeLogin']
     // beforeDashboard: ['@admin-components/BeforeDashboard']
+  },
+  meta: {
+    description: 'Nexweb content management systems',
+    icons: [
+      {
+        type: 'image/svg',
+        rel: 'icon',
+        url: '/assets/nexweb-favicon.svg'
+      }
+    ],
+    // Images that will appear in the preview when...
+    // you share links to your admin panel online and through social media.
+    openGraph: {
+      title: 'Nexweb Admin Panel',
+      // description: 'This is a custom OG description',
+      images: [
+        {
+          height: 600,
+          width: 800,
+          url: '/assets/home-bg.png'
+        }
+      ]
+    },
+    // Text that appends the meta/page title displayed in the browser tab.
+    titleSuffix: '| Nexweb'
   },
   importMap: {
     baseDir: path.resolve(dirname)
