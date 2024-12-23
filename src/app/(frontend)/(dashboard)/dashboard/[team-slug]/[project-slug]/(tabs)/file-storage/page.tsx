@@ -2,11 +2,11 @@ import { Metadata } from 'next'
 
 import { fetchProjectAndRedirect } from '@dashboard/api/fetchProject'
 
-import { ProjectFileStoragePage } from './page_client.js'
+import { ProjectFileStoragePage } from './page_client'
 
 import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants'
 
-export default async ({
+export default async function Page({
   params
 }: {
   params: Promise<{
@@ -14,7 +14,7 @@ export default async ({
     'project-slug': string
     'environment-slug': string
   }>
-}) => {
+}) {
   const {
     'team-slug': teamSlug,
     'project-slug': projectSlug,

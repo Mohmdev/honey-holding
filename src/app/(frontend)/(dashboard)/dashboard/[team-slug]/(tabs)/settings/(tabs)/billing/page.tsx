@@ -1,27 +1,27 @@
 import React from 'react'
 import { Metadata } from 'next'
 
-import { SectionHeader } from '@cloud/[team-slug]/[project-slug]/(tabs)/settings/_layoutComponents/SectionHeader'
+import { SectionHeader } from '@root/app/(frontend)/(dashboard)/dashboard/[team-slug]/[project-slug]/(tabs)/settings/_layoutComponents/SectionHeader'
 
-import { checkTeamRoles } from '@utils/check-team-roles.js'
+import { checkTeamRoles } from '@access/check-team-roles'
 
 import { Text } from '@forms/fields/Text'
 
 import HR from '@components/MDX/components/HR'
-import { fetchMe } from '@dashboard/api/fetchMe.js'
-import { fetchPaymentMethods } from '@dashboard/api/fetchPaymentMethods.js'
+import { fetchMe } from '@dashboard/api/fetchMe'
+import { fetchPaymentMethods } from '@dashboard/api/fetchPaymentMethods'
 import { fetchTeamWithCustomer } from '@dashboard/api/fetchTeam'
-import { CreditCardList } from '@dashboard/CreditCardList'
+import { CreditCardList } from '@dashboard/components/CreditCardList'
 
 import classes from './page.module.scss'
 
-export default async ({
+export default async function Page({
   params
 }: {
   params: Promise<{
     'team-slug': string
   }>
-}) => {
+}) {
   const { 'team-slug': teamSlug } = await params
   const { user } = await fetchMe()
   const team = await fetchTeamWithCustomer(teamSlug)
@@ -59,7 +59,7 @@ export default async ({
               <p>
                 The following payment methods are available for this team.
                 Projects that do not specify a payment method will use this
-                team's default payment method (if any).
+                team&apos;s default payment method (if any).
               </p>
               <CreditCardList
                 team={team}

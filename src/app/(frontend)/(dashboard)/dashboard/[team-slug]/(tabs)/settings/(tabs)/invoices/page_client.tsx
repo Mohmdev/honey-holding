@@ -3,19 +3,20 @@
 import * as React from 'react'
 import Link from 'next/link.js'
 
-import { checkTeamRoles } from '@utils/check-team-roles.js'
-import { formatDate } from '@utils/format-date-time.js'
-import { priceFromJSON } from '@utils/price-from-json.js'
+import { formatDate } from '@utils/format-date-time'
+
+import { checkTeamRoles } from '@access/check-team-roles'
 
 import { CircleIconButton } from '@components/CircleIconButton'
 import { Heading } from '@components/Heading'
 import { Pill } from '@components/Pill'
-import { InvoicesResult } from '@dashboard/api/fetchInvoices.js'
+import { InvoicesResult } from '@dashboard/api/fetchInvoices'
 import { TeamWithCustomer } from '@dashboard/api/fetchTeam'
 import { User } from '@dashboard/types'
+import { priceFromJSON } from '@dashboard/utils/price-from-json'
 
 import classes from './page.module.scss'
-import { useInvoices } from './useInvoices.js'
+import { useInvoices } from './useInvoices'
 
 export const TeamInvoicesPage: React.FC<{
   team: TeamWithCustomer

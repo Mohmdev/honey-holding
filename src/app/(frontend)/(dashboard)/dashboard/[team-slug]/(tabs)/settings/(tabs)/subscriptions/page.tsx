@@ -1,23 +1,23 @@
 import React, { Fragment } from 'react'
 import { Metadata } from 'next'
 
-import { SectionHeader } from '@cloud/[team-slug]/[project-slug]/(tabs)/settings/_layoutComponents/SectionHeader'
+import { SectionHeader } from '@root/app/(frontend)/(dashboard)/dashboard/[team-slug]/[project-slug]/(tabs)/settings/_layoutComponents/SectionHeader'
 
 import { Message } from '@components/Message'
-import { fetchMe } from '@dashboard/api/fetchMe.js'
-import { fetchPlans } from '@dashboard/api/fetchPlans.js'
-import { fetchSubscriptions } from '@dashboard/api/fetchSubscriptions.js'
+import { fetchMe } from '@dashboard/api/fetchMe'
+import { fetchPlans } from '@dashboard/api/fetchPlans'
+import { fetchSubscriptions } from '@dashboard/api/fetchSubscriptions'
 import { fetchTeamWithCustomer } from '@dashboard/api/fetchTeam'
 
-import { TeamSubscriptionsPage } from './page_client.js'
+import { TeamSubscriptionsPage } from './page_client'
 
-export default async ({
+export default async function Page({
   params
 }: {
   params: Promise<{
     'team-slug': string
   }>
-}) => {
+}) {
   const { 'team-slug': teamSlug } = await params
   const { user } = await fetchMe()
   const team = await fetchTeamWithCustomer(teamSlug)

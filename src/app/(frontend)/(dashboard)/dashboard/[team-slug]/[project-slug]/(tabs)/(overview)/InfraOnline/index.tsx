@@ -4,7 +4,7 @@ import * as React from 'react'
 
 import { toast } from 'sonner'
 
-import { formatDate } from '@utils/format-date-time.js'
+import { formatDate } from '@utils/format-date-time'
 import { getClientSideURL } from '@utils/getURL'
 
 import { CommitIcon } from '@graphics/CommitIcon'

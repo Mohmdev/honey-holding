@@ -1,13 +1,16 @@
-import { CardElement as StripeCardElement } from '@stripe/react-stripe-js'
+// @ts-nocheck
 
-import type { PayloadStripeSubscription } from './createSubscription.js'
+// import { CardElement as StripeCardElement } from '@stripe/react-stripe-js'
+
+import type { PayloadStripeSubscription } from './createSubscription'
 import type { CheckoutState } from './reducer.js'
-import type {
-  PaymentIntent,
-  Stripe,
-  StripeCardElement as StripeCardElementType, // eslint-disable-line import/named
-  StripeElements
-} from '@stripe/stripe-js'
+
+// import type {
+//   PaymentIntent,
+//   Stripe,
+//   StripeCardElement as StripeCardElementType, // eslint-disable-line import/named
+//   StripeElements
+// } from '@stripe/stripe-js'
 
 export const confirmCardPayment = async (args: {
   subscription: PayloadStripeSubscription
@@ -26,7 +29,7 @@ export const confirmCardPayment = async (args: {
   const { paid, client_secret: clientSecret } = subscription
   const { paymentMethod } = checkoutState
 
-  let paymentIntent: PaymentIntent | null = null
+  const paymentIntent: PaymentIntent | null = null
 
   if (!paid) {
     if (!clientSecret) {

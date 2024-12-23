@@ -1,4 +1,4 @@
-import type { SubscriptionsResult } from '@dashboard/api/fetchSubscriptions.js'
+import type { SubscriptionsResult } from '@dashboard/api/fetchSubscriptions'
 
 export const subscriptionsReducer = (
   state: SubscriptionsResult | null,

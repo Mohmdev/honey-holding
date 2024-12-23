@@ -1,14 +1,14 @@
 import * as React from 'react'
 
 import { Gutter } from '@components/Gutter'
-import { Sidebar } from '@dashboard/Sidebar'
+import { Sidebar } from '@dashboard/components/Sidebar'
 import { generateRoutePath } from '@dashboard/utils/generate-route-path'
 
 import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants'
 
 const settingsSlug = 'settings'
 
-export default async ({
+export default async function layout({
   children,
   params
 }: {
@@ -18,7 +18,7 @@ export default async ({
     'project-slug': string
     'team-slug': string
   }>
-}) => {
+}) {
   const {
     'environment-slug': environmentSlug = PRODUCTION_ENVIRONMENT_SLUG,
     'project-slug': projectSlug,

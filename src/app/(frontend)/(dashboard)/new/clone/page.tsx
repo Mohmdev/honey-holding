@@ -5,12 +5,12 @@ import { redirect } from 'next/navigation'
 import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
 
 import { Gutter } from '@components/Gutter'
-import { NewProjectBlock } from '@components/NewProject'
 import { RenderParams } from '@components/RenderParams'
 import { fetchMe } from '@dashboard/api/fetchMe.js'
 import { fetchTemplates } from '@dashboard/api/fetchTemplates.js'
+import { NewProjectBlock } from '@dashboard/components/NewProject'
 
-export default async () => {
+export default async function Page() {
   const { user } = await fetchMe()
 
   if (!user) {
@@ -34,9 +34,9 @@ export default async () => {
 }
 
 export const metadata: Metadata = {
-  title: 'Clone Template | Payload Cloud',
+  title: 'Clone Template | Nexweb Cloud',
   openGraph: mergeOpenGraph({
-    title: 'Clone Template | Payload Cloud',
+    title: 'Clone Template | Nexweb Cloud',
     url: '/new/clone'
   })
 }

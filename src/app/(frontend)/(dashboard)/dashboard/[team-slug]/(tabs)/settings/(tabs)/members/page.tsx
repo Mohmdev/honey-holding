@@ -2,15 +2,15 @@ import { Metadata } from 'next'
 
 import { fetchTeamWithCustomer } from '@dashboard/api/fetchTeam'
 
-import { TeamMembersPage } from './page_client.js'
+import { TeamMembersPage } from './page_client'
 
-export default async ({
+export default async function Page({
   params
 }: {
   params: Promise<{
     'team-slug': string
   }>
-}) => {
+}) {
   const { 'team-slug': teamSlug } = await params
   const team = await fetchTeamWithCustomer(teamSlug)
   return <TeamMembersPage team={team} />

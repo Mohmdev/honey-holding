@@ -3,8 +3,8 @@
 import React, { useCallback, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 
-import { createDraftProject } from '@app/(frontend)/(cloud)/new/createDraftProject.js'
 import { Cell, Grid } from '@faceless-ui/css-grid'
+import { createDraftProject } from '@root/app/(frontend)/(dashboard)/new/createDraftProject'
 import { toast } from 'sonner'
 
 import { Checkbox } from '@forms/fields/Checkbox'
@@ -18,11 +18,11 @@ import { Gutter } from '@components/Gutter'
 import { HR } from '@components/HR'
 import { Message } from '@components/Message'
 import { fetchInstalls, Install } from '@dashboard/api/fetchInstalls'
-import { CloneOrDeployProgress } from '@dashboard/CloneOrDeployProgress'
-import { InstallationSelector } from '@dashboard/InstallationSelector'
-import { useTeamDrawer } from '@dashboard/TeamDrawer'
+import { CloneOrDeployProgress } from '@dashboard/components/CloneOrDeployProgress'
+import { InstallationSelector } from '@dashboard/components/InstallationSelector'
+import { useTeamDrawer } from '@dashboard/components/TeamDrawer'
+import { UniqueRepoName } from '@dashboard/components/UniqueRepoName'
 import { Team, Template, User } from '@dashboard/types'
-import { UniqueRepoName } from '@dashboard/UniqueRepoName'
 
 import classes from './page.module.scss'
 
@@ -54,7 +54,7 @@ export const CloneTemplate: React.FC<{
 
   const matchedTeam = user?.teams?.find(
     ({ team }) => typeof team !== 'string' && team?.slug === teamParam
-  )?.team as Team //eslint-disable-line function-paren-newline
+  )?.team as Team
 
   const onDraftCreateProject = useCallback(
     ({ slug: draftProjectSlug, team }) => {
@@ -94,7 +94,7 @@ export const CloneTemplate: React.FC<{
         const msg =
           err instanceof Error ? err.message : 'An unknown error occurred.'
         setCloneError(msg)
-        console.error(msg) // eslint-disable-line no-console
+        console.error(msg)
       }
     },
     [user, template, selectedInstall, matchedTeam, onDraftCreateProject]

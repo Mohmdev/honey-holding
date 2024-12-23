@@ -1,14 +1,14 @@
 import React from 'react'
 
-import { teamHasDefaultPaymentMethod } from '@cloud/_utilities/teamHasDefaultPaymentMethod.js'
 import { DashboardTabs } from '@root/app/(frontend)/(dashboard)/~/components/DashboardTabs'
 
 import { Gutter } from '@components/Gutter'
 import { fetchTeamWithCustomer } from '@dashboard/api/fetchTeam'
+import { teamHasDefaultPaymentMethod } from '@dashboard/utils/teamHasDefaultPaymentMethod'
 
 import { DASHBOARD_SLUG } from '@constants'
 
-export default async ({
+export default async function Layout({
   children,
   params
 }: {
@@ -16,7 +16,7 @@ export default async ({
   params: Promise<{
     'team-slug': string
   }>
-}) => {
+}) {
   const { 'team-slug': teamSlug } = await params
 
   // Note: this fetch will get deduped by the page

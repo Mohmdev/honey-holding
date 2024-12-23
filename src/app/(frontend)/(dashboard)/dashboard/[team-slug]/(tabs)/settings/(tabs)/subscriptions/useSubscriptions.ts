@@ -17,9 +17,9 @@ import type {
 } from '@dashboard/api/fetchSubscriptions.js'
 import type { Team } from '@dashboard/types'
 
-import { fetchSubscriptionsClient } from '@dashboard/api/fetchSubscriptions.js'
+import { fetchSubscriptionsClient } from '@dashboard/api/fetchSubscriptions'
 
-import { subscriptionsReducer } from './reducer.js'
+import { subscriptionsReducer } from './reducer'
 
 export const useSubscriptions = (args: {
   delay?: number

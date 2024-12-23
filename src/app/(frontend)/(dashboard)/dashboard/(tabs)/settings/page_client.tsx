@@ -2,8 +2,8 @@
 
 import React, { Fragment, useCallback } from 'react'
 
-import { SectionHeader } from '@cloud/[team-slug]/[project-slug]/(tabs)/settings/_layoutComponents/SectionHeader'
 import { useModal } from '@faceless-ui/modal'
+import { SectionHeader } from '@root/app/(frontend)/(dashboard)/dashboard/[team-slug]/[project-slug]/(tabs)/settings/_layoutComponents/SectionHeader'
 import { toast } from 'sonner'
 
 import { useAuth } from '@providers/Auth'
@@ -70,7 +70,7 @@ export const SettingsPage: React.FC<{
 
       try {
         await updateUser({
-          name: data?.name,
+          firstName: data?.firstName,
           email: data?.email,
           password: data?.password
         })
@@ -86,7 +86,7 @@ export const SettingsPage: React.FC<{
         const message =
           err?.message ||
           `An error occurred while attempting to update your account`
-        console.error(message) // eslint-disable-line no-console
+        console.error(message)
         throw new Error(message)
       }
     },

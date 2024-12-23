@@ -7,7 +7,7 @@ import { InfraOnline } from './InfraOnline'
 
 import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants'
 
-export default async ({
+export default async function Page({
   params
 }: {
   params: Promise<{
@@ -15,7 +15,7 @@ export default async ({
     'project-slug': string
     'environment-slug': string
   }>
-}) => {
+}) {
   const {
     'team-slug': teamSlug,
     'project-slug': projectSlug,

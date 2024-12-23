@@ -2,17 +2,17 @@ import { Metadata } from 'next'
 
 import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
 
-import { Logout } from './page_client.js'
+import { Logout } from './page_client'
 
-export default (props) => {
+export default function Page(props) {
   return <Logout {...props} />
 }
 
 export const metadata: Metadata = {
-  title: 'Logout | Payload Cloud',
-  description: 'Logout of Payload Cloud',
+  title: 'Logout | Nexweb Cloud',
+  description: 'Logout of Nexweb Cloud',
   openGraph: mergeOpenGraph({
-    title: 'Logout | Payload Cloud',
+    title: 'Logout | Nexweb Cloud',
     url: '/logout'
   })
 }

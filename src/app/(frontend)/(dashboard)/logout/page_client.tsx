@@ -40,7 +40,7 @@ export const Logout: React.FC = () => {
           setLoggingOut(false)
           setLoggedOut(true)
         } catch (e) {
-          console.error(e) // eslint-disable-line no-console
+          console.error(e)
         }
 
         isRequesting.current = false

@@ -8,7 +8,7 @@ import { LinkGrid } from '@blocks/LinkGrid'
 import { Gutter } from '@components/Gutter'
 import { fetchMe } from '@dashboard/api/fetchMe.js'
 import { fetchTeams } from '@dashboard/api/fetchTeam'
-import { TeamDrawer, TeamDrawerToggler } from '@dashboard/TeamDrawer'
+import { TeamDrawer, TeamDrawerToggler } from '@dashboard/components/TeamDrawer'
 
 import classes from './page.module.scss'
 
@@ -16,7 +16,7 @@ import { DASHBOARD_SLUG } from '@constants'
 
 const drawerSlug = 'team-drawer'
 
-export default async () => {
+export default async function Page() {
   const { user } = await fetchMe()
 
   const teams = await fetchTeams(

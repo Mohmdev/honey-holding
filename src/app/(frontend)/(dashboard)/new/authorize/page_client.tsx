@@ -4,7 +4,7 @@ import React, { useCallback } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 
-import { exchangeCode } from '@app/(frontend)/(cloud)/new/authorize/exchangeCode.js'
+import { exchangeCode } from '@root/app/(frontend)/(dashboard)/new/authorize/exchangeCode.js'
 
 import { usePopupWindow } from '@utils/use-popup-window'
 

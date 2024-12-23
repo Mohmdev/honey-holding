@@ -1,7 +1,7 @@
 import {
   default as EnvironmentBuildSettings,
   generateMetadata
-} from '@cloud/[team-slug]/[project-slug]/(tabs)/settings/(build-settings)/page'
+} from '@root/app/(frontend)/(dashboard)/dashboard/[team-slug]/[project-slug]/(tabs)/settings/(build-settings)/page'
 
 export default EnvironmentBuildSettings
 

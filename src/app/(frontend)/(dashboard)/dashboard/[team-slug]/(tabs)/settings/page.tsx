@@ -4,15 +4,15 @@ import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
 
 import { fetchTeamWithCustomer } from '@dashboard/api/fetchTeam'
 
-import { TeamSettingsPage } from './page_client.js'
+import { TeamSettingsPage } from './page_client'
 
-export default async ({
+export default async function Page({
   params
 }: {
   params: Promise<{
     'team-slug': string
   }>
-}) => {
+}) {
   const { 'team-slug': teamSlug } = await params
   const team = await fetchTeamWithCustomer(teamSlug)
   return <TeamSettingsPage team={team} />

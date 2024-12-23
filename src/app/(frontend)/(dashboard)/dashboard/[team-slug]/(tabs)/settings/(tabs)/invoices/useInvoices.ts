@@ -9,10 +9,10 @@ import {
 
 import { toast } from 'sonner'
 
-import type { InvoicesResult } from '@dashboard/api/fetchInvoices.js'
+import type { InvoicesResult } from '@dashboard/api/fetchInvoices'
 import type { Team } from '@dashboard/types'
 
-import { fetchInvoicesClient } from '@dashboard/api/fetchInvoices.js'
+import { fetchInvoicesClient } from '@dashboard/api/fetchInvoices'
 
 const reducer = (
   state: InvoicesResult | null,

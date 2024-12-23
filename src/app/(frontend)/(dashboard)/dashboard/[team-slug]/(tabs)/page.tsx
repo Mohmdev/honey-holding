@@ -2,19 +2,19 @@ import { Metadata } from 'next'
 
 import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
 
-import { fetchProjects } from '@dashboard/api/fetchProjects.js'
+import { fetchProjects } from '@dashboard/api/fetchProjects'
 import { fetchTeamWithCustomer } from '@dashboard/api/fetchTeam'
-import { fetchTemplates } from '@dashboard/api/fetchTemplates.js'
+import { fetchTemplates } from '@dashboard/api/fetchTemplates'
 
-import { TeamPage } from './page_client.js'
+import { TeamPage } from './page_client'
 
-export default async ({
+export default async function Page({
   params
 }: {
   params: Promise<{
     'team-slug': string
   }>
-}) => {
+}) {
   const { 'team-slug': teamSlug } = await params
   const team = await fetchTeamWithCustomer(teamSlug)
   const projectsRes = await fetchProjects([team?.id])

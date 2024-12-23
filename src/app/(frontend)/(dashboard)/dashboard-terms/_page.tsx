@@ -1,12 +1,11 @@
-// @ts-nocheck
-
 'use client'
 
 import React from 'react'
+import Link from 'next/link'
 
 import { Gutter } from '@components/Gutter'
 import { Heading } from '@components/Heading'
-import { CreditCardList } from '@dashboard/CreditCardList'
+import { CreditCardList } from '@dashboard/components/CreditCardList'
 
 export default function TermsClientPage() {
   return (
@@ -141,7 +140,7 @@ export default function TermsClientPage() {
                   Term, unless under a seperate signed agremeent, Payload will
                   make the Service available in accordance with and provide the
                   support set forth in the Service Level Agreement located at
-                  <a href="/sla" /> (the “
+                  <Link href="/sla" /> (the “
                   <i>
                     <b>SLA</b>
                   </i>
@@ -225,7 +224,7 @@ export default function TermsClientPage() {
                   </i>
                   ”) in accordance with Payload’s privacy notices and privacy
                   policy located at
-                  <a href="/privacy">payloadcms.com/privacy</a> as may be
+                  <Link href="/privacy">payloadcms.com/privacy</Link> as may be
                   updated by Payload from time to time in its sole discretion (“
                   <i>
                     <b>Privacy Policy</b>
@@ -259,9 +258,9 @@ export default function TermsClientPage() {
                   </i>
                   ”). For a description of Payload’s current standard rates and
                   pricing, please visit{' '}
-                  <a href="/cloud-pricing">
+                  <Link href="/cloud-pricing">
                     https://payloadcms.com/cloud-pricing
-                  </a>
+                  </Link>
                   . Payload offers the Service on a subscription basis with
                   different service tiers to choose. Customer will pay for any
                   excess usage beyond any usage limitations or metrics on which
@@ -324,10 +323,10 @@ export default function TermsClientPage() {
                   .” Customer may cancel the Subscription prior to the start of
                   a Renewal Subscription Period by deleting the project. To
                   delete a project, log into the Account, click the project to
-                  cancel, then click "Settings", then "Plan" and follow
-                  instructions to delete the project. Customer agrees that any
-                  termination of a Subscription will be effective as of the end
-                  of the then-current Subscription Period.
+                  cancel, then click &quot;Settings&quot;, then &quot;Plan&quot;
+                  and follow instructions to delete the project. Customer agrees
+                  that any termination of a Subscription will be effective as of
+                  the end of the then-current Subscription Period.
                 </li>
                 <li>
                   <b>Subscription Upgrades</b>. If Customer chooses to upgrade

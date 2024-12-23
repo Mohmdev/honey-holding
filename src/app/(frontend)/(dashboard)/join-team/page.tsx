@@ -3,9 +3,9 @@ import { redirect } from 'next/navigation'
 
 import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
 
-import { fetchMe } from '@dashboard/api/fetchMe.js'
+import { fetchMe } from '@dashboard/api/fetchMe'
 
-import { JoinTeam } from './page_client.js'
+import { JoinTeam } from './page_client'
 
 // TODO: server render the `JoinTeam` page
 // see the `verify` page for an example
@@ -24,10 +24,10 @@ export default async function JoinTeamPage(props) {
 }
 
 export const metadata: Metadata = {
-  title: 'Join Team | Payload Cloud',
-  description: 'Join a Payload team',
+  title: 'Join Team | Nexweb Cloud',
+  description: 'Join a Nexweb team',
   openGraph: mergeOpenGraph({
-    title: 'Join Team | Payload Cloud',
+    title: 'Join Team | Nexweb Cloud',
     url: '/join-team'
   })
 }

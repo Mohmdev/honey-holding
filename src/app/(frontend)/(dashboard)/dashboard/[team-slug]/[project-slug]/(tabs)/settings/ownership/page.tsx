@@ -8,7 +8,7 @@ import { ProjectOwnershipPage } from './page_client.js'
 
 import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants'
 
-export default async ({
+export default async function Page({
   params
 }: {
   params: Promise<{
@@ -16,7 +16,7 @@ export default async ({
     'project-slug': string
     'team-slug': string
   }>
-}) => {
+}) {
   const {
     'environment-slug': environmentSlug = PRODUCTION_ENVIRONMENT_SLUG,
     'project-slug': projectSlug,
@@ -42,7 +42,7 @@ export async function generateMetadata({
   return {
     openGraph: mergeOpenGraph({
       title: 'Ownership',
-      url: `/cloud/${teamSlug}/${projectSlug}/settings/ownership`
+      url: `/dashboard/${teamSlug}/${projectSlug}/settings/ownership`
     }),
     title: 'Ownership'
   }

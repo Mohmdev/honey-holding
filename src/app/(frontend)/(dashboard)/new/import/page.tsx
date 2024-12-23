@@ -3,21 +3,21 @@ import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 
 import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
-import { uuid as generateUUID } from '@utils/uuid.js'
+import { uuid as generateUUID } from '@utils/uuid'
 
 import { Breadcrumbs } from '@components/Breadcrumbs'
 import { Gutter } from '@components/Gutter'
 import { Heading } from '@components/Heading'
-import { fetchGitHubToken } from '@dashboard/api/fetchGitHubToken.js'
+import { fetchGitHubToken } from '@dashboard/api/fetchGitHubToken'
 import { fetchInstalls } from '@dashboard/api/fetchInstalls'
-import { fetchMe } from '@dashboard/api/fetchMe.js'
-import { fetchRepos, Repo, RepoResults } from '@dashboard/api/fetchRepos.js'
+import { fetchMe } from '@dashboard/api/fetchMe'
+import { fetchRepos, Repo, RepoResults } from '@dashboard/api/fetchRepos'
 
-import { ImportProject } from './page_client.js'
+import { ImportProject } from './page_client'
 
 const title = `Import a codebase`
 
-export default async () => {
+export default async function Page() {
   const { user } = await fetchMe()
 
   if (!user) {
@@ -62,9 +62,9 @@ export default async () => {
 }
 
 export const metadata: Metadata = {
-  title: 'Import Project | Payload Cloud',
+  title: 'Import Project | Nexweb Cloud',
   openGraph: mergeOpenGraph({
-    title: 'Import Project | Payload Cloud',
+    title: 'Import Project | Nexweb Cloud',
     url: '/new/import'
   })
 }

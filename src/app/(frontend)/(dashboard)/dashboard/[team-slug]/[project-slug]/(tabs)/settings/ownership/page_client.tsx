@@ -4,8 +4,9 @@ import * as React from 'react'
 import Link from 'next/link'
 
 import { useAuth } from '@providers/Auth'
-import { checkTeamRoles } from '@utils/check-team-roles.js'
-import { isExpandedDoc } from '@utils/is-expanded-doc.js'
+import { isExpandedDoc } from '@utils/is-expanded-doc'
+
+import { checkTeamRoles } from '@access/check-team-roles'
 
 import type { Team } from '@dashboard/types'
 
@@ -20,32 +21,32 @@ export const ProjectOwnershipPage: React.FC<{
 }> = ({ team: currentTeam }) => {
   const { user } = useAuth()
 
-  const isCurrentTeamOwner = checkTeamRoles(user, currentTeam, ['owner'])
+  // const isCurrentTeamOwner = checkTeamRoles(user, currentTeam, ['owner'])
 
-  const teamOptions = user?.teams?.reduce(
-    (acc, userTeam) => {
-      if (
-        userTeam.team &&
-        userTeam.team !== 'string' &&
-        isExpandedDoc<Team>(userTeam.team) &&
-        userTeam?.roles?.length
-      ) {
-        acc.push({
-          slug: userTeam.team.slug,
-          label: `"${userTeam.team.name}" owns this project`,
-          value: userTeam.team.id
-        })
-      }
+  // const teamOptions = user?.teams?.reduce(
+  //   (acc, userTeam) => {
+  //     if (
+  //       userTeam.team &&
+  //       userTeam.team !== 'string' &&
+  //       isExpandedDoc<Team>(userTeam.team) &&
+  //       userTeam?.roles?.length
+  //     ) {
+  //       acc.push({
+  //         slug: userTeam.team.slug,
+  //         label: `"${userTeam.team.name}" owns this project`,
+  //         value: userTeam.team.id
+  //       })
+  //     }
 
-      return acc
-    },
-    [] as { label: string; slug?: string; value: string }[]
-  )
+  //     return acc
+  //   },
+  //   [] as { label: string; slug?: string; value: string }[]
+  // )
 
   return (
     <MaxWidth>
       <SectionHeader title="Ownership" />
-
+      {/*
       {isCurrentTeamOwner && teamOptions ? (
         <div className={classes.noAccess}>
           Contact support at{' '}
@@ -57,7 +58,10 @@ export const ProjectOwnershipPage: React.FC<{
         <div className={classes.noAccess}>
           You do not have permission to change ownership of this project.
         </div>
-      )}
+      )} */}
+      <div className={classes.noAccess}>
+        You do not have permission to change ownership of this project.
+      </div>
     </MaxWidth>
   )
 }

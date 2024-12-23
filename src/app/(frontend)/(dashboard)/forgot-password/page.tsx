@@ -7,7 +7,7 @@ import { fetchMe } from '@dashboard/api/fetchMe.js'
 
 import { ForgotPassword } from './page_client.js'
 
-export default async (props) => {
+export default async function Page(props) {
   const { user } = await fetchMe()
 
   if (user) {
@@ -20,10 +20,10 @@ export default async (props) => {
 }
 
 export const metadata: Metadata = {
-  title: 'Forgot Password | Payload Cloud',
+  title: 'Forgot Password | Nexweb Cloud',
   description: 'If you forgot your password, reset it',
   openGraph: mergeOpenGraph({
-    title: 'Forgot Password | Payload Cloud',
+    title: 'Forgot Password | Nexweb Cloud',
     url: '/forgot-password'
   })
 }

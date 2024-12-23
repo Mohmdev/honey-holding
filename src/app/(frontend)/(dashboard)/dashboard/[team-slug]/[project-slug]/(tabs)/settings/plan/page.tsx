@@ -1,39 +1,42 @@
-import { fetchMe } from '@dashboard/api/fetchMe.js'
-import { fetchProjectAndRedirect } from '@dashboard/api/fetchProject'
 import { Metadata } from 'next'
 
-import { canUserMangeProject } from '@access.js'
-import { MaxWidth } from '@components/MaxWidth'
-import { Plan } from '@dashboard/types'
 import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
-import { isExpandedDoc } from '@utils/is-expanded-doc.js'
-import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants'
-import { SectionHeader } from '../_layoutComponents/SectionHeader
-import { DeletePlanButton } from './DeletePlanButton
-import { DeletePlanModal } from './DeletePlanModal
+import { isExpandedDoc } from '@utils/is-expanded-doc'
 
-import classes from './index.module.scss'
+import { canUserMangeProject } from '@access/canUserMangeProject'
+
+import { MaxWidth } from '@components/MaxWidth'
+import { fetchMe } from '@dashboard/api/fetchMe.js'
+import { fetchProjectAndRedirect } from '@dashboard/api/fetchProject'
+import { Plan } from '@dashboard/types'
 import { generateRoutePath } from '@dashboard/utils/generate-route-path'
 
-export default async ({
-  params,
+import { SectionHeader } from '../_layoutComponents/SectionHeader'
+import { DeletePlanButton } from './DeletePlanButton'
+import { DeletePlanModal } from './DeletePlanModal'
+import classes from './index.module.scss'
+
+import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants'
+
+export default async function Page({
+  params
 }: {
   params: Promise<{
     'team-slug': string
     'project-slug': string
     'environment-slug': string
   }>
-}) => {
+}) {
   const {
     'team-slug': teamSlug,
     'project-slug': projectSlug,
-    'environment-slug': environmentSlug = PRODUCTION_ENVIRONMENT_SLUG,
+    'environment-slug': environmentSlug = PRODUCTION_ENVIRONMENT_SLUG
   } = await params
   const { user } = await fetchMe()
   const { project } = await fetchProjectAndRedirect({
     teamSlug,
     projectSlug,
-    environmentSlug,
+    environmentSlug
   })
   const canManageProject = canUserMangeProject({ project, user })
 
@@ -49,8 +52,8 @@ export default async ({
               <a href="mailto:info@payloadcms.com?subject=Downgrade/Upgrade Cloud Plan&body=Hi! I would like to change my cloud plan.">
                 contact us
               </a>{' '}
-              and we will change your plan for you. This is temporary until we have a self-service
-              plan change feature.
+              and we will change your plan for you. This is temporary until we
+              have a self-service plan change feature.
             </p>
           </div>
         </div>
@@ -61,8 +64,8 @@ export default async ({
           <div className={classes.borderBox}>
             <h4>Warning</h4>
             <p className={classes.downgradeText}>
-              Once you delete a project, there is no going back so please be certain. We recommend
-              exporting your database before deleting.
+              Once you delete a project, there is no going back so please be
+              certain. We recommend exporting your database before deleting.
             </p>
             <DeletePlanButton />
           </div>
@@ -79,7 +82,7 @@ export default async ({
 }
 
 export async function generateMetadata({
-  params,
+  params
 }: {
   params: Promise<{
     'team-slug': string
@@ -90,7 +93,7 @@ export async function generateMetadata({
   const {
     'team-slug': teamSlug,
     'project-slug': projectSlug,
-    'environment-slug': environmentSlug = PRODUCTION_ENVIRONMENT_SLUG,
+    'environment-slug': environmentSlug = PRODUCTION_ENVIRONMENT_SLUG
   } = await params
   return {
     title: 'Plan',
@@ -100,8 +103,8 @@ export async function generateMetadata({
         teamSlug,
         projectSlug,
         environmentSlug,
-        suffix: 'settings/plan',
-      }),
-    }),
+        suffix: 'settings/plan'
+      })
+    })
   }
 }

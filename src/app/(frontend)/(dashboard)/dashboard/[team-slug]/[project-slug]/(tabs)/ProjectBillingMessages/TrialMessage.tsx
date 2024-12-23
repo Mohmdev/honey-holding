@@ -4,12 +4,11 @@ import React, { Fragment } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-import { projectHasPaymentMethod } from '@cloud/_utilities/projectHasPaymentMethod.js'
-import { teamHasDefaultPaymentMethod } from '@cloud/_utilities/teamHasDefaultPaymentMethod.js'
-
 import { Message } from '@components/Message'
 import { ProjectWithSubscription } from '@dashboard/api/fetchProject'
 import { TeamWithCustomer } from '@dashboard/api/fetchTeam'
+import { projectHasPaymentMethod } from '@dashboard/utils/projectHasPaymentMethod'
+import { teamHasDefaultPaymentMethod } from '@dashboard/utils/teamHasDefaultPaymentMethod'
 
 export const TrialMessage: React.FC<{
   project: ProjectWithSubscription

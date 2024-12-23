@@ -3,9 +3,7 @@
 import * as React from 'react'
 import Link from 'next/link'
 
-import { RequireField } from '@ts-helpers/requireField.js'
-
-import { useGetProjectDeployments } from '@utils/use-cloud-api.js'
+import { RequireField } from '@lib/ts-helpers/requireField'
 
 import { Banner } from '@components/Banner'
 import { ExtendedBackground } from '@components/ExtendedBackground'
@@ -15,6 +13,7 @@ import { Indicator } from '@components/Indicator'
 import { Message } from '@components/Message'
 import { fetchProjectClient } from '@dashboard/api/fetchProjects.js'
 import { Project, Team } from '@dashboard/types'
+import { useGetProjectDeployments } from '@dashboard/utils/use-cloud-api'
 
 import { DeploymentLogs } from '../DeploymentLogs'
 import classes from './index.module.scss'
@@ -171,6 +170,7 @@ export const InfraOffline: React.FC<{
     }
 
     return () => {
+      // eslint-disable-next-line
       deploymentInterval && clearInterval(deploymentInterval)
     }
   }, [reqStatus, reloadDeployments])
@@ -268,8 +268,8 @@ export const InfraOffline: React.FC<{
                             <code>{project?.deploymentBranch}</code> exist?
                           </h6>
                           <p className={classes.helpText}>
-                            Validate that your branch exists. If it doesn't, go
-                            to{' '}
+                            Validate that your branch exists. If it
+                            doesn&apos;t, go to{' '}
                             <Link
                               href={`/cloud/${team?.slug}/${project?.slug}/settings`}
                             >
@@ -280,8 +280,8 @@ export const InfraOffline: React.FC<{
                           </p>
                           <h6>Can you build your project locally?</h6>
                           <p className={classes.helpText}>
-                            If you're importing a project, make sure it can
-                            build on your local machine. If you can't build
+                            If you&apos;re importing a project, make sure it can
+                            build on your local machine. If you can&apos;t build
                             locally, fix the errors and then push a commit to
                             restart this process.
                           </p>
@@ -296,8 +296,8 @@ export const InfraOffline: React.FC<{
 
                           <h6>Check Run Script</h6>
                           <p className={classes.helpText}>
-                            Check that your Project's Run Script is the correct
-                            command for the script in your package.json
+                            Check that your Project&apos;s Run Script is the
+                            correct command for the script in your package.json
                           </p>
 
                           <h6>Required ENV variables</h6>

@@ -3,25 +3,25 @@ import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 
 import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
-import { uuid as generateUUID } from '@utils/uuid.js'
+import { uuid as generateUUID } from '@utils/uuid'
 
 import { Gutter } from '@components/Gutter'
-import { fetchGitHubToken } from '@dashboard/api/fetchGitHubToken.js'
+import { fetchGitHubToken } from '@dashboard/api/fetchGitHubToken'
 import { fetchInstalls } from '@dashboard/api/fetchInstalls'
-import { fetchMe } from '@dashboard/api/fetchMe.js'
-import { fetchTemplate } from '@dashboard/api/fetchTemplate.js'
+import { fetchMe } from '@dashboard/api/fetchMe'
+import { fetchTemplate } from '@dashboard/api/fetchTemplate'
 
-import { CloneTemplate } from './page_client.js'
+import { CloneTemplate } from './page_client'
 
 const title = `Create new from template`
 
-export default async ({
+export default async function Page({
   params
 }: {
   params: Promise<{
     'template-slug': string
   }>
-}) => {
+}) {
   const { 'template-slug': templateSlug } = await params
   const { user } = await fetchMe()
 

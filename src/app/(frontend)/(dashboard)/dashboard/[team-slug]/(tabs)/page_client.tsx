@@ -8,14 +8,11 @@ import { useDebounce } from '@utils/useDebounce'
 import { Text } from '@forms/fields/Text'
 
 import { Gutter } from '@components/Gutter'
-import { NewProjectBlock } from '@components/NewProject'
 import { Pagination } from '@components/Pagination'
-import {
-  fetchProjectsClient,
-  ProjectsRes
-} from '@dashboard/api/fetchProjects.js'
+import { fetchProjectsClient, ProjectsRes } from '@dashboard/api/fetchProjects'
 import { TeamWithCustomer } from '@dashboard/api/fetchTeam'
-import { ProjectCard } from '@dashboard/ProjectCard'
+import { NewProjectBlock } from '@dashboard/components/NewProject'
+import { ProjectCard } from '@dashboard/components/ProjectCard'
 import { Template } from '@dashboard/types'
 
 import classes from './page.module.scss'

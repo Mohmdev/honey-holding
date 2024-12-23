@@ -4,9 +4,9 @@ import { Metadata } from 'next'
 import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
 
 import { Gutter } from '@components/Gutter'
-import { NewProjectBlock } from '@components/NewProject'
 import { RenderParams } from '@components/RenderParams'
-import { fetchTemplates } from '@dashboard/api/fetchTemplates.js'
+import { fetchTemplates } from '@dashboard/api/fetchTemplates'
+import { NewProjectBlock } from '@dashboard/components/NewProject'
 
 export const dynamic = 'force-dynamic'
 

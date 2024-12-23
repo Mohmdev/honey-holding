@@ -2,11 +2,11 @@ import { Metadata } from 'next'
 
 import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
 
-import { fetchMe } from '@dashboard/api/fetchMe.js'
+import { fetchMe } from '@dashboard/api/fetchMe'
 
-import { SettingsPage } from './page_client.js'
+import { SettingsPage } from './page_client'
 
-export default async () => {
+export default async function Page() {
   const { user } = await fetchMe()
   return <SettingsPage user={user} />
 }

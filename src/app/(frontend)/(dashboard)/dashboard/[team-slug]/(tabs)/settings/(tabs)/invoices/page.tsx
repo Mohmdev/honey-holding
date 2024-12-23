@@ -1,22 +1,22 @@
 import React from 'react'
 import { Metadata } from 'next'
 
-import { SectionHeader } from '@cloud/[team-slug]/[project-slug]/(tabs)/settings/_layoutComponents/SectionHeader'
+import { SectionHeader } from '@root/app/(frontend)/(dashboard)/dashboard/[team-slug]/[project-slug]/(tabs)/settings/_layoutComponents/SectionHeader'
 
 import { Message } from '@components/Message'
-import { fetchInvoices } from '@dashboard/api/fetchInvoices.js'
-import { fetchMe } from '@dashboard/api/fetchMe.js'
+import { fetchInvoices } from '@dashboard/api/fetchInvoices'
+import { fetchMe } from '@dashboard/api/fetchMe'
 import { fetchTeamWithCustomer } from '@dashboard/api/fetchTeam'
 
-import { TeamInvoicesPage } from './page_client.js'
+import { TeamInvoicesPage } from './page_client'
 
-export default async ({
+export default async function Page({
   params
 }: {
   params: Promise<{
     'team-slug': string
   }>
-}) => {
+}) {
   const { 'team-slug': teamSlug } = await params
   const { user } = await fetchMe()
   const team = await fetchTeamWithCustomer(teamSlug)

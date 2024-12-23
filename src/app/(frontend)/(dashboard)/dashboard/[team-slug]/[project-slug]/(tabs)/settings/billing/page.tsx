@@ -3,7 +3,8 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 
 import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
-import { checkTeamRoles } from '@utils/check-team-roles.js'
+
+import { checkTeamRoles } from '@access/check-team-roles'
 
 import { Text } from '@forms/fields/Text'
 
@@ -11,12 +12,12 @@ import { Heading } from '@components/Heading'
 import { MaxWidth } from '@components/MaxWidth'
 import { Message } from '@components/Message'
 import { fetchMe } from '@dashboard/api/fetchMe.js'
-import { fetchPaymentMethods } from '@dashboard/api/fetchPaymentMethods.js'
+import { fetchPaymentMethods } from '@dashboard/api/fetchPaymentMethods'
 import {
   fetchProjectAndRedirect,
   ProjectWithSubscription
 } from '@dashboard/api/fetchProject'
-import { ProjectPaymentMethodSelector } from '@dashboard/CreditCardSelector/ProjectPaymentMethodSelector.js'
+import { ProjectPaymentMethodSelector } from '@dashboard/components/CreditCardSelector/ProjectPaymentMethodSelector'
 import { generateRoutePath } from '@dashboard/utils/generate-route-path'
 
 import { SectionHeader } from '../_layoutComponents/SectionHeader'
@@ -36,7 +37,7 @@ const statusLabels = {
   unknown: 'Unknown'
 }
 
-export default async ({
+export default async function Page({
   params
 }: {
   params: Promise<{
@@ -44,7 +45,7 @@ export default async ({
     'project-slug': string
     'environment-slug': string
   }>
-}) => {
+}) {
   const {
     'team-slug': teamSlug,
     'project-slug': projectSlug,

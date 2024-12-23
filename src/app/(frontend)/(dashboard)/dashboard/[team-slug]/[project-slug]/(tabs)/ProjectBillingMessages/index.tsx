@@ -1,17 +1,16 @@
 import React from 'react'
 
-import { projectHasPaymentMethod } from '@cloud/_utilities/projectHasPaymentMethod.js'
-import { teamHasDefaultPaymentMethod } from '@cloud/_utilities/teamHasDefaultPaymentMethod.js'
-
 import { Gutter } from '@components/Gutter'
 import { ProjectWithSubscription } from '@dashboard/api/fetchProject'
 import { TeamWithCustomer } from '@dashboard/api/fetchTeam'
 import { hasBadSubscription } from '@dashboard/utils/hasBadSubscription'
+import { projectHasPaymentMethod } from '@dashboard/utils/projectHasPaymentMethod'
+import { teamHasDefaultPaymentMethod } from '@dashboard/utils/teamHasDefaultPaymentMethod'
 
-import { BadSubscriptionMessage } from './BadSubscription.js'
+import { BadSubscriptionMessage } from './BadSubscription'
 import classes from './index.module.scss'
-import { MissingPaymentMethodMessage } from './MissingPaymentMethod.js'
-import { TrialMessage } from './TrialMessage.js'
+import { MissingPaymentMethodMessage } from './MissingPaymentMethod'
+import { TrialMessage } from './TrialMessage'
 
 export const ProjectBillingMessages: React.FC<{
   team: TeamWithCustomer

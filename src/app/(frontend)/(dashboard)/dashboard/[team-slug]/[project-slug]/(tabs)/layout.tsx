@@ -1,20 +1,19 @@
 import { Metadata } from 'next'
 
-import { fetchProjectAndRedirect } from '@dashboard/api/fetchProject'
-import { DashboardTabs } from '@root/app/(frontend)/(dashboard)/~/components/DashboardTabs'
-import { ProjectHeader } from '@dashboard/ProjectHeader'
-import { hasBadSubscription } from '@dashboard/utils/hasBadSubscription'
-import { DASHBOARD_SLUG } from '@constants'
 import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
-import { generateRoutePath } from '@utils/generate-route-path
 
 import { Gutter } from '@components/Gutter'
+import { fetchProjectAndRedirect } from '@dashboard/api/fetchProject'
+import { DashboardTabs } from '@dashboard/components/DashboardTabs'
+import { ProjectHeader } from '@dashboard/components/ProjectHeader'
+import { generateRoutePath } from '@dashboard/utils/generate-route-path'
+import { hasBadSubscription } from '@dashboard/utils/hasBadSubscription'
 
 import { ProjectBillingMessages } from './ProjectBillingMessages'
 
-import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants'
+import { DASHBOARD_SLUG, PRODUCTION_ENVIRONMENT_SLUG } from '@constants'
 
-export default async ({
+export default async function Layout({
   children,
   params
 }: {
@@ -24,7 +23,7 @@ export default async ({
     'project-slug': string
     'environment-slug': string
   }>
-}) => {
+}) {
   const {
     'environment-slug': environmentSlug = PRODUCTION_ENVIRONMENT_SLUG,
     'project-slug': projectSlug,
@@ -151,7 +150,7 @@ export async function generateMetadata({
     },
     openGraph: mergeOpenGraph({
       title: `${teamSlug} / ${projectSlug} | %s`,
-      url: `/cloud/${teamSlug}/${projectSlug}${environmentSlug ? `/env/${environmentSlug}` : ''}`
+      url: `/dashboard/${teamSlug}/${projectSlug}${environmentSlug ? `/env/${environmentSlug}` : ''}`
     })
   }
 }

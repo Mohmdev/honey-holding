@@ -2,12 +2,13 @@ import { Metadata } from 'next'
 
 import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
 
-import { fetchMe } from '../../~/_api/fetchMe.js'
-import { fetchProjects } from '../../~/_api/fetchProjects.js'
-import { fetchTemplates } from '../../~/_api/fetchTemplates.js'
+import { fetchMe } from '@dashboard/api/fetchMe'
+import { fetchProjects } from '@dashboard/api/fetchProjects'
+import { fetchTemplates } from '@dashboard/api/fetchTemplates'
+
 import { CloudPage } from './page_client.js'
 
-export default async () => {
+export default async function Page() {
   const { user } = await fetchMe()
 
   const projectsRes = await fetchProjects(
@@ -24,9 +25,9 @@ export default async () => {
 }
 
 export const metadata: Metadata = {
-  title: 'Home | Payload Cloud',
+  title: 'Home | Nexweb Dashboard',
   openGraph: mergeOpenGraph({
-    title: 'Home | Payload Cloud',
-    url: '/cloud'
+    title: 'Home | Nexweb Dashboard',
+    url: '/dashboard'
   })
 }

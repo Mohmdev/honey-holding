@@ -11,16 +11,16 @@ import FormSubmissionError from '@forms/FormSubmissionError'
 import { Gutter } from '@components/Gutter'
 import { Pagination } from '@components/Pagination'
 import { fetchInstalls, Install } from '@dashboard/api/fetchInstalls'
-import { RepoResults } from '@dashboard/api/fetchRepos.js'
-import { InstallationButton } from '@dashboard/InstallationButton'
-import { InstallationSelector } from '@dashboard/InstallationSelector'
-import { useTeamDrawer } from '@dashboard/TeamDrawer'
+import { RepoResults } from '@dashboard/api/fetchRepos'
+import { InstallationButton } from '@dashboard/components/InstallationButton'
+import { InstallationSelector } from '@dashboard/components/InstallationSelector'
+import { useTeamDrawer } from '@dashboard/components/TeamDrawer'
 import { Team } from '@dashboard/types'
 
-import { createDraftProject } from '../createDraftProject.js'
+import { createDraftProject } from '../createDraftProject'
 import classes from './page.module.scss'
 import { RepoCard } from './RepoCard'
-import { useGetRepos } from './useGetRepos.js'
+import { useGetRepos } from './useGetRepos'
 
 import { DASHBOARD_SLUG } from '@constants'
 
@@ -71,7 +71,7 @@ export const ImportProject: React.FC<{
 
   const matchedTeam = user?.teams?.find(
     ({ team }) => typeof team !== 'string' && team?.slug === teamParam
-  )?.team as Team //eslint-disable-line function-paren-newline
+  )?.team as Team
 
   const onDraftProjectCreate = useCallback(
     ({ slug: draftProjectSlug, team }) =>
@@ -213,7 +213,7 @@ export const ImportProject: React.FC<{
                               })
                             } catch (error) {
                               window.scrollTo(0, 0)
-                              console.error(error) // eslint-disable-line no-console
+                              console.error(error)
                             }
                           }}
                         />

@@ -7,7 +7,7 @@ import { fetchMe } from '@dashboard/api/fetchMe.js'
 
 import { Signup } from './page_client.js'
 
-export default async () => {
+export default async function Page() {
   const { user } = await fetchMe()
 
   if (user) {
@@ -20,10 +20,10 @@ export default async () => {
 }
 
 export const metadata: Metadata = {
-  title: 'Signup | Payload Cloud',
-  description: 'Signup for Payload Cloud',
+  title: 'Signup | Nexweb Cloud',
+  description: 'Signup for Nexweb Cloud',
   openGraph: mergeOpenGraph({
-    title: 'Signup | Payload Cloud',
+    title: 'Signup | Nexweb Cloud',
     url: '/signup'
   })
 }

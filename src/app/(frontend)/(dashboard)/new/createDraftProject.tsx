@@ -3,7 +3,7 @@ import { getClientSideURL } from '@utils/getURL'
 import type { Project, User } from '@dashboard/types'
 
 import { revalidateCache } from '@dashboard/actions/revalidateCache'
-import { Repo } from '@dashboard/api/fetchRepos.js'
+import { Repo } from '@dashboard/api/fetchRepos'
 
 export const createDraftProject = async ({
   projectName,

@@ -76,7 +76,7 @@ export const Login: React.FC = () => {
           throw new Error(`Invalid email or password`)
         }
       } catch (err) {
-        console.error(err) // eslint-disable-line no-console
+        console.error(err)
         throw new Error(`Invalid email or password`)
       }
     },

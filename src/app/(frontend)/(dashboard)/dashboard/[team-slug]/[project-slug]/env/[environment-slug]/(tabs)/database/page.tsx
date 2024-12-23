@@ -1,7 +1,7 @@
 import {
   default as EnvironmentDatabase,
   metadata
-} from '@cloud/[team-slug]/[project-slug]/(tabs)/database/page'
+} from '@root/app/(frontend)/(dashboard)/dashboard/[team-slug]/[project-slug]/(tabs)/database/page'
 
 export default EnvironmentDatabase
 

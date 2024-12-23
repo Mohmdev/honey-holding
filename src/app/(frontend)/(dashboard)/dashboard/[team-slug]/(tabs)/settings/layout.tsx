@@ -2,14 +2,14 @@ import * as React from 'react'
 
 import { Gutter } from '@components/Gutter'
 import { fetchTeamWithCustomer } from '@dashboard/api/fetchTeam'
-import { Sidebar } from '@dashboard/Sidebar'
+import { Sidebar } from '@dashboard/components/Sidebar'
 
 import classes from './layout.module.scss'
 import { TeamBillingMessages } from './TeamBillingMessages'
 
 import { DASHBOARD_SLUG } from '@constants'
 
-export default async ({
+export default async function Layout({
   children,
   params
 }: {
@@ -17,7 +17,7 @@ export default async ({
   params: Promise<{
     'team-slug': string
   }>
-}) => {
+}) {
   const { 'team-slug': teamSlug } = await params
   // Note: this fetch will get deduped by the page
   // each page within this layout calls this same function

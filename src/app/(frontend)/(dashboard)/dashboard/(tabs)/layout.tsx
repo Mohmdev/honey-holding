@@ -1,12 +1,11 @@
 import { Fragment } from 'react'
 
-import { DashboardTabs } from '@root/app/(frontend)/(dashboard)/~/components/DashboardTabs'
-
 import { Gutter } from '@components/Gutter'
+import { DashboardTabs } from '@dashboard/components/DashboardTabs'
 
 import { DASHBOARD_SLUG } from '@constants'
 
-export default async (props) => {
+export default async function Layout(props) {
   const { children } = props
 
   return (

@@ -4,10 +4,9 @@ import React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-import { teamHasDefaultPaymentMethod } from '@cloud/_utilities/teamHasDefaultPaymentMethod.js'
-
 import { Message } from '@components/Message'
 import { TeamWithCustomer } from '@dashboard/api/fetchTeam'
+import { teamHasDefaultPaymentMethod } from '@dashboard/utils/teamHasDefaultPaymentMethod'
 
 import classes from './index.module.scss'
 

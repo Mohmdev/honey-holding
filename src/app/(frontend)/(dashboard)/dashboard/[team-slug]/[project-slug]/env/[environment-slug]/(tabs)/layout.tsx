@@ -1,7 +1,7 @@
 import {
   default as EnvironmentLayout,
   generateMetadata
-} from '@cloud/[team-slug]/[project-slug]/(tabs)/layout'
+} from '@root/app/(frontend)/(dashboard)/dashboard/[team-slug]/[project-slug]/(tabs)/layout'
 
 export default EnvironmentLayout
 

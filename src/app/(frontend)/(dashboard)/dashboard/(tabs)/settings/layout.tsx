@@ -4,10 +4,9 @@ import * as React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-import { usePathnameSegments } from '@utils/use-pathname-segments.js'
-
 import { EdgeScroll } from '@components/EdgeScroll'
 import { Gutter } from '@components/Gutter'
+import { usePathnameSegments } from '@dashboard/utils/use-pathname-segments'
 
 import classes from './layout.module.scss'
 
@@ -17,7 +16,7 @@ type ProjectSettingsLayoutType = {
   children: React.ReactNode
 }
 
-export default ({ children }: ProjectSettingsLayoutType) => {
+export default function Layout({ children }: ProjectSettingsLayoutType) {
   const [, settingsTab] = usePathnameSegments()
   const pathname = usePathname()
 

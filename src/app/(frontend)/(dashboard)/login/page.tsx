@@ -3,11 +3,11 @@ import { redirect } from 'next/navigation'
 
 import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
 
-import { fetchMe } from '@dashboard/api/fetchMe.js'
+import { fetchMe } from '@dashboard/api/fetchMe'
 
-import { Login } from './page_client.js'
+import { Login } from './page_client'
 
-export default async () => {
+export default async function Page() {
   const { user } = await fetchMe()
 
   if (user) {
@@ -20,10 +20,10 @@ export default async () => {
 }
 
 export const metadata: Metadata = {
-  title: 'Login | Payload Cloud',
-  description: 'Login to Payload Cloud',
+  title: 'Login | Nexweb Cloud',
+  description: 'Login to Nexweb Cloud',
   openGraph: mergeOpenGraph({
-    title: 'Login | Payload Cloud',
+    title: 'Login | Nexweb Cloud',
     url: '/login'
   })
 }

@@ -3,9 +3,9 @@ import React, { useEffect } from 'react'
 import { useAuth } from '@providers/Auth'
 
 import type { Install } from '@dashboard/api/fetchInstalls'
-import type { Repo, RepoResults } from '@dashboard/api/fetchRepos.js'
+import type { Repo, RepoResults } from '@dashboard/api/fetchRepos'
 
-import { fetchReposClient } from '@dashboard/api/fetchRepos.js'
+import { fetchReposClient } from '@dashboard/api/fetchRepos'
 
 export const useGetRepos = (props: {
   selectedInstall: Install | undefined

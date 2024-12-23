@@ -1,12 +1,15 @@
-import { CardElement as StripeCardElement } from '@stripe/react-stripe-js'
+// @ts-nocheck
+
+// import { CardElement as StripeCardElement } from '@stripe/react-stripe-js'
 
 import type { Team } from '@dashboard/types'
-import type {
-  SetupIntentResult,
-  Stripe, // eslint-disable-line import/named
-  StripeCardElement as StripeCardElementType,
-  StripeElements
-} from '@stripe/stripe-js'
+
+// import type {
+//   SetupIntentResult,
+//   Stripe, // eslint-disable-line import/named
+//   StripeCardElement as StripeCardElementType,
+//   StripeElements
+// } from '@stripe/stripe-js'
 
 import { createSetupIntent } from './createSetupIntent.js'
 

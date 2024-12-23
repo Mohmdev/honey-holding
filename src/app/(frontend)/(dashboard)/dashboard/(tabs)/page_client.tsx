@@ -9,13 +9,13 @@ import { useDebounce } from '@utils/useDebounce'
 import { Text } from '@forms/fields/Text'
 
 import { Gutter } from '@components/Gutter'
-import { NewProjectBlock } from '@components/NewProject'
 import { Pagination } from '@components/Pagination'
-import { ProjectCard } from '@dashboard/ProjectCard'
-import { TeamSelector } from '@dashboard/TeamSelector'
+import { fetchProjectsClient, ProjectsRes } from '@dashboard/api/fetchProjects'
+import { NewProjectBlock } from '@dashboard/components/NewProject'
+import { ProjectCard } from '@dashboard/components/ProjectCard'
+import { TeamSelector } from '@dashboard/components/TeamSelector'
 import { Team, Template, User } from '@dashboard/types'
 
-import { fetchProjectsClient, ProjectsRes } from '../../~/_api/fetchProjects.js'
 import classes from './page.module.scss'
 
 const delay = 500
@@ -71,25 +71,25 @@ export const CloudPage: React.FC<{
         const start = Date.now()
 
         // reduce user teams to an array of team IDs
-        const userTeams =
-          user?.teams?.map(({ team }) =>
-            team && typeof team === 'object' && team !== null && 'id' in team
-              ? team.id
-              : team
-          ) || [].filter(Boolean) // eslint-disable-line function-paren-newline
+        // const userTeams =
+        //   user?.teams?.map(({ team }) =>
+        //     team && typeof team === 'object' && team !== null && 'id' in team
+        //       ? team.id
+        //       : team
+        //   ) || [].filter(Boolean)
 
         // filter 'none' from the selected teams array
         // select all user teams if no team is selected
-        const teams =
-          !selectedTeam || selectedTeam === 'none' ? userTeams : [selectedTeam]
+        // const teams =
+        // !selectedTeam || selectedTeam === 'none' ? userTeams : [selectedTeam]
 
         try {
           requestRef.current = setTimeout(async () => {
-            const projectsRes = await fetchProjectsClient({
-              teamIDs: teams,
-              page: searchChanged || teamChanged ? 1 : page,
-              search: debouncedSearch
-            })
+            // const projectsRes = await fetchProjectsClient({
+            //   teamIDs: teams,
+            //   page: searchChanged || teamChanged ? 1 : page,
+            //   search: debouncedSearch
+            // })
 
             const end = Date.now()
             const diff = end - start
@@ -99,10 +99,10 @@ export const CloudPage: React.FC<{
               await new Promise((resolve) => setTimeout(resolve, delay - diff))
             }
 
-            setRenderNewProjectBlock(
-              !debouncedSearch && projectsRes?.totalDocs === 0
-            )
-            setResult(projectsRes)
+            // setRenderNewProjectBlock(
+            //   !debouncedSearch && projectsRes?.totalDocs === 0
+            // )
+            // setResult(projectsRes)
             setIsLoading(false)
           }, 0)
         } catch (error) {
@@ -120,20 +120,18 @@ export const CloudPage: React.FC<{
     ? Array.from(Array(result?.docs?.length || result?.limit).keys())
     : result?.docs || []
 
-  const matchedTeam = user?.teams?.find(({ team }) =>
-    typeof team === 'string' ? team === selectedTeam : team?.id === selectedTeam
-  )?.team as Team //eslint-disable-line function-paren-newline
+  // const matchedTeam = user?.teams?.find(({ team }) =>
+  //   typeof team === 'string' ? team === selectedTeam : team?.id === selectedTeam
+  // )?.team as Team
 
   if (initialState?.totalDocs === 0) {
     return (
       <NewProjectBlock
         heading={
-          selectedTeam
-            ? `Team '${matchedTeam?.name}' has no projects`
-            : `You have no projects`
+          selectedTeam ? `Team team has no projects` : `You have no projects`
         }
         cardLeader="New"
-        teamSlug={matchedTeam?.slug}
+        // teamSlug={matchedTeam?.slug}
         templates={templates}
       />
     )
@@ -164,27 +162,25 @@ export const CloudPage: React.FC<{
           initialValue="none"
           allowEmpty
           label={false}
-          user={user}
+          // user={user}
         />
         <div className="cols-2 cols-l-4 cols-m-2 cols-s-4">
-          <Link
+          {/* <Link
             className={classes.createButton}
             href={`/new${matchedTeam?.slug ? `?team=${matchedTeam?.slug}` : ''}`}
           >
             New Project
-          </Link>
+          </Link> */}
         </div>
       </div>
       {renderNewProjectBlock && !isLoading && (
         <NewProjectBlock
           heading={
-            selectedTeam
-              ? `Team '${matchedTeam?.name}' has no projects`
-              : `You have no projects`
+            selectedTeam ? `Team has no projects` : `You have no projects`
           }
           cardLeader="New"
           largeHeading={false}
-          teamSlug={matchedTeam?.slug}
+          // teamSlug={matchedTeam?.slug}
           templates={templates}
         />
       )}

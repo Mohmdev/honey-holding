@@ -8,13 +8,13 @@ import { fetchMe } from '@dashboard/api/fetchMe.js'
 
 import { AuthorizePage } from './page_client.js'
 
-export default async ({
+export default async function Page({
   searchParams
 }: {
   searchParams: Promise<{
     redirect: string
   }>
-}) => {
+}) {
   const { redirect: redirectParam } = await searchParams
   const { user } = await fetchMe()
 
@@ -36,9 +36,9 @@ export default async ({
 }
 
 export const metadata: Metadata = {
-  title: 'Authorize | Payload Cloud',
+  title: 'Authorize | Nexweb Cloud',
   openGraph: mergeOpenGraph({
-    title: 'Authorize | Payload Cloud',
+    title: 'Authorize | Nexweb Cloud',
     url: '/new/authorize'
   })
 }

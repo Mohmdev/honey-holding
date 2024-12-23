@@ -51,9 +51,9 @@ export default async ({ searchParams }) => {
 }
 
 export const metadata: Metadata = {
-  title: 'Verify Email | Payload Cloud',
+  title: 'Verify Email | Nexweb Cloud',
   openGraph: mergeOpenGraph({
-    title: 'Verify Email | Payload Cloud',
+    title: 'Verify Email | Nexweb Cloud',
     url: '/verify'
   })
 }

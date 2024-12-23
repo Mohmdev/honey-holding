@@ -5,11 +5,11 @@ import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
 import { fetchProjectAndRedirect } from '@dashboard/api/fetchProject'
 import { generateRoutePath } from '@dashboard/utils/generate-route-path'
 
-import { ProjectBuildSettingsPage } from './page_client.js'
+import { ProjectBuildSettingsPage } from './page_client'
 
 import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants'
 
-export default async function Page ({
+export default async function Page({
   params
 }: {
   params: Promise<{
@@ -17,7 +17,7 @@ export default async function Page ({
     'project-slug': string
     'environment-slug': string
   }>
-}) => {
+}) {
   const {
     'team-slug': teamSlug,
     'project-slug': projectSlug,

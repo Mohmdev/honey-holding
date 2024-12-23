@@ -1,37 +1,40 @@
-import { fetchProjectAndRedirect } from '@dashboard/api/fetchProject'
-import { Accordion } from '@components/Accordion'
-import { HR } from '@components/HR
-import { MaxWidth } from '@components/MaxWidth
-import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants'
-import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
-import { generateRoutePath } from '@dashboard/utils/generate-route-path'
 import React from 'react'
 
-import { NoData } from '../_layoutComponents/NoData
-import { SectionHeader } from '../_layoutComponents/SectionHeader
-import { AddEnvs } from './AddEnvs
-import { ManageEnvs } from './ManageEnvs
-import { Secret } from './Secret
-import classes from './page.module.scss'
+import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
 
-export default async ({
-  params,
+import { Accordion } from '@components/Accordion'
+import { HR } from '@components/HR'
+import { MaxWidth } from '@components/MaxWidth'
+import { fetchProjectAndRedirect } from '@dashboard/api/fetchProject'
+import { generateRoutePath } from '@dashboard/utils/generate-route-path'
+
+import { NoData } from '../_layoutComponents/NoData'
+import { SectionHeader } from '../_layoutComponents/SectionHeader'
+import { AddEnvs } from './AddEnvs'
+import { ManageEnvs } from './ManageEnvs'
+import classes from './page.module.scss'
+import { Secret } from './Secret'
+
+import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants'
+
+export default async function Page({
+  params
 }: {
   params: Promise<{
     'environment-slug': string
     'project-slug': string
     'team-slug': string
   }>
-}) => {
+}) {
   const {
     'environment-slug': environmentSlug = PRODUCTION_ENVIRONMENT_SLUG,
     'project-slug': projectSlug,
-    'team-slug': teamSlug,
+    'team-slug': teamSlug
   } = await params
   const { project, team } = await fetchProjectAndRedirect({
     environmentSlug,
     projectSlug,
-    teamSlug,
+    teamSlug
   })
 
   return (
@@ -92,7 +95,7 @@ export default async ({
 }
 
 export async function generateMetadata({
-  params,
+  params
 }: {
   params: Promise<{
     'environment-slug': string
@@ -103,7 +106,7 @@ export async function generateMetadata({
   const {
     'environment-slug': environmentSlug = PRODUCTION_ENVIRONMENT_SLUG,
     'project-slug': projectSlug,
-    'team-slug': teamSlug,
+    'team-slug': teamSlug
   } = await params
   return {
     openGraph: mergeOpenGraph({
@@ -112,9 +115,9 @@ export async function generateMetadata({
         environmentSlug,
         projectSlug,
         suffix: 'settings/environment-variables',
-        teamSlug,
-      }),
+        teamSlug
+      })
     }),
-    title: 'Environment Variables',
+    title: 'Environment Variables'
   }
 }

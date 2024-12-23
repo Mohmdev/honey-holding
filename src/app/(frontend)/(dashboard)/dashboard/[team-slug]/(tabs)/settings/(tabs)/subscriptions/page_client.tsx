@@ -5,22 +5,23 @@ import Link from 'next/link'
 
 import { useModal } from '@faceless-ui/modal'
 
-import { checkTeamRoles } from '@utils/check-team-roles.js'
-import { formatDate } from '@utils/format-date-time.js'
-import { priceFromJSON } from '@utils/price-from-json.js'
-import { useGetPlans } from '@utils/use-cloud-api.js'
+import { formatDate } from '@utils/format-date-time'
+
+import { checkTeamRoles } from '@access/check-team-roles'
 
 import { Button } from '@components/ButtonComponent'
 import { CircleIconButton } from '@components/CircleIconButton'
 import { Heading } from '@components/Heading'
 import { ModalWindow } from '@components/ModalWindow'
 import { Pill } from '@components/Pill'
-import { SubscriptionsResult } from '@dashboard/api/fetchSubscriptions.js'
+import { SubscriptionsResult } from '@dashboard/api/fetchSubscriptions'
 import { TeamWithCustomer } from '@dashboard/api/fetchTeam'
 import { User } from '@dashboard/types'
+import { priceFromJSON } from '@dashboard/utils/price-from-json'
+import { useGetPlans } from '@dashboard/utils/use-cloud-api'
 
 import classes from './page.module.scss'
-import { useSubscriptions } from './useSubscriptions.js'
+import { useSubscriptions } from './useSubscriptions'
 
 const modalSlug = 'cancel-subscription'
 

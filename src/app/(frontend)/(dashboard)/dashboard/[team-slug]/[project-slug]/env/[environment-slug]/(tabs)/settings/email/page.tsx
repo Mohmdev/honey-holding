@@ -1,7 +1,7 @@
 import {
   default as EnvironmentSettingsEmailPage,
   generateMetadata
-} from '@cloud/[team-slug]/[project-slug]/(tabs)/settings/email/page.js'
+} from '@root/app/(frontend)/(dashboard)/dashboard/[team-slug]/[project-slug]/(tabs)/settings/email/page'
 
 export default EnvironmentSettingsEmailPage
 
