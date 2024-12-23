@@ -7,8 +7,6 @@ import React, {
   useState
 } from 'react'
 
-import { Project } from '@payload-cloud-types'
-
 import type { Endpoints } from '@octokit/types'
 
 import { Select } from '@forms/fields/Select'
@@ -16,8 +14,9 @@ import { Text } from '@forms/fields/Text'
 import Label from '@forms/Label'
 
 import { LoadingShimmer } from '@components/LoadingShimmer'
+import { Project } from '@dashboard/types'
 
-import { branchReducer } from './reducer.js'
+import { branchReducer } from './reducer'
 
 type GitHubListBranchesResponse =
   Endpoints['GET /repos/{owner}/{repo}/branches']['response']

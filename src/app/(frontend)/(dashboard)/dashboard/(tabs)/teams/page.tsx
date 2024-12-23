@@ -1,17 +1,18 @@
 import React from 'react'
 import { Metadata } from 'next'
 
-import { fetchMe } from '@cloud/_api/fetchMe.js'
-import { fetchTeams } from '@cloud/_api/fetchTeam.js'
-import { cloudSlug } from '@cloud/slug.js'
-import { mergeOpenGraph } from '@seo/mergeOpenGraph.js'
+import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
 
 import { LinkGrid } from '@blocks/LinkGrid'
 
 import { Gutter } from '@components/Gutter'
+import { fetchMe } from '@dashboard/api/fetchMe.js'
+import { fetchTeams } from '@dashboard/api/fetchTeam.js'
 import { TeamDrawer, TeamDrawerToggler } from '@dashboard/TeamDrawer'
 
 import classes from './page.module.scss'
+
+import { DASHBOARD_SLUG } from '@constants'
 
 const drawerSlug = 'team-drawer'
 
@@ -69,7 +70,7 @@ export default async () => {
                   return {
                     link: {
                       type: 'custom',
-                      url: `/${cloudSlug}/${team.slug}`,
+                      url: `/${DASHBOARD_SLUG}/${team.slug}`,
                       label: team.name
                     }
                   }

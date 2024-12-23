@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import useDebounce from '@utilities/use-debounce.js'
+import useDebounce from '@utils/use-debounce.js'
 
 import type { SlugValidationResult } from './reducer.js'
 

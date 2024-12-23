@@ -3,14 +3,14 @@
 import React from 'react'
 import { useParams, usePathname, useRouter } from 'next/navigation'
 
-import { cloudSlug } from '@cloud/slug.js'
-import { generateRoutePath } from '@utilities/generate-route-path'
-
 import { Select } from '@forms/fields/Select'
 import Form from '@forms/Form'
 
+import { generateRoutePath } from '@dashboard/utils/generate-route-path'
+
 import classes from './index.module.scss'
 
+import { DASHBOARD_SLUG } from '@constants'
 import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants.js'
 
 export function ProjectHeader({ environmentOptions, title }) {
@@ -21,7 +21,7 @@ export function ProjectHeader({ environmentOptions, title }) {
   }: { [key: string]: string } = useParams()
   const pathname = usePathname()
   const router = useRouter()
-  const baseProjectURL = `/${cloudSlug}/${teamSlug}/${projectSlug}`
+  const baseProjectURL = `/${DASHBOARD_SLUG}/${teamSlug}/${projectSlug}`
 
   const handleEnvironmentChange = React.useCallback(
     (environmentToSet: string) => {

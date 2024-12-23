@@ -1,4 +1,4 @@
-import type { Team } from '@payload-cloud-types'
+import type { Team } from '@dashboard/types'
 import type { PaymentMethod } from '@stripe/stripe-js'
 
 import { payloadCloudToken } from './token.js'

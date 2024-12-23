@@ -1,4 +1,4 @@
-import type { Install } from './fetchInstalls.js'
+import type { Install } from './fetchInstalls'
 import type { Endpoints } from '@octokit/types'
 
 import { payloadCloudToken } from './token.js'

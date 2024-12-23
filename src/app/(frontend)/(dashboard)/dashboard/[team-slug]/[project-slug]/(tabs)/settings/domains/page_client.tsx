@@ -3,11 +3,11 @@
 import * as React from 'react'
 
 import { CollapsibleGroup } from '@faceless-ui/collapsibles'
-import { Project, Team } from '@payload-cloud-types'
 
 import { Accordion } from '@components/Accordion'
 import { HR } from '@components/HR'
 import { MaxWidth } from '@components/MaxWidth'
+import { Project, Team } from '@dashboard/types'
 
 import { NoData } from '../_layoutComponents/NoData'
 import { SectionHeader } from '../_layoutComponents/SectionHeader'

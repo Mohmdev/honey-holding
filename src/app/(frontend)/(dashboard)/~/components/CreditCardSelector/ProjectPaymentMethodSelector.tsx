@@ -2,14 +2,15 @@
 
 import React, { useCallback } from 'react'
 
-import { ProjectWithSubscription } from '@cloud/_api/fetchProject.js'
-import { TeamWithCustomer } from '@cloud/_api/fetchTeam.js'
-import { updateSubscription } from '@cloud/_api/updateSubscription.js'
 import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
 import { toast } from 'sonner'
 
 import type { PaymentMethod } from '@stripe/stripe-js'
+
+import { ProjectWithSubscription } from '@dashboard/api/fetchProject'
+import { TeamWithCustomer } from '@dashboard/api/fetchTeam.js'
+import { updateSubscription } from '@dashboard/api/updateSubscription.js'
 
 import { CreditCardSelector } from '.'
 

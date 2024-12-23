@@ -3,17 +3,20 @@
 import React, { useEffect } from 'react'
 import Link from 'next/link'
 
-import { fetchProjectsClient, ProjectsRes } from '@cloud/_api/fetchProjects.js'
-import { TeamWithCustomer } from '@cloud/_api/fetchTeam.js'
-import { Template } from '@payload-cloud-types'
-import useDebounce from '@utilities/use-debounce.js'
+import useDebounce from '@utils/use-debounce.js'
 
 import { Text } from '@forms/fields/Text'
 
 import { Gutter } from '@components/Gutter'
 import { NewProjectBlock } from '@components/NewProject'
 import { Pagination } from '@components/Pagination'
+import {
+  fetchProjectsClient,
+  ProjectsRes
+} from '@dashboard/api/fetchProjects.js'
+import { TeamWithCustomer } from '@dashboard/api/fetchTeam.js'
 import { ProjectCard } from '@dashboard/ProjectCard'
+import { Template } from '@dashboard/types'
 
 import classes from './page.module.scss'
 

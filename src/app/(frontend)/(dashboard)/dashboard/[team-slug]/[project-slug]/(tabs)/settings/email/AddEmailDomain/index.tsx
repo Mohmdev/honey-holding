@@ -2,7 +2,6 @@
 
 import * as React from 'react'
 
-import { Project } from '@payload-cloud-types'
 import { toast } from 'sonner'
 
 import { Text } from '@forms/fields/Text'
@@ -10,6 +9,8 @@ import Form from '@forms/Form'
 import Submit from '@forms/Submit'
 import { OnSubmit } from '@forms/types'
 import { validateDomain } from '@forms/validations.js'
+
+import { Project } from '@dashboard/types'
 
 import classes from './index.module.scss'
 

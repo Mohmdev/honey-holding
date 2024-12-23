@@ -11,8 +11,8 @@ import { useRouter } from 'next/navigation'
 import { Button } from '@components/Button
 import { Heading } from '@components/Heading
 import { ModalWindow } from '@components/ModalWindow
-import { Project } from '@payload-cloud-types'
-import { qs } from '@utilities/qs.js'
+import { Project } from '@dashboard/types'
+import { qs } from '@utils/qs.js'
 
 import classes from './index.module.scss'
 

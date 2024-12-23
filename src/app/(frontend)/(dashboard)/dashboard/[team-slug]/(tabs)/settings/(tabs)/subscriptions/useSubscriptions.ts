@@ -7,14 +7,15 @@ import {
   useState
 } from 'react'
 
-import { fetchSubscriptionsClient } from '@cloud/_api/fetchSubscriptions.js'
 import { toast } from 'sonner'
 
 import type {
   Subscription,
   SubscriptionsResult
-} from '@cloud/_api/fetchSubscriptions.js'
-import type { Team } from '@payload-cloud-types'
+} from '@dashboard/api/fetchSubscriptions.js'
+import type { Team } from '@dashboard/types'
+
+import { fetchSubscriptionsClient } from '@dashboard/api/fetchSubscriptions.js'
 
 import { subscriptionsReducer } from './reducer.js'
 

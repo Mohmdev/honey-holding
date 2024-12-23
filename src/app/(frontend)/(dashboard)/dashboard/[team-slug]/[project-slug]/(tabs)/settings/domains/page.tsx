@@ -1,8 +1,9 @@
 import React from 'react'
 
-import { fetchProjectAndRedirect } from '@cloud/_api/fetchProject.js'
-import { mergeOpenGraph } from '@seo/mergeOpenGraph.js'
-import { generateRoutePath } from '@utilities/generate-route-path.js'
+import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
+
+import { fetchProjectAndRedirect } from '@dashboard/api/fetchProject'
+import { generateRoutePath } from '@dashboard/utils/generate-route-path'
 
 import { ProjectDomainsPage } from './page_client.js'
 

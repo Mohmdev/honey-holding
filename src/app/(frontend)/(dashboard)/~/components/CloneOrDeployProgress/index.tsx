@@ -2,14 +2,13 @@
 
 import React, { Fragment, useEffect } from 'react'
 
-import { Install } from '@cloud/_api/fetchInstalls.js'
-import { Project, Template } from '@payload-cloud-types'
-
-import { useForm, useFormProcessing } from '@forms/Form/context.js'
+import { useForm, useFormProcessing } from '@forms/Form/context'
 
 import { GithubIcon } from '@graphics/GithubIcon'
 import { PayloadIcon } from '@graphics/PayloadIcon'
 import { FolderIcon } from '@icons/FolderIcon'
+import { Install } from '@dashboard/api/fetchInstalls'
+import { Project, Template } from '@dashboard/types'
 
 import classes from './index.module.scss'
 

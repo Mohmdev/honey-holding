@@ -2,9 +2,7 @@
 
 import * as React from 'react'
 
-import { cloudSlug } from '@cloud/slug.js'
 import { CollapsibleGroup } from '@faceless-ui/collapsibles'
-import { Plan, Project, Team } from '@payload-cloud-types'
 
 import { Secret } from '@forms/fields/Secret'
 import { Text } from '@forms/fields/Text'
@@ -14,11 +12,14 @@ import { Banner } from '@components/Banner'
 import Code from '@components/Code'
 import { HR } from '@components/HR'
 import { MaxWidth } from '@components/MaxWidth'
+import { Plan, Project, Team } from '@dashboard/types'
 
 import { NoData } from '../_layoutComponents/NoData'
 import { SectionHeader } from '../_layoutComponents/SectionHeader'
 import { AddEmailDomain } from './AddEmailDomain'
 import { ManageEmailDomain } from './ManageEmailDomain'
+
+import { DASHBOARD_SLUG } from '@constants'
 
 export const ProjectEmailPage: React.FC<{
   project: Project
@@ -101,7 +102,7 @@ export default buildConfig({
             Custom email domains are not supported on the Standard Plan. To use
             this feature,{' '}
             <a
-              href={`/${cloudSlug}/${teamSlug}/${project?.slug}/settings/plan`}
+              href={`/${DASHBOARD_SLUG}/${teamSlug}/${project?.slug}/settings/plan`}
             >
               upgrade your plan.
             </a>

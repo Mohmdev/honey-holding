@@ -2,7 +2,6 @@ import React from 'react'
 
 import { revalidateCache } from '@cloud/_actions/revalidateCache.js'
 import { useModal } from '@faceless-ui/modal'
-import { Team, User } from '@payload-cloud-types'
 import { toast } from 'sonner'
 
 import Form from '@forms/Form'
@@ -11,6 +10,7 @@ import Submit from '@forms/Submit'
 import { Button } from '@components/Button'
 import { Heading } from '@components/Heading'
 import { Member } from '@dashboard/TeamMembers'
+import { Team, User } from '@dashboard/types'
 
 import classes from './page.module.scss'
 

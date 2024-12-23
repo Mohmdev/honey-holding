@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { AddArrayRow, ArrayRow } from '@forms/fields/Array'
-import { ArrayProvider, useArray } from '@forms/fields/Array/context.js'
+import { ArrayProvider, useArray } from '@forms/fields/Array/context'
 import { Select } from '@forms/fields/Select'
 import { Text } from '@forms/fields/Text'
 

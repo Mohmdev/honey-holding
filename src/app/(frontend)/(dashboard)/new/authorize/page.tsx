@@ -1,9 +1,10 @@
 import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 
-import { fetchGitHubToken } from '@cloud/_api/fetchGitHubToken.js'
-import { fetchMe } from '@cloud/_api/fetchMe.js'
-import { mergeOpenGraph } from '@seo/mergeOpenGraph.js'
+import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
+
+import { fetchGitHubToken } from '@dashboard/api/fetchGitHubToken.js'
+import { fetchMe } from '@dashboard/api/fetchMe.js'
 
 import { AuthorizePage } from './page_client.js'
 

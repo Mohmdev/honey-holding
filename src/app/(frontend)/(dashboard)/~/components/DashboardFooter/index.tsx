@@ -9,7 +9,7 @@ import { useThemePreference } from '@providers/Theme'
 import {
   getImplicitPreference,
   themeLocalStorageKey
-} from '@providers/Theme/shared.js'
+} from '@providers/Theme/shared'
 import { Theme } from '@providers/Theme/types'
 
 import { ThemeAutoIcon } from '@graphics/ThemeAutoIcon'

@@ -4,13 +4,14 @@ import * as React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-import { cloudSlug } from '@cloud/slug.js'
-import { usePathnameSegments } from '@utilities/use-pathname-segments.js'
+import { usePathnameSegments } from '@utils/use-pathname-segments.js'
 
 import { EdgeScroll } from '@components/EdgeScroll'
 import { Gutter } from '@components/Gutter'
 
 import classes from './layout.module.scss'
+
+import { DASHBOARD_SLUG } from '@constants'
 
 type ProjectSettingsLayoutType = {
   children: React.ReactNode
@@ -23,7 +24,7 @@ export default ({ children }: ProjectSettingsLayoutType) => {
   const sidebarNavRoutes = [
     {
       label: 'Account',
-      url: `/${cloudSlug}/${settingsTab}`
+      url: `/${DASHBOARD_SLUG}/${settingsTab}`
     },
     {
       label: 'Logout',

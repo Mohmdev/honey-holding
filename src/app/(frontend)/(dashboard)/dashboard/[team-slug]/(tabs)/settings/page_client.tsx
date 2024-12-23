@@ -4,8 +4,6 @@ import * as React from 'react'
 import { useRouter } from 'next/navigation'
 
 import { revalidateCache } from '@cloud/_actions/revalidateCache.js'
-import { TeamWithCustomer } from '@cloud/_api/fetchTeam.js'
-import { Team } from '@payload-cloud-types'
 import { toast } from 'sonner'
 
 import { useAuth } from '@providers/Auth'
@@ -18,6 +16,8 @@ import Submit from '@forms/Submit'
 import { OnSubmit } from '@forms/types'
 
 import { HR } from '@components/HR'
+import { TeamWithCustomer } from '@dashboard/api/fetchTeam.js'
+import { Team } from '@dashboard/types'
 import { UniqueTeamSlug } from '@dashboard/UniqueSlug'
 
 import { SectionHeader } from '../../[project-slug]/(tabs)/settings/_layoutComponents/SectionHeader'

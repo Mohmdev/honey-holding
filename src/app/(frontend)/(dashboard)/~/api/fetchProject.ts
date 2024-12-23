@@ -1,11 +1,11 @@
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
-import { mergeProjectEnvironment } from '@utilities/merge-project-environment.js'
+import { mergeProjectEnvironment } from '@utils/merge-project-environment.js'
 
 import type { Subscription } from './fetchSubscriptions.js'
 import type { Customer, TeamWithCustomer } from './fetchTeam.js'
-import type { Project } from '@payload-cloud-types'
+import type { Project } from '@dashboard/types'
 
 import { payloadCloudToken } from './token.js'
 

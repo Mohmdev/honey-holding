@@ -7,11 +7,12 @@ import {
   useState
 } from 'react'
 
-import { fetchInvoicesClient } from '@cloud/_api/fetchInvoices.js'
 import { toast } from 'sonner'
 
-import type { InvoicesResult } from '@cloud/_api/fetchInvoices.js'
-import type { Team } from '@payload-cloud-types'
+import type { InvoicesResult } from '@dashboard/api/fetchInvoices.js'
+import type { Team } from '@dashboard/types'
+
+import { fetchInvoicesClient } from '@dashboard/api/fetchInvoices.js'
 
 const reducer = (
   state: InvoicesResult | null,

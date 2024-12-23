@@ -1,6 +1,6 @@
 import { CardElement as StripeCardElement } from '@stripe/react-stripe-js'
 
-import type { Team } from '@payload-cloud-types'
+import type { Team } from '@dashboard/types'
 import type {
   SetupIntentResult,
   Stripe, // eslint-disable-line import/named

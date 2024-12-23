@@ -1,18 +1,18 @@
 import React from 'react'
 import Link from 'next/link'
 
-import { hasBadSubscription } from '@cloud/_utilities/hasBadSubscription.js'
-import { cloudSlug } from '@cloud/slug.js'
-import { Project } from '@payload-cloud-types'
-
 import { GitHubIcon } from '@graphics/GitHub'
 import { ArrowIcon } from '@icons/ArrowIcon'
 import { BranchIcon } from '@icons/BranchIcon'
-import { BackgroundScanline } from '@components/BackgroundScanline'
+import { BackgroundScanline } from '@components/Background/Scanline'
 import { LoadingShimmer } from '@components/LoadingShimmer'
 import { Pill } from '@components/Pill'
+import { Project } from '@dashboard/types'
+import { hasBadSubscription } from '@dashboard/utils/hasBadSubscription'
 
 import classes from './index.module.scss'
+
+import { DASHBOARD_SLUG } from '@constants'
 
 export const ProjectCard: React.FC<{
   project: Partial<Project>
@@ -126,9 +126,9 @@ export const ProjectCard: React.FC<{
   }
 
   // link the card directly to the billing page if the subscription is past due
-  let href = `/${cloudSlug}/${teamSlug}/${project.slug}${status === 'draft' ? '/configure' : ''}`
+  let href = `/${DASHBOARD_SLUG}/${teamSlug}/${project.slug}${status === 'draft' ? '/configure' : ''}`
   if (status == 'published' && hasBadSubscriptionStatus)
-    href = `/${cloudSlug}/${teamSlug}/${project.slug}/settings/billing`
+    href = `/${DASHBOARD_SLUG}/${teamSlug}/${project.slug}/settings/billing`
 
   return (
     <Link

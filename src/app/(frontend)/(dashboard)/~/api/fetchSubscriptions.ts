@@ -1,4 +1,4 @@
-import type { Project, Team } from '@payload-cloud-types'
+import type { Project, Team } from '@dashboard/types'
 
 import { payloadCloudToken } from './token.js'
 

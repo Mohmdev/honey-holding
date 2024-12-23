@@ -4,12 +4,12 @@ import React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-import { ProjectWithSubscription } from '@cloud/_api/fetchProject.js'
-import { TeamWithCustomer } from '@cloud/_api/fetchTeam.js'
-import { cloudSlug } from '@cloud/slug.js'
-import { Project } from '@payload-cloud-types'
-
 import { Message } from '@components/Message'
+import { ProjectWithSubscription } from '@dashboard/api/fetchProject'
+import { TeamWithCustomer } from '@dashboard/api/fetchTeam.js'
+import { Project } from '@dashboard/types'
+
+import { DASHBOARD_SLUG } from '@constants'
 
 export const BadSubscriptionMessage: React.FC<{
   team: TeamWithCustomer
@@ -20,7 +20,7 @@ export const BadSubscriptionMessage: React.FC<{
 
   const pathname = usePathname()
 
-  const billingPath = `/${cloudSlug}/${team?.slug}/${project?.slug}/settings/billing`
+  const billingPath = `/${DASHBOARD_SLUG}/${team?.slug}/${project?.slug}/settings/billing`
   const isOnBillingPage = pathname === billingPath
 
   return (

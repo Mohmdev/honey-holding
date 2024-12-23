@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import { mergeOpenGraph } from '@seo/mergeOpenGraph.js'
+import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
 
 import { Logout } from './page_client.js'
 

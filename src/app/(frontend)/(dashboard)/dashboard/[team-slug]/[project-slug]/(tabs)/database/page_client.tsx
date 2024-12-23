@@ -2,12 +2,11 @@
 
 import * as React from 'react'
 
-import { Project, Team } from '@payload-cloud-types'
-
 import { Secret } from '@forms/fields/Secret'
 
 import { Banner } from '@components/Banner'
 import { Gutter } from '@components/Gutter'
+import { Project, Team } from '@dashboard/types'
 
 export const ProjectDatabasePage: React.FC<{
   project: Project

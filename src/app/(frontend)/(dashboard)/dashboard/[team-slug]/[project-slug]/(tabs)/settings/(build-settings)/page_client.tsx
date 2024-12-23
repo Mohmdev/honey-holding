@@ -3,7 +3,6 @@
 import * as React from 'react'
 import { useRouter } from 'next/navigation'
 
-import { Project, Team } from '@payload-cloud-types'
 import { toast } from 'sonner'
 
 import { Text } from '@forms/fields/Text'
@@ -12,6 +11,7 @@ import Submit from '@forms/Submit'
 
 import { MaxWidth } from '@components/MaxWidth'
 import { BranchSelector } from '@dashboard/BranchSelector'
+import { Project, Team } from '@dashboard/types'
 import { UniqueProjectSlug } from '@dashboard/UniqueSlug'
 
 import { SectionHeader } from '../_layoutComponents/SectionHeader'

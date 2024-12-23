@@ -1,13 +1,13 @@
 import * as React from 'react'
 
-import { fetchTeamWithCustomer } from '@cloud/_api/fetchTeam.js'
-import { cloudSlug } from '@cloud/slug.js'
-
 import { Gutter } from '@components/Gutter'
+import { fetchTeamWithCustomer } from '@dashboard/api/fetchTeam.js'
 import { Sidebar } from '@dashboard/Sidebar'
 
 import classes from './layout.module.scss'
 import { TeamBillingMessages } from './TeamBillingMessages'
+
+import { DASHBOARD_SLUG } from '@constants'
 
 export default async ({
   children,
@@ -31,23 +31,23 @@ export default async ({
           routes={[
             {
               label: 'General',
-              url: `/${cloudSlug}/${teamSlug}/settings`
+              url: `/${DASHBOARD_SLUG}/${teamSlug}/settings`
             },
             {
               label: 'Team Members',
-              url: `/${cloudSlug}/${teamSlug}/settings/members`
+              url: `/${DASHBOARD_SLUG}/${teamSlug}/settings/members`
             },
             {
               label: 'Billing',
-              url: `/${cloudSlug}/${teamSlug}/settings/billing`
+              url: `/${DASHBOARD_SLUG}/${teamSlug}/settings/billing`
             },
             {
               label: 'Subscriptions',
-              url: `/${cloudSlug}/${teamSlug}/settings/subscriptions`
+              url: `/${DASHBOARD_SLUG}/${teamSlug}/settings/subscriptions`
             },
             {
               label: 'Invoices',
-              url: `/${cloudSlug}/${teamSlug}/settings/invoices`
+              url: `/${DASHBOARD_SLUG}/${teamSlug}/settings/invoices`
             }
           ]}
         />

@@ -2,14 +2,13 @@
 
 import * as React from 'react'
 
-import { Project, Team } from '@payload-cloud-types'
-
 import { Secret } from '@forms/fields/Secret'
 import Label from '@forms/Label'
 
 import { Banner } from '@components/Banner'
 import { CopyToClipboard } from '@components/CopyToClipboard'
 import { Gutter } from '@components/Gutter'
+import { Project, Team } from '@dashboard/types'
 
 import classes from './page.module.scss'
 

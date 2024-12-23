@@ -1,4 +1,4 @@
-import type { Template } from '@payload-cloud-types'
+import type { Template } from '@dashboard/types'
 
 import { TEMPLATE } from '@data/templates.js'
 

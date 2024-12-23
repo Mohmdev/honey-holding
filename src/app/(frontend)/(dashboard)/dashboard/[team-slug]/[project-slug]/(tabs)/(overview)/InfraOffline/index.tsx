@@ -3,10 +3,9 @@
 import * as React from 'react'
 import Link from 'next/link'
 
-import { fetchProjectClient } from '@cloud/_api/fetchProjects.js'
-import { Project, Team } from '@payload-cloud-types'
 import { RequireField } from '@ts-helpers/requireField.js'
-import { useGetProjectDeployments } from '@utilities/use-cloud-api.js'
+
+import { useGetProjectDeployments } from '@utils/use-cloud-api.js'
 
 import { Banner } from '@components/Banner'
 import { ExtendedBackground } from '@components/ExtendedBackground'
@@ -14,6 +13,8 @@ import { Gutter } from '@components/Gutter'
 import { Heading } from '@components/Heading'
 import { Indicator } from '@components/Indicator'
 import { Message } from '@components/Message'
+import { fetchProjectClient } from '@dashboard/api/fetchProjects.js'
+import { Project, Team } from '@dashboard/types'
 
 import { DeploymentLogs } from '../DeploymentLogs'
 import classes from './index.module.scss'

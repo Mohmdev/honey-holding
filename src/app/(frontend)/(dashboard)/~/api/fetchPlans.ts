@@ -1,4 +1,4 @@
-import type { Plan } from '@payload-cloud-types'
+import type { Plan } from '@dashboard/types'
 
 import { PLANS_QUERY } from '@data/plans.js'
 

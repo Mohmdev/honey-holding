@@ -1,12 +1,12 @@
 import { Metadata } from 'next'
 
-import { fetchProjectAndRedirect } from '@cloud/_api/fetchProject.js'
+import { fetchProjectAndRedirect } from '@dashboard/api/fetchProject'
 import { DashboardTabs } from '@root/app/(frontend)/(dashboard)/~/components/DashboardTabs'
 import { ProjectHeader } from '@dashboard/ProjectHeader'
-import { hasBadSubscription } from '@cloud/_utilities/hasBadSubscription.js'
-import { cloudSlug } from '@cloud/slug.js'
-import { mergeOpenGraph } from '@seo/mergeOpenGraph.js'
-import { generateRoutePath } from '@utilities/generate-route-pat
+import { hasBadSubscription } from '@dashboard/utils/hasBadSubscription'
+import { DASHBOARD_SLUG } from '@constants'
+import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
+import { generateRoutePath } from '@utils/generate-route-path
 
 import { Gutter } from '@components/Gutter'
 

@@ -6,14 +6,15 @@ import { useRouter, useSearchParams } from 'next/navigation'
 
 import { exchangeCode } from '@app/(frontend)/(cloud)/new/authorize/exchangeCode.js'
 import { revalidateCache } from '@cloud/_actions/revalidateCache.js'
-import { fetchGithubTokenClient } from '@cloud/_api/fetchGitHubToken.js'
-import { usePopupWindow } from '@utilities/use-popup-window.js'
+
+import { usePopupWindow } from '@utils/use-popup-window'
 
 import { GitHubIcon } from '@graphics/GitHub'
 import { ArrowIcon } from '@icons/ArrowIcon'
 import { Gutter } from '@components/Gutter'
 import { Heading } from '@components/Heading'
 import { RenderParams } from '@components/RenderParams'
+import { fetchGithubTokenClient } from '@dashboard/api/fetchGitHubToken.js'
 
 import classes from './page.module.scss'
 

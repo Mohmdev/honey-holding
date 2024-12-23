@@ -3,9 +3,9 @@ import * as React from 'react'
 import Link from 'next/link'
 
 import { useModal } from '@faceless-ui/modal'
-import { Project, Team } from '@payload-cloud-types'
-import { qs } from '@utilities/qs.js'
 import { toast } from 'sonner'
+
+import { qs } from '@utils/qs.js'
 
 import { Secret } from '@forms/fields/Secret'
 
@@ -15,6 +15,7 @@ import { Button, ButtonProps } from '@components/Button'
 import { CopyToClipboard } from '@components/CopyToClipboard'
 import { Heading } from '@components/Heading'
 import { ModalWindow } from '@components/ModalWindow'
+import { Project, Team } from '@dashboard/types'
 
 import classes from './index.module.scss'
 

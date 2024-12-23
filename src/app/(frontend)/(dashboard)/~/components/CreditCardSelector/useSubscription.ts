@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
-import type { Team } from '@payload-cloud-types'
+import type { Team } from '@dashboard/types'
 
 // TODO: type this using the Stripe module
 export interface Subscription {

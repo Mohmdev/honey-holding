@@ -1,9 +1,10 @@
 import { Fragment } from 'react'
 
-import { cloudSlug } from '@cloud/slug.js'
 import { DashboardTabs } from '@root/app/(frontend)/(dashboard)/~/components/DashboardTabs'
 
 import { Gutter } from '@components/Gutter'
+
+import { DASHBOARD_SLUG } from '@constants'
 
 export default async (props) => {
   const { children } = props
@@ -14,17 +15,17 @@ export default async (props) => {
         <h2>Cloud</h2>
         <DashboardTabs
           tabs={{
-            [cloudSlug]: {
-              href: `/${cloudSlug}`,
+            [DASHBOARD_SLUG]: {
+              href: `/${DASHBOARD_SLUG}`,
               label: 'Projects'
             },
             teams: {
               label: 'Teams',
-              href: `/${cloudSlug}/teams`
+              href: `/${DASHBOARD_SLUG}/teams`
             },
             settings: {
               label: 'Settings',
-              href: `/${cloudSlug}/settings`
+              href: `/${DASHBOARD_SLUG}/settings`
             }
           }}
         />

@@ -1,19 +1,19 @@
-import { fetchMe } from '@cloud/_api/fetchMe.js'
-import { fetchProjectAndRedirect } from '@cloud/_api/fetchProject.js'
+import { fetchMe } from '@dashboard/api/fetchMe.js'
+import { fetchProjectAndRedirect } from '@dashboard/api/fetchProject'
 import { Metadata } from 'next'
 
 import { canUserMangeProject } from '@access.js'
 import { MaxWidth } from '@components/MaxWidth'
-import { Plan } from '@payload-cloud-types'
-import { mergeOpenGraph } from '@seo/mergeOpenGraph.js'
-import { isExpandedDoc } from '@utilities/is-expanded-doc.js'
+import { Plan } from '@dashboard/types'
+import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
+import { isExpandedDoc } from '@utils/is-expanded-doc.js'
 import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants.js'
 import { SectionHeader } from '../_layoutComponents/SectionHeader
 import { DeletePlanButton } from './DeletePlanButton
 import { DeletePlanModal } from './DeletePlanModal
 
 import classes from './index.module.scss'
-import { generateRoutePath } from '@utilities/generate-route-path.js'
+import { generateRoutePath } from '@dashboard/utils/generate-route-path'
 
 export default async ({
   params,

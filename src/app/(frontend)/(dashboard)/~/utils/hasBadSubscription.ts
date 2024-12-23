@@ -1,4 +1,4 @@
-import type { Project } from '@payload-cloud-types'
+import type { Project } from '@dashboard/types'
 
 export const hasBadSubscription = (
   subscriptionStatus: Project['stripeSubscriptionStatus']

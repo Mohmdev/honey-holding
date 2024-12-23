@@ -1,4 +1,4 @@
-import type { Subscription } from '@cloud/_api/fetchSubscriptions.js'
+import type { Subscription } from '@dashboard/api/fetchSubscriptions.js'
 
 export const updatePaymentMethod = async (args: {
   teamID: string

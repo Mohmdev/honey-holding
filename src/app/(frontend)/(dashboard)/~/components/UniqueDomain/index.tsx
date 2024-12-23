@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-import { Project, Team } from '@payload-cloud-types'
-import useDebounce from '@utilities/use-debounce.js'
+import useDebounce from '@utils/use-debounce.js'
 
 import { Text } from '@forms/fields/Text'
 
 import { CheckIcon } from '@icons/CheckIcon'
 import { CloseIcon } from '@icons/CloseIcon'
 import { Spinner } from '@components/Spinner'
+import { Project, Team } from '@dashboard/types'
 
 import classes from './index.module.scss'
 import { validatedDomainReducer, ValidatedDomainResult } from './reducer.js'

@@ -1,19 +1,19 @@
 import React, { Fragment } from 'react'
 
 import { useModal } from '@faceless-ui/modal'
-import { Plan } from '@payload-cloud-types'
 
 import { ArrowIcon } from '@icons/ArrowIcon'
 import { CheckIcon } from '@icons/CheckIcon'
 import { CloseIcon } from '@icons/CloseIcon'
 import { PricingCard } from '@components/cards/PricingCard'
 import { Drawer, DrawerToggler } from '@components/Drawer'
+import { Plan } from '@dashboard/types'
 
 import classes from './index.module.scss'
 
 type ComparePlansProps = {
   plans: Plan[]
-  handlePlanChange: (value?: Plan | null) => void // eslint-disable-line no-unused-vars
+  handlePlanChange: (value?: Plan | null) => void
 }
 
 export const ComparePlans: React.FC<ComparePlansProps> = (props) => {

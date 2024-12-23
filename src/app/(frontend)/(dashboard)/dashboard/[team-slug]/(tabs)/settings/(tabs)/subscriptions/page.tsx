@@ -1,13 +1,13 @@
 import React, { Fragment } from 'react'
 import { Metadata } from 'next'
 
-import { fetchMe } from '@cloud/_api/fetchMe.js'
-import { fetchPlans } from '@cloud/_api/fetchPlans.js'
-import { fetchSubscriptions } from '@cloud/_api/fetchSubscriptions.js'
-import { fetchTeamWithCustomer } from '@cloud/_api/fetchTeam.js'
 import { SectionHeader } from '@cloud/[team-slug]/[project-slug]/(tabs)/settings/_layoutComponents/SectionHeader'
 
 import { Message } from '@components/Message'
+import { fetchMe } from '@dashboard/api/fetchMe.js'
+import { fetchPlans } from '@dashboard/api/fetchPlans.js'
+import { fetchSubscriptions } from '@dashboard/api/fetchSubscriptions.js'
+import { fetchTeamWithCustomer } from '@dashboard/api/fetchTeam.js'
 
 import { TeamSubscriptionsPage } from './page_client.js'
 

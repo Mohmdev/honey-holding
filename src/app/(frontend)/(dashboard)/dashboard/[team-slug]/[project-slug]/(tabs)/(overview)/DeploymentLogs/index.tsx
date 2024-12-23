@@ -1,12 +1,12 @@
 import * as React from 'react'
 
-import { Deployment } from '@payload-cloud-types'
-import { useWebSocket } from '@utilities/use-websocket.js'
+import { useWebSocket } from '@utils/use-websocket.js'
 
 import { Gutter } from '@components/Gutter'
 import { Indicator } from '@components/Indicator'
 import { LogLine, SimpleLogs, styleLogs } from '@components/SimpleLogs'
 import { Tab, Tabs } from '@dashboard/Tabs'
+import { Deployment } from '@dashboard/types'
 
 import classes from './index.module.scss'
 

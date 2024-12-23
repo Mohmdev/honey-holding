@@ -5,7 +5,7 @@ import { Text } from '@forms/fields/Text'
 
 import { Accordion } from '@components/Accordion
 import { Spinner } from '@components/Spinner
-import { Project } from '@payload-cloud-types'
+import { Project } from '@dashboard/types'
 
 export const Secret: React.FC<{
   project: Project

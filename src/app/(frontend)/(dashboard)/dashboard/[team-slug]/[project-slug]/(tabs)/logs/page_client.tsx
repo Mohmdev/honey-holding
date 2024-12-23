@@ -2,12 +2,12 @@
 
 import * as React from 'react'
 
-import { Project, Team } from '@payload-cloud-types'
-import { useWebSocket } from '@utilities/use-websocket.js'
+import { useWebSocket } from '@utils/use-websocket.js'
 
 import { Gutter } from '@components/Gutter'
 import { Heading } from '@components/Heading'
 import { LogLine, SimpleLogs, styleLogLine } from '@components/SimpleLogs'
+import { Project, Team } from '@dashboard/types'
 
 export const ProjectLogsPage: React.FC<{
   project: Project

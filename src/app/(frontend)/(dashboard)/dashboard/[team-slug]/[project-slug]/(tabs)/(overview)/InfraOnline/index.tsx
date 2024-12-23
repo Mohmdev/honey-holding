@@ -2,19 +2,20 @@
 
 import * as React from 'react'
 
-import { Deployment, Project } from '@payload-cloud-types'
-import { formatDate } from '@utilities/format-date-time.js'
-import { qs } from '@utilities/qs.js'
-import { useGetProjectDeployments } from '@utilities/use-cloud-api.js'
 import { toast } from 'sonner'
+
+import { formatDate } from '@utils/format-date-time.js'
+import { qs } from '@utils/qs.js'
+import { useGetProjectDeployments } from '@utils/use-cloud-api.js'
 
 import { CommitIcon } from '@graphics/CommitIcon'
 import { GitHubIcon } from '@graphics/GitHub'
 import { ArrowIcon } from '@icons/ArrowIcon'
 import { BranchIcon } from '@icons/BranchIcon'
-import { BackgroundScanline } from '@components/BackgroundScanline'
+import { BackgroundScanline } from '@components/Background/Scanline'
 import { Gutter } from '@components/Gutter'
 import { Indicator } from '@components/Indicator'
+import { Deployment, Project } from '@dashboard/types'
 
 import { DeploymentLogs } from '../DeploymentLogs'
 import classes from './index.module.scss'

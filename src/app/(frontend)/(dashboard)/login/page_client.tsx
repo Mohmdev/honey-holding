@@ -4,8 +4,6 @@ import React, { useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { redirect, useSearchParams } from 'next/navigation'
 
-import { cloudSlug } from '@cloud/slug.js'
-
 import { useAuth } from '@providers/Auth'
 
 import { Text } from '@forms/fields/Text'
@@ -19,6 +17,8 @@ import { Gutter } from '@components/Gutter'
 import { RenderParams } from '@components/RenderParams'
 
 import classes from './page.module.scss'
+
+import { DASHBOARD_SLUG } from '@constants'
 
 const initialFormState: InitialState = {
   email: {
@@ -38,7 +38,7 @@ const initialFormState: InitialState = {
 export const Login: React.FC = () => {
   const searchParams = useSearchParams()
   const { user, login } = useAuth()
-  const [redirectTo, setRedirectTo] = useState(cloudSlug)
+  const [redirectTo, setRedirectTo] = useState(DASHBOARD_SLUG)
 
   const trustedRoutes = ['/'] // .. add more routes or external links
 
@@ -53,9 +53,9 @@ export const Login: React.FC = () => {
         setRedirectTo(redirectParam)
       }
 
-      // If the 'redirectParam' is not trusted, redirect to the default 'cloudSlug'
+      // If the 'redirectParam' is not trusted, redirect to the default 'DASHBOARD_SLUG'
       else {
-        setRedirectTo(cloudSlug)
+        setRedirectTo(DASHBOARD_SLUG)
       }
     }
   }, [searchParams])

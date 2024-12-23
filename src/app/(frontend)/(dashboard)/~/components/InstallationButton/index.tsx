@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 
-import { usePopupWindow } from '@utilities/use-popup-window.js'
+import { usePopupWindow } from '@utils/use-popup-window'
 
 import classes from './index.module.scss'
 
 export const InstallationButton: React.FC<{
-  onInstall?: (installationId: number) => void // eslint-disable-line no-unused-vars
+  onInstall?: (installationId: number) => void
   label?: string
   uuid: string
 }> = ({ onInstall, label, uuid }) => {

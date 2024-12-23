@@ -3,20 +3,21 @@
 import * as React from 'react'
 import Link from 'next/link'
 
-import { SubscriptionsResult } from '@cloud/_api/fetchSubscriptions.js'
-import { TeamWithCustomer } from '@cloud/_api/fetchTeam.js'
 import { useModal } from '@faceless-ui/modal'
-import { User } from '@payload-cloud-types'
-import { checkTeamRoles } from '@utilities/check-team-roles.js'
-import { formatDate } from '@utilities/format-date-time.js'
-import { priceFromJSON } from '@utilities/price-from-json.js'
-import { useGetPlans } from '@utilities/use-cloud-api.js'
+
+import { checkTeamRoles } from '@utils/check-team-roles.js'
+import { formatDate } from '@utils/format-date-time.js'
+import { priceFromJSON } from '@utils/price-from-json.js'
+import { useGetPlans } from '@utils/use-cloud-api.js'
 
 import { Button } from '@components/Button'
 import { CircleIconButton } from '@components/CircleIconButton'
 import { Heading } from '@components/Heading'
 import { ModalWindow } from '@components/ModalWindow'
 import { Pill } from '@components/Pill'
+import { SubscriptionsResult } from '@dashboard/api/fetchSubscriptions.js'
+import { TeamWithCustomer } from '@dashboard/api/fetchTeam.js'
+import { User } from '@dashboard/types'
 
 import classes from './page.module.scss'
 import { useSubscriptions } from './useSubscriptions.js'

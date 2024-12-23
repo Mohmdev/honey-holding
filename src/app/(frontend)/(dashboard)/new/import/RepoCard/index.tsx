@@ -1,10 +1,9 @@
 import React from 'react'
 
-import { Repo } from '@cloud/_api/fetchRepos.js'
-
 import { ArrowIcon } from '@icons/ArrowIcon'
-import { BackgroundScanline } from '@components/BackgroundScanline'
+import { BackgroundScanline } from '@components/Background/Scanline'
 import { LoadingShimmer } from '@components/LoadingShimmer'
+import { Repo } from '@dashboard/api/fetchRepos.js'
 
 import classes from './index.module.scss'
 

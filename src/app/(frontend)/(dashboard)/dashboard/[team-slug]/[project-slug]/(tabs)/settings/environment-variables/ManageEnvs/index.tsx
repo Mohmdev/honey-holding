@@ -14,9 +14,9 @@ import { Button } from '@components/Button
 import { Heading } from '@components/Heading
 import { ModalWindow } from '@components/ModalWindow
 import { Accordion } from '@components/Accordion
-import { Project } from '@payload-cloud-types'
+import { Project } from '@dashboard/types'
 import { validateKey, validateValue } from '../validations.js'
-import { qs } from '@utilities/qs.js'
+import { qs } from '@utils/qs.js'
 
 import classes from './index.module.scss'
 

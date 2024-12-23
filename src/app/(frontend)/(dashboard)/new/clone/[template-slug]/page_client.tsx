@@ -4,10 +4,7 @@ import React, { useCallback, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 import { createDraftProject } from '@app/(frontend)/(cloud)/new/createDraftProject.js'
-import { fetchInstalls, Install } from '@cloud/_api/fetchInstalls.js'
-import { cloudSlug } from '@cloud/slug.js'
 import { Cell, Grid } from '@faceless-ui/css-grid'
-import { Team, Template, User } from '@payload-cloud-types'
 import { toast } from 'sonner'
 
 import { Checkbox } from '@forms/fields/Checkbox'
@@ -20,12 +17,16 @@ import { PayloadIcon } from '@graphics/PayloadIcon'
 import { Gutter } from '@components/Gutter'
 import { HR } from '@components/HR'
 import { Message } from '@components/Message'
+import { fetchInstalls, Install } from '@dashboard/api/fetchInstalls'
 import { CloneOrDeployProgress } from '@dashboard/CloneOrDeployProgress'
 import { InstallationSelector } from '@dashboard/InstallationSelector'
 import { useTeamDrawer } from '@dashboard/TeamDrawer'
+import { Team, Template, User } from '@dashboard/types'
 import { UniqueRepoName } from '@dashboard/UniqueRepoName'
 
 import classes from './page.module.scss'
+
+import { DASHBOARD_SLUG } from '@constants'
 
 export const CloneTemplate: React.FC<{
   template?: Template
@@ -62,7 +63,7 @@ export const CloneTemplate: React.FC<{
       )
 
       router.push(
-        `/${cloudSlug}/${
+        `/${DASHBOARD_SLUG}/${
           typeof team === 'string' ? team : team?.slug
         }/${draftProjectSlug}/configure`
       )

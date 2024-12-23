@@ -3,10 +3,8 @@
 import React, { useEffect } from 'react'
 import Link from 'next/link'
 
-import { Team, Template, User } from '@payload-cloud-types'
-import useDebounce from '@utilities/use-debounce.js'
-
 import { useAuth } from '@providers/Auth'
+import useDebounce from '@utils/use-debounce.js'
 
 import { Text } from '@forms/fields/Text'
 
@@ -15,6 +13,7 @@ import { NewProjectBlock } from '@components/NewProject'
 import { Pagination } from '@components/Pagination'
 import { ProjectCard } from '@dashboard/ProjectCard'
 import { TeamSelector } from '@dashboard/TeamSelector'
+import { Team, Template, User } from '@dashboard/types'
 
 import { fetchProjectsClient, ProjectsRes } from '../../~/_api/fetchProjects.js'
 import classes from './page.module.scss'

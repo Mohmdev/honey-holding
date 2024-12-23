@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useRouter } from 'next/navigation'
 
-import type { Team } from '@payload-cloud-types'
+import type { Team } from '@dashboard/types'
 
 const portalURL = `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/customer-portal`
 

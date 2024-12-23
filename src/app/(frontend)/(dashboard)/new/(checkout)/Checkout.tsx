@@ -5,14 +5,11 @@ import Link from 'next/link'
 import { redirect, useRouter } from 'next/navigation'
 
 import { revalidateCache } from '@cloud/_actions/revalidateCache.js'
-import { Install } from '@cloud/_api/fetchInstalls.js'
-import { TeamWithCustomer } from '@cloud/_api/fetchTeam.js'
-import { cloudSlug } from '@cloud/slug.js'
-import { Plan, Project, Team, Template, User } from '@payload-cloud-types'
 import { Elements, useElements, useStripe } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
-import { priceFromJSON } from '@utilities/price-from-json.js'
 import { toast } from 'sonner'
+
+import { priceFromJSON } from '@utils/price-from-json.js'
 
 import type { PaymentMethod } from '@stripe/stripe-js'
 
@@ -30,12 +27,15 @@ import { Gutter } from '@components/Gutter'
 import { Heading } from '@components/Heading'
 import { HR } from '@components/HR'
 import { Message } from '@components/Message'
+import { Install } from '@dashboard/api/fetchInstalls'
+import { TeamWithCustomer } from '@dashboard/api/fetchTeam.js'
 import { BranchSelector } from '@dashboard/BranchSelector'
 import { ComparePlans } from '@dashboard/ComparePlans'
 import { CreditCardSelector } from '@dashboard/CreditCardSelector'
 import { PlanSelector } from '@dashboard/PlanSelector'
 import { RepoExists } from '@dashboard/RepoExists'
 import { TeamSelector } from '@dashboard/TeamSelector'
+import { Plan, Project, Team, Template, User } from '@dashboard/types'
 import { UniqueDomain } from '@dashboard/UniqueDomain'
 import { UniqueProjectSlug } from '@dashboard/UniqueSlug'
 
@@ -44,6 +44,8 @@ import classes from './Checkout.module.scss'
 import { deploy } from './deploy.js'
 import { EnvVars } from './EnvVars.js'
 import { checkoutReducer, CheckoutState } from './reducer.js'
+
+import { DASHBOARD_SLUG } from '@constants'
 
 const apiKey = `${process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}`
 const Stripe = loadStripe(apiKey)
@@ -115,8 +117,8 @@ const Checkout: React.FC<{
     (project: Project) => {
       const redirectURL =
         typeof project?.team === 'object' && project?.team !== null
-          ? `/${cloudSlug}/${project?.team?.slug}/${project.slug}`
-          : `/${cloudSlug}`
+          ? `/${DASHBOARD_SLUG}/${project?.team?.slug}/${project.slug}`
+          : `/${DASHBOARD_SLUG}`
 
       router.push(redirectURL)
       toast.success('Thank you! Your project is now being configured.')
@@ -149,7 +151,7 @@ const Checkout: React.FC<{
           tag: `projects`
         })
 
-        router.push(`/${cloudSlug}`)
+        router.push(`/${DASHBOARD_SLUG}`)
 
         toast.success('Draft project canceled successfully.')
       } else {
@@ -500,7 +502,7 @@ const CheckoutProvider: React.FC<{
   }
 
   if (project?.status === 'published') {
-    redirect(`/${cloudSlug}/${team?.slug}/${project.slug}`)
+    redirect(`/${DASHBOARD_SLUG}/${team?.slug}/${project.slug}`)
   }
 
   if (!token) {

@@ -2,16 +2,16 @@ import { Fragment } from 'react'
 import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 
-import { fetchGitHubToken } from '@cloud/_api/fetchGitHubToken.js'
-import { fetchInstalls } from '@cloud/_api/fetchInstalls.js'
-import { fetchMe } from '@cloud/_api/fetchMe.js'
-import { fetchRepos, Repo, RepoResults } from '@cloud/_api/fetchRepos.js'
-import { mergeOpenGraph } from '@seo/mergeOpenGraph.js'
-import { uuid as generateUUID } from '@utilities/uuid.js'
+import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
+import { uuid as generateUUID } from '@utils/uuid.js'
 
 import { Breadcrumbs } from '@components/Breadcrumbs'
 import { Gutter } from '@components/Gutter'
 import { Heading } from '@components/Heading'
+import { fetchGitHubToken } from '@dashboard/api/fetchGitHubToken.js'
+import { fetchInstalls } from '@dashboard/api/fetchInstalls'
+import { fetchMe } from '@dashboard/api/fetchMe.js'
+import { fetchRepos, Repo, RepoResults } from '@dashboard/api/fetchRepos.js'
 
 import { ImportProject } from './page_client.js'
 

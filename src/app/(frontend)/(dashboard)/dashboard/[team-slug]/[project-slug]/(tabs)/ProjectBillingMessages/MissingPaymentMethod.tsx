@@ -4,10 +4,9 @@ import React, { Fragment } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-import { ProjectWithSubscription } from '@cloud/_api/fetchProject.js'
-import { TeamWithCustomer } from '@cloud/_api/fetchTeam.js'
-
 import { Message } from '@components/Message'
+import { ProjectWithSubscription } from '@dashboard/api/fetchProject'
+import { TeamWithCustomer } from '@dashboard/api/fetchTeam.js'
 
 export const MissingPaymentMethodMessage: React.FC<{
   project: ProjectWithSubscription

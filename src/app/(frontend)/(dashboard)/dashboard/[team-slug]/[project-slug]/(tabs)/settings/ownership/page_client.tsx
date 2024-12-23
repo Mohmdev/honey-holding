@@ -3,12 +3,11 @@
 import * as React from 'react'
 import Link from 'next/link'
 
-import { checkTeamRoles } from '@utilities/check-team-roles.js'
-import { isExpandedDoc } from '@utilities/is-expanded-doc.js'
-
 import { useAuth } from '@providers/Auth'
+import { checkTeamRoles } from '@utils/check-team-roles.js'
+import { isExpandedDoc } from '@utils/is-expanded-doc.js'
 
-import type { Team } from '@payload-cloud-types'
+import type { Team } from '@dashboard/types'
 
 import { MaxWidth } from '@components/MaxWidth'
 

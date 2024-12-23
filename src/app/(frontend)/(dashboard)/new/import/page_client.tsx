@@ -3,11 +3,6 @@
 import React, { Fragment, useCallback, useReducer } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 
-import { fetchInstalls, Install } from '@cloud/_api/fetchInstalls.js'
-import { RepoResults } from '@cloud/_api/fetchRepos.js'
-import { cloudSlug } from '@cloud/slug.js'
-import { Team } from '@payload-cloud-types'
-
 import RadioGroup from '@forms/fields/RadioGroup'
 import Form from '@forms/Form'
 import FormProcessing from '@forms/FormProcessing'
@@ -15,14 +10,19 @@ import FormSubmissionError from '@forms/FormSubmissionError'
 
 import { Gutter } from '@components/Gutter'
 import { Pagination } from '@components/Pagination'
+import { fetchInstalls, Install } from '@dashboard/api/fetchInstalls'
+import { RepoResults } from '@dashboard/api/fetchRepos.js'
 import { InstallationButton } from '@dashboard/InstallationButton'
 import { InstallationSelector } from '@dashboard/InstallationSelector'
 import { useTeamDrawer } from '@dashboard/TeamDrawer'
+import { Team } from '@dashboard/types'
 
 import { createDraftProject } from '../createDraftProject.js'
 import classes from './page.module.scss'
 import { RepoCard } from './RepoCard'
 import { useGetRepos } from './useGetRepos.js'
+
+import { DASHBOARD_SLUG } from '@constants'
 
 const perPage = 30
 
@@ -76,7 +76,7 @@ export const ImportProject: React.FC<{
   const onDraftProjectCreate = useCallback(
     ({ slug: draftProjectSlug, team }) =>
       router.push(
-        `/${cloudSlug}/${
+        `/${DASHBOARD_SLUG}/${
           typeof team === 'string' ? team : team?.slug
         }/${draftProjectSlug}/configure`
       ),

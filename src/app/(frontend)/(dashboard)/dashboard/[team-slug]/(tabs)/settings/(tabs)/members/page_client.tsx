@@ -3,10 +3,8 @@
 import * as React from 'react'
 
 import { revalidateCache } from '@cloud/_actions/revalidateCache.js'
-import { TeamWithCustomer } from '@cloud/_api/fetchTeam.js'
 import { SectionHeader } from '@cloud/[team-slug]/[project-slug]/(tabs)/settings/_layoutComponents/SectionHeader'
 import { useModal } from '@faceless-ui/modal'
-import { Team } from '@payload-cloud-types'
 import { toast } from 'sonner'
 
 import { useAuth } from '@providers/Auth'
@@ -19,9 +17,11 @@ import { OnSubmit } from '@forms/types'
 
 import { HR } from '@components/HR'
 import { ModalWindow } from '@components/ModalWindow'
+import { TeamWithCustomer } from '@dashboard/api/fetchTeam.js'
 import { InviteTeammates } from '@dashboard/InviteTeammates'
 import { TeamInvitations } from '@dashboard/TeamInvitations'
 import { Member, TeamMembers } from '@dashboard/TeamMembers'
+import { Team } from '@dashboard/types'
 
 import classes from './page.module.scss'
 import { UpdateRolesConfirmationForm } from './UpdateRolesConfirmationForm'

@@ -1,9 +1,10 @@
 import { Metadata } from 'next'
 
-import { fetchProjects } from '@cloud/_api/fetchProjects.js'
-import { fetchTeamWithCustomer } from '@cloud/_api/fetchTeam.js'
-import { fetchTemplates } from '@cloud/_api/fetchTemplates.js'
-import { mergeOpenGraph } from '@seo/mergeOpenGraph.js'
+import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
+
+import { fetchProjects } from '@dashboard/api/fetchProjects.js'
+import { fetchTeamWithCustomer } from '@dashboard/api/fetchTeam.js'
+import { fetchTemplates } from '@dashboard/api/fetchTemplates.js'
 
 import { TeamPage } from './page_client.js'
 

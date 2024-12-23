@@ -1,15 +1,16 @@
 import React from 'react'
 import { Metadata } from 'next'
 
-import { fetchMe } from '@cloud/_api/fetchMe.js'
-import { fetchPaymentMethods } from '@cloud/_api/fetchPaymentMethods.js'
-import { fetchTeamWithCustomer } from '@cloud/_api/fetchTeam.js'
 import { SectionHeader } from '@cloud/[team-slug]/[project-slug]/(tabs)/settings/_layoutComponents/SectionHeader'
-import { checkTeamRoles } from '@utilities/check-team-roles.js'
+
+import { checkTeamRoles } from '@utils/check-team-roles.js'
 
 import { Text } from '@forms/fields/Text'
 
 import HR from '@components/MDX/components/HR'
+import { fetchMe } from '@dashboard/api/fetchMe.js'
+import { fetchPaymentMethods } from '@dashboard/api/fetchPaymentMethods.js'
+import { fetchTeamWithCustomer } from '@dashboard/api/fetchTeam.js'
 import { CreditCardList } from '@dashboard/CreditCardList'
 
 import classes from './page.module.scss'

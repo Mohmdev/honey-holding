@@ -6,13 +6,13 @@ import React, {
   useState
 } from 'react'
 
-import { TeamWithCustomer } from '@cloud/_api/fetchTeam.js'
 import { type PaymentMethod } from '@stripe/stripe-js'
 import { v4 as uuid } from 'uuid'
 
 import { CircleIconButton } from '@components/CircleIconButton'
 import { LargeRadio } from '@components/LargeRadio'
 import { Pill } from '@components/Pill'
+import { TeamWithCustomer } from '@dashboard/api/fetchTeam.js'
 import { CreditCardElement } from '@dashboard/CreditCardElement'
 
 import { usePaymentMethods } from '../CreditCardList/usePaymentMethods.js'

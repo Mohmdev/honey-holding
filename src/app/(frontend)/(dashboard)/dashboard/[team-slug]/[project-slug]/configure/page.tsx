@@ -3,13 +3,14 @@ import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 
 import Checkout from '@app/(frontend)/(cloud)/new/(checkout)/Checkout.js'
-import { fetchGitHubToken } from '@cloud/_api/fetchGitHubToken.js'
-import { fetchInstalls } from '@cloud/_api/fetchInstalls.js'
-import { fetchMe } from '@cloud/_api/fetchMe.js'
-import { fetchPaymentMethods } from '@cloud/_api/fetchPaymentMethods.js'
-import { fetchPlans } from '@cloud/_api/fetchPlans.js'
-import { fetchProjectWithSubscription } from '@cloud/_api/fetchProject.js'
-import { fetchTemplates } from '@cloud/_api/fetchTemplates.js'
+
+import { fetchGitHubToken } from '@dashboard/api/fetchGitHubToken.js'
+import { fetchInstalls } from '@dashboard/api/fetchInstalls'
+import { fetchMe } from '@dashboard/api/fetchMe.js'
+import { fetchPaymentMethods } from '@dashboard/api/fetchPaymentMethods.js'
+import { fetchPlans } from '@dashboard/api/fetchPlans.js'
+import { fetchProjectWithSubscription } from '@dashboard/api/fetchProject'
+import { fetchTemplates } from '@dashboard/api/fetchTemplates.js'
 
 export const dynamic = 'force-dynamic'
 

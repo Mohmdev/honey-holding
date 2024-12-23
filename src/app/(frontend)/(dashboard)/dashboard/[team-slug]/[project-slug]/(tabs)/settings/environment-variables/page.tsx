@@ -1,10 +1,10 @@
-import { fetchProjectAndRedirect } from '@cloud/_api/fetchProject.js'
+import { fetchProjectAndRedirect } from '@dashboard/api/fetchProject'
 import { Accordion } from '@components/Accordion'
 import { HR } from '@components/HR
 import { MaxWidth } from '@components/MaxWidth
 import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants.js'
-import { mergeOpenGraph } from '@seo/mergeOpenGraph.js'
-import { generateRoutePath } from '@utilities/generate-route-path.js'
+import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
+import { generateRoutePath } from '@dashboard/utils/generate-route-path'
 import React from 'react'
 
 import { NoData } from '../_layoutComponents/NoData

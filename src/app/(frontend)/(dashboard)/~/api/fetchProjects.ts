@@ -1,6 +1,6 @@
-import { mergeProjectEnvironment } from '@utilities/merge-project-environment.js'
+import { mergeProjectEnvironment } from '@utils/merge-project-environment.js'
 
-import type { Project } from '@payload-cloud-types'
+import type { Project } from '@dashboard/types'
 
 import { payloadCloudToken } from './token.js'
 

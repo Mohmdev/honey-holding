@@ -1,12 +1,12 @@
 import React from 'react'
 import { Metadata } from 'next'
 
-import { fetchInvoices } from '@cloud/_api/fetchInvoices.js'
-import { fetchMe } from '@cloud/_api/fetchMe.js'
-import { fetchTeamWithCustomer } from '@cloud/_api/fetchTeam.js'
 import { SectionHeader } from '@cloud/[team-slug]/[project-slug]/(tabs)/settings/_layoutComponents/SectionHeader'
 
 import { Message } from '@components/Message'
+import { fetchInvoices } from '@dashboard/api/fetchInvoices.js'
+import { fetchMe } from '@dashboard/api/fetchMe.js'
+import { fetchTeamWithCustomer } from '@dashboard/api/fetchTeam.js'
 
 import { TeamInvoicesPage } from './page_client.js'
 

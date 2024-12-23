@@ -1,9 +1,8 @@
 import * as React from 'react'
 
-import { generateRoutePath } from '@utilities/generate-route-path'
-
 import { Gutter } from '@components/Gutter'
 import { Sidebar } from '@dashboard/Sidebar'
+import { generateRoutePath } from '@dashboard/utils/generate-route-path'
 
 import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants.js'
 

@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import { fetchProjectAndRedirect } from '@cloud/_api/fetchProject.js'
+import { fetchProjectAndRedirect } from '@dashboard/api/fetchProject'
 
 import { InfraOffline } from './InfraOffline'
 import { InfraOnline } from './InfraOnline'

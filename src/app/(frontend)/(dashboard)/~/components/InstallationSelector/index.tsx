@@ -1,12 +1,12 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react'
 
-import { Install } from '@cloud/_api/fetchInstalls.js'
-import { usePopupWindow } from '@utilities/use-popup-window.js'
+import { usePopupWindow } from '@utils/use-popup-window'
 
 import { Select } from '@forms/fields/Select'
 import Label from '@forms/Label'
 
 import { LoadingShimmer } from '@components/LoadingShimmer'
+import { Install } from '@dashboard/api/fetchInstalls'
 
 import { MenuList } from './components/MenuList'
 import { Option } from './components/Option'

@@ -1,11 +1,12 @@
 import React from 'react'
 
-import { fetchTeamWithCustomer } from '@cloud/_api/fetchTeam.js'
 import { teamHasDefaultPaymentMethod } from '@cloud/_utilities/teamHasDefaultPaymentMethod.js'
-import { cloudSlug } from '@cloud/slug.js'
 import { DashboardTabs } from '@root/app/(frontend)/(dashboard)/~/components/DashboardTabs'
 
 import { Gutter } from '@components/Gutter'
+import { fetchTeamWithCustomer } from '@dashboard/api/fetchTeam.js'
+
+import { DASHBOARD_SLUG } from '@constants'
 
 export default async ({
   children,
@@ -33,17 +34,17 @@ export default async ({
               error:
                 !teamHasDefaultPaymentMethod(team) &&
                 team?.hasPublishedProjects,
-              href: `/${cloudSlug}/${teamSlug}/settings`,
+              href: `/${DASHBOARD_SLUG}/${teamSlug}/settings`,
               label: 'Team Settings',
               subpaths: [
-                `/${cloudSlug}/${teamSlug}/settings/members`,
-                `/${cloudSlug}/${teamSlug}/settings/subscriptions`,
-                `/${cloudSlug}/${teamSlug}/settings/billing`,
-                `/${cloudSlug}/${teamSlug}/settings/invoices`
+                `/${DASHBOARD_SLUG}/${teamSlug}/settings/members`,
+                `/${DASHBOARD_SLUG}/${teamSlug}/settings/subscriptions`,
+                `/${DASHBOARD_SLUG}/${teamSlug}/settings/billing`,
+                `/${DASHBOARD_SLUG}/${teamSlug}/settings/invoices`
               ]
             },
             [teamSlug]: {
-              href: `/${cloudSlug}/${teamSlug}`,
+              href: `/${DASHBOARD_SLUG}/${teamSlug}`,
               label: 'Team Projects'
             }
           }}

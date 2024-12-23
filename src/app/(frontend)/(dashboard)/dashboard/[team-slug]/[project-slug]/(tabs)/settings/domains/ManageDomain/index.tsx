@@ -2,13 +2,13 @@ import * as React from 'react'
 import Link from 'next/link'
 
 import { useModal } from '@faceless-ui/modal'
-import { Project, Team } from '@payload-cloud-types'
 
 import { ExternalLinkIcon } from '@icons/ExternalLinkIcon'
 import { Accordion } from '@components/Accordion'
 import { Button } from '@components/Button'
 import { Heading } from '@components/Heading'
 import { ModalWindow } from '@components/ModalWindow'
+import { Project, Team } from '@dashboard/types'
 
 import classes from './index.module.scss'
 

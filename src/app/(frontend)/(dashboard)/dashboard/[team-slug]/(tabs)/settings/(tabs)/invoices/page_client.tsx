@@ -3,16 +3,16 @@
 import * as React from 'react'
 import Link from 'next/link.js'
 
-import { InvoicesResult } from '@cloud/_api/fetchInvoices.js'
-import { TeamWithCustomer } from '@cloud/_api/fetchTeam.js'
-import { User } from '@payload-cloud-types'
-import { checkTeamRoles } from '@utilities/check-team-roles.js'
-import { formatDate } from '@utilities/format-date-time.js'
-import { priceFromJSON } from '@utilities/price-from-json.js'
+import { checkTeamRoles } from '@utils/check-team-roles.js'
+import { formatDate } from '@utils/format-date-time.js'
+import { priceFromJSON } from '@utils/price-from-json.js'
 
 import { CircleIconButton } from '@components/CircleIconButton'
 import { Heading } from '@components/Heading'
 import { Pill } from '@components/Pill'
+import { InvoicesResult } from '@dashboard/api/fetchInvoices.js'
+import { TeamWithCustomer } from '@dashboard/api/fetchTeam.js'
+import { User } from '@dashboard/types'
 
 import classes from './page.module.scss'
 import { useInvoices } from './useInvoices.js'

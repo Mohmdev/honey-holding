@@ -4,15 +4,15 @@ import * as React from 'react'
 import { toast } from 'sonner'
 import { revalidateCache } from '@cloud/_actions/revalidateCache.js'
 import { AddArrayRow, ArrayRow } from '@forms/fields/Array'
-import { ArrayProvider, useArray } from '@forms/fields/Array/context.js'
+import { ArrayProvider, useArray } from '@forms/fields/Array/context'
 import { Text } from '@forms/fields/Text
 import Form from '@forms/Form
 import Submit from '@forms/Submit
 import { OnSubmit } from '@forms/types'
 
-import { Project } from '@payload-cloud-types'
+import { Project } from '@dashboard/types'
 import { validateKey, validateValue } from '../validations.js'
-import { qs } from '@utilities/qs.js'
+import { qs } from '@utils/qs.js'
 
 import classes from './index.module.scss'
 

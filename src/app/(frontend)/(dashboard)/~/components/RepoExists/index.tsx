@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-import { Project } from '@payload-cloud-types'
-import useDebounce from '@utilities/use-debounce.js'
+import useDebounce from '@utils/use-debounce.js'
 
 import type { Endpoints } from '@octokit/types'
 
@@ -10,6 +9,7 @@ import { Text } from '@forms/fields/Text'
 import { CheckIcon } from '@icons/CheckIcon'
 import { CloseIcon } from '@icons/CloseIcon'
 import { Spinner } from '@components/Spinner'
+import { Project } from '@dashboard/types'
 
 import classes from './index.module.scss'
 

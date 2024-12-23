@@ -2,27 +2,27 @@ import * as React from 'react'
 import { Metadata } from 'next'
 import Link from 'next/link'
 
-import { fetchMe } from '@cloud/_api/fetchMe.js'
-import { fetchPaymentMethods } from '@cloud/_api/fetchPaymentMethods.js'
-import {
-  fetchProjectAndRedirect,
-  ProjectWithSubscription
-} from '@cloud/_api/fetchProject.js'
-import { cloudSlug } from '@cloud/slug.js'
-import { mergeOpenGraph } from '@seo/mergeOpenGraph.js'
-import { checkTeamRoles } from '@utilities/check-team-roles.js'
-import { generateRoutePath } from '@utilities/generate-route-path.js'
+import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
+import { checkTeamRoles } from '@utils/check-team-roles.js'
 
 import { Text } from '@forms/fields/Text'
 
 import { Heading } from '@components/Heading'
 import { MaxWidth } from '@components/MaxWidth'
 import { Message } from '@components/Message'
+import { fetchMe } from '@dashboard/api/fetchMe.js'
+import { fetchPaymentMethods } from '@dashboard/api/fetchPaymentMethods.js'
+import {
+  fetchProjectAndRedirect,
+  ProjectWithSubscription
+} from '@dashboard/api/fetchProject'
 import { ProjectPaymentMethodSelector } from '@dashboard/CreditCardSelector/ProjectPaymentMethodSelector.js'
+import { generateRoutePath } from '@dashboard/utils/generate-route-path'
 
 import { SectionHeader } from '../_layoutComponents/SectionHeader'
 import classes from './page.module.scss'
 
+import { DASHBOARD_SLUG } from '@constants'
 import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants.js'
 
 const statusLabels = {
@@ -127,7 +127,7 @@ export default async ({
                 <p className={classes.description}>
                   {`Select which card to use for this project. If your payment fails, we will attempt to bill your team's default payment method (if any). To set your team's default payment method or manage all payment methods on file, please visit the `}
                   <Link
-                    href={`/${cloudSlug}/${team.slug}/settings/billing`}
+                    href={`/${DASHBOARD_SLUG}/${team.slug}/settings/billing`}
                     prefetch={false}
                   >
                     team billing page

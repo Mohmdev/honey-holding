@@ -59,5 +59,10 @@
     "next.config.ts",
     "next-sitemap.config.js"
   ],
-  "exclude": ["node_modules", ".temp", ".docs"]
+  "exclude": [
+    "node_modules",
+    ".temp",
+    ".docs",
+    "src/app/(frontend)/(dashboard)/~/components/_"
+  ]
 }

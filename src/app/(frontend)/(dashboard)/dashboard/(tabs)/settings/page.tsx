@@ -1,7 +1,8 @@
 import { Metadata } from 'next'
 
-import { fetchMe } from '@cloud/_api/fetchMe.js'
-import { mergeOpenGraph } from '@seo/mergeOpenGraph.js'
+import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
+
+import { fetchMe } from '@dashboard/api/fetchMe.js'
 
 import { SettingsPage } from './page_client.js'
 

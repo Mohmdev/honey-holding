@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation'
 
 import { ME_QUERY } from '@_data/me.js'
 
-import type { User } from '@payload-cloud-types'
+import type { User } from '@dashboard/types'
 
 import { payloadCloudToken } from './token.js'
 

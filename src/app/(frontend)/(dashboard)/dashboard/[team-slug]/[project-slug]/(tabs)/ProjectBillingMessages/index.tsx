@@ -1,12 +1,12 @@
 import React from 'react'
 
-import { ProjectWithSubscription } from '@cloud/_api/fetchProject.js'
-import { TeamWithCustomer } from '@cloud/_api/fetchTeam.js'
-import { hasBadSubscription } from '@cloud/_utilities/hasBadSubscription.js'
 import { projectHasPaymentMethod } from '@cloud/_utilities/projectHasPaymentMethod.js'
 import { teamHasDefaultPaymentMethod } from '@cloud/_utilities/teamHasDefaultPaymentMethod.js'
 
 import { Gutter } from '@components/Gutter'
+import { ProjectWithSubscription } from '@dashboard/api/fetchProject'
+import { TeamWithCustomer } from '@dashboard/api/fetchTeam.js'
+import { hasBadSubscription } from '@dashboard/utils/hasBadSubscription'
 
 import { BadSubscriptionMessage } from './BadSubscription.js'
 import classes from './index.module.scss'

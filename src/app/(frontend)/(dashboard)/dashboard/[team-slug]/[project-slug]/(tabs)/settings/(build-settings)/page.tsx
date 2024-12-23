@@ -1,14 +1,15 @@
 import { Metadata } from 'next'
 
-import { fetchProjectAndRedirect } from '@cloud/_api/fetchProject.js'
-import { mergeOpenGraph } from '@seo/mergeOpenGraph.js'
-import { generateRoutePath } from '@utilities/generate-route-path.js'
+import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
+
+import { fetchProjectAndRedirect } from '@dashboard/api/fetchProject'
+import { generateRoutePath } from '@dashboard/utils/generate-route-path'
 
 import { ProjectBuildSettingsPage } from './page_client.js'
 
 import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants.js'
 
-export default async ({
+export default async function Page ({
   params
 }: {
   params: Promise<{

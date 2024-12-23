@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useMemo } from 'react'
 
-import { fetchInstallsClient } from '@cloud/_api/fetchInstalls.js'
-
-import type { Install } from '@cloud/_api/fetchInstalls.js'
+import type { Install } from '@dashboard/api/fetchInstalls'
 import type { Endpoints } from '@octokit/types'
+
+import { fetchInstallsClient } from '@dashboard/api/fetchInstalls'
 
 export type GitHubOrgsResponse =
   Endpoints['GET /user/memberships/orgs']['response']

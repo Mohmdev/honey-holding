@@ -2,14 +2,14 @@ import { Fragment } from 'react'
 import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 
-import { fetchGitHubToken } from '@cloud/_api/fetchGitHubToken.js'
-import { fetchInstalls } from '@cloud/_api/fetchInstalls.js'
-import { fetchMe } from '@cloud/_api/fetchMe.js'
-import { fetchTemplate } from '@cloud/_api/fetchTemplate.js'
-import { mergeOpenGraph } from '@seo/mergeOpenGraph.js'
-import { uuid as generateUUID } from '@utilities/uuid.js'
+import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
+import { uuid as generateUUID } from '@utils/uuid.js'
 
 import { Gutter } from '@components/Gutter'
+import { fetchGitHubToken } from '@dashboard/api/fetchGitHubToken.js'
+import { fetchInstalls } from '@dashboard/api/fetchInstalls'
+import { fetchMe } from '@dashboard/api/fetchMe.js'
+import { fetchTemplate } from '@dashboard/api/fetchTemplate.js'
 
 import { CloneTemplate } from './page_client.js'
 

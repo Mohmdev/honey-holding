@@ -2,7 +2,6 @@
 
 import React, { Fragment, useEffect, useRef, useState } from 'react'
 
-import { TeamWithCustomer } from '@cloud/_api/fetchTeam.js'
 import { useModal } from '@faceless-ui/modal'
 import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
@@ -16,6 +15,7 @@ import { DropdownMenu } from '@components/DropdownMenu'
 import { Heading } from '@components/Heading'
 import { ModalWindow } from '@components/ModalWindow'
 import { Pill } from '@components/Pill'
+import { TeamWithCustomer } from '@dashboard/api/fetchTeam.js'
 import { CreditCardElement } from '@dashboard/CreditCardElement'
 
 import classes from './index.module.scss'

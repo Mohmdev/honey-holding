@@ -1,10 +1,11 @@
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime.js'
 
-import { updateCustomer } from '@cloud/_api/updateCustomer.js'
 import { teamHasDefaultPaymentMethod } from '@cloud/_utilities/teamHasDefaultPaymentMethod.js'
-import { Project, User } from '@payload-cloud-types'
 import { type Stripe, type StripeElements } from '@stripe/stripe-js'
 import { toast } from 'sonner'
+
+import { updateCustomer } from '@dashboard/api/updateCustomer.js'
+import { Project, User } from '@dashboard/types'
 
 import { confirmCardPayment } from './confirmCardPayment.js'
 import { confirmCardSetup } from './confirmCardSetup.js'

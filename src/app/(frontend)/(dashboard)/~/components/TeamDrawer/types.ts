@@ -1,7 +1,7 @@
 import type { HTMLAttributes } from 'react'
 import type React from 'react'
 
-import type { Team } from '@payload-cloud-types'
+import type { Team } from '@dashboard/types'
 
 export interface TeamDrawerProps {
   drawerSlug: string

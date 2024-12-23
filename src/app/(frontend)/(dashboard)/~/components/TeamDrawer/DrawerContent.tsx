@@ -3,7 +3,6 @@ import { useRouter } from 'next/navigation'
 
 import { revalidateCache } from '@cloud/_actions/revalidateCache.js'
 import { useModal } from '@faceless-ui/modal'
-import { Team } from '@payload-cloud-types'
 import { toast } from 'sonner'
 
 import { useAuth } from '@providers/Auth'
@@ -15,6 +14,7 @@ import FormSubmissionError from '@forms/FormSubmissionError'
 import Submit from '@forms/Submit'
 
 import { HR } from '@components/HR'
+import { Team } from '@dashboard/types'
 
 import { InviteTeammates } from '../InviteTeammates'
 import { UniqueTeamSlug } from '../UniqueSlug'
