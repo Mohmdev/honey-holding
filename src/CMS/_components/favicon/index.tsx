@@ -1,13 +1,13 @@
 import React from 'react'
 
-import { getCachedGlobals } from '@utils/getGlobals'
+import type { Asset, GlobalSetting } from '@payload-types'
 
-import type { Graphic } from '@payload-types'
+interface Props {
+  graphics: GlobalSetting['branding']
+}
 
-export const AdminFavicon: React.FC = async () => {
-  const favicon = (await getCachedGlobals('graphics', {
-    select: { favicon: true }
-  })()) as Graphic['favicon']
+export const AdminFavicon: React.FC<Props> = ({ graphics }) => {
+  const favicon = graphics?.favicon as Asset
 
   return (
     <>

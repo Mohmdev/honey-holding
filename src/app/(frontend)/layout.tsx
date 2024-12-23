@@ -16,7 +16,7 @@ import '@styles/app.scss'
 import { untitledSans } from '@lib/fonts/fonts'
 import { getClientSideURL } from '@utils/getURL'
 
-import { Favicon } from '@components/Favicon'
+import Favicon from '@components/Favicon'
 
 export default async function RootLayout({
   children
@@ -27,20 +27,20 @@ export default async function RootLayout({
     <html lang="en">
       <PrivacyProvider>
         <head>
-          {/* <link rel="icon" href="/images/favicon.svg" /> */}
           <Favicon />
           <link rel="dns-prefetch" href={getClientSideURL()} />
-          <link
-            rel="dns-prefetch"
-            href="https://api.github.com/repos/payloadcms/payload"
-          />
           <link
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/@docsearch/css@3"
           />
-          <link rel="preconnect" href="https://www.googletagmanager.com" />
+          {/* <link
+            rel="dns-prefetch"
+            href="https://api.github.com/repos/payloadcms/payload"
+          /> */}
+          {/*  */}
+          {/* <link rel="preconnect" href="https://www.googletagmanager.com" />
           <link rel="preconnect" href="https://www.google-analytics.com" />
-          <GoogleAnalytics />
+          <GoogleAnalytics /> */}
         </head>
         <body className={[GeistMono.variable, untitledSans.variable].join(' ')}>
           <GoogleTagManager />

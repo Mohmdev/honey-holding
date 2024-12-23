@@ -1,13 +1,9 @@
 import React from 'react'
 
-import { getCachedGlobals } from '@utils/getGlobals'
+import { globalSettings } from '@data/cachedSiteMeta'
 
-import type { Graphic } from '@payload-types'
-
-export const Favicon: React.FC = async () => {
-  const favicon = (await getCachedGlobals('graphics', {
-    select: { favicon: true }
-  })()) as Graphic['favicon']
+const Favicon: React.FC = async () => {
+  const favicon = await globalSettings.favicon()
 
   return (
     <>
@@ -33,3 +29,5 @@ export const Favicon: React.FC = async () => {
     </>
   )
 }
+
+export default Favicon

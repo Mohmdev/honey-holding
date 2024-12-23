@@ -8,12 +8,6 @@ import type { Config } from '@payload-types'
 
 type Global = keyof Config['globals']
 
-// interface GlobalOptions<T extends Global> {
-//   depth?: number
-//   select?: {
-//     [K in keyof Config['globals'][T]]?: boolean
-//   }
-// }
 interface GlobalOptions<T extends Global> {
   depth?: number
   select?: Config['globalsSelect'][T]
@@ -35,6 +29,12 @@ async function getGlobal<T extends Global>(
 }
 
 /**
+ *
+ * Caching layer for global settings
+ *
+ * @param slug
+ * @param options
+ *
  * Returns a unstable_cache function mapped with the cache tag for the slug
  */
 export const getCachedGlobals = <T extends Global>(

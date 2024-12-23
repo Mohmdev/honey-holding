@@ -2,7 +2,7 @@ import React from 'react'
 import { unstable_cache } from 'next/cache'
 import { draftMode } from 'next/headers'
 
-import { fetchGlobals } from '@data'
+import { fetchGlobals } from '@root/_data'
 
 import { ErrorMessage } from '@components/ErrorMessage'
 import { Footer } from '@components/Footer'
