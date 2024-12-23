@@ -8,6 +8,7 @@ import { Assets } from '@CMS/Assets/config'
 import { Categories } from '@CMS/Categories/config'
 import { Docs } from '@CMS/Docs/config'
 import { Footer } from '@CMS/Footer/config'
+import { GlobalSettings } from '@CMS/GlobalSettings/config'
 import { MainMenu } from '@CMS/MainMenu/config'
 import { Media } from '@CMS/Media/config'
 import { Pages } from '@CMS/Pages/config'
@@ -35,7 +36,7 @@ export default buildConfig({
     ...collectionGroup('Settings', [Users]),
     ...collectionGroup('Support', [Docs, Tickets])
   ],
-  globals: [...globalGroup('Navigation', [MainMenu, Footer])],
+  globals: [...globalGroup('Customize', [GlobalSettings, MainMenu, Footer])],
   defaultDepth: 1,
   sharp,
   admin: adminConfig,

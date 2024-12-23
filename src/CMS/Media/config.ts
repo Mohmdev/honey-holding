@@ -2,7 +2,7 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 
 import { basicLexical } from '@services/editor/basicLexical'
-import { uploadDarkModeFallback } from '@fields/uploadDarkModeFallback'
+import { mediaDarkModeFallback } from '@fields/darkModeFallback/media'
 import { anyone } from '@access/anyone'
 import { isAdminOrEditor } from '@access/isAdminOrEditor'
 import { isAdminOrSelf } from '@access/isAdminOrSelf'
@@ -34,7 +34,7 @@ export const Media: CollectionConfig<'media'> = {
     width: true
   },
   fields: [
-    uploadDarkModeFallback,
+    mediaDarkModeFallback,
     {
       name: 'alt',
       type: 'text',

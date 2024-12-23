@@ -23,7 +23,7 @@ import { BoldFeatureClient as BoldFeatureClient_e70f5e05f09f93e00b997edb1ef0c864
 import { ItalicFeatureClient as ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { LargeBodyFeatureClient as LargeBodyFeatureClient_6d181b38ed52301f81dd4b459a707445 } from '@fields/richText/features/largeBody/client'
 import { LabelFeatureClient as LabelFeatureClient_859bd91e2f8da2e60c1acd991b1396f3 } from '@fields/richText/features/label/client'
-import { SlugComponent as SlugComponent_a2d4102ad227efd5b46d67038e549296 } from '@fields/slug/Component'
+import { SlugComponent as SlugComponent_a2d4102ad227efd5b46d67038e549296 } from '@fields/slug/client'
 import { OverviewComponent as OverviewComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'
 import { MetaTitleComponent as MetaTitleComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'
 import { MetaDescriptionComponent as MetaDescriptionComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'

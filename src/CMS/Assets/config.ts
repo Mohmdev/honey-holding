@@ -1,7 +1,7 @@
 import path from 'path'
 import { fileURLToPath } from 'url'
 
-import { uploadDarkModeFallback } from '@fields/uploadDarkModeFallback'
+import { assetDarkModeFallback } from '@fields/darkModeFallback/asset'
 import { anyone } from '@access/anyone'
 import { isAdminOrEditor } from '@access/isAdminOrEditor'
 import { isAdminOrSelf } from '@access/isAdminOrSelf'
@@ -32,12 +32,20 @@ export const Assets: CollectionConfig<'assets'> = {
     url: true,
     width: true
   },
+  admin: {
+    useAsTitle: 'title'
+  },
   fields: [
-    uploadDarkModeFallback,
+    {
+      name: 'title',
+      type: 'text',
+      required: true
+    },
+    assetDarkModeFallback,
     {
       name: 'alt',
       type: 'text',
-      required: true
+      hooks: {}
     }
   ],
   upload: {

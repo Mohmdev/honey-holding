@@ -1,15 +1,27 @@
 import { revalidatePath } from 'next/cache'
 
 import link from '@fields/link'
-import { isAdmin } from '@access/isAdmin'
+import { isAdminOrEditor } from '@access/isAdminOrEditor'
+import { publishedOnly } from '@access/publishedOnly'
+
+// import { isAdmin } from '@access/isAdmin'
 
 import type { GlobalConfig } from 'payload'
 
 export const MainMenu: GlobalConfig = {
   slug: 'main-menu',
   access: {
-    read: () => true,
-    update: isAdmin
+    read: publishedOnly,
+    update: isAdminOrEditor,
+    readVersions: isAdminOrEditor,
+    readDrafts: isAdminOrEditor
+  },
+  versions: {
+    drafts: {
+      autosave: {
+        interval: 100
+      }
+    }
   },
   fields: [
     {
