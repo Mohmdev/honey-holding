@@ -1,11 +1,13 @@
-import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime.js'
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime'
 
-import { teamHasDefaultPaymentMethod } from '@cloud/_utilities/teamHasDefaultPaymentMethod.js'
-import { type Stripe, type StripeElements } from '@stripe/stripe-js'
+// import { type Stripe, type StripeElements } from '@stripe/stripe-js'
 import { toast } from 'sonner'
+
+import { getClientSideURL } from '@utils/getURL.js'
 
 import { updateCustomer } from '@dashboard/api/updateCustomer.js'
 import { Project, User } from '@dashboard/types'
+import { teamHasDefaultPaymentMethod } from '@dashboard/utils/teamHasDefaultPaymentMethod'
 
 import { confirmCardPayment } from './confirmCardPayment.js'
 import { confirmCardSetup } from './confirmCardSetup.js'
@@ -18,8 +20,14 @@ export const deploy = async (args: {
   installID?: string
   onDeploy?: (project: Project) => void
   user: User | null | undefined
-  stripe: Stripe | null | undefined
-  elements: StripeElements | null | undefined
+  // stripe:
+  //   | Stripe
+  //   | null
+  //   | undefined
+  // elements:
+  //   | StripeElements
+  //   | null
+  //   | undefined
   unflattenedData: any
   router: AppRouterInstance
 }): Promise<void> => {
@@ -29,8 +37,8 @@ export const deploy = async (args: {
     project,
     onDeploy,
     user,
-    stripe,
-    elements,
+    // stripe,
+    // elements,
     unflattenedData: formState,
     router
   } = args
@@ -65,8 +73,8 @@ export const deploy = async (args: {
     if (checkoutState.paymentMethod) {
       const { setupIntent } = await confirmCardSetup({
         paymentMethod: checkoutState.paymentMethod,
-        stripe,
-        elements,
+        // stripe,
+        // elements,
         team: checkoutState.team
       })
 
@@ -88,42 +96,39 @@ export const deploy = async (args: {
 
     // attempt to deploy the project
     // do not create the subscription yet to ensure the project will deploy
-    const req = await fetch(
-      `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/deploy`,
-      {
-        credentials: 'include',
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          project: {
-            id: project?.id,
-            template:
-              project?.template && typeof project.template !== 'string'
-                ? project.template.id
-                : project?.template,
-            paymentMethod: checkoutState.paymentMethod,
-            freeTrial: checkoutState.freeTrial,
-            // reduce large payloads to only the ID, i.e. plan and team
-            plan:
-              typeof checkoutState.plan === 'string'
-                ? checkoutState.plan
-                : checkoutState.plan.id,
-            team:
-              typeof checkoutState.team === 'string'
-                ? checkoutState.team
-                : checkoutState.team.id,
-            ...formState,
-            // remove all empty environment variables
-            environmentVariables: formState.environmentVariables?.filter(
-              ({ key, value }) => key && value
-            ),
-            installID
-          }
-        })
-      }
-    )
+    const req = await fetch(`${getClientSideURL()}/api/deploy`, {
+      credentials: 'include',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        project: {
+          id: project?.id,
+          template:
+            project?.template && typeof project.template !== 'string'
+              ? project.template.id
+              : project?.template,
+          paymentMethod: checkoutState.paymentMethod,
+          freeTrial: checkoutState.freeTrial,
+          // reduce large payloads to only the ID, i.e. plan and team
+          plan:
+            typeof checkoutState.plan === 'string'
+              ? checkoutState.plan
+              : checkoutState.plan.id,
+          team:
+            typeof checkoutState.team === 'string'
+              ? checkoutState.team
+              : checkoutState.team.id,
+          ...formState,
+          // remove all empty environment variables
+          environmentVariables: formState.environmentVariables?.filter(
+            ({ key, value }) => key && value
+          ),
+          installID
+        }
+      })
+    })
 
     const res: {
       doc: Project
@@ -139,17 +144,17 @@ export const deploy = async (args: {
         project: res.doc
       })
 
-      if (!elements || !stripe) throw new Error(`Stripe is not initialized.`)
+      // if (!elements || !stripe) throw new Error(`Stripe is not initialized.`)
 
       // confirm the `SetupIntent` if a payment method was supplied
       // the `setupIntent` has already determined that the card is valid an has sufficient funds
       // free trials will mark the subscription as paid immediately
-      await confirmCardPayment({
-        subscription,
-        elements,
-        stripe,
-        checkoutState
-      })
+      // await confirmCardPayment({
+      //   subscription,
+      //   elements,
+      //   stripe,
+      //   checkoutState
+      // })
 
       if (typeof onDeploy === 'function') {
         onDeploy(res.doc)

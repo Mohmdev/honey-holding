@@ -5,19 +5,21 @@ import { useRouter } from 'next/navigation'
 
 import { toast } from 'sonner'
 
+import { getClientSideURL } from '@utils/getURL'
+
 import { Text } from '@forms/fields/Text'
 import Form from '@forms/Form'
 import Submit from '@forms/Submit'
 
 import { MaxWidth } from '@components/MaxWidth'
-import { BranchSelector } from '@dashboard/BranchSelector'
+import { BranchSelector } from '@dashboard/components/BranchSelector'
+import { UniqueProjectSlug } from '@dashboard/components/UniqueSlug'
 import { Project, Team } from '@dashboard/types'
-import { UniqueProjectSlug } from '@dashboard/UniqueSlug'
 
 import { SectionHeader } from '../_layoutComponents/SectionHeader'
 import classes from './page.module.scss'
 
-import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants.js'
+import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants'
 
 export const ProjectBuildSettingsPage: React.FC<{
   team: Team
@@ -38,7 +40,7 @@ export const ProjectBuildSettingsPage: React.FC<{
 
       try {
         const req = await fetch(
-          `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/projects/${project.id}/build-settings${
+          `${getClientSideURL()}/api/projects/${project.id}/build-settings${
             environmentSlug ? `?env=${environmentSlug}` : ''
           }`,
           {

@@ -5,8 +5,7 @@ import * as React from 'react'
 import { toast } from 'sonner'
 
 import { formatDate } from '@utils/format-date-time.js'
-import { qs } from '@utils/qs.js'
-import { useGetProjectDeployments } from '@utils/use-cloud-api.js'
+import { getClientSideURL } from '@utils/getURL'
 
 import { CommitIcon } from '@graphics/CommitIcon'
 import { GitHubIcon } from '@graphics/GitHub'
@@ -16,6 +15,8 @@ import { BackgroundScanline } from '@components/Background/Scanline'
 import { Gutter } from '@components/Gutter'
 import { Indicator } from '@components/Indicator'
 import { Deployment, Project } from '@dashboard/types'
+import { qs } from '@dashboard/utils/qs'
+import { useGetProjectDeployments } from '@dashboard/utils/use-cloud-api'
 
 import { DeploymentLogs } from '../DeploymentLogs'
 import classes from './index.module.scss'
@@ -55,7 +56,7 @@ export const InfraOnline: React.FC<{
     })
 
     fetch(
-      `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/projects/${project?.id}/deploy${
+      `${getClientSideURL()}/api/projects/${project?.id}/deploy${
         query ? `?${query}` : ''
       }`,
       {
@@ -82,7 +83,7 @@ export const InfraOnline: React.FC<{
 
   // Poll deployments every 10 seconds
   React.useEffect(() => {
-    let interval
+    let interval: NodeJS.Timeout | undefined // Add proper type and declaration
     if (reqStatus && reqStatus < 400) {
       interval = setInterval(() => {
         reloadDeployments()
@@ -90,7 +91,7 @@ export const InfraOnline: React.FC<{
     }
 
     return () => {
-      interval && clearInterval(interval)
+      if (interval) clearInterval(interval)
     }
   }, [reqStatus, reloadDeployments])
 
@@ -120,7 +121,7 @@ export const InfraOnline: React.FC<{
       })
 
       const req = await fetch(
-        `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/deployments?${query}&limit=1`,
+        `${getClientSideURL()}/api/deployments?${query}&limit=1`,
         {
           method: 'GET',
           credentials: 'include',

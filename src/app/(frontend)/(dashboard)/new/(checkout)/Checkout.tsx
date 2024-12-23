@@ -4,14 +4,13 @@ import React, { Fragment, useCallback } from 'react'
 import Link from 'next/link'
 import { redirect, useRouter } from 'next/navigation'
 
-import { revalidateCache } from '@cloud/_actions/revalidateCache.js'
-import { Elements, useElements, useStripe } from '@stripe/react-stripe-js'
-import { loadStripe } from '@stripe/stripe-js'
+// import { Elements, useElements, useStripe } from '@stripe/react-stripe-js'
+// import { loadStripe } from '@stripe/stripe-js'
 import { toast } from 'sonner'
 
-import { priceFromJSON } from '@utils/price-from-json.js'
+import { getClientSideURL } from '@utils/getURL'
 
-import type { PaymentMethod } from '@stripe/stripe-js'
+// import type { PaymentMethod } from '@stripe/stripe-js'
 
 import { Checkbox } from '@forms/fields/Checkbox'
 import { Select } from '@forms/fields/Select'
@@ -22,24 +21,26 @@ import Label from '@forms/Label'
 import Submit from '@forms/Submit'
 
 import { Accordion } from '@components/Accordion'
-import { Button } from '@components/Button'
+import { Button } from '@components/ButtonComponent'
 import { Gutter } from '@components/Gutter'
 import { Heading } from '@components/Heading'
 import { HR } from '@components/HR'
 import { Message } from '@components/Message'
+import { revalidateCache } from '@dashboard/actions/revalidateCache'
 import { Install } from '@dashboard/api/fetchInstalls'
-import { TeamWithCustomer } from '@dashboard/api/fetchTeam.js'
-import { BranchSelector } from '@dashboard/BranchSelector'
-import { ComparePlans } from '@dashboard/ComparePlans'
-import { CreditCardSelector } from '@dashboard/CreditCardSelector'
-import { PlanSelector } from '@dashboard/PlanSelector'
-import { RepoExists } from '@dashboard/RepoExists'
-import { TeamSelector } from '@dashboard/TeamSelector'
+import { TeamWithCustomer } from '@dashboard/api/fetchTeam'
+import { BranchSelector } from '@dashboard/components/BranchSelector'
+import { CloneOrDeployProgress } from '@dashboard/components/CloneOrDeployProgress'
+import { ComparePlans } from '@dashboard/components/ComparePlans'
+import { CreditCardSelector } from '@dashboard/components/CreditCardSelector'
+import { PlanSelector } from '@dashboard/components/PlanSelector'
+import { RepoExists } from '@dashboard/components/RepoExists'
+import { TeamSelector } from '@dashboard/components/TeamSelector'
+import { UniqueDomain } from '@dashboard/components/UniqueDomain'
+import { UniqueProjectSlug } from '@dashboard/components/UniqueSlug'
 import { Plan, Project, Team, Template, User } from '@dashboard/types'
-import { UniqueDomain } from '@dashboard/UniqueDomain'
-import { UniqueProjectSlug } from '@dashboard/UniqueSlug'
+import { priceFromJSON } from '@dashboard/utils/price-from-json'
 
-import { CloneOrDeployProgress } from '../../cloud/_components/CloneOrDeployProgress'
 import classes from './Checkout.module.scss'
 import { deploy } from './deploy.js'
 import { EnvVars } from './EnvVars.js'
@@ -47,8 +48,8 @@ import { checkoutReducer, CheckoutState } from './reducer.js'
 
 import { DASHBOARD_SLUG } from '@constants'
 
-const apiKey = `${process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}`
-const Stripe = loadStripe(apiKey)
+// const apiKey = `${process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}`
+// const Stripe = loadStripe(apiKey)
 
 const title = 'Configure your project'
 
@@ -63,13 +64,19 @@ const Checkout: React.FC<{
   installs: Install[]
   templates: Template[]
   user: User | null | undefined
-  initialPaymentMethods?: PaymentMethod[] | null
+  // initialPaymentMethods?: PaymentMethod[] | null
 }> = (props) => {
-  const { project, plans, installs, templates, user, initialPaymentMethods } =
-    props
+  const {
+    project,
+    plans,
+    installs,
+    templates,
+    user
+    //  initialPaymentMethods
+  } = props
   const isClone = Boolean(project?.template)
-  const stripe = useStripe()
-  const elements = useElements()
+  // const stripe = useStripe()
+  // const elements = useElements()
 
   const router = useRouter()
 
@@ -136,7 +143,7 @@ const Checkout: React.FC<{
 
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/projects/${project?.id}`,
+        `${getClientSideURL()}/api/projects/${project?.id}`,
         {
           method: 'DELETE',
           credentials: 'include',
@@ -159,7 +166,7 @@ const Checkout: React.FC<{
         setErrorDeleting('There was an error deleting your project.')
       }
     } catch (error) {
-      console.error(error) // eslint-disable-line no-console
+      console.error(error)
       setDeleting(false)
       setErrorDeleting(
         `There was an error deleting your project: ${error?.message || 'Unknown'}`
@@ -174,14 +181,22 @@ const Checkout: React.FC<{
         checkoutState,
         onDeploy,
         user,
-        stripe,
-        elements,
+        // stripe,
+        // elements,
         unflattenedData,
         installID: project?.installID,
         router
       })
     },
-    [checkoutState, onDeploy, project, user, stripe, elements, router]
+    [
+      checkoutState,
+      onDeploy,
+      project,
+      user,
+      // stripe,
+      // elements,
+      router
+    ]
   )
 
   return (
@@ -416,14 +431,14 @@ const Checkout: React.FC<{
                         automatically deleted after 4 consecutive failed payment
                         attempts within 30 days. If a payment method is not
                         specified for this project, we will attempt to charge
-                        your team's default payment method (if any).
+                        your team&apos;s default payment method (if any).
                       </p>
                       {checkoutState?.team && (
                         <CreditCardSelector
                           team={checkoutState?.team}
                           onChange={handleCardChange}
                           enableInlineSave={false}
-                          initialPaymentMethods={initialPaymentMethods}
+                          // initialPaymentMethods={initialPaymentMethods}
                         />
                       )}
                     </div>
@@ -484,7 +499,7 @@ const CheckoutProvider: React.FC<{
   installs: Install[]
   templates: Template[]
   user: User | null | undefined
-  initialPaymentMethods?: PaymentMethod[] | null
+  // initialPaymentMethods?: PaymentMethod[] | null
 }> = (props) => {
   const {
     team,
@@ -493,8 +508,8 @@ const CheckoutProvider: React.FC<{
     plans,
     installs,
     templates,
-    user,
-    initialPaymentMethods
+    user
+    // initialPaymentMethods
   } = props
 
   if (!project) {
@@ -514,16 +529,17 @@ const CheckoutProvider: React.FC<{
   }
 
   return (
-    <Elements stripe={Stripe}>
-      <Checkout
-        project={project}
-        plans={plans}
-        installs={installs}
-        templates={templates}
-        user={user}
-        initialPaymentMethods={initialPaymentMethods}
-      />
-    </Elements>
+    // <Elements stripe={Stripe}>
+    //   <Checkout
+    //     project={project}
+    //     plans={plans}
+    //     installs={installs}
+    //     templates={templates}
+    //     user={user}
+    //     initialPaymentMethods={initialPaymentMethods}
+    //   />
+    // </Elements>
+    <h3>Under development...</h3>
   )
 }
 

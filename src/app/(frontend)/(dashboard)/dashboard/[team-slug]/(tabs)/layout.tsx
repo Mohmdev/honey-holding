@@ -4,7 +4,7 @@ import { teamHasDefaultPaymentMethod } from '@cloud/_utilities/teamHasDefaultPay
 import { DashboardTabs } from '@root/app/(frontend)/(dashboard)/~/components/DashboardTabs'
 
 import { Gutter } from '@components/Gutter'
-import { fetchTeamWithCustomer } from '@dashboard/api/fetchTeam.js'
+import { fetchTeamWithCustomer } from '@dashboard/api/fetchTeam'
 
 import { DASHBOARD_SLUG } from '@constants'
 

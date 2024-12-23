@@ -1,16 +1,20 @@
 import React from 'react'
 
-import { revalidateCache } from '@cloud/_actions/revalidateCache.js'
 import { useModal } from '@faceless-ui/modal'
 import { toast } from 'sonner'
+
+import { getClientSideURL } from '@utils/getURL'
+
+import type { User } from '@CMS/payload-types'
+import type { Team } from '@dashboard/types'
 
 import Form from '@forms/Form'
 import Submit from '@forms/Submit'
 
-import { Button } from '@components/Button'
+import { Button } from '@components/ButtonComponent'
 import { Heading } from '@components/Heading'
-import { Member } from '@dashboard/TeamMembers'
-import { Team, User } from '@dashboard/types'
+import { revalidateCache } from '@dashboard/actions/revalidateCache'
+import { Member } from '@dashboard/components/TeamMembers'
 
 import classes from './page.module.scss'
 
@@ -69,7 +73,7 @@ export const UpdateRolesConfirmationForm: React.FC<
     }
 
     const req = await fetch(
-      `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/users/${userID}/change-team-roles`,
+      `${getClientSideURL()}/api/users/${userID}/change-team-roles`,
       {
         method: 'PATCH',
         credentials: 'include',

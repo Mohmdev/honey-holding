@@ -4,6 +4,8 @@ import * as React from 'react'
 
 import { CollapsibleGroup } from '@faceless-ui/collapsibles'
 
+import { getClientSideURL } from '@utils/getURL'
+
 import { Secret } from '@forms/fields/Secret'
 import { Text } from '@forms/fields/Text'
 
@@ -33,7 +35,7 @@ export const ProjectEmailPage: React.FC<{
 
   const loadEmailAPIKey = React.useCallback(async () => {
     const { value } = await fetch(
-      `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/projects/${project?.id}/email-api-key${
+      `${getClientSideURL()}/api/projects/${project?.id}/email-api-key${
         environmentSlug ? `?env=${environmentSlug}` : ''
       }`,
       {

@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation'
 import { teamHasDefaultPaymentMethod } from '@cloud/_utilities/teamHasDefaultPaymentMethod.js'
 
 import { Message } from '@components/Message'
-import { TeamWithCustomer } from '@dashboard/api/fetchTeam.js'
+import { TeamWithCustomer } from '@dashboard/api/fetchTeam'
 
 import classes from './index.module.scss'
 

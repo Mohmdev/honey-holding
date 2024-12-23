@@ -1,18 +1,22 @@
 'use client'
 
 import React from 'react'
-import { toast } from 'sonner'
-import { useModal } from '@faceless-ui/modal'
-import { Text } from '@forms/fields/Text'
-import Form from '@forms/Form
-import Submit from '@forms/Submit
 import { useRouter } from 'next/navigation'
 
-import { Button } from '@components/Button
-import { Heading } from '@components/Heading
-import { ModalWindow } from '@components/ModalWindow
+import { useModal } from '@faceless-ui/modal'
+import { toast } from 'sonner'
+
+import { getClientSideURL } from '@utils/getURL'
+
+import { Text } from '@forms/fields/Text'
+import Form from '@forms/Form'
+import Submit from '@forms/Submit'
+
+import { Button } from '@components/ButtonComponent'
+import { Heading } from '@components/Heading'
+import { ModalWindow } from '@components/ModalWindow'
 import { Project } from '@dashboard/types'
-import { qs } from '@utils/qs.js'
+import { qs } from '@dashboard/utils/qs'
 
 import classes from './index.module.scss'
 
@@ -25,7 +29,7 @@ export type DeletePlanModalProps = {
   environmentSlug?: string
 }
 
-export const DeletePlanModal: React.FC<DeletePlanModalProps> = props => {
+export const DeletePlanModal: React.FC<DeletePlanModalProps> = (props) => {
   const { confirmSlug, canManageProject, project, environmentSlug } = props
   const { closeModal } = useModal()
   const [isDisabled, setIsDisabled] = React.useState(true)
@@ -37,16 +41,16 @@ export const DeletePlanModal: React.FC<DeletePlanModalProps> = props => {
 
       try {
         const query = qs.stringify({
-          env: environmentSlug,
+          env: environmentSlug
         })
         const req = await fetch(
-          `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/projects/${project?.id}${
+          `${getClientSideURL()}/api/projects/${project?.id}${
             query ? `?${query}` : ''
           }`,
           {
             method: 'DELETE',
-            credentials: 'include',
-          },
+            credentials: 'include'
+          }
         )
 
         if (req.status === 200) {
@@ -54,7 +58,7 @@ export const DeletePlanModal: React.FC<DeletePlanModalProps> = props => {
           toast.success('Project was deleted successfully.')
         }
       } catch (e) {
-        console.error(e) // eslint-disable-line no-console
+        console.error(e)
       }
     }
   }, [project, canManageProject, router])
@@ -67,14 +71,14 @@ export const DeletePlanModal: React.FC<DeletePlanModalProps> = props => {
             Are you sure you want to delete this project?
           </Heading>
           <p>
-            Deleting <b>{confirmSlug}</b> cannot be undone, it is recommended to back up your
-            database before continuing. You can manually add the project back to the cloud in the
-            future.
+            Deleting <b>{confirmSlug}</b> cannot be undone, it is recommended to
+            back up your database before continuing. You can manually add the
+            project back to the cloud in the future.
           </p>
           <Text
             label={`Confirm by typing: ${confirmSlug}`}
             path="confirmSlug"
-            onChange={value => {
+            onChange={(value) => {
               setIsDisabled(value.toLowerCase() !== confirmSlug.toLowerCase())
             }}
             required

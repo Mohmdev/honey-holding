@@ -4,7 +4,7 @@ import { Gutter } from '@components/Gutter'
 import { Sidebar } from '@dashboard/Sidebar'
 import { generateRoutePath } from '@dashboard/utils/generate-route-path'
 
-import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants.js'
+import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants'
 
 const settingsSlug = 'settings'
 

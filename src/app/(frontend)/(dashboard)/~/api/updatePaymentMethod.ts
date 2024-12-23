@@ -1,4 +1,6 @@
-import type { Subscription } from '@dashboard/api/fetchSubscriptions.js'
+import { getClientSideURL } from '@utils/getURL'
+
+import type { Subscription } from '@dashboard/api/fetchSubscriptions'
 
 export const updatePaymentMethod = async (args: {
   teamID: string
@@ -9,7 +11,7 @@ export const updatePaymentMethod = async (args: {
 
   try {
     const req = await fetch(
-      `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/${teamID}/subscriptions/${subscriptionID}`,
+      `${getClientSideURL()}/${teamID}/subscriptions/${subscriptionID}`,
       {
         method: 'PATCH',
         headers: {

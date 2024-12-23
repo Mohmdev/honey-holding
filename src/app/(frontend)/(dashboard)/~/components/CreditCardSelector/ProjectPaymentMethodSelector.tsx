@@ -9,7 +9,7 @@ import { toast } from 'sonner'
 import type { PaymentMethod } from '@stripe/stripe-js'
 
 import { ProjectWithSubscription } from '@dashboard/api/fetchProject'
-import { TeamWithCustomer } from '@dashboard/api/fetchTeam.js'
+import { TeamWithCustomer } from '@dashboard/api/fetchTeam'
 import { updateSubscription } from '@dashboard/api/updateSubscription.js'
 
 import { CreditCardSelector } from '.'

@@ -2,12 +2,11 @@
 
 import * as React from 'react'
 
-import { revalidateCache } from '@cloud/_actions/revalidateCache.js'
-import { SectionHeader } from '@cloud/[team-slug]/[project-slug]/(tabs)/settings/_layoutComponents/SectionHeader'
 import { useModal } from '@faceless-ui/modal'
 import { toast } from 'sonner'
 
 import { useAuth } from '@providers/Auth'
+import { getClientSideURL } from '@utils/getURL'
 
 import Form from '@forms/Form'
 import FormProcessing from '@forms/FormProcessing'
@@ -17,12 +16,14 @@ import { OnSubmit } from '@forms/types'
 
 import { HR } from '@components/HR'
 import { ModalWindow } from '@components/ModalWindow'
-import { TeamWithCustomer } from '@dashboard/api/fetchTeam.js'
-import { InviteTeammates } from '@dashboard/InviteTeammates'
-import { TeamInvitations } from '@dashboard/TeamInvitations'
-import { Member, TeamMembers } from '@dashboard/TeamMembers'
+import { revalidateCache } from '@dashboard/actions/revalidateCache'
+import { TeamWithCustomer } from '@dashboard/api/fetchTeam'
+import { InviteTeammates } from '@dashboard/components/InviteTeammates'
+import { TeamInvitations } from '@dashboard/components/TeamInvitations'
+import { Member, TeamMembers } from '@dashboard/components/TeamMembers'
 import { Team } from '@dashboard/types'
 
+import { SectionHeader } from '../../../../[project-slug]/(tabs)/settings/_layoutComponents/SectionHeader'
 import classes from './page.module.scss'
 import { UpdateRolesConfirmationForm } from './UpdateRolesConfirmationForm'
 
@@ -53,7 +54,7 @@ export const TeamMembersPage: React.FC<{
 
   const [roles, setRoles] = React.useState<('owner' | 'admin' | 'user')[][]>(
     (team?.members ?? []).map((member) => member.roles ?? [])
-  ) // eslint-disable-line
+  )
 
   const [error, setError] = React.useState<{
     message: string
@@ -63,14 +64,14 @@ export const TeamMembersPage: React.FC<{
 
   // Determines if the current user is either a global admin or a team owner.
   const isOwnerOrGlobalAdmin = React.useMemo(() => {
-    const isGlobalAdmin = user?.roles?.includes('admin')
+    const isGlobalAdmin = user?.role === 'admin'
     const currentUserRoles = roles.find((_, index) => {
       const currentUser = team?.members?.[index]?.user
       return typeof currentUser === 'object' && currentUser?.id === user?.id
     })
     const isTeamOwner = currentUserRoles?.includes('owner')
     return isTeamOwner || isGlobalAdmin || false
-  }, [roles, team?.members, user?.id, user?.roles])
+  }, [roles, team?.members, user?.id, user?.role])
 
   // Triggers when a user tries to update roles of a team member.
   const handleUpdateRoles = async (
@@ -123,17 +124,14 @@ export const TeamMembersPage: React.FC<{
         )
       }
 
-      const req = await fetch(
-        `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/teams/${team?.id}`,
-        {
-          method: 'PATCH',
-          credentials: 'include',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(updatedTeam)
-        }
-      )
+      const req = await fetch(`${getClientSideURL()}/api/teams/${team?.id}`, {
+        method: 'PATCH',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedTeam)
+      })
 
       const response: {
         doc: Team

@@ -1,11 +1,13 @@
-import type { Customer, TeamWithCustomer } from './fetchTeam.js'
+import { getClientSideURL } from '@utils/getURL.js'
+
+import type { Customer, TeamWithCustomer } from './fetchTeam'
 
 export const updateCustomer = async (
   team: TeamWithCustomer | null | undefined,
   customer: Partial<Customer>
 ): Promise<Customer> => {
   const sub = await fetch(
-    `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/teams/${team?.id}/customer`,
+    `${getClientSideURL()}/api/teams/${team?.id}/customer`,
     {
       method: 'PATCH',
       credentials: 'include',

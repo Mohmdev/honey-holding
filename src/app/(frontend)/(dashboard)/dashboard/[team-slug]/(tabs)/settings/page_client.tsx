@@ -3,10 +3,10 @@
 import * as React from 'react'
 import { useRouter } from 'next/navigation'
 
-import { revalidateCache } from '@cloud/_actions/revalidateCache.js'
 import { toast } from 'sonner'
 
 import { useAuth } from '@providers/Auth'
+import { getClientSideURL } from '@utils/getURL'
 
 import { Text } from '@forms/fields/Text'
 import Form from '@forms/Form'
@@ -16,9 +16,10 @@ import Submit from '@forms/Submit'
 import { OnSubmit } from '@forms/types'
 
 import { HR } from '@components/HR'
-import { TeamWithCustomer } from '@dashboard/api/fetchTeam.js'
+import { revalidateCache } from '@dashboard/actions/revalidateCache'
+import { TeamWithCustomer } from '@dashboard/api/fetchTeam'
+import { UniqueTeamSlug } from '@dashboard/components/UniqueSlug'
 import { Team } from '@dashboard/types'
-import { UniqueTeamSlug } from '@dashboard/UniqueSlug'
 
 import { SectionHeader } from '../../[project-slug]/(tabs)/settings/_layoutComponents/SectionHeader'
 import classes from './page.module.scss'
@@ -50,17 +51,14 @@ export const TeamSettingsPage: React.FC<{
 
       setError(undefined)
 
-      const req = await fetch(
-        `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/teams/${team?.id}`,
-        {
-          method: 'PATCH',
-          credentials: 'include',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(data)
-        }
-      )
+      const req = await fetch(`${getClientSideURL()}/api/teams/${team?.id}`, {
+        method: 'PATCH',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
 
       const response: {
         doc: Team

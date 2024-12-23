@@ -22,8 +22,7 @@ import { generateRoutePath } from '@dashboard/utils/generate-route-path'
 import { SectionHeader } from '../_layoutComponents/SectionHeader'
 import classes from './page.module.scss'
 
-import { DASHBOARD_SLUG } from '@constants'
-import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants.js'
+import { DASHBOARD_SLUG, PRODUCTION_ENVIRONMENT_SLUG } from '@constants'
 
 const statusLabels = {
   active: 'Active',

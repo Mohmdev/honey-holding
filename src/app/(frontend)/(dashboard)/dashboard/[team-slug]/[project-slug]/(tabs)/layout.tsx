@@ -12,7 +12,7 @@ import { Gutter } from '@components/Gutter'
 
 import { ProjectBillingMessages } from './ProjectBillingMessages'
 
-import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants.js'
+import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants'
 
 export default async ({
   children,

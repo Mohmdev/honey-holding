@@ -1,7 +1,9 @@
+import { getClientSideURL } from '@utils/getURL'
+
 import type { Install } from './fetchInstalls'
 import type { Endpoints } from '@octokit/types'
 
-import { payloadCloudToken } from './token.js'
+import { payloadCloudToken } from './token'
 
 type GitHubResponse =
   Endpoints['GET /user/installations/{installation_id}/repositories']['response']
@@ -23,7 +25,7 @@ export const fetchRepos = async (args: {
   if (!token) throw new Error('No token provided')
 
   const docs: RepoResults = await fetch(
-    `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/users/github`,
+    `${getClientSideURL()}/api/users/github`,
     {
       method: 'POST',
       headers: {
@@ -71,24 +73,21 @@ export const fetchReposClient = async ({
   const installID =
     install && typeof install === 'object' ? install.id : install
 
-  const docs = await fetch(
-    `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/users/github`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      credentials: 'include',
-      body: JSON.stringify({
-        route: `GET /user/installations/${installID}/repositories?${new URLSearchParams(
-          {
-            per_page: per_page?.toString() ?? '30',
-            page: page?.toString() ?? '1'
-          }
-        )}`
-      })
-    }
-  )
+  const docs = await fetch(`${getClientSideURL()}/api/users/github`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    credentials: 'include',
+    body: JSON.stringify({
+      route: `GET /user/installations/${installID}/repositories?${new URLSearchParams(
+        {
+          per_page: per_page?.toString() ?? '30',
+          page: page?.toString() ?? '1'
+        }
+      )}`
+    })
+  })
     ?.then((res) => {
       if (!res.ok) throw new Error(`Error getting repositories: ${res.status}`)
       return res.json()

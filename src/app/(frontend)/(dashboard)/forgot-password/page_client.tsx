@@ -6,6 +6,7 @@ import { redirect } from 'next/navigation'
 
 import { useAuth } from '@providers/Auth'
 import canUseDom from '@utils/canUseDOM'
+import { getClientSideURL } from '@utils/getURL'
 
 import { Text } from '@forms/fields/Text'
 import Form from '@forms/Form'
@@ -38,20 +39,17 @@ export const ForgotPassword: React.FC = () => {
   const handleSubmit: OnSubmit = useCallback(
     async ({ data, dispatchFields }) => {
       try {
-        const req = await fetch(
-          `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/graphql`,
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              query: `mutation {
+        const req = await fetch(`${getClientSideURL()}/api/graphql`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            query: `mutation {
               forgotPasswordUser(email: "${data.email}")
             }`
-            })
-          }
-        )
+          })
+        })
 
         const res = await req.json()
 

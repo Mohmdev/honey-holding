@@ -10,7 +10,7 @@ import { Text } from '@forms/fields/Text'
 import HR from '@components/MDX/components/HR'
 import { fetchMe } from '@dashboard/api/fetchMe.js'
 import { fetchPaymentMethods } from '@dashboard/api/fetchPaymentMethods.js'
-import { fetchTeamWithCustomer } from '@dashboard/api/fetchTeam.js'
+import { fetchTeamWithCustomer } from '@dashboard/api/fetchTeam'
 import { CreditCardList } from '@dashboard/CreditCardList'
 
 import classes from './page.module.scss'

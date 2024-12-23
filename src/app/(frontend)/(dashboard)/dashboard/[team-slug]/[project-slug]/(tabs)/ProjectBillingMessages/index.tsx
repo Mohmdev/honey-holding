@@ -5,7 +5,7 @@ import { teamHasDefaultPaymentMethod } from '@cloud/_utilities/teamHasDefaultPay
 
 import { Gutter } from '@components/Gutter'
 import { ProjectWithSubscription } from '@dashboard/api/fetchProject'
-import { TeamWithCustomer } from '@dashboard/api/fetchTeam.js'
+import { TeamWithCustomer } from '@dashboard/api/fetchTeam'
 import { hasBadSubscription } from '@dashboard/utils/hasBadSubscription'
 
 import { BadSubscriptionMessage } from './BadSubscription.js'

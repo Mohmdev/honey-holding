@@ -1,6 +1,8 @@
-import type { ProjectWithSubscription } from './fetchProject.js'
-import type { Subscription } from './fetchSubscriptions.js'
-import type { TeamWithCustomer } from './fetchTeam.js'
+import { getClientSideURL } from '@utils/getURL.js'
+
+import type { ProjectWithSubscription } from './fetchProject'
+import type { Subscription } from './fetchSubscriptions'
+import type { TeamWithCustomer } from './fetchTeam'
 
 export const updateSubscription = async (
   team: TeamWithCustomer,
@@ -8,7 +10,7 @@ export const updateSubscription = async (
   subscription: Partial<Subscription>
 ): Promise<Subscription> => {
   const sub = await fetch(
-    `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/teams/${team?.id}/subscriptions/${project?.stripeSubscriptionID}`,
+    `${getClientSideURL()}/api/teams/${team?.id}/subscriptions/${project?.stripeSubscriptionID}`,
     {
       method: 'PATCH',
       credentials: 'include',

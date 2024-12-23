@@ -7,7 +7,7 @@ import { LinkGrid } from '@blocks/LinkGrid'
 
 import { Gutter } from '@components/Gutter'
 import { fetchMe } from '@dashboard/api/fetchMe.js'
-import { fetchTeams } from '@dashboard/api/fetchTeam.js'
+import { fetchTeams } from '@dashboard/api/fetchTeam'
 import { TeamDrawer, TeamDrawerToggler } from '@dashboard/TeamDrawer'
 
 import classes from './page.module.scss'

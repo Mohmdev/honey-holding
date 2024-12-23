@@ -4,7 +4,7 @@ import React from 'react'
 
 import { useModal } from '@faceless-ui/modal'
 
-import { Button } from '@components/Button'
+import { Button } from '@components/ButtonComponent'
 
 import { deletePlanModalSlug } from '../DeletePlanModal'
 

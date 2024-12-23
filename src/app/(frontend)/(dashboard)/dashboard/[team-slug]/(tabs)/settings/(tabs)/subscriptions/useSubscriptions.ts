@@ -9,6 +9,8 @@ import {
 
 import { toast } from 'sonner'
 
+import { getClientSideURL } from '@utils/getURL'
+
 import type {
   Subscription,
   SubscriptionsResult
@@ -84,7 +86,6 @@ export const useSubscriptions = (args: {
 
       isRequesting.current = false
 
-      // eslint-disable-next-line consistent-return
       return () => {
         clearTimeout(timer)
       }
@@ -118,7 +119,7 @@ export const useSubscriptions = (args: {
         setIsLoading('updating')
 
         const req = await fetch(
-          `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/teams/${team?.id}/subscriptions/${stripeSubscriptionID}`,
+          `${getClientSideURL()}/api/teams/${team?.id}/subscriptions/${stripeSubscriptionID}`,
           {
             body: JSON.stringify(newSubscription),
             credentials: 'include',
@@ -163,7 +164,7 @@ export const useSubscriptions = (args: {
         setIsLoading('deleting')
 
         const req = await fetch(
-          `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/teams/${team?.id}/subscriptions/${stripeSubscriptionID}`,
+          `${getClientSideURL()}/api/teams/${team?.id}/subscriptions/${stripeSubscriptionID}`,
           {
             credentials: 'include',
             method: 'DELETE'

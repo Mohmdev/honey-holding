@@ -1,3 +1,5 @@
+import { getClientSideURL } from '@utils/getURL'
+
 import type { Team } from '@dashboard/types'
 
 export interface PayloadStripeSetupIntent {
@@ -13,18 +15,15 @@ export const createSetupIntent = async (args: {
   const { team } = args
 
   try {
-    const req = await fetch(
-      `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/create-setup-intent`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          team: team?.id
-        })
-      }
-    )
+    const req = await fetch(`${getClientSideURL()}/api/create-setup-intent`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        team: team?.id
+      })
+    })
 
     const res: PayloadStripeSetupIntent = await req.json()
 

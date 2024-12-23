@@ -4,7 +4,7 @@ import React, { useEffect } from 'react'
 import Link from 'next/link'
 
 import { useAuth } from '@providers/Auth'
-import useDebounce from '@utils/use-debounce.js'
+import { useDebounce } from '@utils/useDebounce'
 
 import { Text } from '@forms/fields/Text'
 

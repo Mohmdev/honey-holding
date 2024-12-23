@@ -5,17 +5,18 @@ import Link from 'next/link'
 import { useModal } from '@faceless-ui/modal'
 import { toast } from 'sonner'
 
-import { qs } from '@utils/qs.js'
+import { getClientSideURL } from '@utils/getURL'
 
 import { Secret } from '@forms/fields/Secret'
 
 import { ExternalLinkIcon } from '@icons/ExternalLinkIcon'
 import { Accordion } from '@components/Accordion'
-import { Button, ButtonProps } from '@components/Button'
+import { Button, ButtonProps } from '@components/ButtonComponent'
 import { CopyToClipboard } from '@components/CopyToClipboard'
 import { Heading } from '@components/Heading'
 import { ModalWindow } from '@components/ModalWindow'
 import { Project, Team } from '@dashboard/types'
+import { qs } from '@dashboard/utils/qs'
 
 import classes from './index.module.scss'
 
@@ -58,7 +59,7 @@ export const ManageEmailDomain: React.FC<Props> = ({
         env: environmentSlug
       })
       const { status } = await fetch(
-        `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/projects/${project?.id}/email-verification${
+        `${getClientSideURL()}/api/projects/${project?.id}/email-verification${
           query ? `?${query}` : ''
         }`,
         {
@@ -87,7 +88,7 @@ export const ManageEmailDomain: React.FC<Props> = ({
         env: environmentSlug
       })
       const { value } = await fetch(
-        `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/projects/${project?.id}/email-api-key${
+        `${getClientSideURL()}/api/projects/${project?.id}/email-api-key${
           query ? `?${query}` : ''
         }`,
         {
@@ -110,7 +111,7 @@ export const ManageEmailDomain: React.FC<Props> = ({
           env: environmentSlug
         })
         const req = await fetch(
-          `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/projects/${projectID}${
+          `${getClientSideURL()}/api/projects/${projectID}${
             query ? `?${query}` : ''
           }`,
           {
@@ -129,7 +130,7 @@ export const ManageEmailDomain: React.FC<Props> = ({
           return res
         }
       } catch (e) {
-        console.error(e) // eslint-disable-line no-console
+        console.error(e)
       }
 
       return null
@@ -145,7 +146,7 @@ export const ManageEmailDomain: React.FC<Props> = ({
           env: environmentSlug
         })
         const req = await fetch(
-          `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/projects/${projectID}/verify-email-domain${
+          `${getClientSideURL()}/api/projects/${projectID}/verify-email-domain${
             query ? `?${query}` : ''
           }`,
           {
@@ -164,7 +165,7 @@ export const ManageEmailDomain: React.FC<Props> = ({
           toast.success(res.message)
         }
       } catch (e) {
-        console.error(e) // eslint-disable-line no-console
+        console.error(e)
       }
     },
     [domainURL, projectID]

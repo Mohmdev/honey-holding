@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 
-import { CardElement as StripeCardElement } from '@stripe/react-stripe-js'
-import { type StripeCardElementChangeEvent } from '@stripe/stripe-js'
+// import { CardElement as StripeCardElement } from '@stripe/react-stripe-js'
+// import { type StripeCardElementChangeEvent } from '@stripe/stripe-js'
 
 import { useThemePreference } from '@providers/Theme'
 
@@ -77,7 +77,7 @@ export const CreditCardElement: React.FC<{
   return (
     <div className={classes.cardElement}>
       {error && <p className={classes.error}>{error}</p>}
-      <StripeCardElement
+      {/* <StripeCardElement
         id="card-element"
         options={style}
         onChange={(e) => {
@@ -87,7 +87,8 @@ export const CreditCardElement: React.FC<{
           if (typeof onChange === 'function') onChange(e)
         }}
         className={classes.element}
-      />
+      /> */}
+      <h3>Under development...</h3>
     </div>
   )
 }

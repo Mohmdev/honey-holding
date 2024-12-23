@@ -1,6 +1,8 @@
+import { getClientSideURL } from '@utils/getURL'
+
 import type { Team } from '@dashboard/types'
 
-import { payloadCloudToken } from './token.js'
+import { payloadCloudToken } from './token'
 
 // TODO: type this using the Stripe module
 export interface Invoice {
@@ -47,7 +49,7 @@ export const fetchInvoices = async (
   if (!token) throw new Error('No token provided')
 
   const res: InvoicesResult = await fetch(
-    `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/teams/${teamID}/invoices`,
+    `${getClientSideURL()}/api/teams/${teamID}/invoices`,
     {
       method: 'POST',
       headers: {
@@ -72,7 +74,7 @@ export const fetchInvoicesClient = async ({
   if (!teamID) throw new Error('No team ID provided')
 
   const res: InvoicesResult = await fetch(
-    `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/teams/${teamID}/invoices`,
+    `${getClientSideURL()}/api/teams/${teamID}/invoices`,
     {
       method: 'POST',
       headers: {

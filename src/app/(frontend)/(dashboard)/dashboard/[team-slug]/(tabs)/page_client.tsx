@@ -3,7 +3,7 @@
 import React, { useEffect } from 'react'
 import Link from 'next/link'
 
-import useDebounce from '@utils/use-debounce.js'
+import { useDebounce } from '@utils/useDebounce'
 
 import { Text } from '@forms/fields/Text'
 
@@ -14,7 +14,7 @@ import {
   fetchProjectsClient,
   ProjectsRes
 } from '@dashboard/api/fetchProjects.js'
-import { TeamWithCustomer } from '@dashboard/api/fetchTeam.js'
+import { TeamWithCustomer } from '@dashboard/api/fetchTeam'
 import { ProjectCard } from '@dashboard/ProjectCard'
 import { Template } from '@dashboard/types'
 

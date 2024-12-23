@@ -37,6 +37,7 @@ export const TeamDrawerToggler: React.FC<TeamDrawerTogglerProps> = ({
     </DrawerToggler>
   )
 }
+TeamDrawerToggler.displayName = 'TeamDrawerToggler'
 
 export const TeamDrawer: React.FC<TeamDrawerProps> = (props) => {
   const { drawerSlug } = props
@@ -73,7 +74,7 @@ export const useTeamDrawer: UseTeamDrawer = ({ team } = {}) => {
   }, [drawerSlug, openModal])
 
   const MemoizedDrawer = useMemo(() => {
-    return (props) => (
+    const DrawerComponent = (props) => (
       <TeamDrawer
         {...props}
         drawerSlug={drawerSlug}
@@ -82,10 +83,16 @@ export const useTeamDrawer: UseTeamDrawer = ({ team } = {}) => {
         team={team}
       />
     )
+    DrawerComponent.displayName = 'MemoizedTeamDrawer'
+    return DrawerComponent
   }, [drawerSlug, closeDrawer, team])
 
   const MemoizedDrawerToggler = useMemo(() => {
-    return (props) => <TeamDrawerToggler {...props} drawerSlug={drawerSlug} />
+    const TogglerComponent = (props) => (
+      <TeamDrawerToggler {...props} drawerSlug={drawerSlug} />
+    )
+    TogglerComponent.displayName = 'MemoizedTeamDrawerToggler'
+    return TogglerComponent
   }, [drawerSlug])
 
   const MemoizedDrawerState = useMemo(

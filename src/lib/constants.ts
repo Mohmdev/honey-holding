@@ -1,5 +1,7 @@
 import type { CollectionSlug, GlobalSlug } from 'payload'
 
+export const PRODUCTION_ENVIRONMENT_SLUG = 'prod'
+
 export const ROLES_WITH_ADMIN_ACCESS = ['admin', 'editor'] as const
 export const DASHBOARD_SLUG = 'dashboard'
 

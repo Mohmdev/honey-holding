@@ -11,7 +11,7 @@ import { CircleIconButton } from '@components/CircleIconButton'
 import { Heading } from '@components/Heading'
 import { Pill } from '@components/Pill'
 import { InvoicesResult } from '@dashboard/api/fetchInvoices.js'
-import { TeamWithCustomer } from '@dashboard/api/fetchTeam.js'
+import { TeamWithCustomer } from '@dashboard/api/fetchTeam'
 import { User } from '@dashboard/types'
 
 import classes from './page.module.scss'

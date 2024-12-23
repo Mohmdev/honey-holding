@@ -1,6 +1,8 @@
+import { getClientSideURL } from '@utils/getURL'
+
 import type { Project, Team } from '@dashboard/types'
 
-import { payloadCloudToken } from './token.js'
+import { payloadCloudToken } from './token'
 
 // TODO: type this using the Stripe module
 export interface Subscription {
@@ -54,7 +56,7 @@ export const fetchSubscriptions = async (
   if (!token) throw new Error('No token provided')
 
   const res: SubscriptionsResult = await fetch(
-    `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/teams/${teamID}/subscriptions`,
+    `${getClientSideURL()}/api/teams/${teamID}/subscriptions`,
     {
       method: 'POST',
       headers: {
@@ -79,7 +81,7 @@ export const fetchSubscriptionsClient = async ({
   if (!teamID) throw new Error('No team ID provided')
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/teams/${teamID}/subscriptions`,
+    `${getClientSideURL()}/api/teams/${teamID}/subscriptions`,
     {
       method: 'POST',
       headers: {

@@ -1,8 +1,10 @@
+import { getClientSideURL } from '@utils/getURL.js'
+
 import type { Team } from '@dashboard/types'
 
 import { payloadCloudToken } from './token.js'
 
-import { TEAM_QUERY, TEAMS_QUERY } from '@data/team.js'
+import { TEAM_QUERY, TEAMS_QUERY } from '@data/team'
 
 export type TeamWithCustomer = Team & {
   hasPublishedProjects: boolean
@@ -26,25 +28,22 @@ export const fetchTeams = async (teamIDs: string[]): Promise<Team[]> => {
   const token = (await cookies()).get(payloadCloudToken)?.value ?? null
   if (!token) throw new Error('No token provided')
 
-  const res: Team[] = await fetch(
-    `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/graphql`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        ...(token ? { Authorization: `JWT ${token}` } : {})
-      },
-      next: { tags: ['teams'] },
-      body: JSON.stringify({
-        query: TEAMS_QUERY,
-        variables: {
-          teamIDs: teamIDs.filter(Boolean),
-          limit: 50,
-          page: 1
-        }
-      })
-    }
-  )
+  const res: Team[] = await fetch(`${getClientSideURL()}/api/graphql`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      ...(token ? { Authorization: `JWT ${token}` } : {})
+    },
+    next: { tags: ['teams'] },
+    body: JSON.stringify({
+      query: TEAMS_QUERY,
+      variables: {
+        teamIDs: teamIDs.filter(Boolean),
+        limit: 50,
+        page: 1
+      }
+    })
+  })
     ?.then((r) => r.json())
     ?.then((data) => {
       if (data.errors)
@@ -60,22 +59,19 @@ export const fetchTeam = async (teamSlug?: string): Promise<Team> => {
   const token = (await cookies()).get(payloadCloudToken)?.value ?? null
   if (!token) throw new Error('No token provided')
 
-  const doc: Team = await fetch(
-    `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/graphql`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        ...(token ? { Authorization: `JWT ${token}` } : {})
-      },
-      body: JSON.stringify({
-        query: TEAM_QUERY,
-        variables: {
-          slug: teamSlug
-        }
-      })
-    }
-  )
+  const doc: Team = await fetch(`${getClientSideURL()}/api/graphql`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      ...(token ? { Authorization: `JWT ${token}` } : {})
+    },
+    body: JSON.stringify({
+      query: TEAM_QUERY,
+      variables: {
+        slug: teamSlug
+      }
+    })
+  })
     ?.then((res) => res.json())
     ?.then((res) => {
       if (res.errors)
@@ -88,7 +84,7 @@ export const fetchTeam = async (teamSlug?: string): Promise<Team> => {
 
 export const fetchTeamClient = async (slug: string): Promise<Team> => {
   const { data } = await fetch(
-    `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/graphql?teams=${slug}`,
+    `${getClientSideURL()}/api/graphql?teams=${slug}`,
     {
       method: 'POST',
       headers: {
@@ -119,7 +115,7 @@ export const fetchTeamWithCustomer = async (
   if (!slug) throw new Error('No slug provided')
 
   const data = await fetch(
-    `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/teams/${slug}/with-customer`,
+    `${getClientSideURL()}/api/teams/${slug}/with-customer`,
     {
       method: 'GET',
       headers: {

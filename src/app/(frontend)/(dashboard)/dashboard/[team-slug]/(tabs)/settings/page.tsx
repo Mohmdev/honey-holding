@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 
 import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
 
-import { fetchTeamWithCustomer } from '@dashboard/api/fetchTeam.js'
+import { fetchTeamWithCustomer } from '@dashboard/api/fetchTeam'
 
 import { TeamSettingsPage } from './page_client.js'
 

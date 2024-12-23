@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 import { exchangeCode } from '@app/(frontend)/(cloud)/new/authorize/exchangeCode.js'
-import { revalidateCache } from '@cloud/_actions/revalidateCache.js'
 
 import { usePopupWindow } from '@utils/use-popup-window'
 
@@ -14,6 +13,7 @@ import { ArrowIcon } from '@icons/ArrowIcon'
 import { Gutter } from '@components/Gutter'
 import { Heading } from '@components/Heading'
 import { RenderParams } from '@components/RenderParams'
+import { revalidateCache } from '@dashboard/actions/revalidateCache'
 import { fetchGithubTokenClient } from '@dashboard/api/fetchGitHubToken.js'
 
 import classes from './page.module.scss'

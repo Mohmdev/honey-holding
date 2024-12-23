@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import { Gutter } from '@components/Gutter'
-import { fetchTeamWithCustomer } from '@dashboard/api/fetchTeam.js'
+import { fetchTeamWithCustomer } from '@dashboard/api/fetchTeam'
 import { Sidebar } from '@dashboard/Sidebar'
 
 import classes from './layout.module.scss'

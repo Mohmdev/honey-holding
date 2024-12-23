@@ -1,12 +1,17 @@
 import * as React from 'react'
 
-import { useWebSocket } from '@utils/use-websocket.js'
+import { getClientSideURL } from '@utils/getURL'
 
 import { Gutter } from '@components/Gutter'
 import { Indicator } from '@components/Indicator'
-import { LogLine, SimpleLogs, styleLogs } from '@components/SimpleLogs'
-import { Tab, Tabs } from '@dashboard/Tabs'
+import { Tab, Tabs } from '@dashboard/components/DashboardTabs/Tabs'
+import {
+  LogLine,
+  SimpleLogs,
+  styleLogs
+} from '@dashboard/components/SimpleLogs'
 import { Deployment } from '@dashboard/types'
+import { useWebSocket } from '@dashboard/utils/use-websocket'
 
 import classes from './index.module.scss'
 
@@ -77,7 +82,7 @@ const LiveLogs = ({
   useWebSocket({
     url:
       wsStatus === 'CONNECTING'
-        ? `${`${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}`.replace(
+        ? `${`${getClientSideURL()}`.replace(
             'http',
             'ws'
           )}/api/deployments/${deploymentID}/logs?logType=${type}${

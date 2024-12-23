@@ -1,11 +1,11 @@
 import React, { useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 
-import { revalidateCache } from '@cloud/_actions/revalidateCache.js'
 import { useModal } from '@faceless-ui/modal'
 import { toast } from 'sonner'
 
 import { useAuth } from '@providers/Auth'
+import { getClientSideURL } from '@utils/getURL'
 
 import { Text } from '@forms/fields/Text'
 import Form from '@forms/Form'
@@ -14,6 +14,7 @@ import FormSubmissionError from '@forms/FormSubmissionError'
 import Submit from '@forms/Submit'
 
 import { HR } from '@components/HR'
+import { revalidateCache } from '@dashboard/actions/revalidateCache'
 import { Team } from '@dashboard/types'
 
 import { InviteTeammates } from '../InviteTeammates'
@@ -63,17 +64,14 @@ export const TeamDrawerContent: React.FC<TeamDrawerProps> = ({
           )
         }
 
-        const req = await fetch(
-          `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/teams`,
-          {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(newTeam)
-          }
-        )
+        const req = await fetch(`${getClientSideURL()}/api/teams`, {
+          method: 'POST',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(newTeam)
+        })
 
         const response: {
           doc: Team
@@ -91,16 +89,17 @@ export const TeamDrawerContent: React.FC<TeamDrawerProps> = ({
         }
 
         setUser({
-          ...user,
-          teams: [
-            ...(user?.teams || []),
-            // the api adds the user as an owner automatically, need to sync that here
-            // this data does not come back from the API in the response
-            {
-              team: response?.doc,
-              roles: ['owner']
-            }
-          ]
+          ...user
+          // TODO
+          // teams: [
+          //   ...(user?.teams || []),
+          //   // the api adds the user as an owner automatically, need to sync that here
+          //   // this data does not come back from the API in the response
+          //   {
+          //     team: response?.doc,
+          //     roles: ['owner']
+          //   }
+          // ]
         })
 
         if (redirectOnCreate) {

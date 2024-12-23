@@ -1,7 +1,8 @@
-import { revalidateCache } from '@cloud/_actions/revalidateCache.js'
+import { getClientSideURL } from '@utils/getURL'
 
 import type { Project, User } from '@dashboard/types'
 
+import { revalidateCache } from '@dashboard/actions/revalidateCache'
 import { Repo } from '@dashboard/api/fetchRepos.js'
 
 export const createDraftProject = async ({
@@ -16,7 +17,7 @@ export const createDraftProject = async ({
 }: {
   projectName?: string
   installID: number | undefined
-  onSubmit?: (project: Project) => void // eslint-disable-line no-unused-vars
+  onSubmit?: (project: Project) => void
   templateID?: string // only applies to `clone` flow
   teamID: string | undefined
   user: User | null | undefined
@@ -51,17 +52,14 @@ export const createDraftProject = async ({
       // the user can change these later to whatever they want, but this prevents the user from having `yarn` commands set on an `npm` project, for example
     }
 
-    const projectReq = await fetch(
-      `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/projects`,
-      {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(draftProject)
-      }
-    )
+    const projectReq = await fetch(`${getClientSideURL()}/api/projects`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(draftProject)
+    })
 
     const { doc: project, errors: projectErrs } = await projectReq.json()
 
@@ -77,7 +75,7 @@ export const createDraftProject = async ({
       throw new Error(projectErrs[0].message)
     }
   } catch (err: unknown) {
-    console.error(err) // eslint-disable-line no-console
+    console.error(err)
     throw new Error(err instanceof Error ? err.message : 'Something went wrong')
   }
 }

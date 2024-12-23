@@ -1,35 +1,41 @@
 'use client'
 
 import * as React from 'react'
+
+import { getClientSideURL } from '@utils/getURL'
+
 import { Text } from '@forms/fields/Text'
 
-import { Accordion } from '@components/Accordion
-import { Spinner } from '@components/Spinner
+import { Accordion } from '@components/Accordion'
+import { Spinner } from '@components/Spinner'
 import { Project } from '@dashboard/types'
 
 export const Secret: React.FC<{
   project: Project
 }> = ({ project }) => {
-  const [fetchedSecret, setFetchedSecret] = React.useState<string | undefined>(undefined)
+  const [fetchedSecret, setFetchedSecret] = React.useState<string | undefined>(
+    undefined
+  )
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
   const projectID = project?.id
 
   const fetchSecret = React.useCallback(async (): Promise<string | null> => {
     let timer: NodeJS.Timeout
 
+    // eslint-disable-next-line
     timer = setTimeout(() => {
       setIsLoading(true)
     }, 200)
 
     try {
       const req = await fetch(
-        `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/projects/${projectID}/secret`,
+        `${getClientSideURL()}/api/projects/${projectID}/secret`,
         {
           credentials: 'include',
           headers: {
-            'Content-Type': 'application/json',
-          },
-        },
+            'Content-Type': 'application/json'
+          }
+        }
       )
 
       clearTimeout(timer)
@@ -41,7 +47,7 @@ export const Secret: React.FC<{
         return res.PAYLOAD_SECRET
       }
     } catch (e) {
-      console.error(e) // eslint-disable-line no-console
+      console.error(e)
       setIsLoading(false)
     }
 

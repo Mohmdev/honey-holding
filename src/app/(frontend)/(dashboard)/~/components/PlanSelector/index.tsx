@@ -7,7 +7,7 @@ import classes from './index.module.scss'
 
 type PlanSelectorProps = {
   plans: Plan[]
-  onChange?: (value?: Plan | null) => void // eslint-disable-line no-unused-vars
+  onChange?: (value?: Plan | null) => void
   selectedPlan?: Plan | null
 }
 

@@ -5,12 +5,13 @@ import { useModal } from '@faceless-ui/modal'
 import { toast } from 'sonner'
 
 import { useAuth } from '@providers/Auth'
+import { getClientSideURL } from '@utils/getURL'
 
 import { Text } from '@forms/fields/Text'
 import Form from '@forms/Form'
 import Submit from '@forms/Submit'
 
-import { Button } from '@components/Button'
+import { Button } from '@components/ButtonComponent'
 import { Heading } from '@components/Heading'
 import { Message } from '@components/Message'
 
@@ -45,7 +46,7 @@ export const DeletionConfirmationForm: React.FC<{
           if (confirmedUser && confirmedUser.id === user.id) {
             try {
               const req = await fetch(
-                `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/users/${user.id}`,
+                `${getClientSideURL()}/api/users/${user.id}`,
                 {
                   credentials: 'include',
                   method: 'DELETE'

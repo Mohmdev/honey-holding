@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import { fetchTeamWithCustomer } from '@dashboard/api/fetchTeam.js'
+import { fetchTeamWithCustomer } from '@dashboard/api/fetchTeam'
 
 import { TeamMembersPage } from './page_client.js'
 

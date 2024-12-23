@@ -1,9 +1,11 @@
 import * as React from 'react'
 import { useRouter } from 'next/navigation'
 
+import { getClientSideURL } from '@utils/getURL'
+
 import type { Team } from '@dashboard/types'
 
-const portalURL = `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/customer-portal`
+const portalURL = `${getClientSideURL()}/api/customer-portal`
 
 export const useCustomerPortal = (args: {
   team: Team
@@ -20,7 +22,7 @@ export const useCustomerPortal = (args: {
   const {
     team,
     subscriptionID,
-    returnURL = `${process.env.NEXT_PUBLIC_SITE_URL}/cloud/${team.slug}/settings/billing`,
+    returnURL = `${process.env.NEXT_PUBLIC_SITE_URL}/dashboard/${team.slug}/settings/billing`,
     headline = 'Payload Cloud'
   } = args
 

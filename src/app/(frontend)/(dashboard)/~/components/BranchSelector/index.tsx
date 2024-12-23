@@ -7,6 +7,8 @@ import React, {
   useState
 } from 'react'
 
+import { getClientSideURL } from '@utils/getURL'
+
 import type { Endpoints } from '@octokit/types'
 
 import { Select } from '@forms/fields/Select'
@@ -67,7 +69,7 @@ export const BranchSelector: React.FC<{
 
       try {
         const branchesReq = await fetch(
-          `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/users/github`,
+          `${getClientSideURL()}/api/users/github`,
           {
             method: 'POST',
             credentials: 'include',
@@ -86,7 +88,7 @@ export const BranchSelector: React.FC<{
 
           if (!defaultBranch) {
             const fullRepo = await fetch(
-              `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/users/github`,
+              `${getClientSideURL()}/api/users/github`,
               {
                 method: 'POST',
                 credentials: 'include',

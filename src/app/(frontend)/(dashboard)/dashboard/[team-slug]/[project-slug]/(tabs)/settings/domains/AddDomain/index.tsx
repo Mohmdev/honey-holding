@@ -4,11 +4,13 @@ import * as React from 'react'
 
 import { toast } from 'sonner'
 
+import { getClientSideURL } from '@utils/getURL'
+
 import { Text } from '@forms/fields/Text'
 import Form from '@forms/Form'
 import Submit from '@forms/Submit'
 import { OnSubmit } from '@forms/types'
-import { validateDomain } from '@forms/validations.js'
+import { validateDomain } from '@forms/validations'
 
 import { Project, Team } from '@dashboard/types'
 
@@ -53,7 +55,7 @@ export const AddDomain: React.FC<{
       if (!domainExists) {
         try {
           const req = await fetch(
-            `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/projects/${projectID}${
+            `${getClientSideURL()}/api/projects/${projectID}${
               environmentSlug ? `?env=${environmentSlug}` : ''
             }`,
             {
@@ -76,7 +78,7 @@ export const AddDomain: React.FC<{
 
           return
         } catch (e) {
-          console.error(e) // eslint-disable-line no-console
+          console.error(e)
         }
       } else {
         setFieldKey(generateUUID())

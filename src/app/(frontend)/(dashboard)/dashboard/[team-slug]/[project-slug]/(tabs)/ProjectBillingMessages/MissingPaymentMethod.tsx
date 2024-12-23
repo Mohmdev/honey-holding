@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation'
 
 import { Message } from '@components/Message'
 import { ProjectWithSubscription } from '@dashboard/api/fetchProject'
-import { TeamWithCustomer } from '@dashboard/api/fetchTeam.js'
+import { TeamWithCustomer } from '@dashboard/api/fetchTeam'
 
 export const MissingPaymentMethodMessage: React.FC<{
   project: ProjectWithSubscription

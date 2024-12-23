@@ -2,12 +2,13 @@ import React, { Fragment } from 'react'
 
 import { toast } from 'sonner'
 
-import { formatDate } from '@utils/format-date-time.js'
+import { formatDate } from '@utils/format-date-time'
+import { getClientSideURL } from '@utils/getURL'
 
 import { Heading } from '@components/Heading'
 import { Team } from '@dashboard/types'
 
-import { TeamMemberRow } from '../TeamMembers/TeamMemberRow.js'
+import { TeamMemberRow } from '../TeamMembers/TeamMemberRow'
 import classes from './index.module.scss'
 
 export const TeamInvitations: React.FC<{
@@ -36,7 +37,7 @@ export const TeamInvitations: React.FC<{
 
       try {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/teams/${team?.id}/send-invitations`,
+          `${getClientSideURL()}/api/teams/${team?.id}/send-invitations`,
           {
             method: 'POST',
             credentials: 'include',

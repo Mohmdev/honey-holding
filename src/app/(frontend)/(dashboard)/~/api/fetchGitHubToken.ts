@@ -1,3 +1,5 @@
+import { getClientSideURL } from '@utils/getURL'
+
 import type { Endpoints } from '@octokit/types'
 
 type GitHubResponse = Endpoints['GET /user']['response']
@@ -10,20 +12,17 @@ export const fetchGitHubToken = async (): Promise<null | string> => {
     return null
   }
 
-  const reposReq = await fetch(
-    `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/users/github`,
-    {
-      body: JSON.stringify({
-        route: `GET /user`
-      }),
-      cache: 'no-store',
-      headers: {
-        Authorization: `JWT ${token}`,
-        'Content-Type': 'application/json'
-      },
-      method: 'POST'
-    }
-  )
+  const reposReq = await fetch(`${getClientSideURL()}/api/users/github`, {
+    body: JSON.stringify({
+      route: `GET /user`
+    }),
+    cache: 'no-store',
+    headers: {
+      Authorization: `JWT ${token}`,
+      'Content-Type': 'application/json'
+    },
+    method: 'POST'
+  })
 
   const res: GitHubResponse = await reposReq.json()
 
@@ -35,19 +34,16 @@ export const fetchGitHubToken = async (): Promise<null | string> => {
 }
 
 export const fetchGithubTokenClient = async (): Promise<null | string> => {
-  const reposReq = await fetch(
-    `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/users/github`,
-    {
-      body: JSON.stringify({
-        route: `GET /user`
-      }),
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      method: 'POST'
-    }
-  )
+  const reposReq = await fetch(`${getClientSideURL()}/api/users/github`, {
+    body: JSON.stringify({
+      route: `GET /user`
+    }),
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: 'POST'
+  })
 
   const res: GitHubResponse = await reposReq.json()
 

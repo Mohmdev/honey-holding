@@ -2,7 +2,6 @@
 
 import React, { Fragment, useCallback } from 'react'
 
-import { revalidateCache } from '@cloud/_actions/revalidateCache.js'
 import { SectionHeader } from '@cloud/[team-slug]/[project-slug]/(tabs)/settings/_layoutComponents/SectionHeader'
 import { useModal } from '@faceless-ui/modal'
 import { toast } from 'sonner'
@@ -16,10 +15,11 @@ import FormSubmissionError from '@forms/FormSubmissionError'
 import Submit from '@forms/Submit'
 import { OnSubmit } from '@forms/types'
 
-import { Button } from '@components/Button'
+import { Button } from '@components/ButtonComponent'
 import { Heading } from '@components/Heading'
 import { HR } from '@components/HR'
 import { ModalWindow } from '@components/ModalWindow'
+import { revalidateCache } from '@dashboard/actions/revalidateCache'
 import { User } from '@dashboard/types'
 
 import { DeletionConfirmationForm } from './DeletionConfirmationForm'

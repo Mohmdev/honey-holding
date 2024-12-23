@@ -2,6 +2,8 @@
 
 import * as React from 'react'
 
+import { getClientSideURL } from '@utils/getURL'
+
 import { Secret } from '@forms/fields/Secret'
 import Label from '@forms/Label'
 
@@ -37,7 +39,7 @@ export const ProjectFileStoragePage: React.FC<{
 }> = ({ project, team, environmentSlug }) => {
   const loadPassword = React.useCallback(async () => {
     const { value } = await fetch(
-      `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/projects/${project?.id}/cognito-password${
+      `${getClientSideURL()}/api/projects/${project?.id}/cognito-password${
         environmentSlug ? `?env=${environmentSlug}` : ''
       }`,
       {
@@ -66,9 +68,9 @@ export const ProjectFileStoragePage: React.FC<{
               Payload Cloud Plugin
             </a>{' '}
             will automatically pick up these values. These values are only if
-            you'd like to access your files directly, outside of Payload Cloud.
-            Use copy to clipboard below for .env formatted values. Paste in
-            Cognito Password separately.
+            you&apos;d like to access your files directly, outside of Payload
+            Cloud. Use copy to clipboard below for .env formatted values. Paste
+            in Cognito Password separately.
           </p>
         </Banner>
         <Label

@@ -5,7 +5,7 @@ import { fetchProjectAndRedirect } from '@dashboard/api/fetchProject'
 import { InfraOffline } from './InfraOffline'
 import { InfraOnline } from './InfraOnline'
 
-import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants.js'
+import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants'
 
 export default async ({
   params

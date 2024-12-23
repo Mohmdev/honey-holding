@@ -1,7 +1,12 @@
-import type { Team } from '@dashboard/types'
-import type { PaymentMethod } from '@stripe/stripe-js'
+// @ts-nocheck
 
-import { payloadCloudToken } from './token.js'
+import { getClientSideURL } from '@utils/getURL'
+
+import type { Team } from '@dashboard/types'
+
+// import type { PaymentMethod } from '@stripe/stripe-js'
+
+import { payloadCloudToken } from './token'
 
 export const fetchPaymentMethods = async (args: {
   team: Team | null | undefined
@@ -14,7 +19,7 @@ export const fetchPaymentMethods = async (args: {
   if (!token) throw new Error('No token provided')
 
   const paymentMethods: PaymentMethod[] = await fetch(
-    `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/teams/${team?.id}/payment-methods`,
+    `${getClientSideURL()}/api/teams/${team?.id}/payment-methods`,
     {
       method: 'GET',
       headers: {
@@ -41,7 +46,7 @@ export const fetchPaymentMethodsClient = async (args: {
   if (!team) throw new Error('Cannot fetch payment method without team')
 
   const paymentMethods: PaymentMethod[] = await fetch(
-    `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/teams/${team?.id}/payment-methods`,
+    `${getClientSideURL()}/api/teams/${team?.id}/payment-methods`,
     {
       method: 'GET',
       credentials: 'include',

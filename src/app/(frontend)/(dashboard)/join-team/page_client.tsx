@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 
+import { getClientSideURL } from '@utils/getURL'
+
 import { Gutter } from '@components/Gutter'
 import { Heading } from '@components/Heading'
 
@@ -25,7 +27,7 @@ export const JoinTeam: React.FC = () => {
       const acceptInvitation = async () => {
         try {
           const res = await fetch(
-            `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/teams/${team}/accept-invitation`,
+            `${getClientSideURL()}/api/teams/${team}/accept-invitation`,
             {
               method: 'POST',
               credentials: 'include',

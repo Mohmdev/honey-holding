@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-import useDebounce from '@utils/use-debounce.js'
+import { getClientSideURL } from '@utils/getURL'
+import { useDebounce } from '@utils/useDebounce'
 
 import type { Endpoints } from '@octokit/types'
 
@@ -52,7 +53,7 @@ export const RepoExists: React.FC<{
 
         try {
           const repoReq = await fetch(
-            `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/users/github`,
+            `${getClientSideURL()}/api/users/github`,
             {
               method: 'POST',
               credentials: 'include',

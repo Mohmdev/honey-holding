@@ -6,7 +6,7 @@ import { SectionHeader } from '@cloud/[team-slug]/[project-slug]/(tabs)/settings
 import { Message } from '@components/Message'
 import { fetchInvoices } from '@dashboard/api/fetchInvoices.js'
 import { fetchMe } from '@dashboard/api/fetchMe.js'
-import { fetchTeamWithCustomer } from '@dashboard/api/fetchTeam.js'
+import { fetchTeamWithCustomer } from '@dashboard/api/fetchTeam'
 
 import { TeamInvoicesPage } from './page_client.js'
 

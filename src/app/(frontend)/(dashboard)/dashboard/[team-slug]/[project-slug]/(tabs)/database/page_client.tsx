@@ -2,6 +2,8 @@
 
 import * as React from 'react'
 
+import { getClientSideURL } from '@utils/getURL'
+
 import { Secret } from '@forms/fields/Secret'
 
 import { Banner } from '@components/Banner'
@@ -15,7 +17,7 @@ export const ProjectDatabasePage: React.FC<{
 }> = ({ project, team, environmentSlug }) => {
   const loadConnectionString = React.useCallback(async () => {
     const { value } = await fetch(
-      `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/projects/${project?.id}/atlas-connection${
+      `${getClientSideURL()}/api/projects/${project?.id}/atlas-connection${
         environmentSlug ? `?env=${environmentSlug}` : ''
       }`,
       {

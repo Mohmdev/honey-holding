@@ -7,7 +7,7 @@ import { Message } from '@components/Message'
 import { fetchMe } from '@dashboard/api/fetchMe.js'
 import { fetchPlans } from '@dashboard/api/fetchPlans.js'
 import { fetchSubscriptions } from '@dashboard/api/fetchSubscriptions.js'
-import { fetchTeamWithCustomer } from '@dashboard/api/fetchTeam.js'
+import { fetchTeamWithCustomer } from '@dashboard/api/fetchTeam'
 
 import { TeamSubscriptionsPage } from './page_client.js'
 

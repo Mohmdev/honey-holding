@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
+import { getClientSideURL } from '@utils/getURL'
+
 import type { Team } from '@dashboard/types'
 
 // TODO: type this using the Stripe module
@@ -44,7 +46,7 @@ export const useSubscription = (args: {
         setIsLoading(true)
 
         const req = await fetch(
-          `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/teams/${team?.id}/subscriptions/${stripeSubscriptionID}`,
+          `${getClientSideURL()}/api/teams/${team?.id}/subscriptions/${stripeSubscriptionID}`,
           {
             credentials: 'include',
             method: 'GET'
@@ -74,7 +76,6 @@ export const useSubscription = (args: {
 
     makeRetrieval()
 
-    // eslint-disable-next-line consistent-return
     return () => {
       clearTimeout(timer)
     }
@@ -107,7 +108,7 @@ export const useSubscription = (args: {
           setIsLoading(true)
 
           const req = await fetch(
-            `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/teams/${team?.id}/subscriptions/${stripeSubscriptionID}`,
+            `${getClientSideURL()}/api/teams/${team?.id}/subscriptions/${stripeSubscriptionID}`,
             {
               body: JSON.stringify(newSubscription),
               credentials: 'include',
@@ -141,7 +142,6 @@ export const useSubscription = (args: {
 
       makeUpdate()
 
-      // eslint-disable-next-line consistent-return
       return () => {
         clearTimeout(timer)
       }

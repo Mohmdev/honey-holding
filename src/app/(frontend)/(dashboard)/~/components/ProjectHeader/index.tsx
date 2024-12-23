@@ -10,8 +10,7 @@ import { generateRoutePath } from '@dashboard/utils/generate-route-path'
 
 import classes from './index.module.scss'
 
-import { DASHBOARD_SLUG } from '@constants'
-import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants.js'
+import { DASHBOARD_SLUG, PRODUCTION_ENVIRONMENT_SLUG } from '@constants'
 
 export function ProjectHeader({ environmentOptions, title }) {
   const {

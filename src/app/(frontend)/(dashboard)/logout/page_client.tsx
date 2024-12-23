@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react'
 
 import { useAuth } from '@providers/Auth'
 
-import { Button } from '@components/Button'
+import { Button } from '@components/ButtonComponent'
 import { Gutter } from '@components/Gutter'
 
 import classes from './page.module.scss'

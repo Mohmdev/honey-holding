@@ -2,7 +2,7 @@ import { fetchProjectAndRedirect } from '@dashboard/api/fetchProject'
 import { Accordion } from '@components/Accordion'
 import { HR } from '@components/HR
 import { MaxWidth } from '@components/MaxWidth
-import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants.js'
+import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants'
 import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
 import { generateRoutePath } from '@dashboard/utils/generate-route-path'
 import React from 'react'

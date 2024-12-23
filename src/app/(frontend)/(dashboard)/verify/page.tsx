@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 
 import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
+import { getClientSideURL } from '@utils/getURL'
 
 // force this component to use dynamic search params, see https://github.com/vercel/next.js/issues/43077
 // this is only an issue in production
@@ -12,21 +13,18 @@ export default async ({ searchParams }) => {
 
   if (token) {
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/graphql`,
-        {
-          method: 'POST',
-          credentials: 'include',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            query: `mutation {
+      const res = await fetch(`${getClientSideURL()}/api/graphql`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          query: `mutation {
             verifyEmailUser(token: "${token}")
         }`
-          })
-        }
-      )
+        })
+      })
 
       if (res.ok) {
         const { data, errors } = await res.json()

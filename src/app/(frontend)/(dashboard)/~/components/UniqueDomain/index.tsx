@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-import useDebounce from '@utils/use-debounce.js'
+import { getClientSideURL } from '@utils/getURL'
+import { useDebounce } from '@utils/useDebounce'
 
 import { Text } from '@forms/fields/Text'
 
@@ -10,7 +11,7 @@ import { Spinner } from '@components/Spinner'
 import { Project, Team } from '@dashboard/types'
 
 import classes from './index.module.scss'
-import { validatedDomainReducer, ValidatedDomainResult } from './reducer.js'
+import { validatedDomainReducer, ValidatedDomainResult } from './reducer'
 
 // checks Payload to ensure that the given domain is unique and ensures only the validated domain is used
 // displays a success message if the domain is available, warns the user if the domain is taken
@@ -67,7 +68,7 @@ export const UniqueDomain: React.FC<{
 
         try {
           const validityReq = await fetch(
-            `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/validate-subdomain`,
+            `${getClientSideURL()}/api/validate-subdomain`,
             {
               method: 'POST',
               headers: {
@@ -93,7 +94,7 @@ export const UniqueDomain: React.FC<{
               errorMessage = 'Please input a subdomain.'
             }
 
-            console.error(errorMessage) // eslint-disable-line no-console
+            console.error(errorMessage)
             setError(errorMessage)
             dispatchValidatedDomain({ type: 'SET_UNIQUE', payload: false })
             setIsLoading(false)
@@ -105,7 +106,7 @@ export const UniqueDomain: React.FC<{
           dispatchValidatedDomain({ type: 'RESET', payload: newValidation })
         } catch (e) {
           const message = `Error validating domain: ${e.message}`
-          console.error(message) // eslint-disable-line no-console
+          console.error(message)
           setError(message)
           dispatchValidatedDomain({ type: 'SET_UNIQUE', payload: false })
           setIsLoading(false)

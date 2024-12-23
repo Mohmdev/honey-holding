@@ -1,27 +1,26 @@
+import { getClientSideURL } from '@utils/getURL'
+
 import type { Template } from '@dashboard/types'
 
-import { payloadCloudToken } from './token.js'
+import { payloadCloudToken } from './token'
 
-import { TEMPLATES } from '@data/templates.js'
+import { TEMPLATES } from '@data/templates'
 
 export const fetchTemplates = async (): Promise<Template[]> => {
   const { cookies } = await import('next/headers')
   const token = (await cookies()).get(payloadCloudToken)?.value ?? null
 
-  const doc: Template[] = await fetch(
-    `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/graphql`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        ...(token ? { Authorization: `JWT ${token}` } : {})
-      },
-      next: { tags: ['templates'] },
-      body: JSON.stringify({
-        query: TEMPLATES
-      })
-    }
-  )
+  const doc: Template[] = await fetch(`${getClientSideURL()}/api/graphql`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      ...(token ? { Authorization: `JWT ${token}` } : {})
+    },
+    next: { tags: ['templates'] },
+    body: JSON.stringify({
+      query: TEMPLATES
+    })
+  })
     ?.then((res) => res.json())
     ?.then((res) => {
       if (res.errors)

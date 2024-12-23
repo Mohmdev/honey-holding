@@ -9,13 +9,13 @@ import { v4 as uuid } from 'uuid'
 
 import type { PaymentMethod } from '@stripe/stripe-js'
 
-import { Button } from '@components/Button'
+import { Button } from '@components/ButtonComponent'
 import { CircleIconButton } from '@components/CircleIconButton'
 import { DropdownMenu } from '@components/DropdownMenu'
 import { Heading } from '@components/Heading'
 import { ModalWindow } from '@components/ModalWindow'
 import { Pill } from '@components/Pill'
-import { TeamWithCustomer } from '@dashboard/api/fetchTeam.js'
+import { TeamWithCustomer } from '@dashboard/api/fetchTeam'
 import { CreditCardElement } from '@dashboard/CreditCardElement'
 
 import classes from './index.module.scss'

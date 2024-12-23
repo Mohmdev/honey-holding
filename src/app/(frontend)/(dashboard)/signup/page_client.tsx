@@ -7,6 +7,7 @@ import { useSearchParams } from 'next/navigation'
 import { useAuth } from '@providers/Auth'
 import canUseDom from '@utils/canUseDOM'
 import { getCookie } from '@utils/get-cookie'
+import { getClientSideURL } from '@utils/getURL'
 
 import { Text } from '@forms/fields/Text'
 import Form from '@forms/Form'
@@ -83,7 +84,7 @@ export const Signup: React.FC = () => {
         const pageUri = `${process.env.NEXT_PUBLIC_SITE_URL}/signup`
         const pageName = 'Cloud Sign Up'
         const req = await fetch(
-          `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/graphql${
+          `${getClientSideURL()}/api/graphql${
             formData?.redirect ? `?redirect=${formData.redirect}` : ''
           }`,
           {

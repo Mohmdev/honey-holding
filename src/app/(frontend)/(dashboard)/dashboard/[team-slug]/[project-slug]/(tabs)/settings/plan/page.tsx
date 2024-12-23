@@ -7,7 +7,7 @@ import { MaxWidth } from '@components/MaxWidth'
 import { Plan } from '@dashboard/types'
 import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
 import { isExpandedDoc } from '@utils/is-expanded-doc.js'
-import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants.js'
+import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants'
 import { SectionHeader } from '../_layoutComponents/SectionHeader
 import { DeletePlanButton } from './DeletePlanButton
 import { DeletePlanModal } from './DeletePlanModal

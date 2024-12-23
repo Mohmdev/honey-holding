@@ -1,6 +1,6 @@
 // project reducer
 
-import type { TeamWithCustomer } from '@dashboard/api/fetchTeam.js'
+import type { TeamWithCustomer } from '@dashboard/api/fetchTeam'
 import type { Plan } from '@dashboard/types'
 
 interface SET_PLAN {

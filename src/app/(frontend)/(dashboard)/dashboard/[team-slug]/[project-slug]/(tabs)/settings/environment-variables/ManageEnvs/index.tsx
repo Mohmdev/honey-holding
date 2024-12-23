@@ -1,23 +1,27 @@
 'use client'
 
 import * as React from 'react'
-import { toast } from 'sonner'
-import { revalidateCache } from '@cloud/_actions/revalidateCache.js'
+
 import { CollapsibleGroup } from '@faceless-ui/collapsibles'
 import { useModal } from '@faceless-ui/modal'
+import { toast } from 'sonner'
+
+import { getClientSideURL } from '@utils/getURL'
+
 import { Text } from '@forms/fields/Text'
-import { Textarea } from '@forms/fields/Textarea
-import Form from '@forms/Form
-import Submit from '@forms/Submit
+import { Textarea } from '@forms/fields/Textarea'
+import Form from '@forms/Form'
+import Submit from '@forms/Submit'
 
-import { Button } from '@components/Button
-import { Heading } from '@components/Heading
-import { ModalWindow } from '@components/ModalWindow
-import { Accordion } from '@components/Accordion
+import { Accordion } from '@components/Accordion'
+import { Button } from '@components/ButtonComponent'
+import { Heading } from '@components/Heading'
+import { ModalWindow } from '@components/ModalWindow'
+import { revalidateCache } from '@dashboard/actions/revalidateCache'
 import { Project } from '@dashboard/types'
-import { validateKey, validateValue } from '../validations.js'
-import { qs } from '@utils/qs.js'
+import { qs } from '@dashboard/utils/qs'
 
+import { validateKey, validateValue } from '../validations'
 import classes from './index.module.scss'
 
 const envKeyFieldPath = 'envKey'
@@ -39,32 +43,37 @@ export const ManageEnv: React.FC<Props> = ({
   envs,
   projectID,
   env: { key, id },
-  environmentSlug,
+  environmentSlug
 }) => {
   const modalSlug = `delete-env-${id}`
-  const [fetchedEnvValue, setFetchedEnvValue] = React.useState<string | undefined>(undefined)
+  const [fetchedEnvValue, setFetchedEnvValue] = React.useState<
+    string | undefined
+  >(undefined)
   const { closeModal, openModal } = useModal()
-  const existingEnvKeys = (envs || []).reduce((acc: string[], { key: existingKey }) => {
-    if (existingKey && existingKey !== key) {
-      acc.push(existingKey)
-    }
-    return acc
-  }, [])
+  const existingEnvKeys = (envs || []).reduce(
+    (acc: string[], { key: existingKey }) => {
+      if (existingKey && existingKey !== key) {
+        acc.push(existingKey)
+      }
+      return acc
+    },
+    []
+  )
 
   const fetchEnv = React.useCallback(async (): Promise<string | null> => {
     try {
       const query = qs.stringify({
         env: environmentSlug,
-        key,
+        key
       })
       const req = await fetch(
-        `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/projects/${projectID}/env${`?${query}`}`,
+        `${getClientSideURL()}/api/projects/${projectID}/env${`?${query}`}`,
         {
           credentials: 'include',
           headers: {
-            'Content-Type': 'application/json',
-          },
-        },
+            'Content-Type': 'application/json'
+          }
+        }
       )
 
       if (req.status === 200) {
@@ -72,7 +81,7 @@ export const ManageEnv: React.FC<Props> = ({
         return res.value
       }
     } catch (e) {
-      console.error(e) // eslint-disable-line no-console
+      console.error(e)
     }
 
     return null
@@ -83,23 +92,31 @@ export const ManageEnv: React.FC<Props> = ({
       const newEnvKey = data[envKeyFieldPath]
       const newEnvValue = data[envValueFieldPath]
 
-      if (typeof newEnvValue === 'string' && typeof newEnvKey === 'string' && id) {
+      if (
+        typeof newEnvValue === 'string' &&
+        typeof newEnvKey === 'string' &&
+        id
+      ) {
         try {
           const query = qs.stringify({
-            env: environmentSlug,
+            env: environmentSlug
           })
           const req = await fetch(
-            `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/projects/${projectID}/env${
+            `${getClientSideURL()}/api/projects/${projectID}/env${
               query ? `?${query}` : ''
             }`,
             {
               method: 'PATCH',
               credentials: 'include',
               headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
               },
-              body: JSON.stringify({ arrayID: id, key: newEnvKey, value: newEnvValue }),
-            },
+              body: JSON.stringify({
+                arrayID: id,
+                key: newEnvKey,
+                value: newEnvValue
+              })
+            }
           )
 
           const res = await req.json()
@@ -115,36 +132,36 @@ export const ManageEnv: React.FC<Props> = ({
             // TODO: set in state
 
             await revalidateCache({
-              tag: `project_${projectID}`,
+              tag: `project_${projectID}`
             })
 
             return res.value
           }
         } catch (e) {
-          console.error(e) // eslint-disable-line no-console
+          console.error(e)
         }
       }
 
       return null
     },
-    [projectID, id],
+    [projectID, id]
   )
 
   const deleteEnv = React.useCallback(async () => {
     try {
       const query = qs.stringify({
         env: environmentSlug,
-        key,
+        key
       })
       const req = await fetch(
-        `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/projects/${projectID}/env?${query}`,
+        `${getClientSideURL()}/api/projects/${projectID}/env?${query}`,
         {
           method: 'DELETE',
           credentials: 'include',
           headers: {
-            'Content-Type': 'application/json',
-          },
-        },
+            'Content-Type': 'application/json'
+          }
+        }
       )
 
       // TODO: alert user based on status code & message
@@ -153,7 +170,7 @@ export const ManageEnv: React.FC<Props> = ({
         // reloadProject()
       }
     } catch (e) {
-      console.error(e) // eslint-disable-line no-console
+      console.error(e)
     } finally {
       closeModal(modalSlug)
     }
@@ -182,7 +199,9 @@ export const ManageEnv: React.FC<Props> = ({
             label="Key"
             path={envKeyFieldPath}
             initialValue={key}
-            validate={(keyValue: string) => validateKey(keyValue, existingEnvKeys)}
+            validate={(keyValue: string) =>
+              validateKey(keyValue, existingEnvKeys)
+            }
           />
 
           <Textarea
@@ -195,7 +214,11 @@ export const ManageEnv: React.FC<Props> = ({
           />
 
           <div className={classes.actionFooter}>
-            <Button label="Remove" appearance="danger" onClick={() => openModal(modalSlug)} />
+            <Button
+              label="Remove"
+              appearance="danger"
+              onClick={() => openModal(modalSlug)}
+            />
             <Submit label="Update" icon={false} />
           </div>
         </Form>
@@ -206,12 +229,16 @@ export const ManageEnv: React.FC<Props> = ({
             Are you sure you want to delete this environment variable?
           </Heading>
           <p>
-            Deleting an environment variable from a project cannot be undone. You can manually add
-            the env back to the project.
+            Deleting an environment variable from a project cannot be undone.
+            You can manually add the env back to the project.
           </p>
 
           <div className={classes.modalActions}>
-            <Button label="Cancel" appearance="secondary" onClick={() => closeModal(modalSlug)} />
+            <Button
+              label="Cancel"
+              appearance="secondary"
+              onClick={() => closeModal(modalSlug)}
+            />
             <Button label="Delete" appearance="danger" onClick={deleteEnv} />
           </div>
         </div>
@@ -224,13 +251,13 @@ export const ManageEnvs: React.FC<{
   envs: Project['environmentVariables']
   projectID: Project['id']
   environmentSlug?: string
-}> = props => {
+}> = (props) => {
   const { envs, projectID, environmentSlug } = props
 
   return (
     <CollapsibleGroup transTime={250} transCurve="ease" allowMultiple>
       <div className={classes.envs}>
-        {envs?.map(env => (
+        {envs?.map((env) => (
           <ManageEnv
             key={env.id}
             env={env}

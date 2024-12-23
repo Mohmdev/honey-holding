@@ -1,8 +1,10 @@
+import { getClientSideURL } from '@utils/getURL'
+
 export const exchangeCode = async (code: string): Promise<boolean> => {
   if (code) {
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/exchange-code?code=${code}`,
+        `${getClientSideURL()}/api/exchange-code?code=${code}`,
         {
           method: 'GET',
           credentials: 'include'
@@ -18,7 +20,7 @@ export const exchangeCode = async (code: string): Promise<boolean> => {
       }
     } catch (err: unknown) {
       const message = `Unable to authorize GitHub: ${err}`
-      console.error(message) // eslint-disable-line no-console
+      console.error(message)
       throw new Error(message)
     }
   }

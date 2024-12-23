@@ -1,15 +1,17 @@
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
-import { mergeProjectEnvironment } from '@utils/merge-project-environment.js'
+import { getClientSideURL } from '@utils/getURL'
 
-import type { Subscription } from './fetchSubscriptions.js'
-import type { Customer, TeamWithCustomer } from './fetchTeam.js'
+import type { Subscription } from './fetchSubscriptions'
+import type { Customer, TeamWithCustomer } from './fetchTeam'
 import type { Project } from '@dashboard/types'
 
-import { payloadCloudToken } from './token.js'
+import { mergeProjectEnvironment } from '@dashboard/utils/merge-project-environment'
 
-import { PROJECT_QUERY } from '@data/project.js'
+import { payloadCloudToken } from './token'
+
+import { PROJECT_QUERY } from '@data/project'
 
 export type ProjectWithSubscription = Project & {
   stripeSubscription: Subscription
@@ -23,24 +25,21 @@ export const fetchProject = async (args: {
   const token = (await cookies()).get(payloadCloudToken)?.value ?? null
   if (!token) throw new Error('No token provided')
 
-  const doc: Project = await fetch(
-    `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/graphql`,
-    {
-      body: JSON.stringify({
-        query: PROJECT_QUERY,
-        variables: {
-          projectSlug,
-          teamID
-        }
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-        ...(token ? { Authorization: `JWT ${token}` } : {})
-      },
-      method: 'POST',
-      next: { tags: [`project_${projectSlug}`] }
-    }
-  )
+  const doc: Project = await fetch(`${getClientSideURL()}/api/graphql`, {
+    body: JSON.stringify({
+      query: PROJECT_QUERY,
+      variables: {
+        projectSlug,
+        teamID
+      }
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+      ...(token ? { Authorization: `JWT ${token}` } : {})
+    },
+    method: 'POST',
+    next: { tags: [`project_${projectSlug}`] }
+  })
     ?.then((res) => res.json())
     ?.then((res) => {
       if (res.errors)
@@ -100,7 +99,7 @@ export const fetchProjectWithSubscription = async (args: {
   if (!token) throw new Error('No token provided')
 
   const projectWithSubscription = await fetch(
-    `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/projects/${projectSlug}/with-subscription`,
+    `${getClientSideURL()}/api/projects/${projectSlug}/with-subscription`,
     {
       body: JSON.stringify({
         projectSlug,

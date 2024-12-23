@@ -1,19 +1,23 @@
 'use client'
 
 import * as React from 'react'
+
 import { toast } from 'sonner'
-import { revalidateCache } from '@cloud/_actions/revalidateCache.js'
+
+import { getClientSideURL } from '@utils/getURL'
+
 import { AddArrayRow, ArrayRow } from '@forms/fields/Array'
 import { ArrayProvider, useArray } from '@forms/fields/Array/context'
-import { Text } from '@forms/fields/Text
-import Form from '@forms/Form
-import Submit from '@forms/Submit
+import { Text } from '@forms/fields/Text'
+import Form from '@forms/Form'
+import Submit from '@forms/Submit'
 import { OnSubmit } from '@forms/types'
 
+import { revalidateCache } from '@dashboard/actions/revalidateCache'
 import { Project } from '@dashboard/types'
-import { validateKey, validateValue } from '../validations.js'
-import { qs } from '@utils/qs.js'
+import { qs } from '@dashboard/utils/qs'
 
+import { validateKey, validateValue } from '../validations'
 import classes from './index.module.scss'
 
 type AddEnvsProps = {
@@ -22,7 +26,7 @@ type AddEnvsProps = {
   environmentSlug?: string
 }
 
-export const AddEnvsComponent: React.FC<AddEnvsProps> = props => {
+export const AddEnvsComponent: React.FC<AddEnvsProps> = (props) => {
   const { envs, projectID, environmentSlug } = props
 
   const { uuids, clearRows } = useArray()
@@ -37,7 +41,7 @@ export const AddEnvsComponent: React.FC<AddEnvsProps> = props => {
           if (envKey && !acc.includes(envKey)) {
             acc.push({
               key: envKey,
-              value: env.value,
+              value: env.value
             })
           }
 
@@ -46,20 +50,20 @@ export const AddEnvsComponent: React.FC<AddEnvsProps> = props => {
 
         try {
           const query = qs.stringify({
-            env: environmentSlug,
+            env: environmentSlug
           })
           const req = await fetch(
-            `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/projects/${projectID}/env${
+            `${getClientSideURL()}/api/projects/${projectID}/env${
               query ? `?${query}` : ''
             }`,
             {
               method: 'POST',
               credentials: 'include',
               headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
               },
-              body: JSON.stringify({ envs: sanitizedEnvs }),
-            },
+              body: JSON.stringify({ envs: sanitizedEnvs })
+            }
           )
 
           const res = await req.json()
@@ -75,17 +79,17 @@ export const AddEnvsComponent: React.FC<AddEnvsProps> = props => {
             clearRows()
 
             await revalidateCache({
-              tag: `project_${projectID}`,
+              tag: `project_${projectID}`
             })
           }
 
           return
         } catch (e) {
-          console.error(e) // eslint-disable-line no-console
+          console.error(e)
         }
       }
     },
-    [projectID, clearRows],
+    [projectID, clearRows]
   )
 
   return (
@@ -111,7 +115,10 @@ export const AddEnvsComponent: React.FC<AddEnvsProps> = props => {
           </ArrayRow>
         )
       })}
-      <AddArrayRow singularLabel="Environment Variable" pluralLabel="Environment Variables" />
+      <AddArrayRow
+        singularLabel="Environment Variable"
+        pluralLabel="Environment Variables"
+      />
       <div className={classes.actionFooter}>
         <Submit icon={false} label="Save" />
       </div>
@@ -119,7 +126,7 @@ export const AddEnvsComponent: React.FC<AddEnvsProps> = props => {
   )
 }
 
-export const AddEnvs: React.FC<AddEnvsProps> = props => {
+export const AddEnvs: React.FC<AddEnvsProps> = (props) => {
   return (
     <ArrayProvider>
       <AddEnvsComponent {...props} />

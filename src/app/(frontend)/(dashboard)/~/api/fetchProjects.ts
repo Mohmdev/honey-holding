@@ -1,10 +1,12 @@
-import { mergeProjectEnvironment } from '@utils/merge-project-environment.js'
+import { getClientSideURL } from '@utils/getURL'
 
 import type { Project } from '@dashboard/types'
 
-import { payloadCloudToken } from './token.js'
+import { mergeProjectEnvironment } from '@dashboard/utils/merge-project-environment'
 
-import { PROJECT_QUERY, PROJECTS_QUERY } from '@data/project.js'
+import { payloadCloudToken } from './token'
+
+import { PROJECT_QUERY, PROJECTS_QUERY } from '@data/project'
 
 export interface ProjectsRes {
   docs: Project[]
@@ -22,25 +24,22 @@ export const fetchProjects = async (
   const token = (await cookies()).get(payloadCloudToken)?.value ?? null
   if (!token) throw new Error('No token provided')
 
-  const res: ProjectsRes = await fetch(
-    `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/graphql`,
-    {
-      body: JSON.stringify({
-        query: PROJECTS_QUERY,
-        variables: {
-          limit: 8,
-          page: 1,
-          teamIDs: teamIDs.filter(Boolean)
-        }
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-        ...(token ? { Authorization: `JWT ${token}` } : {})
-      },
-      method: 'POST',
-      next: { tags: ['projects'] }
-    }
-  )
+  const res: ProjectsRes = await fetch(`${getClientSideURL()}/api/graphql`, {
+    body: JSON.stringify({
+      query: PROJECTS_QUERY,
+      variables: {
+        limit: 8,
+        page: 1,
+        teamIDs: teamIDs.filter(Boolean)
+      }
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+      ...(token ? { Authorization: `JWT ${token}` } : {})
+    },
+    method: 'POST',
+    next: { tags: ['projects'] }
+  })
     ?.then((r) => r.json())
     ?.then((data) => {
       if (data.errors)
@@ -62,25 +61,22 @@ export const fetchProjectsClient = async ({
   search?: string
   teamIDs: Array<string | undefined>
 }): Promise<ProjectsRes> => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/graphql`,
-    {
-      body: JSON.stringify({
-        query: PROJECTS_QUERY,
-        variables: {
-          limit,
-          page,
-          search,
-          teamIDs: teamIDs.filter(Boolean)
-        }
-      }),
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      method: 'POST'
-    }
-  )
+  const res = await fetch(`${getClientSideURL()}/api/graphql`, {
+    body: JSON.stringify({
+      query: PROJECTS_QUERY,
+      variables: {
+        limit,
+        page,
+        search,
+        teamIDs: teamIDs.filter(Boolean)
+      }
+    }),
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: 'POST'
+  })
     .then((r) => r.json())
     ?.then((data) => data?.data?.Projects)
 
@@ -96,23 +92,20 @@ export const fetchProjectClient = async ({
   projectSlug?: string
   teamID: string
 }): Promise<Project> => {
-  const { data } = await fetch(
-    `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/graphql`,
-    {
-      body: JSON.stringify({
-        query: PROJECT_QUERY,
-        variables: {
-          projectSlug,
-          teamID
-        }
-      }),
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      method: 'POST'
-    }
-  ).then((res) => res.json())
+  const { data } = await fetch(`${getClientSideURL()}/api/graphql`, {
+    body: JSON.stringify({
+      query: PROJECT_QUERY,
+      variables: {
+        projectSlug,
+        teamID
+      }
+    }),
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: 'POST'
+  }).then((res) => res.json())
 
   const project = data?.Projects?.docs?.[0]
 

@@ -9,7 +9,7 @@ import { teamHasDefaultPaymentMethod } from '@cloud/_utilities/teamHasDefaultPay
 
 import { Message } from '@components/Message'
 import { ProjectWithSubscription } from '@dashboard/api/fetchProject'
-import { TeamWithCustomer } from '@dashboard/api/fetchTeam.js'
+import { TeamWithCustomer } from '@dashboard/api/fetchTeam'
 
 export const TrialMessage: React.FC<{
   project: ProjectWithSubscription

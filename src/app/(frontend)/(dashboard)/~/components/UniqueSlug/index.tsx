@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 
-import useDebounce from '@utils/use-debounce.js'
+import { getClientSideURL } from '@utils/getURL'
+import { useDebounce } from '@utils/useDebounce'
 
-import type { SlugValidationResult } from './reducer.js'
+import type { SlugValidationResult } from './reducer'
 
 import { Text } from '@forms/fields/Text'
 
@@ -11,7 +12,7 @@ import { CloseIcon } from '@icons/CloseIcon'
 import { Spinner } from '@components/Spinner'
 
 import classes from './index.module.scss'
-import { stateReducer } from './reducer.js'
+import { stateReducer } from './reducer'
 
 // checks Payload to ensure that the given slug is unique and ensures only the validated slug is used
 // displays a success message if the slug is available, warns the user if the slug is taken
@@ -96,7 +97,7 @@ export const UniqueSlug: React.FC<{
 
           try {
             const validityReq = await fetch(
-              `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/validate-slug`,
+              `${getClientSideURL()}/api/validate-slug`,
               {
                 body: JSON.stringify({
                   id: docID,
@@ -122,13 +123,13 @@ export const UniqueSlug: React.FC<{
                 validityReq.status === 400
                   ? 'The slug can only contain alphanumeric characters, hyphens, and underscores.'
                   : `Error validating slug: ${validityReq.statusText}`
-              console.error(message) // eslint-disable-line no-console
+              console.error(message)
               setError(message)
               dispatchState({ type: 'SET_UNIQUE', payload: false })
             }
           } catch (e) {
             const message = `Error validating slug: ${e.message}`
-            console.error(message) // eslint-disable-line no-console
+            console.error(message)
             setError(message)
             dispatchState({ type: 'SET_UNIQUE', payload: false })
           }

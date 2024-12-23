@@ -7,7 +7,7 @@ import { generateRoutePath } from '@dashboard/utils/generate-route-path'
 
 import { ProjectBuildSettingsPage } from './page_client.js'
 
-import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants.js'
+import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants'
 
 export default async function Page ({
   params

@@ -3,9 +3,11 @@ import Link from 'next/link'
 
 import { useModal } from '@faceless-ui/modal'
 
+import { getClientSideURL } from '@utils/getURL'
+
 import { ExternalLinkIcon } from '@icons/ExternalLinkIcon'
 import { Accordion } from '@components/Accordion'
-import { Button } from '@components/Button'
+import { Button } from '@components/ButtonComponent'
 import { Heading } from '@components/Heading'
 import { ModalWindow } from '@components/ModalWindow'
 import { Project, Team } from '@dashboard/types'
@@ -45,7 +47,7 @@ export const ManageDomain: React.FC<Props> = ({
     async (domains: Props['domain'][]) => {
       try {
         const req = await fetch(
-          `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/projects/${projectID}${
+          `${getClientSideURL()}/api/projects/${projectID}${
             environmentSlug ? `?env=${environmentSlug}` : ''
           }`,
           {
@@ -66,7 +68,7 @@ export const ManageDomain: React.FC<Props> = ({
           return res
         }
       } catch (e) {
-        console.error(e) // eslint-disable-line no-console
+        console.error(e)
       }
 
       return null

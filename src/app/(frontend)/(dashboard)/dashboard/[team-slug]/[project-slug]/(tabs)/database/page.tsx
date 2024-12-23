@@ -4,7 +4,7 @@ import { fetchProjectAndRedirect } from '@dashboard/api/fetchProject'
 
 import { ProjectDatabasePage } from './page_client.js'
 
-import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants.js'
+import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants'
 
 export default async ({
   params

@@ -2,12 +2,17 @@
 
 import * as React from 'react'
 
-import { useWebSocket } from '@utils/use-websocket.js'
+import { getClientSideURL } from '@utils/getURL'
 
 import { Gutter } from '@components/Gutter'
 import { Heading } from '@components/Heading'
-import { LogLine, SimpleLogs, styleLogLine } from '@components/SimpleLogs'
+import {
+  LogLine,
+  SimpleLogs,
+  styleLogLine
+} from '@dashboard/components/SimpleLogs'
 import { Project, Team } from '@dashboard/types'
+import { useWebSocket } from '@dashboard/utils/use-websocket'
 
 export const ProjectLogsPage: React.FC<{
   project: Project
@@ -41,7 +46,7 @@ export const ProjectLogsPage: React.FC<{
 
   useWebSocket({
     url: hasSuccessfullyDeployed
-      ? `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/projects/${project?.id}/logs${
+      ? `${getClientSideURL()}/api/projects/${project?.id}/logs${
           environmentSlug ? `?env=${environmentSlug}` : ''
         }`.replace('http', 'ws')
       : '',

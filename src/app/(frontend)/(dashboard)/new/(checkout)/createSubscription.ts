@@ -1,5 +1,7 @@
-import type { CheckoutState } from '@app/(frontend)/(cloud)/new/(checkout)/reducer.js'
+import { getClientSideURL } from '@utils/getURL'
+
 import type { Project } from '@dashboard/types'
+import type { CheckoutState } from '@root/app/(frontend)/(dashboard)/new/(checkout)/reducer'
 
 export interface PayloadStripeSubscription {
   client_secret: string
@@ -18,29 +20,26 @@ export const createSubscription = async (args: {
   } = args
 
   try {
-    const req = await fetch(
-      `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/create-subscription`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
+    const req = await fetch(`${getClientSideURL()}/api/create-subscription`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        project: {
+          ...project,
+          // flatten relationships to only the ID
+          plan: typeof plan === 'string' ? plan : plan.id,
+          team: typeof team === 'string' ? team : team.id,
+          template:
+            typeof project?.template === 'string'
+              ? project.template
+              : project?.template?.id
         },
-        body: JSON.stringify({
-          project: {
-            ...project,
-            // flatten relationships to only the ID
-            plan: typeof plan === 'string' ? plan : plan.id,
-            team: typeof team === 'string' ? team : team.id,
-            template:
-              typeof project?.template === 'string'
-                ? project.template
-                : project?.template?.id
-          },
-          paymentMethod,
-          freeTrial
-        })
-      }
-    )
+        paymentMethod,
+        freeTrial
+      })
+    })
 
     const res: PayloadStripeSubscription = await req.json()
 

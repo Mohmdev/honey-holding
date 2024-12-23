@@ -1,6 +1,8 @@
+import { getClientSideURL } from '@utils/getURL'
+
 import type { Endpoints } from '@octokit/types'
 
-import { payloadCloudToken } from './token.js'
+import { payloadCloudToken } from './token'
 
 export type GitHubInstallationsResponse =
   Endpoints['GET /user/installations']['response']
@@ -13,7 +15,7 @@ export const fetchInstalls = async (): Promise<Install[]> => {
   if (!token) throw new Error('No token provided')
 
   const docs: Install[] = await fetch(
-    `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/users/github`,
+    `${getClientSideURL()}/api/users/github`,
     {
       body: JSON.stringify({
         route: `GET /user/installations`
@@ -43,7 +45,7 @@ export const fetchInstalls = async (): Promise<Install[]> => {
 
 export const fetchInstallsClient: () => Promise<Install[]> = async () => {
   const docs: Install[] = await fetch(
-    `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/users/github`,
+    `${getClientSideURL()}/api/users/github`,
     {
       body: JSON.stringify({
         route: `GET /user/installations`

@@ -1,20 +1,19 @@
+import { getClientSideURL } from '@utils/getURL'
+
 import type { Plan } from '@dashboard/types'
 
-import { PLANS_QUERY } from '@data/plans.js'
+import { PLANS_QUERY } from '@data/plans'
 
 export const fetchPlans = async (): Promise<Plan[]> => {
-  const doc: Plan[] = await fetch(
-    `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/graphql`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        query: PLANS_QUERY
-      })
-    }
-  )
+  const doc: Plan[] = await fetch(`${getClientSideURL()}/api/graphql`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      query: PLANS_QUERY
+    })
+  })
     ?.then((res) => res.json())
     ?.then((res) => {
       if (res.errors)
