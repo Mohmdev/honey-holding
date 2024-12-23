@@ -3,6 +3,7 @@ import { fileURLToPath } from 'url'
 
 import { basicLexical } from '@services/editor/basicLexical'
 import { mediaDarkModeFallback } from '@fields/darkModeFallback/media'
+import { uploadAltField } from '@fields/uploadAlt/config'
 import { anyone } from '@access/anyone'
 import { isAdminOrEditor } from '@access/isAdminOrEditor'
 import { isAdminOrSelf } from '@access/isAdminOrSelf'
@@ -26,20 +27,31 @@ export const Media: CollectionConfig<'media'> = {
   },
   defaultPopulate: {
     alt: true,
-    darkModeFallback: true,
+    mediaDarkModeFallback: true,
     filename: true,
     height: true,
     mimeType: true,
     url: true,
     width: true
   },
+  admin: {
+    useAsTitle: 'title',
+    defaultColumns: [
+      'thumbnail',
+      'title',
+      'mimeType',
+      'authors',
+      'createdAt',
+      'updatedAt'
+    ]
+  },
   fields: [
-    mediaDarkModeFallback,
     {
-      name: 'alt',
+      name: 'title',
       type: 'text',
       required: true
     },
+    ...uploadAltField(),
     {
       name: 'caption',
       type: 'richText',
@@ -47,7 +59,8 @@ export const Media: CollectionConfig<'media'> = {
       admin: {
         description: 'Optional'
       }
-    }
+    },
+    mediaDarkModeFallback
   ],
   upload: {
     crop: true,

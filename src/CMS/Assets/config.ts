@@ -2,6 +2,7 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 
 import { assetDarkModeFallback } from '@fields/darkModeFallback/asset'
+import { uploadAltField } from '@fields/uploadAlt/config'
 import { anyone } from '@access/anyone'
 import { isAdminOrEditor } from '@access/isAdminOrEditor'
 import { isAdminOrSelf } from '@access/isAdminOrSelf'
@@ -25,7 +26,7 @@ export const Assets: CollectionConfig<'assets'> = {
   },
   defaultPopulate: {
     alt: true,
-    darkModeFallback: true,
+    assetDarkModeFallback: true,
     filename: true,
     height: true,
     mimeType: true,
@@ -33,7 +34,15 @@ export const Assets: CollectionConfig<'assets'> = {
     width: true
   },
   admin: {
-    useAsTitle: 'title'
+    useAsTitle: 'title',
+    defaultColumns: [
+      'thumbnail',
+      'title',
+      'mimeType',
+      'authors',
+      'createdAt',
+      'updatedAt'
+    ]
   },
   fields: [
     {
@@ -41,12 +50,8 @@ export const Assets: CollectionConfig<'assets'> = {
       type: 'text',
       required: true
     },
-    assetDarkModeFallback,
-    {
-      name: 'alt',
-      type: 'text',
-      hooks: {}
-    }
+    ...uploadAltField(),
+    assetDarkModeFallback
   ],
   upload: {
     crop: true,
