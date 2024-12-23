@@ -1,46 +1,58 @@
 'use client'
 
 import * as React from 'react'
-import { toast } from 'sonner'
+
 import { revalidateCache } from '@cloud/_actions/revalidateCache.js'
 import { TeamWithCustomer } from '@cloud/_api/fetchTeam.js'
-import { InviteTeammates } from '@cloud/_components/InviteTeammates/index.js'
-import { TeamInvitations } from '@cloud/_components/TeamInvitations/index.js'
-import { Member, TeamMembers } from '@cloud/_components/TeamMembers/index.js'
-import { SectionHeader } from '@cloud/[team-slug]/[project-slug]/(tabs)/settings/_layoutComponents/SectionHeader/index.js'
+import { SectionHeader } from '@cloud/[team-slug]/[project-slug]/(tabs)/settings/_layoutComponents/SectionHeader'
 import { useModal } from '@faceless-ui/modal'
-import Form from '@forms/Form/index.js'
-import FormProcessing from '@forms/FormProcessing/index.js'
-import FormSubmissionError from '@forms/FormSubmissionError/index.js'
-import Submit from '@forms/Submit/index.js'
-import { OnSubmit } from '@forms/types.js'
+import { Team } from '@payload-cloud-types'
+import { toast } from 'sonner'
 
-import { ModalWindow } from '@components/ModalWindow/index.js'
-import { HR } from '@components/HR/index.js'
-import { Team } from '@root/payload-cloud-types.js'
-import { useAuth } from '@root/providers/Auth/index.js'
-import { UpdateRolesConfirmationForm } from './UpdateRolesConfirmationForm/index.js'
+import { useAuth } from '@providers/Auth'
+
+import Form from '@forms/Form'
+import FormProcessing from '@forms/FormProcessing'
+import FormSubmissionError from '@forms/FormSubmissionError'
+import Submit from '@forms/Submit'
+import { OnSubmit } from '@forms/types'
+
+import { HR } from '@components/HR'
+import { ModalWindow } from '@components/ModalWindow'
+import { InviteTeammates } from '@dashboard/InviteTeammates'
+import { TeamInvitations } from '@dashboard/TeamInvitations'
+import { Member, TeamMembers } from '@dashboard/TeamMembers'
 
 import classes from './page.module.scss'
+import { UpdateRolesConfirmationForm } from './UpdateRolesConfirmationForm'
 
 export const TeamMembersPage: React.FC<{
   team: TeamWithCustomer
 }> = ({ team: initialTeam }) => {
   const [team, setTeam] = React.useState<Team>(initialTeam)
   const { user } = useAuth()
-  const [clearCount, dispatchClearCount] = React.useReducer((state: number) => state + 1, 0)
+  const [clearCount, dispatchClearCount] = React.useReducer(
+    (state: number) => state + 1,
+    0
+  )
 
   const { openModal } = useModal()
 
-  const [originalRoles, setOriginalRoles] = React.useState<('owner' | 'admin' | 'user')[][]>([])
-  const [selectedMemberIndex, setSelectedMemberIndex] = React.useState<number | null>(null)
+  const [originalRoles, setOriginalRoles] = React.useState<
+    ('owner' | 'admin' | 'user')[][]
+  >([])
+  const [selectedMemberIndex, setSelectedMemberIndex] = React.useState<
+    number | null
+  >(null)
   const [selectedNewRoles, setSelectedNewRoles] = React.useState<
     ('owner' | 'admin' | 'user')[] | null
   >(null)
-  const [selectedMember, setSelectedMember] = React.useState<Member | null>(null)
+  const [selectedMember, setSelectedMember] = React.useState<Member | null>(
+    null
+  )
 
   const [roles, setRoles] = React.useState<('owner' | 'admin' | 'user')[][]>(
-    (team?.members ?? []).map(member => member.roles ?? []),
+    (team?.members ?? []).map((member) => member.roles ?? [])
   ) // eslint-disable-line
 
   const [error, setError] = React.useState<{
@@ -64,7 +76,7 @@ export const TeamMembersPage: React.FC<{
   const handleUpdateRoles = async (
     index: number,
     newRoles: ('owner' | 'admin' | 'user')[],
-    member: Member,
+    member: Member
   ) => {
     if (!isOwnerOrGlobalAdmin) {
       toast.error('You must be an owner or global admin to update roles.')
@@ -103,20 +115,25 @@ export const TeamMembersPage: React.FC<{
 
       const updatedTeam: Partial<Team> = {
         ...(unflattenedData || {}),
-        sendEmailInvitationsTo: unflattenedData?.sendEmailInvitationsTo?.map(invite => ({
-          email: invite?.email,
-          roles: invite?.roles,
-        })),
+        sendEmailInvitationsTo: unflattenedData?.sendEmailInvitationsTo?.map(
+          (invite) => ({
+            email: invite?.email,
+            roles: invite?.roles
+          })
+        )
       }
 
-      const req = await fetch(`${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/teams/${team?.id}`, {
-        method: 'PATCH',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(updatedTeam),
-      })
+      const req = await fetch(
+        `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/teams/${team?.id}`,
+        {
+          method: 'PATCH',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(updatedTeam)
+        }
+      )
 
       const response: {
         doc: Team
@@ -129,7 +146,9 @@ export const TeamMembersPage: React.FC<{
       } = await req.json()
 
       if (!req.ok) {
-        toast.error(`Failed to update settings: ${response?.errors?.[0]?.message}`)
+        toast.error(
+          `Failed to update settings: ${response?.errors?.[0]?.message}`
+        )
         setError(response?.errors?.[0])
         return
       }
@@ -142,12 +161,12 @@ export const TeamMembersPage: React.FC<{
         ...response.doc,
         invitations: [
           ...(team?.invitations || []),
-          ...(response.doc?.sendEmailInvitationsTo?.map(invite => ({
+          ...(response.doc?.sendEmailInvitationsTo?.map((invite) => ({
             email: invite?.email,
             roles: invite?.roles,
-            invitedOn: new Date().toISOString(),
-          })) || []),
-        ],
+            invitedOn: new Date().toISOString()
+          })) || [])
+        ]
       })
 
       // `sendEmailInvitationsTo` is the only field in this form
@@ -156,9 +175,9 @@ export const TeamMembersPage: React.FC<{
         type: 'RESET',
         payload: {
           sendEmailInvitationsTo: {
-            value: [],
-          },
-        },
+            value: []
+          }
+        }
       })
 
       // need to also clear the array provider, though
@@ -168,16 +187,20 @@ export const TeamMembersPage: React.FC<{
       toast.success('Team updated successfully.')
 
       await revalidateCache({
-        tag: `team_${team?.id}`,
+        tag: `team_${team?.id}`
       })
     },
-    [user, team, setTeam],
+    [user, team, setTeam]
   )
 
   return (
     <React.Fragment>
       <SectionHeader title="Team Members" />
-      <Form onSubmit={handleSubmit} className={classes.form} errors={error?.data}>
+      <Form
+        onSubmit={handleSubmit}
+        className={classes.form}
+        errors={error?.data}
+      >
         <FormSubmissionError />
         <FormProcessing message="Updating team, one moment..." />
         <TeamMembers
@@ -208,7 +231,7 @@ export const TeamMembersPage: React.FC<{
             newRoles={selectedNewRoles}
             selectedMember={selectedMember}
             setRoles={setRoles}
-            onRolesUpdated={newRoles => {
+            onRolesUpdated={(newRoles) => {
               const newRolesArray = [...roles]
               newRolesArray[selectedMemberIndex!] = newRoles
               setRoles(newRolesArray)

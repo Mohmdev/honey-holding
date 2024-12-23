@@ -1,20 +1,21 @@
 'use client'
 
 import * as React from 'react'
+import Link from 'next/link.js'
+
 import { InvoicesResult } from '@cloud/_api/fetchInvoices.js'
 import { TeamWithCustomer } from '@cloud/_api/fetchTeam.js'
+import { User } from '@payload-cloud-types'
+import { checkTeamRoles } from '@utilities/check-team-roles.js'
+import { formatDate } from '@utilities/format-date-time.js'
+import { priceFromJSON } from '@utilities/price-from-json.js'
 
-import { CircleIconButton } from '@components/CircleIconButton/index.js'
-import { Heading } from '@components/Heading/index.js'
-import { Pill } from '@components/Pill/index.js'
-import { User } from '@root/payload-cloud-types.js'
-import { checkTeamRoles } from '@root/utilities/check-team-roles.js'
-import { formatDate } from '@root/utilities/format-date-time.js'
-import { priceFromJSON } from '@root/utilities/price-from-json.js'
-import { useInvoices } from './useInvoices.js'
+import { CircleIconButton } from '@components/CircleIconButton'
+import { Heading } from '@components/Heading'
+import { Pill } from '@components/Pill'
 
 import classes from './page.module.scss'
-import Link from 'next/link.js'
+import { useInvoices } from './useInvoices.js'
 
 export const TeamInvoicesPage: React.FC<{
   team: TeamWithCustomer
@@ -27,10 +28,10 @@ export const TeamInvoicesPage: React.FC<{
   const {
     result: invoices,
     isLoading,
-    loadMoreInvoices,
+    loadMoreInvoices
   } = useInvoices({
     team,
-    initialInvoices,
+    initialInvoices
   })
 
   return (
@@ -38,24 +39,34 @@ export const TeamInvoicesPage: React.FC<{
       {hasCustomerID && (
         <React.Fragment>
           {!isCurrentTeamOwner && (
-            <p className={classes.error}>You must be an owner of this team to manage invoices.</p>
+            <p className={classes.error}>
+              You must be an owner of this team to manage invoices.
+            </p>
           )}
           {invoices !== null && (
             <React.Fragment>
-              {Array.isArray(invoices?.data) && invoices?.data?.length === 0 && (
-                <p>No invoices found.</p>
-              )}
+              {Array.isArray(invoices?.data) &&
+                invoices?.data?.length === 0 && <p>No invoices found.</p>}
               {Array.isArray(invoices?.data) && invoices?.data?.length > 0 && (
                 <React.Fragment>
                   <ul className={classes.list}>
                     {invoices &&
                       invoices?.data?.map((invoice, index) => {
-                        const { status, total, created, lines, hosted_invoice_url } = invoice
+                        const {
+                          status,
+                          total,
+                          created,
+                          lines,
+                          hosted_invoice_url
+                        } = invoice
 
                         const dateCreated = new Date(created * 1000)
 
                         return (
-                          <li key={`${invoice.id}-${index}`} className={classes.invoice}>
+                          <li
+                            key={`${invoice.id}-${index}`}
+                            className={classes.invoice}
+                          >
                             <div className={classes.invoiceBlockLeft}>
                               <Heading
                                 element="h3"
@@ -65,7 +76,9 @@ export const TeamInvoicesPage: React.FC<{
                               >
                                 {formatDate({ date: dateCreated })}
                               </Heading>
-                              <span className={classes.invoiceStatus}>{status}</span>
+                              <span className={classes.invoiceStatus}>
+                                {status}
+                              </span>
                             </div>
                             <div className={classes.invoiceLines}>
                               {lines?.data?.map((line, lineIndex) => {
@@ -78,15 +91,23 @@ export const TeamInvoicesPage: React.FC<{
                                   >
                                     <span>
                                       {period?.start && period?.end && (
-                                        <span className={classes.invoiceLinePeriod}>
+                                        <span
+                                          className={classes.invoiceLinePeriod}
+                                        >
                                           {'Period: '}
-                                          {formatDate({ date: new Date(period.start * 1000) })}
+                                          {formatDate({
+                                            date: new Date(period.start * 1000)
+                                          })}
                                           {' - '}
-                                          {formatDate({ date: new Date(period.end * 1000) })}
+                                          {formatDate({
+                                            date: new Date(period.end * 1000)
+                                          })}
                                         </span>
                                       )}
                                     </span>
-                                    <span className={classes.invoiceLineDescription}>
+                                    <span
+                                      className={classes.invoiceLineDescription}
+                                    >
                                       {description}
                                     </span>
                                   </div>
@@ -102,15 +123,15 @@ export const TeamInvoicesPage: React.FC<{
                                 className={[
                                   total < 0
                                     ? classes.invoiceTotalNegative
-                                    : classes.invoiceTotalPositive,
+                                    : classes.invoiceTotalPositive
                                 ]
                                   .filter(Boolean)
                                   .join(' ')}
                               >
                                 {`${priceFromJSON(
                                   JSON.stringify({
-                                    unit_amount: total,
-                                  }),
+                                    unit_amount: total
+                                  })
                                 )}`}
                               </Heading>
                               {hosted_invoice_url && (

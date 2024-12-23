@@ -2,18 +2,18 @@ import { fetchMe } from '@cloud/_api/fetchMe.js'
 import { fetchProjectAndRedirect } from '@cloud/_api/fetchProject.js'
 import { Metadata } from 'next'
 
-import { canUserMangeProject } from '@root/access.js'
-import { MaxWidth } from '@components/MaxWidth/index.js'
-import { Plan } from '@root/payload-cloud-types.js'
-import { mergeOpenGraph } from '@root/seo/mergeOpenGraph.js'
-import { isExpandedDoc } from '@root/utilities/is-expanded-doc.js'
-import { PRODUCTION_ENVIRONMENT_SLUG } from '@root/constants.js'
-import { SectionHeader } from '../_layoutComponents/SectionHeader/index.js'
-import { DeletePlanButton } from './DeletePlanButton/index.js'
-import { DeletePlanModal } from './DeletePlanModal/index.js'
+import { canUserMangeProject } from '@access.js'
+import { MaxWidth } from '@components/MaxWidth'
+import { Plan } from '@payload-cloud-types'
+import { mergeOpenGraph } from '@seo/mergeOpenGraph.js'
+import { isExpandedDoc } from '@utilities/is-expanded-doc.js'
+import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants.js'
+import { SectionHeader } from '../_layoutComponents/SectionHeader
+import { DeletePlanButton } from './DeletePlanButton
+import { DeletePlanModal } from './DeletePlanModal
 
 import classes from './index.module.scss'
-import { generateRoutePath } from '@root/utilities/generate-route-path.js'
+import { generateRoutePath } from '@utilities/generate-route-path.js'
 
 export default async ({
   params,

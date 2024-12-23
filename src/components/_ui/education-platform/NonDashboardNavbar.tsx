@@ -1,11 +1,12 @@
 // @ts-nocheck
 'use client'
 
+import React from 'react'
+import Link from 'next/link'
+
 import { SignedIn, SignedOut, UserButton, useUser } from '@clerk/nextjs'
 import { dark } from '@clerk/themes'
 import { Bell, BookOpen } from 'lucide-react'
-import Link from 'next/link'
-import React from 'react'
 
 const NonDashboardNavbar = () => {
   const { user } = useUser()

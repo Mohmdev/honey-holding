@@ -1,4 +1,8 @@
 import React from 'react'
+import { Metadata } from 'next'
+import { redirect } from 'next/navigation'
+
+import Checkout from '@app/(frontend)/(cloud)/new/(checkout)/Checkout.js'
 import { fetchGitHubToken } from '@cloud/_api/fetchGitHubToken.js'
 import { fetchInstalls } from '@cloud/_api/fetchInstalls.js'
 import { fetchMe } from '@cloud/_api/fetchMe.js'
@@ -6,15 +10,11 @@ import { fetchPaymentMethods } from '@cloud/_api/fetchPaymentMethods.js'
 import { fetchPlans } from '@cloud/_api/fetchPlans.js'
 import { fetchProjectWithSubscription } from '@cloud/_api/fetchProject.js'
 import { fetchTemplates } from '@cloud/_api/fetchTemplates.js'
-import { Metadata } from 'next'
-import { redirect } from 'next/navigation'
-
-import Checkout from '@root/app/(frontend)/(cloud)/new/(checkout)/Checkout.js'
 
 export const dynamic = 'force-dynamic'
 
 export default async ({
-  params,
+  params
 }: {
   params: Promise<{
     'team-slug': string
@@ -34,8 +34,8 @@ export default async ({
   if (!token) {
     redirect(
       `/new/authorize?redirect=${encodeURIComponent(
-        `/cloud/${teamSlug}/${projectSlug}/configure`,
-      )}`,
+        `/cloud/${teamSlug}/${projectSlug}/configure`
+      )}`
     )
   }
 
@@ -43,7 +43,7 @@ export default async ({
   const installs = await fetchInstalls()
   const templates = await fetchTemplates()
   const paymentMethods = await fetchPaymentMethods({
-    team: project.team,
+    team: project.team
   })
 
   return (
@@ -61,7 +61,7 @@ export default async ({
 }
 
 export async function generateMetadata({
-  params,
+  params
 }: {
   params: Promise<{
     'team-slug': string
@@ -73,7 +73,7 @@ export async function generateMetadata({
     title: 'Checkout | Payload Cloud',
     openGraph: {
       title: 'Checkout | Payload Cloud',
-      url: `/cloud/${teamSlug}/${projectSlug}/configure`,
-    },
+      url: `/cloud/${teamSlug}/${projectSlug}/configure`
+    }
   }
 }

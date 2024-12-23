@@ -1,7 +1,9 @@
-import { formatPrice } from './utils'
-import Image from 'next/image'
 import React from 'react'
+import Image from 'next/image'
+
 import type { SearchCourseCardProps } from './types'
+
+import { formatPrice } from './utils'
 
 const CourseCardSearch = ({
   course,

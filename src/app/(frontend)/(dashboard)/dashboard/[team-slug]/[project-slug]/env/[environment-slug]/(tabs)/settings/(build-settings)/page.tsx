@@ -1,6 +1,6 @@
 import {
   default as EnvironmentBuildSettings,
-  generateMetadata,
+  generateMetadata
 } from '@cloud/[team-slug]/[project-slug]/(tabs)/settings/(build-settings)/page'
 
 export default EnvironmentBuildSettings

@@ -1,11 +1,12 @@
 import * as React from 'react'
-import { Tab, Tabs } from '@cloud/_components/Tabs/index.js'
 
-import { Gutter } from '@components/Gutter/index.js'
-import { Indicator } from '@components/Indicator/index.js'
-import { LogLine, SimpleLogs, styleLogs } from '@components/SimpleLogs/index.js'
-import { Deployment } from '@root/payload-cloud-types.js'
-import { useWebSocket } from '@root/utilities/use-websocket.js'
+import { Deployment } from '@payload-cloud-types'
+import { useWebSocket } from '@utilities/use-websocket.js'
+
+import { Gutter } from '@components/Gutter'
+import { Indicator } from '@components/Indicator'
+import { LogLine, SimpleLogs, styleLogs } from '@components/SimpleLogs'
+import { Tab, Tabs } from '@dashboard/Tabs'
 
 import classes from './index.module.scss'
 
@@ -14,12 +15,12 @@ const defaultBuildLogs: LogLine[] = [
     messageChunks: [
       {
         appearance: 'text',
-        text: 'Waiting for build logs...',
-      },
+        text: 'Waiting for build logs...'
+      }
     ],
     timestamp: new Date().toISOString(),
-    service: 'Info',
-  },
+    service: 'Info'
+  }
 ]
 
 const defaultDeployLogs: LogLine[] = [
@@ -27,19 +28,19 @@ const defaultDeployLogs: LogLine[] = [
     messageChunks: [
       {
         appearance: 'text',
-        text: 'Waiting for deploy logs...',
-      },
+        text: 'Waiting for deploy logs...'
+      }
     ],
     timestamp: new Date().toISOString(),
-    service: 'Info',
-  },
+    service: 'Info'
+  }
 ]
 
 const LiveLogs = ({
   active,
   deploymentID,
   type,
-  environmentSlug,
+  environmentSlug
 }: {
   active: boolean
   deploymentID: string
@@ -47,9 +48,11 @@ const LiveLogs = ({
   environmentSlug?: string
 }) => {
   const [logs, setLogs] = React.useState<LogLine[] | undefined>(
-    type === 'BUILD' ? defaultBuildLogs : defaultDeployLogs,
+    type === 'BUILD' ? defaultBuildLogs : defaultDeployLogs
   )
-  const [wsStatus, setWsStatus] = React.useState<'CONNECTING' | 'OPEN' | 'CLOSED'>('CLOSED')
+  const [wsStatus, setWsStatus] = React.useState<
+    'CONNECTING' | 'OPEN' | 'CLOSED'
+  >('CLOSED')
 
   const onLogMessage = React.useCallback((event: MessageEvent) => {
     const message = event?.data
@@ -63,7 +66,7 @@ const LiveLogs = ({
           setLogs(styledLogs)
         } else {
           // live log - append
-          setLogs(existingLogs => [...(existingLogs || []), ...styledLogs])
+          setLogs((existingLogs) => [...(existingLogs || []), ...styledLogs])
         }
       }
     } catch (e) {
@@ -76,18 +79,18 @@ const LiveLogs = ({
       wsStatus === 'CONNECTING'
         ? `${`${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}`.replace(
             'http',
-            'ws',
+            'ws'
           )}/api/deployments/${deploymentID}/logs?logType=${type}${
             environmentSlug ? `&env=${environmentSlug}` : ''
           }`
         : '',
-    onMessage: e => onLogMessage(e),
+    onMessage: (e) => onLogMessage(e),
     onClose: () => {
       setWsStatus('CLOSED')
     },
     onError: () => {
       setWsStatus('CLOSED')
-    },
+    }
   })
 
   React.useEffect(() => {
@@ -105,7 +108,10 @@ type Props = {
   deployment?: Deployment
   environmentSlug?: string
 }
-export const DeploymentLogs: React.FC<Props> = ({ deployment, environmentSlug }) => {
+export const DeploymentLogs: React.FC<Props> = ({
+  deployment,
+  environmentSlug
+}) => {
   const [activeTab, setActiveTab] = React.useState<'build' | 'deploy'>('build')
   const prevBuildStep = React.useRef('')
 
@@ -114,7 +120,10 @@ export const DeploymentLogs: React.FC<Props> = ({ deployment, environmentSlug })
   React.useEffect(() => {
     const buildStepStatus = deployment?.buildStepStatus
     if (buildStepStatus) {
-      if (buildStepStatus === 'SUCCESS' && prevBuildStep.current === 'RUNNING') {
+      if (
+        buildStepStatus === 'SUCCESS' &&
+        prevBuildStep.current === 'RUNNING'
+      ) {
         setActiveTab('deploy')
       }
 
@@ -133,7 +142,9 @@ export const DeploymentLogs: React.FC<Props> = ({ deployment, environmentSlug })
                 label: (
                   <div className={classes.tabLabel}>
                     <Indicator
-                      className={[activeTab !== 'build' ? classes.inactiveIndicator : '']
+                      className={[
+                        activeTab !== 'build' ? classes.inactiveIndicator : ''
+                      ]
                         .filter(Boolean)
                         .join(' ')}
                       status={deployment?.buildStepStatus}
@@ -146,13 +157,15 @@ export const DeploymentLogs: React.FC<Props> = ({ deployment, environmentSlug })
                 isActive: activeTab === 'build',
                 onClick: () => {
                   setActiveTab('build')
-                },
+                }
               },
               {
                 label: (
                   <div className={classes.tabLabel}>
                     <Indicator
-                      className={[activeTab !== 'deploy' ? classes.inactiveIndicator : '']
+                      className={[
+                        activeTab !== 'deploy' ? classes.inactiveIndicator : ''
+                      ]
                         .filter(Boolean)
                         .join(' ')}
                       status={deployment?.deployStepStatus}
@@ -167,8 +180,8 @@ export const DeploymentLogs: React.FC<Props> = ({ deployment, environmentSlug })
                   if (enableDeployTab) {
                     setActiveTab('deploy')
                   }
-                },
-              },
+                }
+              }
             ].filter(Boolean) as Tab[]
           }
         />

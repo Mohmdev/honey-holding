@@ -1,4 +1,5 @@
 import React from 'react'
+
 import type { CustomFixedModalProps } from './types'
 
 const CustomModal = ({ isOpen, onClose, children }: CustomFixedModalProps) => {

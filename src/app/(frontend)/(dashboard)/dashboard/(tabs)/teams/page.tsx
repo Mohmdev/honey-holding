@@ -1,13 +1,15 @@
 import React from 'react'
-import { LinkGrid } from '@blocks/LinkGrid/index.js'
-import { fetchMe } from '@cloud/_api/fetchMe.js'
-import { fetchTeams } from '@cloud/_api/fetchTeam.js'
-import { TeamDrawer, TeamDrawerToggler } from '@cloud/_components/TeamDrawer/index.js'
-import { cloudSlug } from '@cloud/slug.js'
 import { Metadata } from 'next'
 
-import { Gutter } from '@components/Gutter/index.js'
-import { mergeOpenGraph } from '@root/seo/mergeOpenGraph.js'
+import { fetchMe } from '@cloud/_api/fetchMe.js'
+import { fetchTeams } from '@cloud/_api/fetchTeam.js'
+import { cloudSlug } from '@cloud/slug.js'
+import { mergeOpenGraph } from '@seo/mergeOpenGraph.js'
+
+import { LinkGrid } from '@blocks/LinkGrid'
+
+import { Gutter } from '@components/Gutter'
+import { TeamDrawer, TeamDrawerToggler } from '@dashboard/TeamDrawer'
 
 import classes from './page.module.scss'
 
@@ -17,7 +19,9 @@ export default async () => {
   const { user } = await fetchMe()
 
   const teams = await fetchTeams(
-    user?.teams?.map(({ team }) => (team && typeof team === 'object' ? team.id : team || '')) || [],
+    user?.teams?.map(({ team }) =>
+      team && typeof team === 'object' ? team.id : team || ''
+    ) || []
   )
 
   const hasTeams = Boolean(teams?.length && teams.length > 0)
@@ -29,7 +33,10 @@ export default async () => {
           {!hasTeams && (
             <p>
               {`You are not a member of any teams. `}
-              <TeamDrawerToggler className={classes.createTeamLink} drawerSlug={drawerSlug}>
+              <TeamDrawerToggler
+                className={classes.createTeamLink}
+                drawerSlug={drawerSlug}
+              >
                 Create a new team
               </TeamDrawerToggler>
               {' to get started.'}
@@ -40,7 +47,10 @@ export default async () => {
               {`You are a member of ${teams?.length || 0} team${
                 (teams?.length || 0) > 1 ? 's' : ''
               }. `}
-              <TeamDrawerToggler className={classes.createTeamLink} drawerSlug={drawerSlug}>
+              <TeamDrawerToggler
+                className={classes.createTeamLink}
+                drawerSlug={drawerSlug}
+              >
                 Create a new team
               </TeamDrawerToggler>
               {'.'}
@@ -60,10 +70,10 @@ export default async () => {
                     link: {
                       type: 'custom',
                       url: `/${cloudSlug}/${team.slug}`,
-                      label: team.name,
-                    },
+                      label: team.name
+                    }
                   }
-                }) || [],
+                }) || []
             }}
           />
         )}
@@ -77,6 +87,6 @@ export const metadata: Metadata = {
   title: `My Teams`,
   openGraph: mergeOpenGraph({
     title: `My Teams`,
-    url: `/cloud/teams`,
-  }),
+    url: `/cloud/teams`
+  })
 }

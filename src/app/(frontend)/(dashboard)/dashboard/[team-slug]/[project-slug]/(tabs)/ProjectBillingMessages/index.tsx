@@ -1,23 +1,25 @@
 import React from 'react'
+
 import { ProjectWithSubscription } from '@cloud/_api/fetchProject.js'
 import { TeamWithCustomer } from '@cloud/_api/fetchTeam.js'
 import { hasBadSubscription } from '@cloud/_utilities/hasBadSubscription.js'
 import { projectHasPaymentMethod } from '@cloud/_utilities/projectHasPaymentMethod.js'
 import { teamHasDefaultPaymentMethod } from '@cloud/_utilities/teamHasDefaultPaymentMethod.js'
 
-import { Gutter } from '@components/Gutter/index.js'
+import { Gutter } from '@components/Gutter'
+
 import { BadSubscriptionMessage } from './BadSubscription.js'
+import classes from './index.module.scss'
 import { MissingPaymentMethodMessage } from './MissingPaymentMethod.js'
 import { TrialMessage } from './TrialMessage.js'
-
-import classes from './index.module.scss'
 
 export const ProjectBillingMessages: React.FC<{
   team: TeamWithCustomer
   project: ProjectWithSubscription
 }> = ({ team, project }) => {
   const isTrialing = Boolean(
-    project?.stripeSubscriptionStatus === 'trialing' && project?.stripeSubscription?.trial_end,
+    project?.stripeSubscriptionStatus === 'trialing' &&
+      project?.stripeSubscription?.trial_end
   )
 
   // check if this plan is free, and do not show a message if it is
@@ -29,9 +31,12 @@ export const ProjectBillingMessages: React.FC<{
     return null
   }
 
-  const hasBadSubscriptionStatus = hasBadSubscription(project?.stripeSubscriptionStatus)
+  const hasBadSubscriptionStatus = hasBadSubscription(
+    project?.stripeSubscriptionStatus
+  )
 
-  const hasPaymentError = !projectHasPaymentMethod(project) && !teamHasDefaultPaymentMethod(team)
+  const hasPaymentError =
+    !projectHasPaymentMethod(project) && !teamHasDefaultPaymentMethod(team)
 
   if (hasBadSubscriptionStatus) {
     return (

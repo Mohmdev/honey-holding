@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { globalSettings } from '@data/cachedSiteMeta'
+import { getGlobalSettings } from '@data/globals/cachedSiteMeta'
 
 const Favicon: React.FC = async () => {
-  const favicon = await globalSettings.favicon()
+  const favicon = await getGlobalSettings.favicon()
 
   return (
     <>

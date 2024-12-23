@@ -1,13 +1,15 @@
-import { fetchProjectAndRedirect } from '@cloud/_api/fetchProject.js'
-import { PRODUCTION_ENVIRONMENT_SLUG } from '@root/constants.js'
-import { mergeOpenGraph } from '@root/seo/mergeOpenGraph.js'
-import { generateRoutePath } from '@root/utilities/generate-route-path.js'
 import React from 'react'
+
+import { fetchProjectAndRedirect } from '@cloud/_api/fetchProject.js'
+import { mergeOpenGraph } from '@seo/mergeOpenGraph.js'
+import { generateRoutePath } from '@utilities/generate-route-path.js'
 
 import { ProjectDomainsPage } from './page_client.js'
 
+import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants.js'
+
 export default async ({
-  params,
+  params
 }: {
   params: Promise<{
     'environment-slug': string
@@ -18,18 +20,24 @@ export default async ({
   const {
     'environment-slug': environmentSlug = PRODUCTION_ENVIRONMENT_SLUG,
     'project-slug': projectSlug,
-    'team-slug': teamSlug,
+    'team-slug': teamSlug
   } = await params
   const { project, team } = await fetchProjectAndRedirect({
     environmentSlug,
     projectSlug,
-    teamSlug,
+    teamSlug
   })
-  return <ProjectDomainsPage environmentSlug={environmentSlug} project={project} team={team} />
+  return (
+    <ProjectDomainsPage
+      environmentSlug={environmentSlug}
+      project={project}
+      team={team}
+    />
+  )
 }
 
 export async function generateMetadata({
-  params,
+  params
 }: {
   params: Promise<{
     'environment-slug': string
@@ -40,7 +48,7 @@ export async function generateMetadata({
   const {
     'environment-slug': environmentSlug = PRODUCTION_ENVIRONMENT_SLUG,
     'project-slug': projectSlug,
-    'team-slug': teamSlug,
+    'team-slug': teamSlug
   } = await params
   return {
     openGraph: mergeOpenGraph({
@@ -49,9 +57,9 @@ export async function generateMetadata({
         environmentSlug,
         projectSlug,
         suffix: 'settings/domains',
-        teamSlug,
-      }),
+        teamSlug
+      })
     }),
-    title: 'Domains',
+    title: 'Domains'
   }
 }

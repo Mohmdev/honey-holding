@@ -1,20 +1,22 @@
-import { fetchProjectAndRedirect } from '@cloud/_api/fetchProject.js'
-import { DashboardTabs } from '@cloud/_components/DashboardTabs/index.js'
-import { hasBadSubscription } from '@cloud/_utilities/hasBadSubscription.js'
-import { cloudSlug } from '@cloud/slug.js'
 import { Metadata } from 'next'
 
-import { Gutter } from '@components/Gutter/index.js'
-import { mergeOpenGraph } from '@root/seo/mergeOpenGraph.js'
-import { ProjectBillingMessages } from './ProjectBillingMessages/index.js'
+import { fetchProjectAndRedirect } from '@cloud/_api/fetchProject.js'
+import { DashboardTabs } from '@root/app/(frontend)/(dashboard)/~/components/DashboardTabs'
+import { ProjectHeader } from '@dashboard/ProjectHeader'
+import { hasBadSubscription } from '@cloud/_utilities/hasBadSubscription.js'
+import { cloudSlug } from '@cloud/slug.js'
+import { mergeOpenGraph } from '@seo/mergeOpenGraph.js'
+import { generateRoutePath } from '@utilities/generate-route-pat
 
-import { ProjectHeader } from '@cloud/_components/ProjectHeader/index.js'
-import { generateRoutePath } from '@root/utilities/generate-route-path.js'
-import { PRODUCTION_ENVIRONMENT_SLUG } from '@root/constants.js'
+import { Gutter } from '@components/Gutter'
+
+import { ProjectBillingMessages } from './ProjectBillingMessages'
+
+import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants.js'
 
 export default async ({
   children,
-  params,
+  params
 }: {
   children: React.ReactNode
   params: Promise<{
@@ -26,7 +28,7 @@ export default async ({
   const {
     'environment-slug': environmentSlug = PRODUCTION_ENVIRONMENT_SLUG,
     'project-slug': projectSlug,
-    'team-slug': teamSlug,
+    'team-slug': teamSlug
   } = await params
 
   // Note: this fetch will get deduped by the page
@@ -35,17 +37,20 @@ export default async ({
   const { team, project } = await fetchProjectAndRedirect({
     teamSlug,
     projectSlug,
-    environmentSlug,
+    environmentSlug
   })
 
   // display an error if the project has a bad subscription status
-  const hasBadSubscriptionStatus = hasBadSubscription(project?.stripeSubscriptionStatus)
+  const hasBadSubscriptionStatus = hasBadSubscription(
+    project?.stripeSubscriptionStatus
+  )
 
   // disable some tabs when the `infraStatus` is not active
   // if infra failed, enable settings tab
   // i.e. db creation was successful, but the app failed to deploy, or is deploying
   const enableAllTabs =
-    (project?.infraStatus && !['notStarted', 'awaitingDatabase'].includes(project.infraStatus)) ||
+    (project?.infraStatus &&
+      !['notStarted', 'awaitingDatabase'].includes(project.infraStatus)) ||
     project?.infraStatus === 'done'
 
   return (
@@ -59,7 +64,7 @@ export default async ({
                 acc.push({ label: name, value: environmentSlug })
                 return acc
               },
-              [{ label: 'Production', value: PRODUCTION_ENVIRONMENT_SLUG }],
+              [{ label: 'Production', value: PRODUCTION_ENVIRONMENT_SLUG }]
             ) || []
           }
         />
@@ -70,8 +75,8 @@ export default async ({
               href: generateRoutePath({
                 teamSlug,
                 projectSlug,
-                environmentSlug,
-              }),
+                environmentSlug
+              })
             },
             ...(enableAllTabs
               ? {
@@ -81,8 +86,8 @@ export default async ({
                       teamSlug,
                       projectSlug,
                       environmentSlug,
-                      suffix: 'database',
-                    }),
+                      suffix: 'database'
+                    })
                   },
                   'file-storage': {
                     label: 'File Storage',
@@ -90,8 +95,8 @@ export default async ({
                       teamSlug,
                       projectSlug,
                       environmentSlug,
-                      suffix: 'file-storage',
-                    }),
+                      suffix: 'file-storage'
+                    })
                   },
                   logs: {
                     label: 'Logs',
@@ -99,9 +104,9 @@ export default async ({
                       teamSlug,
                       projectSlug,
                       environmentSlug,
-                      suffix: 'logs',
-                    }),
-                  },
+                      suffix: 'logs'
+                    })
+                  }
                 }
               : {}),
             settings: {
@@ -110,10 +115,10 @@ export default async ({
                 teamSlug,
                 projectSlug,
                 environmentSlug,
-                suffix: 'settings',
+                suffix: 'settings'
               }),
-              error: hasBadSubscriptionStatus,
-            },
+              error: hasBadSubscriptionStatus
+            }
           }}
         />
       </Gutter>
@@ -124,7 +129,7 @@ export default async ({
 }
 
 export async function generateMetadata({
-  params,
+  params
 }: {
   params: Promise<{
     'team-slug': string
@@ -135,18 +140,18 @@ export async function generateMetadata({
   const {
     'team-slug': teamSlug,
     'project-slug': projectSlug,
-    'environment-slug': environmentSlug = PRODUCTION_ENVIRONMENT_SLUG,
+    'environment-slug': environmentSlug = PRODUCTION_ENVIRONMENT_SLUG
   } = await params
   return {
     title: {
       template: `${teamSlug} / ${projectSlug}${
         environmentSlug ? ` / ${environmentSlug}` : ''
       } | %s`,
-      default: 'Project',
+      default: 'Project'
     },
     openGraph: mergeOpenGraph({
       title: `${teamSlug} / ${projectSlug} | %s`,
-      url: `/cloud/${teamSlug}/${projectSlug}${environmentSlug ? `/env/${environmentSlug}` : ''}`,
-    }),
+      url: `/cloud/${teamSlug}/${projectSlug}${environmentSlug ? `/env/${environmentSlug}` : ''}`
+    })
   }
 }

@@ -1,8 +1,10 @@
-import { Card, CardHeader, CardContent, CardTitle, CardFooter } from '../card'
-import { Avatar, AvatarImage, AvatarFallback } from '../avatar'
 import Image from 'next/image'
-import { formatPrice } from './utils'
+
 import type { CourseCardProps } from './types'
+
+import { Avatar, AvatarFallback, AvatarImage } from '../avatar'
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '../card'
+import { formatPrice } from './utils'
 
 const CourseCard = ({ course, onGoToCourse }: CourseCardProps) => {
   return (

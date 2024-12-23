@@ -1,6 +1,6 @@
 import {
   default as EnvironmentLogs,
-  metadata,
+  metadata
 } from '@cloud/[team-slug]/[project-slug]/(tabs)/logs/page'
 
 export default EnvironmentLogs

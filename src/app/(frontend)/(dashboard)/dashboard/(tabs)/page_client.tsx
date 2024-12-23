@@ -1,19 +1,22 @@
 'use client'
 
 import React, { useEffect } from 'react'
-import { ProjectCard } from '@cloud/_components/ProjectCard/index.js'
-import { TeamSelector } from '@cloud/_components/TeamSelector/index.js'
-import { Text } from '@forms/fields/Text/index.js'
 import Link from 'next/link'
 
-import { Gutter } from '@components/Gutter/index.js'
-import { Pagination } from '@components/Pagination/index.js'
-import { Team, Template, User } from '@root/payload-cloud-types.js'
-import { useAuth } from '@root/providers/Auth/index.js'
-import useDebounce from '@root/utilities/use-debounce.js'
-import { NewProjectBlock } from '@components/NewProject/index.js'
-import { fetchProjectsClient, ProjectsRes } from '../_api/fetchProjects.js'
+import { Team, Template, User } from '@payload-cloud-types'
+import useDebounce from '@utilities/use-debounce.js'
 
+import { useAuth } from '@providers/Auth'
+
+import { Text } from '@forms/fields/Text'
+
+import { Gutter } from '@components/Gutter'
+import { NewProjectBlock } from '@components/NewProject'
+import { Pagination } from '@components/Pagination'
+import { ProjectCard } from '@dashboard/ProjectCard'
+import { TeamSelector } from '@dashboard/TeamSelector'
+
+import { fetchProjectsClient, ProjectsRes } from '../../~/_api/fetchProjects.js'
 import classes from './page.module.scss'
 
 const delay = 500
@@ -26,7 +29,9 @@ export const CloudPage: React.FC<{
 }> = ({ initialState, templates }) => {
   const { user } = useAuth()
   const [selectedTeam, setSelectedTeam] = React.useState<string | 'none'>()
-  const prevSelectedTeam = React.useRef<string | 'none' | undefined>(selectedTeam)
+  const prevSelectedTeam = React.useRef<string | 'none' | undefined>(
+    selectedTeam
+  )
 
   const [result, setResult] = React.useState<ProjectsRes>(initialState)
   const [page, setPage] = React.useState<number>(initialState?.page || 1)
@@ -41,9 +46,8 @@ export const CloudPage: React.FC<{
   // on initial load, we'll know whether or not to render the `NewProjectBlock`
   // this will prevent subsequent searches from showing the `NewProjectBlock`
   // this will also prevent content flash if using `projectRes.docs.length` to conditionally render
-  const [renderNewProjectBlock, setRenderNewProjectBlock] = React.useState<boolean>(
-    initialState?.totalDocs === 0,
-  )
+  const [renderNewProjectBlock, setRenderNewProjectBlock] =
+    React.useState<boolean>(initialState?.totalDocs === 0)
 
   useEffect(() => {
     // keep a timer reference so that we can cancel the old request
@@ -70,19 +74,22 @@ export const CloudPage: React.FC<{
         // reduce user teams to an array of team IDs
         const userTeams =
           user?.teams?.map(({ team }) =>
-            team && typeof team === 'object' && team !== null && 'id' in team ? team.id : team,
+            team && typeof team === 'object' && team !== null && 'id' in team
+              ? team.id
+              : team
           ) || [].filter(Boolean) // eslint-disable-line function-paren-newline
 
         // filter 'none' from the selected teams array
         // select all user teams if no team is selected
-        const teams = !selectedTeam || selectedTeam === 'none' ? userTeams : [selectedTeam]
+        const teams =
+          !selectedTeam || selectedTeam === 'none' ? userTeams : [selectedTeam]
 
         try {
           requestRef.current = setTimeout(async () => {
             const projectsRes = await fetchProjectsClient({
               teamIDs: teams,
               page: searchChanged || teamChanged ? 1 : page,
-              search: debouncedSearch,
+              search: debouncedSearch
             })
 
             const end = Date.now()
@@ -90,10 +97,12 @@ export const CloudPage: React.FC<{
 
             // the request was too fast, so we'll add a delay to make it appear as if it took longer
             if (diff < delay) {
-              await new Promise(resolve => setTimeout(resolve, delay - diff))
+              await new Promise((resolve) => setTimeout(resolve, delay - diff))
             }
 
-            setRenderNewProjectBlock(!debouncedSearch && projectsRes?.totalDocs === 0)
+            setRenderNewProjectBlock(
+              !debouncedSearch && projectsRes?.totalDocs === 0
+            )
             setResult(projectsRes)
             setIsLoading(false)
           }, 0)
@@ -113,14 +122,16 @@ export const CloudPage: React.FC<{
     : result?.docs || []
 
   const matchedTeam = user?.teams?.find(({ team }) =>
-    typeof team === 'string' ? team === selectedTeam : team?.id === selectedTeam,
+    typeof team === 'string' ? team === selectedTeam : team?.id === selectedTeam
   )?.team as Team //eslint-disable-line function-paren-newline
 
   if (initialState?.totalDocs === 0) {
     return (
       <NewProjectBlock
         heading={
-          selectedTeam ? `Team '${matchedTeam?.name}' has no projects` : `You have no projects`
+          selectedTeam
+            ? `Team '${matchedTeam?.name}' has no projects`
+            : `You have no projects`
         }
         cardLeader="New"
         teamSlug={matchedTeam?.slug}
@@ -143,11 +154,14 @@ export const CloudPage: React.FC<{
           className={['cols-8 cols-l-8 cols-m-8', classes.search].join(' ')}
         />
         <TeamSelector
-          onChange={incomingTeam => {
+          onChange={(incomingTeam) => {
             setSelectedTeam(incomingTeam?.id)
             setEnableSearch(true)
           }}
-          className={['cols-6 cols-l-4 cols-m-6 cols-s-4', classes.teamSelector].join(' ')}
+          className={[
+            'cols-6 cols-l-4 cols-m-6 cols-s-4',
+            classes.teamSelector
+          ].join(' ')}
           initialValue="none"
           allowEmpty
           label={false}
@@ -165,7 +179,9 @@ export const CloudPage: React.FC<{
       {renderNewProjectBlock && !isLoading && (
         <NewProjectBlock
           heading={
-            selectedTeam ? `Team '${matchedTeam?.name}' has no projects` : `You have no projects`
+            selectedTeam
+              ? `Team '${matchedTeam?.name}' has no projects`
+              : `You have no projects`
           }
           cardLeader="New"
           largeHeading={false}
@@ -198,7 +214,7 @@ export const CloudPage: React.FC<{
           className={classes.pagination}
           page={result?.page}
           totalPages={result?.totalPages}
-          setPage={page => {
+          setPage={(page) => {
             setPage(page)
             setEnableSearch(true)
           }}

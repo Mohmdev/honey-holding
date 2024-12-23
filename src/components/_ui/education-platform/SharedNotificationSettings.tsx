@@ -1,20 +1,24 @@
 // @ts-nocheck
 'use client'
 
+import React from 'react'
+
+import { useUser } from '@clerk/nextjs'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+
 import {
   NotificationSettingsFormData,
   notificationSettingsSchema
 } from '@lib/schemas'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { useUpdateUserMutation } from '@/state/api'
-import { useUser } from '@clerk/nextjs'
-import React from 'react'
-import { useForm } from 'react-hook-form'
-import Header from './Header'
+
+import type { SharedNotificationSettingsProps, UserSettings } from './types'
+
+import { Button } from '../button'
 import { Form } from '../form'
 import { CustomFormField } from './CustomFormField'
-import { Button } from '../button'
-import type { SharedNotificationSettingsProps, UserSettings } from './types'
+import Header from './Header'
 
 const SharedNotificationSettings = ({
   title = 'Notification Settings',

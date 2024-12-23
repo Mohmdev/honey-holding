@@ -1,34 +1,52 @@
 import React from 'react'
-import { unstable_cache } from 'next/cache'
 import { draftMode } from 'next/headers'
 
-import { fetchGlobals } from '@root/_data'
+import type { Footer as FooterType, MainMenu } from '@payload-types'
 
 import { ErrorMessage } from '@components/ErrorMessage'
 import { Footer } from '@components/Footer'
 import { Header } from '@components/Header'
 
+import { getFooter } from '@data/globals/cachedFooter'
+import { getMainMenu } from '@data/globals/cachedMainMenu'
+
 export default async function NotFound() {
   const { isEnabled: draft } = await draftMode()
 
-  const getGlobals = draft
-    ? fetchGlobals
-    : unstable_cache(fetchGlobals, [
-        'globals',
-        'mainMenu',
-        'footer',
-        'graphics'
-      ])
+  const isDraft = draft && draft === true ? 'draft' : 'published'
 
-  const { footer, mainMenu, graphics } = await getGlobals()
+  const footer: FooterType = await getFooter.all()
+  const footerData =
+    footer && isDraft === 'published' && typeof footer === 'object'
+      ? (footer as FooterType)
+      : ({
+          id: 'preview-footer',
+          _status: isDraft
+        } as FooterType)
+
+  const mainMenu: MainMenu = await getMainMenu.all()
+  const mainMenuData =
+    mainMenu && isDraft === 'published' && typeof mainMenu === 'object'
+      ? (mainMenu as MainMenu)
+      : ({
+          id: 'preview-main-menu',
+          _status: isDraft,
+          menuCta: {
+            label: 'Preview CTA',
+            type: 'custom',
+            url: '#'
+          },
+          tabs: []
+        } as MainMenu)
 
   return (
     <React.Fragment>
-      <Header {...mainMenu} {...graphics} />
+      <Header {...mainMenuData} />
       <div>
         <ErrorMessage />
         <div id="docsearch" />
-        <Footer {...footer} />
+        {/* <Footer {...footer} /> */}
+        <Footer {...footerData} />
       </div>
     </React.Fragment>
   )

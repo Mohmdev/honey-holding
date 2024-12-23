@@ -1,6 +1,6 @@
 import {
   default as EnvironmentDatabase,
-  metadata,
+  metadata
 } from '@cloud/[team-slug]/[project-slug]/(tabs)/database/page'
 
 export default EnvironmentDatabase

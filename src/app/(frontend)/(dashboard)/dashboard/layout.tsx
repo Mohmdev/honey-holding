@@ -1,33 +1,34 @@
 import { Fragment } from 'react'
 import { Metadata } from 'next'
 
-import { Gutter } from '@components/Gutter/index.js'
-import { mergeOpenGraph } from '@root/seo/mergeOpenGraph.js'
-import { RenderParams } from '@components/RenderParams/index.js'
-import { fetchMe } from './_api/fetchMe.js'
+import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
+
+import { Gutter } from '@components/Gutter'
+import { RenderParams } from '@components/RenderParams'
+import { fetchMe } from '@dashboard/api/fetchMe'
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | Payload Cloud',
-    default: 'Payload Cloud',
+    template: '%s | Nexweb Dashboard',
+    default: 'Nexweb Dashboard'
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Payload',
+    title: 'Nexweb',
     description: 'The Node & React TypeScript Headless CMS',
-    creator: '@payloadcms',
+    creator: '@mohmdev'
   },
   // TODO: Add cloud graphic
-  openGraph: mergeOpenGraph(),
+  openGraph: mergeOpenGraph()
 }
 
-export default async props => {
+export default async function Layout(props) {
   const { children } = props
 
   await fetchMe({
     nullUserRedirect: `/login?error=${encodeURIComponent(
-      'You must be logged in to visit this page',
-    )}`,
+      'You must be logged in to visit this page'
+    )}`
   })
 
   return (

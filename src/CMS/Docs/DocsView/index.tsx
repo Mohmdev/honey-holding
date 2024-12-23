@@ -2,19 +2,23 @@
 
 import React from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { Tabs } from './tabs'
+
 import styles from './index.module.scss'
+import { Tabs } from './tabs'
 
 interface DocsViewProps {
   activeKey: string
 }
 
-export const DocsView: React.FC<DocsViewProps> = ({ activeKey: initialKey }) => {
+export const DocsView: React.FC<DocsViewProps> = ({
+  activeKey: initialKey
+}) => {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [activeKey, setActiveKey] = React.useState(initialKey)
 
-  const ActiveComponent = Tabs[activeKey]?.component || Tabs['getting-started'].component
+  const ActiveComponent =
+    Tabs[activeKey]?.component || Tabs['getting-started'].component
 
   const handleDocChange = (key: string) => {
     setActiveKey(key)

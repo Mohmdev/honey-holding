@@ -1,12 +1,15 @@
 import React from 'react'
+
+import { FileText } from 'lucide-react'
+
+import type { AccordionSectionsProps } from './types'
+
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger
 } from '../accordion'
-import { FileText } from 'lucide-react'
-import type { AccordionSectionsProps } from './types'
 
 const AccordionSections = ({ sections }: AccordionSectionsProps) => {
   return (

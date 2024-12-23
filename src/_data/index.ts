@@ -4,17 +4,9 @@ import { getPayload } from 'payload'
 
 import config from '@payload-config'
 
-import type {
-  Footer,
-  GlobalSetting,
-  MainMenu,
-  Page,
-  Portfolio,
-  Post
-} from '@payload-types'
+import type { Footer, MainMenu, Page, Portfolio, Post } from '@payload-types'
 
 export const fetchGlobals = async (): Promise<{
-  graphics: GlobalSetting['branding']
   footer: Footer
   mainMenu: MainMenu
 }> => {
@@ -27,15 +19,10 @@ export const fetchGlobals = async (): Promise<{
     slug: 'footer',
     depth: 1
   })
-  const globalSettings = await payload.findGlobal({
-    slug: 'global-settings',
-    depth: 1
-  })
 
   return {
     footer,
-    mainMenu,
-    graphics: globalSettings.branding
+    mainMenu
   }
 }
 

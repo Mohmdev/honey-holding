@@ -1,8 +1,10 @@
-import { formatPrice } from './utils'
-import Image from 'next/image'
 import React from 'react'
-import AccordionSections from './AccordionSections'
+import Image from 'next/image'
+
 import type { CoursePreviewProps } from './types'
+
+import AccordionSections from './AccordionSections'
+import { formatPrice } from './utils'
 
 const CoursePreview = ({ course }: CoursePreviewProps) => {
   const price = formatPrice(course.price)

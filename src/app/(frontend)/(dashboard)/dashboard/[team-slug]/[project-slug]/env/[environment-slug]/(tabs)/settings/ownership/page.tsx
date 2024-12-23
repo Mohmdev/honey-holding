@@ -1,6 +1,6 @@
 import {
   default as EnvironmentSettingsOwnershipPage,
-  generateMetadata,
+  generateMetadata
 } from '@cloud/[team-slug]/[project-slug]/(tabs)/settings/ownership/page.js'
 
 export default EnvironmentSettingsOwnershipPage

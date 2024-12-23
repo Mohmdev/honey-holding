@@ -1,19 +1,23 @@
 'use client'
 
 import * as React from 'react'
-import { toast } from 'sonner'
-import { Text } from '@forms/fields/Text/index.js'
-import Form from '@forms/Form/index.js'
-import Submit from '@forms/Submit/index.js'
-import { OnSubmit } from '@forms/types.js'
-import { validateDomain } from '@forms/validations.js'
 
-import { Project } from '@root/payload-cloud-types.js'
+import { Project } from '@payload-cloud-types'
+import { toast } from 'sonner'
+
+import { Text } from '@forms/fields/Text'
+import Form from '@forms/Form'
+import Submit from '@forms/Submit'
+import { OnSubmit } from '@forms/types'
+import { validateDomain } from '@forms/validations.js'
 
 import classes from './index.module.scss'
 
 const generateUUID = () => {
-  return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+  return (
+    Math.random().toString(36).substring(2, 15) +
+    Math.random().toString(36).substring(2, 15)
+  )
 }
 
 const emailDomainFieldPath = 'newEmailDomain'
@@ -34,11 +38,12 @@ export const AddEmailDomain: React.FC<{
         cloudflareID?: string
         id?: string
       } = {
-        domain: data[emailDomainFieldPath] as string,
+        domain: data[emailDomainFieldPath] as string
       }
 
       const domainExists = projectEmailDomains?.find(
-        projectEmailDomains => projectEmailDomains.domain === newEmailDomain.domain,
+        (projectEmailDomains) =>
+          projectEmailDomains.domain === newEmailDomain.domain
       )
 
       if (!domainExists) {
@@ -51,12 +56,15 @@ export const AddEmailDomain: React.FC<{
               method: 'PATCH',
               credentials: 'include',
               headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
               },
               body: JSON.stringify({
-                customEmailDomains: [newEmailDomain, ...(projectEmailDomains || [])],
-              }),
-            },
+                customEmailDomains: [
+                  newEmailDomain,
+                  ...(projectEmailDomains || [])
+                ]
+              })
+            }
           )
 
           if (req.status === 200) {
@@ -77,7 +85,7 @@ export const AddEmailDomain: React.FC<{
         toast.error('Domain already exists.')
       }
     },
-    [projectID, projectEmailDomains],
+    [projectID, projectEmailDomains]
   )
 
   return (

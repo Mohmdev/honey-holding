@@ -1,6 +1,6 @@
 import {
   default as EnvironmentSettingsBillingPage,
-  generateMetadata,
+  generateMetadata
 } from '@cloud/[team-slug]/[project-slug]/(tabs)/settings/billing/page.js'
 
 export default EnvironmentSettingsBillingPage

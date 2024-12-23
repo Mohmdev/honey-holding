@@ -1,18 +1,20 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import * as React from 'react'
-import { toast } from 'sonner'
-import { useModal } from '@faceless-ui/modal'
-import { Secret } from '@forms/fields/Secret/index.js'
 import Link from 'next/link'
 
-import { Button, ButtonProps } from '@components/Button/index.js'
-import { CopyToClipboard } from '@components/CopyToClipboard/index.js'
-import { Heading } from '@components/Heading/index.js'
-import { ModalWindow } from '@components/ModalWindow/index.js'
-import { Accordion } from '@components/Accordion/index.js'
-import { ExternalLinkIcon } from '@root/icons/ExternalLinkIcon/index.js'
-import { Project, Team } from '@root/payload-cloud-types.js'
-import { qs } from '@root/utilities/qs.js'
+import { useModal } from '@faceless-ui/modal'
+import { Project, Team } from '@payload-cloud-types'
+import { qs } from '@utilities/qs.js'
+import { toast } from 'sonner'
+
+import { Secret } from '@forms/fields/Secret'
+
+import { ExternalLinkIcon } from '@icons/ExternalLinkIcon'
+import { Accordion } from '@components/Accordion'
+import { Button, ButtonProps } from '@components/Button'
+import { CopyToClipboard } from '@components/CopyToClipboard'
+import { Heading } from '@components/Heading'
+import { ModalWindow } from '@components/ModalWindow'
 
 import classes from './index.module.scss'
 
@@ -31,13 +33,19 @@ export const ManageEmailDomain: React.FC<Props> = ({
   emailDomain,
   project,
   team,
-  environmentSlug,
+  environmentSlug
 }) => {
-  const { id, domain: domainURL, customDomainResendDNSRecords, resendDomainID } = emailDomain
+  const {
+    id,
+    domain: domainURL,
+    customDomainResendDNSRecords,
+    resendDomainID
+  } = emailDomain
   const modalSlug = `delete-emailDomain-${id}`
 
   const { openModal, closeModal } = useModal()
-  const [verificationStatus, setVerificationStatus] = useState<VerificationStatus>('not_started')
+  const [verificationStatus, setVerificationStatus] =
+    useState<VerificationStatus>('not_started')
   const projectID = project?.id
   const projectEmailDomains = project?.customEmailDomains
   const hasInitialized = useRef(false)
@@ -46,7 +54,7 @@ export const ManageEmailDomain: React.FC<Props> = ({
     async (domainId: string) => {
       const query = qs.stringify({
         domainId,
-        env: environmentSlug,
+        env: environmentSlug
       })
       const { status } = await fetch(
         `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/projects/${project?.id}/email-verification${
@@ -55,13 +63,13 @@ export const ManageEmailDomain: React.FC<Props> = ({
         {
           credentials: 'include',
           headers: {
-            'Content-Type': 'application/json',
-          },
-        },
-      ).then(res => res.json())
+            'Content-Type': 'application/json'
+          }
+        }
+      ).then((res) => res.json())
       setVerificationStatus(status)
     },
-    [project?.id],
+    [project?.id]
   )
 
   useEffect(() => {
@@ -75,7 +83,7 @@ export const ManageEmailDomain: React.FC<Props> = ({
     async (domainId: string) => {
       const query = qs.stringify({
         domainId,
-        env: environmentSlug,
+        env: environmentSlug
       })
       const { value } = await fetch(
         `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/projects/${project?.id}/email-api-key${
@@ -84,21 +92,21 @@ export const ManageEmailDomain: React.FC<Props> = ({
         {
           credentials: 'include',
           headers: {
-            'Content-Type': 'application/json',
-          },
-        },
-      ).then(res => res.json())
+            'Content-Type': 'application/json'
+          }
+        }
+      ).then((res) => res.json())
 
       return value
     },
-    [project?.id],
+    [project?.id]
   )
 
   const patchEmailDomains = useCallback(
     async (emailDomains: Props['emailDomain'][]) => {
       try {
         const query = qs.stringify({
-          env: environmentSlug,
+          env: environmentSlug
         })
         const req = await fetch(
           `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/projects/${projectID}${
@@ -108,10 +116,10 @@ export const ManageEmailDomain: React.FC<Props> = ({
             method: 'PATCH',
             credentials: 'include',
             headers: {
-              'Content-Type': 'application/json',
+              'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ customEmailDomains: emailDomains }),
-          },
+            body: JSON.stringify({ customEmailDomains: emailDomains })
+          }
         )
 
         if (req.status === 200) {
@@ -125,7 +133,7 @@ export const ManageEmailDomain: React.FC<Props> = ({
 
       return null
     },
-    [projectID],
+    [projectID]
   )
 
   const verifyEmailDomain = useCallback(
@@ -133,7 +141,7 @@ export const ManageEmailDomain: React.FC<Props> = ({
       try {
         const query = qs.stringify({
           domainId,
-          env: environmentSlug,
+          env: environmentSlug
         })
         const req = await fetch(
           `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/projects/${projectID}/verify-email-domain${
@@ -143,10 +151,10 @@ export const ManageEmailDomain: React.FC<Props> = ({
             method: 'POST',
             credentials: 'include',
             headers: {
-              'Content-Type': 'application/json',
+              'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ domain: domainURL }),
-          },
+            body: JSON.stringify({ domain: domainURL })
+          }
         )
 
         if (req.status === 200) {
@@ -158,12 +166,12 @@ export const ManageEmailDomain: React.FC<Props> = ({
         console.error(e) // eslint-disable-line no-console
       }
     },
-    [domainURL, projectID],
+    [domainURL, projectID]
   )
 
   const deleteEmailDomain = useCallback(async () => {
     const remainingDomains = (projectEmailDomains || []).filter(
-      existingDomain => existingDomain.id !== id,
+      (existingDomain) => existingDomain.id !== id
     )
 
     await patchEmailDomains(remainingDomains)
@@ -182,7 +190,9 @@ export const ManageEmailDomain: React.FC<Props> = ({
     }
   }
 
-  const verificationStatusColor = (status: VerificationStatus): ButtonProps['appearance'] => {
+  const verificationStatusColor = (
+    status: VerificationStatus
+  ): ButtonProps['appearance'] => {
     switch (status) {
       case 'not_started':
         return 'secondary'
@@ -202,7 +212,11 @@ export const ManageEmailDomain: React.FC<Props> = ({
         openOnInit
         label={
           <div className={classes.labelWrap}>
-            <Link href={`https://${domainURL}`} target="_blank" className={classes.linkedDomain}>
+            <Link
+              href={`https://${domainURL}`}
+              target="_blank"
+              className={classes.linkedDomain}
+            >
               <div className={classes.domainTitleName}>{domainURL}</div>
               <ExternalLinkIcon className={classes.externalLinkIcon} />
             </Link>
@@ -211,25 +225,28 @@ export const ManageEmailDomain: React.FC<Props> = ({
       >
         <div className={classes.domainContent}>
           <div className={classes.domainInfo}>
-            {(emailDomain.resendAPIKey && typeof emailDomain.resendDomainID === 'string') ?? (
+            {(emailDomain.resendAPIKey &&
+              typeof emailDomain.resendDomainID === 'string') ?? (
               <Secret
                 label="Resend API Key"
                 loadSecret={() =>
                   loadCustomDomainEmailAPIKey(
                     typeof emailDomain.resendDomainID === 'string'
                       ? emailDomain.resendDomainID
-                      : '',
+                      : ''
                   )
                 }
                 readOnly
               />
             )}
-            {emailDomain.resendDomainID && verificationStatus !== 'verified' && (
-              <p>
-                To use your custom domain, add the following records to your DNS provider. Once
-                added, click verify to confirm your domain settings with Resend.
-              </p>
-            )}
+            {emailDomain.resendDomainID &&
+              verificationStatus !== 'verified' && (
+                <p>
+                  To use your custom domain, add the following records to your
+                  DNS provider. Once added, click verify to confirm your domain
+                  settings with Resend.
+                </p>
+              )}
           </div>
           <table className={classes.records}>
             <thead>
@@ -262,7 +279,7 @@ export const ManageEmailDomain: React.FC<Props> = ({
                         </td>
                       )}
                     </tr>
-                  ),
+                  )
                 )}
             </tbody>
           </table>
@@ -272,11 +289,17 @@ export const ManageEmailDomain: React.FC<Props> = ({
             <Button
               label={formatVerificationStatus(verificationStatus)}
               appearance={verificationStatusColor(verificationStatus)}
-              onClick={() => verifyEmailDomain(emailDomain.resendDomainID as string)}
+              onClick={() =>
+                verifyEmailDomain(emailDomain.resendDomainID as string)
+              }
             />
           </div>
           <div className={classes.rightActions}>
-            <Button label="Delete" appearance="danger" onClick={() => openModal(modalSlug)} />
+            <Button
+              label="Delete"
+              appearance="danger"
+              onClick={() => openModal(modalSlug)}
+            />
           </div>
         </div>
       </Accordion>
@@ -286,8 +309,16 @@ export const ManageEmailDomain: React.FC<Props> = ({
             Are you sure you want to delete this domain?
           </Heading>
           <div className={classes.modalActions}>
-            <Button label="Cancel" appearance="secondary" onClick={() => closeModal(modalSlug)} />
-            <Button label="Delete" appearance="danger" onClick={deleteEmailDomain} />
+            <Button
+              label="Cancel"
+              appearance="secondary"
+              onClick={() => closeModal(modalSlug)}
+            />
+            <Button
+              label="Delete"
+              appearance="danger"
+              onClick={deleteEmailDomain}
+            />
           </div>
         </div>
       </ModalWindow>

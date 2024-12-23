@@ -5,18 +5,18 @@ import { toast } from 'sonner'
 import { revalidateCache } from '@cloud/_actions/revalidateCache.js'
 import { CollapsibleGroup } from '@faceless-ui/collapsibles'
 import { useModal } from '@faceless-ui/modal'
-import { Text } from '@forms/fields/Text/index.js'
-import { Textarea } from '@forms/fields/Textarea/index.js'
-import Form from '@forms/Form/index.js'
-import Submit from '@forms/Submit/index.js'
+import { Text } from '@forms/fields/Text'
+import { Textarea } from '@forms/fields/Textarea
+import Form from '@forms/Form
+import Submit from '@forms/Submit
 
-import { Button } from '@components/Button/index.js'
-import { Heading } from '@components/Heading/index.js'
-import { ModalWindow } from '@components/ModalWindow/index.js'
-import { Accordion } from '@components/Accordion/index.js'
-import { Project } from '@root/payload-cloud-types.js'
+import { Button } from '@components/Button
+import { Heading } from '@components/Heading
+import { ModalWindow } from '@components/ModalWindow
+import { Accordion } from '@components/Accordion
+import { Project } from '@payload-cloud-types'
 import { validateKey, validateValue } from '../validations.js'
-import { qs } from '@root/utilities/qs.js'
+import { qs } from '@utilities/qs.js'
 
 import classes from './index.module.scss'
 

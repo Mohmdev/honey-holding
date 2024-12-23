@@ -1,18 +1,18 @@
-import { Collections } from "./collections";
-import { Deployment } from "./deployment";
-import { GettingStarted } from "./getting-started";
+import { Collections } from './collections'
+import { Deployment } from './deployment'
+import { GettingStarted } from './getting-started'
 
 export const Tabs = {
   'getting-started': {
     title: 'Getting Started',
-    component: GettingStarted,
+    component: GettingStarted
   },
-  'collections': {
+  collections: {
     title: 'Collections',
-    component: Collections,
+    component: Collections
   },
-  'deployment': {
+  deployment: {
     title: 'Deployment',
-    component: Deployment,
-  },
+    component: Deployment
+  }
 } as const

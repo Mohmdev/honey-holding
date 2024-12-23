@@ -1,13 +1,14 @@
 import * as React from 'react'
-import { useModal } from '@faceless-ui/modal'
 import Link from 'next/link'
 
-import { Button } from '@components/Button/index.js'
-import { Heading } from '@components/Heading/index.js'
-import { ModalWindow } from '@components/ModalWindow/index.js'
-import { Accordion } from '@components/Accordion/index.js'
-import { ExternalLinkIcon } from '@root/icons/ExternalLinkIcon/index.js'
-import { Project, Team } from '@root/payload-cloud-types.js'
+import { useModal } from '@faceless-ui/modal'
+import { Project, Team } from '@payload-cloud-types'
+
+import { ExternalLinkIcon } from '@icons/ExternalLinkIcon'
+import { Accordion } from '@components/Accordion'
+import { Button } from '@components/Button'
+import { Heading } from '@components/Heading'
+import { ModalWindow } from '@components/ModalWindow'
 
 import classes from './index.module.scss'
 
@@ -20,8 +21,19 @@ type Props = {
   environmentSlug: string
 }
 
-export const ManageDomain: React.FC<Props> = ({ domain, project, team, environmentSlug }) => {
-  const { id, domain: domainURL, recordType, recordName, recordContent } = domain
+export const ManageDomain: React.FC<Props> = ({
+  domain,
+  project,
+  team,
+  environmentSlug
+}) => {
+  const {
+    id,
+    domain: domainURL,
+    recordType,
+    recordName,
+    recordContent
+  } = domain
   const modalSlug = `delete-domain-${id}`
 
   const { openModal, closeModal } = useModal()
@@ -40,10 +52,10 @@ export const ManageDomain: React.FC<Props> = ({ domain, project, team, environme
             method: 'PATCH',
             credentials: 'include',
             headers: {
-              'Content-Type': 'application/json',
+              'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ domains }),
-          },
+            body: JSON.stringify({ domains })
+          }
         )
 
         // TODO: alert user based on status code & message
@@ -59,12 +71,12 @@ export const ManageDomain: React.FC<Props> = ({ domain, project, team, environme
 
       return null
     },
-    [projectID],
+    [projectID]
   )
 
   const deleteDomain = React.useCallback(async () => {
     const remainingDomains = (projectDomains || []).filter(
-      existingDomain => existingDomain.id !== id,
+      (existingDomain) => existingDomain.id !== id
     )
 
     await patchDomains(remainingDomains)
@@ -78,7 +90,11 @@ export const ManageDomain: React.FC<Props> = ({ domain, project, team, environme
         openOnInit
         label={
           <div className={classes.labelWrap}>
-            <Link href={`https://${domainURL}`} target="_blank" className={classes.linkedDomain}>
+            <Link
+              href={`https://${domainURL}`}
+              target="_blank"
+              className={classes.linkedDomain}
+            >
               <div className={classes.domainTitleName}>{domainURL}</div>
               <ExternalLinkIcon className={classes.externalLinkIcon} />
             </Link>
@@ -105,7 +121,11 @@ export const ManageDomain: React.FC<Props> = ({ domain, project, team, environme
           </table>
           <div className={classes.domainActions}>
             <div className={classes.rightActions}>
-              <Button label="Delete" appearance="danger" onClick={() => openModal(modalSlug)} />
+              <Button
+                label="Delete"
+                appearance="danger"
+                onClick={() => openModal(modalSlug)}
+              />
             </div>
           </div>
         </div>
@@ -116,7 +136,11 @@ export const ManageDomain: React.FC<Props> = ({ domain, project, team, environme
             Are you sure you want to delete this domain?
           </Heading>
           <div className={classes.modalActions}>
-            <Button label="Cancel" appearance="secondary" onClick={() => closeModal(modalSlug)} />
+            <Button
+              label="Cancel"
+              appearance="secondary"
+              onClick={() => closeModal(modalSlug)}
+            />
             <Button label="Delete" appearance="danger" onClick={deleteDomain} />
           </div>
         </div>

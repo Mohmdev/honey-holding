@@ -1,20 +1,20 @@
 'use client'
 
 import React from 'react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+
 import { TeamWithCustomer } from '@cloud/_api/fetchTeam.js'
 import { teamHasDefaultPaymentMethod } from '@cloud/_utilities/teamHasDefaultPaymentMethod.js'
 import { cloudSlug } from '@cloud/slug.js'
-import Link from 'next/link'
 
-import { usePathname } from 'next/navigation'
-
-import { Message } from '@components/Message/index.js'
+import { Message } from '@components/Message'
 
 import classes from './index.module.scss'
 
 export const TeamBillingMessages: React.FC<{
   team: TeamWithCustomer
-}> = props => {
+}> = (props) => {
   const { team } = props
   const pathname = usePathname()
 
@@ -29,7 +29,9 @@ export const TeamBillingMessages: React.FC<{
           <React.Fragment>
             {'This team does not have a default payment method set. Please '}
             {isOnBillingPage ? (
-              <React.Fragment>{'add or select a payment method below '}</React.Fragment>
+              <React.Fragment>
+                {'add or select a payment method below '}
+              </React.Fragment>
             ) : (
               <Link href={billingPath}>add or select a payment method</Link>
             )}

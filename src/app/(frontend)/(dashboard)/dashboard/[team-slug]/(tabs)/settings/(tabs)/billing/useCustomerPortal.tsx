@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useRouter } from 'next/navigation'
 
-import type { Team } from '@root/payload-cloud-types.js'
+import type { Team } from '@payload-cloud-types'
 
 const portalURL = `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/customer-portal`
 
@@ -21,7 +21,7 @@ export const useCustomerPortal = (args: {
     team,
     subscriptionID,
     returnURL = `${process.env.NEXT_PUBLIC_SITE_URL}/cloud/${team.slug}/settings/billing`,
-    headline = 'Payload Cloud',
+    headline = 'Payload Cloud'
   } = args
 
   const router = useRouter()
@@ -41,14 +41,14 @@ export const useCustomerPortal = (args: {
           method: 'POST',
           credentials: 'include',
           headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json'
           },
           body: JSON.stringify({
             team: team.id,
             returnURL,
             subscriptionID,
-            headline,
-          }),
+            headline
+          })
         })
 
         const data = await req.json()
@@ -63,12 +63,12 @@ export const useCustomerPortal = (args: {
         setLoading(false)
       }
     },
-    [team, router, subscriptionID, returnURL, headline],
+    [team, router, subscriptionID, returnURL, headline]
   )
 
   return {
     openPortalSession,
     loading,
-    error,
+    error
   }
 }

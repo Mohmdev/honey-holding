@@ -1,12 +1,13 @@
 'use client'
 
 import React, { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { useSelectedLayoutSegments } from 'next/navigation'
+import { useRouter, useSelectedLayoutSegments } from 'next/navigation'
+
+import { cn } from '@utils/cn'
+import { getClientSideURL } from '@utils/getURL'
+
 import { PayloadAdminBar } from './admin-bar'
 
-import { getClientSideURL } from '@utils/getURL'
-import { cn } from '@utils/cn'
 import './index.module.scss'
 
 import type { PayloadAdminBarProps } from './admin-bar'

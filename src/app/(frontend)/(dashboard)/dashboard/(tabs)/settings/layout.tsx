@@ -1,14 +1,14 @@
 'use client'
 
 import * as React from 'react'
-import { cloudSlug } from '@cloud/slug.js'
 import Link from 'next/link'
-
 import { usePathname } from 'next/navigation'
 
-import { EdgeScroll } from '@components/EdgeScroll/index.js'
-import { Gutter } from '@components/Gutter/index.js'
-import { usePathnameSegments } from '@root/utilities/use-pathname-segments.js'
+import { cloudSlug } from '@cloud/slug.js'
+import { usePathnameSegments } from '@utilities/use-pathname-segments.js'
+
+import { EdgeScroll } from '@components/EdgeScroll'
+import { Gutter } from '@components/Gutter'
 
 import classes from './layout.module.scss'
 
@@ -23,12 +23,12 @@ export default ({ children }: ProjectSettingsLayoutType) => {
   const sidebarNavRoutes = [
     {
       label: 'Account',
-      url: `/${cloudSlug}/${settingsTab}`,
+      url: `/${cloudSlug}/${settingsTab}`
     },
     {
       label: 'Logout',
-      url: `/logout`,
-    },
+      url: `/logout`
+    }
   ]
 
   return (
@@ -45,7 +45,7 @@ export default ({ children }: ProjectSettingsLayoutType) => {
                   className={[
                     classes.sidebarNavItem,
                     isActive && classes.active,
-                    index === sidebarNavRoutes.length - 1 && classes.lastItem,
+                    index === sidebarNavRoutes.length - 1 && classes.lastItem
                   ]
                     .filter(Boolean)
                     .join(' ')}

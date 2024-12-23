@@ -1,6 +1,6 @@
 import {
   default as EnvironmentLayout,
-  generateMetadata,
+  generateMetadata
 } from '@cloud/[team-slug]/[project-slug]/(tabs)/layout'
 
 export default EnvironmentLayout

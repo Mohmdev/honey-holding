@@ -1,13 +1,15 @@
+import React from 'react'
+
 import { fetchTeamWithCustomer } from '@cloud/_api/fetchTeam.js'
-import { DashboardTabs } from '@cloud/_components/DashboardTabs/index.js'
 import { teamHasDefaultPaymentMethod } from '@cloud/_utilities/teamHasDefaultPaymentMethod.js'
 import { cloudSlug } from '@cloud/slug.js'
-import { Gutter } from '@components/Gutter/index.js'
-import React from 'react'
+import { DashboardTabs } from '@root/app/(frontend)/(dashboard)/~/components/DashboardTabs'
+
+import { Gutter } from '@components/Gutter'
 
 export default async ({
   children,
-  params,
+  params
 }: {
   children: React.ReactNode
   params: Promise<{
@@ -28,20 +30,22 @@ export default async ({
         <DashboardTabs
           tabs={{
             settings: {
-              error: !teamHasDefaultPaymentMethod(team) && team?.hasPublishedProjects,
+              error:
+                !teamHasDefaultPaymentMethod(team) &&
+                team?.hasPublishedProjects,
               href: `/${cloudSlug}/${teamSlug}/settings`,
               label: 'Team Settings',
               subpaths: [
                 `/${cloudSlug}/${teamSlug}/settings/members`,
                 `/${cloudSlug}/${teamSlug}/settings/subscriptions`,
                 `/${cloudSlug}/${teamSlug}/settings/billing`,
-                `/${cloudSlug}/${teamSlug}/settings/invoices`,
-              ],
+                `/${cloudSlug}/${teamSlug}/settings/invoices`
+              ]
             },
             [teamSlug]: {
               href: `/${cloudSlug}/${teamSlug}`,
-              label: 'Team Projects',
-            },
+              label: 'Team Projects'
+            }
           }}
         />
       </Gutter>

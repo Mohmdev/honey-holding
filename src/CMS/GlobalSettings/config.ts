@@ -51,28 +51,26 @@ export const GlobalSettings: GlobalConfig = {
           name: 'branding',
           label: 'Branding',
           fields: [
-            // Group 1
-            // {
-            //   name: 'logoLight',
-            //   label: 'Logo Light',
-            //   type: 'upload',
-            //   relationTo: 'assets',
-            //   admin: {
-            //     description:
-            //       'Light-colored version of your logo optimized for dark backgrounds and dark mode displays.'
-            //   }
-            // },
-            // {
-            //   name: 'logoDark',
-            //   label: 'Logo Dark',
-            //   type: 'upload',
-            //   relationTo: 'assets',
-            //   admin: {
-            //     description:
-            //       'Dark-colored version of your logo optimized for light backgrounds and standard displays.'
-            //   }
-            // },
-            // Group 2
+            {
+              name: 'logo',
+              label: 'Logo',
+              type: 'upload',
+              relationTo: 'assets',
+              admin: {
+                description:
+                  'Light-colored version of your logo optimized for dark backgrounds and dark mode displays.'
+              }
+            },
+            {
+              name: 'logoSquare',
+              label: 'Logo 1x1',
+              type: 'upload',
+              relationTo: 'assets',
+              admin: {
+                description:
+                  'Dark-colored version of your logo optimized for light backgrounds and standard displays.'
+              }
+            },
             {
               name: 'favicon',
               label: 'Favicon',

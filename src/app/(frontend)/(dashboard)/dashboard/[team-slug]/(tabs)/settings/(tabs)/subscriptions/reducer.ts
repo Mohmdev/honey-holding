@@ -5,7 +5,7 @@ export const subscriptionsReducer = (
   action: {
     type: 'reset' | 'add'
     payload: SubscriptionsResult
-  },
+  }
 ): SubscriptionsResult | null => {
   switch (action.type) {
     case 'reset':
@@ -14,7 +14,7 @@ export const subscriptionsReducer = (
       return {
         ...(state || {}),
         data: [...(state?.data || []), ...(action?.payload?.data || [])],
-        has_more: action?.payload?.has_more || false,
+        has_more: action?.payload?.has_more || false
       }
     default:
       return state

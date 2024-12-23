@@ -1,37 +1,42 @@
 'use client'
 
 import React, { Fragment, useCallback } from 'react'
+
 import { revalidateCache } from '@cloud/_actions/revalidateCache.js'
-import { SectionHeader } from '@cloud/[team-slug]/[project-slug]/(tabs)/settings/_layoutComponents/SectionHeader/index.js'
+import { SectionHeader } from '@cloud/[team-slug]/[project-slug]/(tabs)/settings/_layoutComponents/SectionHeader'
 import { useModal } from '@faceless-ui/modal'
-import { Text } from '@forms/fields/Text/index.js'
-import Form from '@forms/Form/index.js'
-import FormProcessing from '@forms/FormProcessing/index.js'
-import FormSubmissionError from '@forms/FormSubmissionError/index.js'
-import Submit from '@forms/Submit/index.js'
-import { OnSubmit } from '@forms/types.js'
-
-import { Button } from '@components/Button/index.js'
-import { Heading } from '@components/Heading/index.js'
-import { ModalWindow } from '@components/ModalWindow/index.js'
-import { HR } from '@components/HR/index.js'
-import { User } from '@root/payload-cloud-types.js'
-import { useAuth } from '@root/providers/Auth/index.js'
-import { DeletionConfirmationForm } from './DeletionConfirmationForm/index.js'
-
-import classes from './page.module.scss'
+import { User } from '@payload-cloud-types'
 import { toast } from 'sonner'
+
+import { useAuth } from '@providers/Auth'
+
+import { Text } from '@forms/fields/Text'
+import Form from '@forms/Form'
+import FormProcessing from '@forms/FormProcessing'
+import FormSubmissionError from '@forms/FormSubmissionError'
+import Submit from '@forms/Submit'
+import { OnSubmit } from '@forms/types'
+
+import { Button } from '@components/Button'
+import { Heading } from '@components/Heading'
+import { HR } from '@components/HR'
+import { ModalWindow } from '@components/ModalWindow'
+
+import { DeletionConfirmationForm } from './DeletionConfirmationForm'
+import classes from './page.module.scss'
 
 const modalSlug = 'delete-account'
 
 export const SettingsPage: React.FC<{
   user: User
-}> = props => {
+}> = (props) => {
   const { user } = props
 
   const { updateUser } = useAuth()
   const { openModal } = useModal()
-  const [formToShow, setFormToShow] = React.useState<'account' | 'password'>('account')
+  const [formToShow, setFormToShow] = React.useState<'account' | 'password'>(
+    'account'
+  )
 
   const handleSubmit: OnSubmit = useCallback(
     async ({ data, dispatchFields }): Promise<void> => {
@@ -47,25 +52,27 @@ export const SettingsPage: React.FC<{
               path: 'passwordConfirm',
               errorMessage: 'Passwords do not match',
               valid: false,
-              value: data.passwordConfirm,
+              value: data.passwordConfirm
             },
             {
               path: 'password',
               errorMessage: 'Passwords do not match',
               valid: false,
-              value: data.password,
-            },
-          ],
+              value: data.password
+            }
+          ]
         })
 
-        throw new Error('Please confirm that your passwords match and try again')
+        throw new Error(
+          'Please confirm that your passwords match and try again'
+        )
       }
 
       try {
         await updateUser({
           name: data?.name,
           email: data?.email,
-          password: data?.password,
+          password: data?.password
         })
 
         toast.success('Your account has been updated successfully.')
@@ -73,15 +80,17 @@ export const SettingsPage: React.FC<{
         setFormToShow('account')
 
         await revalidateCache({
-          tag: 'user',
+          tag: 'user'
         })
       } catch (err) {
-        const message = err?.message || `An error occurred while attempting to update your account`
+        const message =
+          err?.message ||
+          `An error occurred while attempting to update your account`
         console.error(message) // eslint-disable-line no-console
         throw new Error(message)
       }
     },
-    [updateUser],
+    [updateUser]
   )
 
   return (
@@ -124,13 +133,28 @@ export const SettingsPage: React.FC<{
         <FormProcessing message="Updating profile, one moment" />
         {formToShow === 'account' && (
           <>
-            <Text path="name" label="Your Full Name" initialValue={user?.name} />
-            <Text path="email" label="Email" required initialValue={user?.email} />
+            <Text
+              path="name"
+              label="Your Full Name"
+              initialValue={user?.name}
+            />
+            <Text
+              path="email"
+              label="Email"
+              required
+              initialValue={user?.email}
+            />
           </>
         )}
         {formToShow === 'password' && (
           <>
-            <Text type="password" path="password" label="Password" required initialValue="" />
+            <Text
+              type="password"
+              path="password"
+              label="Password"
+              required
+              initialValue=""
+            />
             <Text
               type="password"
               path="passwordConfirm"

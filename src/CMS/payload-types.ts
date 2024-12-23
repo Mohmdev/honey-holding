@@ -8777,6 +8777,14 @@ export interface GlobalSetting {
   };
   branding?: {
     /**
+     * Light-colored version of your logo optimized for dark backgrounds and dark mode displays.
+     */
+    logo?: (string | null) | Asset;
+    /**
+     * Dark-colored version of your logo optimized for light backgrounds and standard displays.
+     */
+    logoSquare?: (string | null) | Asset;
+    /**
      * The small icon that is displayed in the browser tab. Recommended size: 32x32px.
      */
     favicon?: (string | null) | Asset;
@@ -9045,6 +9053,8 @@ export interface GlobalSettingsSelect<T extends boolean = true> {
   branding?:
     | T
     | {
+        logo?: T;
+        logoSquare?: T;
         favicon?: T;
       };
   contactInfo?:

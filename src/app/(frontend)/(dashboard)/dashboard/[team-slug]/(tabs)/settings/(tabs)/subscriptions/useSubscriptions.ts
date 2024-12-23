@@ -1,9 +1,20 @@
-import type { Subscription, SubscriptionsResult } from '@cloud/_api/fetchSubscriptions.js'
-import type { Team } from '@root/payload-cloud-types.js'
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useReducer,
+  useRef,
+  useState
+} from 'react'
 
 import { fetchSubscriptionsClient } from '@cloud/_api/fetchSubscriptions.js'
-import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react'
 import { toast } from 'sonner'
+
+import type {
+  Subscription,
+  SubscriptionsResult
+} from '@cloud/_api/fetchSubscriptions.js'
+import type { Team } from '@payload-cloud-types'
 
 import { subscriptionsReducer } from './reducer.js'
 
@@ -18,17 +29,23 @@ export const useSubscriptions = (args: {
   loadMoreSubscriptions: () => void
   refreshSubscriptions: () => void
   result: SubscriptionsResult | null
-  updateSubscription: (subscriptionID: string, subscription: Subscription) => void
+  updateSubscription: (
+    subscriptionID: string,
+    subscription: Subscription
+  ) => void
 } => {
   const { delay, initialSubscriptions, team } = args
 
   const isRequesting = useRef(false)
   const isDeleting = useRef(false)
   const isUpdating = useRef(false)
-  const [result, dispatchResult] = useReducer(subscriptionsReducer, initialSubscriptions || null)
-  const [isLoading, setIsLoading] = useState<'deleting' | 'loading' | 'updating' | false | null>(
-    null,
+  const [result, dispatchResult] = useReducer(
+    subscriptionsReducer,
+    initialSubscriptions || null
   )
+  const [isLoading, setIsLoading] = useState<
+    'deleting' | 'loading' | 'updating' | false | null
+  >(null)
   const [error, setError] = useState('')
 
   const getSubscriptions = useCallback(
@@ -44,13 +61,13 @@ export const useSubscriptions = (args: {
 
         const subscriptions = await fetchSubscriptionsClient({
           starting_after,
-          team,
+          team
         })
 
         timer = setTimeout(() => {
           dispatchResult({
             type: starting_after ? 'add' : 'reset',
-            payload: subscriptions,
+            payload: subscriptions
           })
           setError('')
           setIsLoading(false)
@@ -71,7 +88,7 @@ export const useSubscriptions = (args: {
         clearTimeout(timer)
       }
     },
-    [delay, team],
+    [delay, team]
   )
 
   useEffect(() => {
@@ -82,7 +99,7 @@ export const useSubscriptions = (args: {
     (successMessage?: string) => {
       getSubscriptions(successMessage)
     },
-    [getSubscriptions],
+    [getSubscriptions]
   )
 
   const updateSubscription = useCallback(
@@ -105,10 +122,10 @@ export const useSubscriptions = (args: {
             body: JSON.stringify(newSubscription),
             credentials: 'include',
             headers: {
-              'Content-Type': 'application/json',
+              'Content-Type': 'application/json'
             },
-            method: 'PATCH',
-          },
+            method: 'PATCH'
+          }
         )
 
         const subscription: Subscription = await req.json()
@@ -127,7 +144,7 @@ export const useSubscriptions = (args: {
 
       isUpdating.current = false
     },
-    [refreshSubscriptions, team],
+    [refreshSubscriptions, team]
   )
 
   const cancelSubscription = useCallback(
@@ -148,8 +165,8 @@ export const useSubscriptions = (args: {
           `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/teams/${team?.id}/subscriptions/${stripeSubscriptionID}`,
           {
             credentials: 'include',
-            method: 'DELETE',
-          },
+            method: 'DELETE'
+          }
         )
 
         const subscription: Subscription = await req.json()
@@ -168,7 +185,7 @@ export const useSubscriptions = (args: {
 
       isDeleting.current = false
     },
-    [refreshSubscriptions, team],
+    [refreshSubscriptions, team]
   )
 
   const loadMoreSubscriptions = useCallback(() => {
@@ -187,7 +204,7 @@ export const useSubscriptions = (args: {
       loadMoreSubscriptions,
       refreshSubscriptions,
       result,
-      updateSubscription,
+      updateSubscription
     }),
     [
       result,
@@ -196,8 +213,8 @@ export const useSubscriptions = (args: {
       refreshSubscriptions,
       updateSubscription,
       cancelSubscription,
-      loadMoreSubscriptions,
-    ],
+      loadMoreSubscriptions
+    ]
   )
 
   return memoizedState

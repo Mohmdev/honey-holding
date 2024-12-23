@@ -1,5 +1,5 @@
-import { Button } from '@components/Button/index.js'
-import { Gutter } from '@components/Gutter/index.js'
+import { Button } from '@components/ButtonComponent'
+import { Gutter } from '@components/Gutter'
 
 export default function NotFound() {
   return (

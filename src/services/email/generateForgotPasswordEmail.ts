@@ -1,7 +1,8 @@
+import { getServerSideURL } from '@utils/getURL'
+
 import type { PayloadRequest } from 'payload'
 
 import { generateEmailHTML } from './generateEmailHTML'
-import { getServerSideURL } from '@utils/getURL'
 
 type ForgotPasswordEmailArgs =
   | {

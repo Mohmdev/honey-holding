@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+
+import type { ToolbarProps } from './types'
+
 import {
   Select,
   SelectContent,
@@ -6,7 +9,6 @@ import {
   SelectTrigger,
   SelectValue
 } from '../select'
-import type { ToolbarProps } from './types'
 
 const courseCategories = [
   { value: 'technology', label: 'Technology' },

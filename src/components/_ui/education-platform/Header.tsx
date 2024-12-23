@@ -1,4 +1,5 @@
 import React from 'react'
+
 import type { HeaderProps } from './types'
 
 const Header = ({ title, subtitle, rightElement }: HeaderProps) => {

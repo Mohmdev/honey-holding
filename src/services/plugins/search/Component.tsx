@@ -1,10 +1,12 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+
+import { useDebounce } from '@utils/useDebounce'
+
 import { Input } from '@ui/input'
 import { Label } from '@ui/label'
-import { useDebounce } from '@utils/useDebounce'
 
 export const Search: React.FC = () => {
   const [value, setValue] = useState('')

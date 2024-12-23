@@ -1,14 +1,16 @@
 import React from 'react'
-import { toast } from 'sonner'
-import { revalidateCache } from '@cloud/_actions/revalidateCache.js'
-import { Member } from '@cloud/_components/TeamMembers/index.js'
-import { useModal } from '@faceless-ui/modal'
-import Form from '@forms/Form/index.js'
-import Submit from '@forms/Submit/index.js'
 
-import { Button } from '@components/Button/index.js'
-import { Heading } from '@components/Heading/index.js'
-import { Team, User } from '@root/payload-cloud-types.js'
+import { revalidateCache } from '@cloud/_actions/revalidateCache.js'
+import { useModal } from '@faceless-ui/modal'
+import { Team, User } from '@payload-cloud-types'
+import { toast } from 'sonner'
+
+import Form from '@forms/Form'
+import Submit from '@forms/Submit'
+
+import { Button } from '@components/Button'
+import { Heading } from '@components/Heading'
+import { Member } from '@dashboard/TeamMembers'
 
 import classes from './page.module.scss'
 
@@ -24,7 +26,9 @@ interface UpdateRolesConfirmationFormProps {
   originalRoles: ('owner' | 'admin' | 'user')[][]
 }
 
-export const UpdateRolesConfirmationForm: React.FC<UpdateRolesConfirmationFormProps> = ({
+export const UpdateRolesConfirmationForm: React.FC<
+  UpdateRolesConfirmationFormProps
+> = ({
   modalSlug,
   team,
   memberIndex,
@@ -32,7 +36,7 @@ export const UpdateRolesConfirmationForm: React.FC<UpdateRolesConfirmationFormPr
   selectedMember,
   setRoles,
   onRolesUpdated,
-  originalRoles,
+  originalRoles
 }) => {
   const { closeModal } = useModal()
 
@@ -70,13 +74,13 @@ export const UpdateRolesConfirmationForm: React.FC<UpdateRolesConfirmationFormPr
         method: 'PATCH',
         credentials: 'include',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           teamID: team.id,
-          roles: newRoles,
-        }),
-      },
+          roles: newRoles
+        })
+      }
     )
 
     const response = await req.json()
@@ -91,7 +95,7 @@ export const UpdateRolesConfirmationForm: React.FC<UpdateRolesConfirmationFormPr
     onRolesUpdated(newRoles)
 
     revalidateCache({
-      tag: `team_${team.id}`,
+      tag: `team_${team.id}`
     })
 
     toast.success('Roles updated successfully.')
@@ -106,13 +110,17 @@ export const UpdateRolesConfirmationForm: React.FC<UpdateRolesConfirmationFormPr
   return (
     <Form onSubmit={confirmUpdateRoles}>
       <Heading marginTop={false} as="h4">
-        Are you sure you want to update the member roles of <b>{userName ? userName : userEmail}</b>
-        ?
+        Are you sure you want to update the member roles of{' '}
+        <b>{userName ? userName : userEmail}</b>?
       </Heading>
       {newRoles && (
         <p>
           You are about to change the roles to{' '}
-          <b>{newRoles.length === 1 ? newRoles[0] : newRoles.slice(0, -1).join(', ')}</b>
+          <b>
+            {newRoles.length === 1
+              ? newRoles[0]
+              : newRoles.slice(0, -1).join(', ')}
+          </b>
           {newRoles.length > 1 && ' and '}
           {newRoles.length > 1 && <b>{newRoles[newRoles.length - 1]}</b>}.
         </p>

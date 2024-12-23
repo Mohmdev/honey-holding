@@ -1,4 +1,7 @@
-export const validateKey = (key: string, existingKeys: string[]): string | true => {
+export const validateKey = (
+  key: string,
+  existingKeys: string[]
+): string | true => {
   if (!key) {
     return 'Key is required'
   }

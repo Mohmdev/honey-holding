@@ -1,50 +1,56 @@
 'use client'
 
 import * as React from 'react'
+
+import { Deployment, Project } from '@payload-cloud-types'
+import { formatDate } from '@utilities/format-date-time.js'
+import { qs } from '@utilities/qs.js'
+import { useGetProjectDeployments } from '@utilities/use-cloud-api.js'
 import { toast } from 'sonner'
 
-import { BackgroundScanline } from '@components/BackgroundScanline/index.js'
-import { Gutter } from '@components/Gutter/index.js'
-import { Indicator } from '@components/Indicator/index.js'
-import { CommitIcon } from '@root/graphics/CommitIcon/index.js'
-import { GitHubIcon } from '@root/graphics/GitHub/index.js'
-import { ArrowIcon } from '@root/icons/ArrowIcon/index.js'
-import { BranchIcon } from '@root/icons/BranchIcon/index.js'
-import { Deployment, Project } from '@root/payload-cloud-types.js'
-import { formatDate } from '@root/utilities/format-date-time.js'
-import { qs } from '@root/utilities/qs.js'
-import { useGetProjectDeployments } from '@root/utilities/use-cloud-api.js'
-import { DeploymentLogs } from '../DeploymentLogs/index.js'
+import { CommitIcon } from '@graphics/CommitIcon'
+import { GitHubIcon } from '@graphics/GitHub'
+import { ArrowIcon } from '@icons/ArrowIcon'
+import { BranchIcon } from '@icons/BranchIcon'
+import { BackgroundScanline } from '@components/BackgroundScanline'
+import { Gutter } from '@components/Gutter'
+import { Indicator } from '@components/Indicator'
 
+import { DeploymentLogs } from '../DeploymentLogs'
 import classes from './index.module.scss'
 
-type FinalDeploymentStages = Extract<Deployment['deploymentStatus'], 'ACTIVE' | 'SUPERSEDED'>
+type FinalDeploymentStages = Extract<
+  Deployment['deploymentStatus'],
+  'ACTIVE' | 'SUPERSEDED'
+>
 const finalDeploymentStages: FinalDeploymentStages[] = ['ACTIVE', 'SUPERSEDED']
 
 export const InfraOnline: React.FC<{
   project: Project
   environmentSlug: string
-}> = props => {
+}> = (props) => {
   const { project, environmentSlug } = props
 
   const {
     result: deployments,
     reqStatus,
-    reload: reloadDeployments,
+    reload: reloadDeployments
   } = useGetProjectDeployments({
     projectID: project?.id,
-    environmentSlug,
+    environmentSlug
   })
 
   const latestDeployment = deployments?.[0]
 
-  const [liveDeployment, setLiveDeployment] = React.useState<Deployment | null | undefined>()
+  const [liveDeployment, setLiveDeployment] = React.useState<
+    Deployment | null | undefined
+  >()
   const [redeployTriggered, setRedeployTriggered] = React.useState(false)
 
   const triggerDeployment = React.useCallback(() => {
     setRedeployTriggered(true)
     const query = qs.stringify({
-      env: environmentSlug,
+      env: environmentSlug
     })
 
     fetch(
@@ -53,9 +59,9 @@ export const InfraOnline: React.FC<{
       }`,
       {
         method: 'POST',
-        credentials: 'include',
-      },
-    ).then(res => {
+        credentials: 'include'
+      }
+    ).then((res) => {
       setRedeployTriggered(false)
 
       if (res.status === 200) {
@@ -65,7 +71,7 @@ export const InfraOnline: React.FC<{
 
       if (res.status === 429) {
         return toast.error(
-          'You can only manually deploy once per minute. Please wait and try again.',
+          'You can only manually deploy once per minute. Please wait and try again.'
         )
       }
 
@@ -95,21 +101,21 @@ export const InfraOnline: React.FC<{
           and: [
             {
               project: {
-                equals: project?.id,
-              },
+                equals: project?.id
+              }
             },
             {
               environmentSlug: {
-                equals: environmentSlug,
-              },
+                equals: environmentSlug
+              }
             },
             {
               deploymentStatus: {
-                in: ['ACTIVE'],
-              },
-            },
-          ],
-        },
+                in: ['ACTIVE']
+              }
+            }
+          ]
+        }
       })
 
       const req = await fetch(
@@ -118,9 +124,9 @@ export const InfraOnline: React.FC<{
           method: 'GET',
           credentials: 'include',
           headers: {
-            'Content-Type': 'application/json',
-          },
-        },
+            'Content-Type': 'application/json'
+          }
+        }
       )
 
       const json = await req.json()
@@ -133,8 +139,10 @@ export const InfraOnline: React.FC<{
     if (latestDeployment?.deploymentStatus === 'ACTIVE') {
       setLiveDeployment(latestDeployment)
     } else {
-      const liveDeployment = deployments?.find(deployment => {
-        return finalDeploymentStages.includes(deployment.deploymentStatus as FinalDeploymentStages)
+      const liveDeployment = deployments?.find((deployment) => {
+        return finalDeploymentStages.includes(
+          deployment.deploymentStatus as FinalDeploymentStages
+        )
       })
 
       if (liveDeployment) {
@@ -146,8 +154,8 @@ export const InfraOnline: React.FC<{
   }, [latestDeployment, deployments, project?.id])
 
   const projectDomains = [
-    ...(project?.domains || []).map(domain => domain.domain),
-    project?.defaultDomain,
+    ...(project?.domains || []).map((domain) => domain.domain),
+    project?.defaultDomain
   ]
 
   return (
@@ -155,7 +163,11 @@ export const InfraOnline: React.FC<{
       <Gutter>
         <div className={classes.deploymentWrapper}>
           <div className={[classes.domainAndDetails, 'grid'].join(' ')}>
-            <div className={[classes.domains, 'cols-12 cols-l-10 cols-m-8'].join(' ')}>
+            <div
+              className={[classes.domains, 'cols-12 cols-l-10 cols-m-8'].join(
+                ' '
+              )}
+            >
               <h6>Live Deployment</h6>
               {projectDomains.map((domain, index) => (
                 <a
@@ -171,13 +183,18 @@ export const InfraOnline: React.FC<{
                 </a>
               ))}
             </div>
-            <div className={[classes.deploymentDetails, 'cols-4 cols-l-6 cols-m-8'].join(' ')}>
+            <div
+              className={[
+                classes.deploymentDetails,
+                'cols-4 cols-l-6 cols-m-8'
+              ].join(' ')}
+            >
               <h6>Deployment Details</h6>
               {liveDeployment && (
                 <p>
                   {formatDate({
                     date: liveDeployment.createdAt,
-                    format: 'dateAndTimeWithMinutes',
+                    format: 'dateAndTimeWithMinutes'
                   })}
                 </p>
               )}
@@ -208,7 +225,9 @@ export const InfraOnline: React.FC<{
                   title={project?.deploymentBranch}
                 >
                   <BranchIcon />
-                  <p className={classes.ellipseText}>{project?.deploymentBranch}</p>
+                  <p className={classes.ellipseText}>
+                    {project?.deploymentBranch}
+                  </p>
                 </a>
               )}
               {project?.repositoryFullName && liveDeployment?.commitSha ? (
@@ -236,26 +255,31 @@ export const InfraOnline: React.FC<{
           </div>
           <div className={[classes.statusWrapper, 'grid'].join(' ')}>
             <BackgroundScanline />
-            <div className={[classes.status, 'cols-12 cols-l-8 cols-m-4 cols-s-8'].join(' ')}>
+            <div
+              className={[
+                classes.status,
+                'cols-12 cols-l-8 cols-m-4 cols-s-8'
+              ].join(' ')}
+            >
               <Indicator
                 status={
                   liveDeployment === undefined
                     ? undefined
                     : finalDeploymentStages.includes(
-                        liveDeployment?.deploymentStatus as FinalDeploymentStages,
-                      )
-                    ? 'SUCCESS'
-                    : 'ERROR'
+                          liveDeployment?.deploymentStatus as FinalDeploymentStages
+                        )
+                      ? 'SUCCESS'
+                      : 'ERROR'
                 }
               />
               <p className={classes.detail}>
                 {liveDeployment === undefined
                   ? 'No status'
                   : finalDeploymentStages.includes(
-                      liveDeployment?.deploymentStatus as FinalDeploymentStages,
-                    )
-                  ? 'Online'
-                  : 'Offline'}
+                        liveDeployment?.deploymentStatus as FinalDeploymentStages
+                      )
+                    ? 'Online'
+                    : 'Offline'}
               </p>
               <button
                 onClick={triggerDeployment}
@@ -280,11 +304,17 @@ export const InfraOnline: React.FC<{
   )
 }
 
-const DeploymentIndicator: React.FC<{ deployment: Deployment }> = ({ deployment }) => {
+const DeploymentIndicator: React.FC<{ deployment: Deployment }> = ({
+  deployment
+}) => {
   let status: React.ComponentProps<typeof Indicator>['status'] = 'UNKNOWN'
   let spinner = false
 
-  if (finalDeploymentStages.includes(deployment?.deploymentStatus as FinalDeploymentStages)) {
+  if (
+    finalDeploymentStages.includes(
+      deployment?.deploymentStatus as FinalDeploymentStages
+    )
+  ) {
     status = 'SUCCESS'
   } else if (
     deployment?.deploymentStatus === 'CANCELED' ||
@@ -312,7 +342,7 @@ const DeploymentIndicator: React.FC<{ deployment: Deployment }> = ({ deployment 
       str
         ?.toLowerCase()
         .split('_')
-        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
         .join(' ') || ''
     )
   }

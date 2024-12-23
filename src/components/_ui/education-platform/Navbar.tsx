@@ -1,13 +1,15 @@
 // @ts-nocheck
 'use client'
 
+import React, { useState } from 'react'
+import Link from 'next/link'
+
 import { SignedIn, SignedOut, UserButton, useUser } from '@clerk/nextjs'
 import { dark } from '@clerk/themes'
 import { Bell, BookOpen } from 'lucide-react'
-import Link from 'next/link'
-import React, { useState } from 'react'
-import { SidebarTrigger } from '../sidebar'
+
 import { cn } from '../../../lib/utils/cn'
+import { SidebarTrigger } from '../sidebar'
 
 const Navbar = ({ isCoursePage }: { isCoursePage: boolean }) => {
   const { user } = useUser()

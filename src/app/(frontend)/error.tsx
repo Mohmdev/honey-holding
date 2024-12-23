@@ -1,7 +1,9 @@
 'use client'
-import { Gutter } from '@components/Gutter/index.js'
-import NextError from 'next/error'
+
 import React from 'react'
+import NextError from 'next/error'
+
+import { Gutter } from '@components/Gutter'
 
 export default function Error() {
   return (

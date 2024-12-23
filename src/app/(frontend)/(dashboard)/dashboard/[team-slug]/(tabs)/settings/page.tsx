@@ -1,11 +1,12 @@
-import { fetchTeamWithCustomer } from '@cloud/_api/fetchTeam.js'
 import { Metadata } from 'next'
 
-import { mergeOpenGraph } from '@root/seo/mergeOpenGraph.js'
+import { fetchTeamWithCustomer } from '@cloud/_api/fetchTeam.js'
+import { mergeOpenGraph } from '@seo/mergeOpenGraph.js'
+
 import { TeamSettingsPage } from './page_client.js'
 
 export default async ({
-  params,
+  params
 }: {
   params: Promise<{
     'team-slug': string
@@ -17,7 +18,7 @@ export default async ({
 }
 
 export async function generateMetadata({
-  params,
+  params
 }: {
   params: Promise<{
     'team-slug': string
@@ -28,7 +29,7 @@ export async function generateMetadata({
     title: `${teamSlug} - Team Settings`,
     openGraph: mergeOpenGraph({
       title: `${teamSlug} - Team Settings`,
-      url: `/cloud/${teamSlug}/settings`,
-    }),
+      url: `/cloud/${teamSlug}/settings`
+    })
   }
 }

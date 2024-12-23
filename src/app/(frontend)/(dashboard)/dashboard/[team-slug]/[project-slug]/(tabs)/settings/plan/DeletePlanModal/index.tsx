@@ -3,16 +3,16 @@
 import React from 'react'
 import { toast } from 'sonner'
 import { useModal } from '@faceless-ui/modal'
-import { Text } from '@forms/fields/Text/index.js'
-import Form from '@forms/Form/index.js'
-import Submit from '@forms/Submit/index.js'
+import { Text } from '@forms/fields/Text'
+import Form from '@forms/Form
+import Submit from '@forms/Submit
 import { useRouter } from 'next/navigation'
 
-import { Button } from '@components/Button/index.js'
-import { Heading } from '@components/Heading/index.js'
-import { ModalWindow } from '@components/ModalWindow/index.js'
-import { Project } from '@root/payload-cloud-types.js'
-import { qs } from '@root/utilities/qs.js'
+import { Button } from '@components/Button
+import { Heading } from '@components/Heading
+import { ModalWindow } from '@components/ModalWindow
+import { Project } from '@payload-cloud-types'
+import { qs } from '@utilities/qs.js'
 
 import classes from './index.module.scss'
 

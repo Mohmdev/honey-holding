@@ -1,15 +1,17 @@
-import { fetchTeamWithCustomer } from '@cloud/_api/fetchTeam.js'
-import { Sidebar } from '@cloud/_components/Sidebar/index.js'
-import { cloudSlug } from '@cloud/slug.js'
-import { Gutter } from '@components/Gutter/index.js'
 import * as React from 'react'
 
-import { TeamBillingMessages } from './TeamBillingMessages/index.js'
+import { fetchTeamWithCustomer } from '@cloud/_api/fetchTeam.js'
+import { cloudSlug } from '@cloud/slug.js'
+
+import { Gutter } from '@components/Gutter'
+import { Sidebar } from '@dashboard/Sidebar'
+
 import classes from './layout.module.scss'
+import { TeamBillingMessages } from './TeamBillingMessages'
 
 export default async ({
   children,
-  params,
+  params
 }: {
   children: React.ReactNode
   params: Promise<{
@@ -29,24 +31,24 @@ export default async ({
           routes={[
             {
               label: 'General',
-              url: `/${cloudSlug}/${teamSlug}/settings`,
+              url: `/${cloudSlug}/${teamSlug}/settings`
             },
             {
               label: 'Team Members',
-              url: `/${cloudSlug}/${teamSlug}/settings/members`,
+              url: `/${cloudSlug}/${teamSlug}/settings/members`
             },
             {
               label: 'Billing',
-              url: `/${cloudSlug}/${teamSlug}/settings/billing`,
+              url: `/${cloudSlug}/${teamSlug}/settings/billing`
             },
             {
               label: 'Subscriptions',
-              url: `/${cloudSlug}/${teamSlug}/settings/subscriptions`,
+              url: `/${cloudSlug}/${teamSlug}/settings/subscriptions`
             },
             {
               label: 'Invoices',
-              url: `/${cloudSlug}/${teamSlug}/settings/invoices`,
-            },
+              url: `/${cloudSlug}/${teamSlug}/settings/invoices`
+            }
           ]}
         />
       </div>

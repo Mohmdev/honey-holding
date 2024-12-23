@@ -1,19 +1,23 @@
 'use client'
 
 import * as React from 'react'
-import { toast } from 'sonner'
-import { Text } from '@forms/fields/Text/index.js'
-import Form from '@forms/Form/index.js'
-import Submit from '@forms/Submit/index.js'
-import { OnSubmit } from '@forms/types.js'
-import { validateDomain } from '@forms/validations.js'
 
-import { Project, Team } from '@root/payload-cloud-types.js'
+import { Project, Team } from '@payload-cloud-types'
+import { toast } from 'sonner'
+
+import { Text } from '@forms/fields/Text'
+import Form from '@forms/Form'
+import Submit from '@forms/Submit'
+import { OnSubmit } from '@forms/types'
+import { validateDomain } from '@forms/validations.js'
 
 import classes from './index.module.scss'
 
 const generateUUID = () => {
-  return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+  return (
+    Math.random().toString(36).substring(2, 15) +
+    Math.random().toString(36).substring(2, 15)
+  )
 }
 
 const domainFieldPath = 'newDomain'
@@ -36,11 +40,11 @@ export const AddDomain: React.FC<{
         cloudflareID?: string
         id?: string
       } = {
-        domain: data[domainFieldPath] as string,
+        domain: data[domainFieldPath] as string
       }
 
       const domainExists = projectDomains?.find(
-        projectDomain => projectDomain.domain === newDomain.domain,
+        (projectDomain) => projectDomain.domain === newDomain.domain
       )
 
       // TODO - toast messages
@@ -55,12 +59,12 @@ export const AddDomain: React.FC<{
               method: 'PATCH',
               credentials: 'include',
               headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
               },
               body: JSON.stringify({
-                domains: [newDomain, ...(projectDomains || [])],
-              }),
-            },
+                domains: [newDomain, ...(projectDomains || [])]
+              })
+            }
           )
 
           if (req.status === 200) {
@@ -77,7 +81,7 @@ export const AddDomain: React.FC<{
         setFieldKey(generateUUID())
       }
     },
-    [projectID, projectDomains],
+    [projectID, projectDomains]
   )
 
   return (

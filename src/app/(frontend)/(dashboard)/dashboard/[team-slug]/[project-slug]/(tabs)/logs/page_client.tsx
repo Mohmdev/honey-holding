@@ -2,11 +2,12 @@
 
 import * as React from 'react'
 
-import { Gutter } from '@components/Gutter/index.js'
-import { Heading } from '@components/Heading/index.js'
-import { LogLine, SimpleLogs, styleLogLine } from '@components/SimpleLogs/index.js'
-import { Project, Team } from '@root/payload-cloud-types.js'
-import { useWebSocket } from '@root/utilities/use-websocket.js'
+import { Project, Team } from '@payload-cloud-types'
+import { useWebSocket } from '@utilities/use-websocket.js'
+
+import { Gutter } from '@components/Gutter'
+import { Heading } from '@components/Heading'
+import { LogLine, SimpleLogs, styleLogLine } from '@components/SimpleLogs'
 
 export const ProjectLogsPage: React.FC<{
   project: Project
@@ -18,16 +19,18 @@ export const ProjectLogsPage: React.FC<{
 
   const hasSuccessfullyDeployed = project?.infraStatus === 'done'
 
-  const onMessage = React.useCallback(event => {
+  const onMessage = React.useCallback((event) => {
     const message = event?.data
     try {
       const parsedMessage = JSON.parse(message)
       if (parsedMessage?.data) {
         const styledLogLine = styleLogLine(parsedMessage.data)
-        setRuntimeLogs(logs => {
+        setRuntimeLogs((logs) => {
           const newLogs = [...logs, styledLogLine]
           previousLogs.current =
-            previousLogs.current?.length > newLogs.length ? previousLogs.current : newLogs
+            previousLogs.current?.length > newLogs.length
+              ? previousLogs.current
+              : newLogs
           return newLogs
         })
       }
@@ -44,17 +47,20 @@ export const ProjectLogsPage: React.FC<{
       : '',
     onOpen: () => setRuntimeLogs([]),
     onMessage,
-    retryOnClose: true,
+    retryOnClose: true
   })
 
   const logsToShow =
-    previousLogs.current.length > runtimeLogs.length ? previousLogs.current : runtimeLogs
+    previousLogs.current.length > runtimeLogs.length
+      ? previousLogs.current
+      : runtimeLogs
 
   return (
     <Gutter>
       <Heading element="h4" marginTop={false}>
         Runtime logs
-        {!hasSuccessfullyDeployed && ' will be available after a successful deploy - hang tight!'}
+        {!hasSuccessfullyDeployed &&
+          ' will be available after a successful deploy - hang tight!'}
       </Heading>
 
       {hasSuccessfullyDeployed && <SimpleLogs logs={logsToShow} />}

@@ -1,20 +1,20 @@
 'use client'
 
 import React from 'react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+
 import { ProjectWithSubscription } from '@cloud/_api/fetchProject.js'
 import { TeamWithCustomer } from '@cloud/_api/fetchTeam.js'
 import { cloudSlug } from '@cloud/slug.js'
-import Link from 'next/link'
+import { Project } from '@payload-cloud-types'
 
-import { usePathname } from 'next/navigation'
-
-import { Message } from '@components/Message/index.js'
-import { Project } from '@root/payload-cloud-types.js'
+import { Message } from '@components/Message'
 
 export const BadSubscriptionMessage: React.FC<{
   team: TeamWithCustomer
   project: ProjectWithSubscription
-}> = props => {
+}> = (props) => {
   const { team, project } = props
   const subscriptionStatus = project?.stripeSubscriptionStatus
 
@@ -31,7 +31,9 @@ export const BadSubscriptionMessage: React.FC<{
           <strong>{subscriptionStatus}</strong>
           {'. Please '}
           {isOnBillingPage ? (
-            <React.Fragment>{'update the payment method(s) below'}</React.Fragment>
+            <React.Fragment>
+              {'update the payment method(s) below'}
+            </React.Fragment>
           ) : (
             <Link href={billingPath}>update your payment method(s)</Link>
           )}

@@ -1,28 +1,31 @@
 'use client'
 
 import * as React from 'react'
-import { revalidateCache } from '@cloud/_actions/revalidateCache.js'
-import { TeamWithCustomer } from '@cloud/_api/fetchTeam.js'
-import { UniqueTeamSlug } from '@cloud/_components/UniqueSlug/index.js'
-import { Text } from '@forms/fields/Text/index.js'
-import Form from '@forms/Form/index.js'
-import FormProcessing from '@forms/FormProcessing/index.js'
-import FormSubmissionError from '@forms/FormSubmissionError/index.js'
-import Submit from '@forms/Submit/index.js'
-import { OnSubmit } from '@forms/types.js'
 import { useRouter } from 'next/navigation'
 
-import { HR } from '@components/HR/index.js'
-import { Team } from '@root/payload-cloud-types.js'
-import { useAuth } from '@root/providers/Auth/index.js'
-import { SectionHeader } from '../../[project-slug]/(tabs)/settings/_layoutComponents/SectionHeader/index.js'
-
-import classes from './page.module.scss'
+import { revalidateCache } from '@cloud/_actions/revalidateCache.js'
+import { TeamWithCustomer } from '@cloud/_api/fetchTeam.js'
+import { Team } from '@payload-cloud-types'
 import { toast } from 'sonner'
+
+import { useAuth } from '@providers/Auth'
+
+import { Text } from '@forms/fields/Text'
+import Form from '@forms/Form'
+import FormProcessing from '@forms/FormProcessing'
+import FormSubmissionError from '@forms/FormSubmissionError'
+import Submit from '@forms/Submit'
+import { OnSubmit } from '@forms/types'
+
+import { HR } from '@components/HR'
+import { UniqueTeamSlug } from '@dashboard/UniqueSlug'
+
+import { SectionHeader } from '../../[project-slug]/(tabs)/settings/_layoutComponents/SectionHeader'
+import classes from './page.module.scss'
 
 export const TeamSettingsPage: React.FC<{
   team: TeamWithCustomer
-}> = props => {
+}> = (props) => {
   const { team } = props
 
   const router = useRouter()
@@ -47,14 +50,17 @@ export const TeamSettingsPage: React.FC<{
 
       setError(undefined)
 
-      const req = await fetch(`${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/teams/${team?.id}`, {
-        method: 'PATCH',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      })
+      const req = await fetch(
+        `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/teams/${team?.id}`,
+        {
+          method: 'PATCH',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        }
+      )
 
       const response: {
         doc: Team
@@ -67,7 +73,9 @@ export const TeamSettingsPage: React.FC<{
       } = await req.json()
 
       if (!req.ok) {
-        toast.error(`Failed to update settings: ${response?.errors?.[0]?.message}`)
+        toast.error(
+          `Failed to update settings: ${response?.errors?.[0]?.message}`
+        )
         setError(response?.errors?.[0])
         return
       }
@@ -77,7 +85,7 @@ export const TeamSettingsPage: React.FC<{
       toast.success(`Team settings updated successfully.`)
 
       await revalidateCache({
-        tag: `team_${team?.id}`,
+        tag: `team_${team?.id}`
       })
 
       // if the team slug has changed, redirect to the new URL
@@ -86,16 +94,25 @@ export const TeamSettingsPage: React.FC<{
         return
       }
     },
-    [user, team, router],
+    [user, team, router]
   )
 
   return (
     <React.Fragment>
       <SectionHeader title="Team Settings" />
-      <Form onSubmit={handleSubmit} className={classes.form} errors={error?.data}>
+      <Form
+        onSubmit={handleSubmit}
+        className={classes.form}
+        errors={error?.data}
+      >
         <FormSubmissionError />
         <FormProcessing message="Updating team, one moment..." />
-        <Text path="name" label="Team Name" required initialValue={team?.name} />
+        <Text
+          path="name"
+          label="Team Name"
+          required
+          initialValue={team?.name}
+        />
         <UniqueTeamSlug teamID={team?.id} initialValue={team?.slug} />
         <Text
           path="billingEmail"

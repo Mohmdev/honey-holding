@@ -3,16 +3,16 @@
 import * as React from 'react'
 import { toast } from 'sonner'
 import { revalidateCache } from '@cloud/_actions/revalidateCache.js'
-import { AddArrayRow, ArrayRow } from '@forms/fields/Array/index.js'
+import { AddArrayRow, ArrayRow } from '@forms/fields/Array'
 import { ArrayProvider, useArray } from '@forms/fields/Array/context.js'
-import { Text } from '@forms/fields/Text/index.js'
-import Form from '@forms/Form/index.js'
-import Submit from '@forms/Submit/index.js'
-import { OnSubmit } from '@forms/types.js'
+import { Text } from '@forms/fields/Text
+import Form from '@forms/Form
+import Submit from '@forms/Submit
+import { OnSubmit } from '@forms/types'
 
-import { Project } from '@root/payload-cloud-types.js'
+import { Project } from '@payload-cloud-types'
 import { validateKey, validateValue } from '../validations.js'
-import { qs } from '@root/utilities/qs.js'
+import { qs } from '@utilities/qs.js'
 
 import classes from './index.module.scss'
 

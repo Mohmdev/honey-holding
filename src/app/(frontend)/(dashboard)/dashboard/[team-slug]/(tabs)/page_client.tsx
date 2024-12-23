@@ -1,17 +1,19 @@
 'use client'
 
 import React, { useEffect } from 'react'
-import { fetchProjectsClient, ProjectsRes } from '@cloud/_api/fetchProjects.js'
-import { TeamWithCustomer } from '@cloud/_api/fetchTeam.js'
-import { ProjectCard } from '@cloud/_components/ProjectCard/index.js'
-import { Text } from '@forms/fields/Text/index.js'
 import Link from 'next/link'
 
-import { Gutter } from '@components/Gutter/index.js'
-import { Pagination } from '@components/Pagination/index.js'
-import { NewProjectBlock } from '@components/NewProject/index.js'
-import { Template } from '@root/payload-cloud-types.js'
-import useDebounce from '@root/utilities/use-debounce.js'
+import { fetchProjectsClient, ProjectsRes } from '@cloud/_api/fetchProjects.js'
+import { TeamWithCustomer } from '@cloud/_api/fetchTeam.js'
+import { Template } from '@payload-cloud-types'
+import useDebounce from '@utilities/use-debounce.js'
+
+import { Text } from '@forms/fields/Text'
+
+import { Gutter } from '@components/Gutter'
+import { NewProjectBlock } from '@components/NewProject'
+import { Pagination } from '@components/Pagination'
+import { ProjectCard } from '@dashboard/ProjectCard'
 
 import classes from './page.module.scss'
 
@@ -35,7 +37,9 @@ export const TeamPage: React.FC<{
 
   // on initial load, we'll know whether or not to render the `NewProjectBlock`
   // this will prevent subsequent searches from showing the `NewProjectBlock`
-  const [renderNewProjectBlock] = React.useState<boolean>(initialState?.totalDocs === 0)
+  const [renderNewProjectBlock] = React.useState<boolean>(
+    initialState?.totalDocs === 0
+  )
 
   useEffect(() => {
     // keep a timer reference so that we can cancel the old request
@@ -61,7 +65,7 @@ export const TeamPage: React.FC<{
             const projectsRes = await fetchProjectsClient({
               teamIDs: [team.id],
               page: searchChanged ? 1 : page,
-              search: debouncedSearch,
+              search: debouncedSearch
             })
 
             const end = Date.now()
@@ -69,7 +73,7 @@ export const TeamPage: React.FC<{
 
             // the request was too fast, so we'll add a delay to make it appear as if it took longer
             if (diff < delay) {
-              await new Promise(resolve => setTimeout(resolve, delay - diff))
+              await new Promise((resolve) => setTimeout(resolve, delay - diff))
             }
 
             setResult(projectsRes)
@@ -146,7 +150,7 @@ export const TeamPage: React.FC<{
           className={classes.pagination}
           page={result?.page}
           totalPages={result?.totalPages}
-          setPage={page => {
+          setPage={(page) => {
             setPage(page)
             setEnableSearch(true)
           }}

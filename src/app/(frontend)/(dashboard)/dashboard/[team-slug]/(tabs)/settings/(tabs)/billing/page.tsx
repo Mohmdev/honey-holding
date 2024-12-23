@@ -1,19 +1,21 @@
 import React from 'react'
+import { Metadata } from 'next'
+
 import { fetchMe } from '@cloud/_api/fetchMe.js'
 import { fetchPaymentMethods } from '@cloud/_api/fetchPaymentMethods.js'
 import { fetchTeamWithCustomer } from '@cloud/_api/fetchTeam.js'
-import { CreditCardList } from '@cloud/_components/CreditCardList/index.js'
-import { SectionHeader } from '@cloud/[team-slug]/[project-slug]/(tabs)/settings/_layoutComponents/SectionHeader/index.js'
-import { Text } from '@forms/fields/Text/index.js'
-import { Metadata } from 'next'
+import { SectionHeader } from '@cloud/[team-slug]/[project-slug]/(tabs)/settings/_layoutComponents/SectionHeader'
+import { checkTeamRoles } from '@utilities/check-team-roles.js'
 
-import HR from '@components/MDX/components/HR/index.js'
-import { checkTeamRoles } from '@root/utilities/check-team-roles.js'
+import { Text } from '@forms/fields/Text'
+
+import HR from '@components/MDX/components/HR'
+import { CreditCardList } from '@dashboard/CreditCardList'
 
 import classes from './page.module.scss'
 
 export default async ({
-  params,
+  params
 }: {
   params: Promise<{
     'team-slug': string
@@ -36,8 +38,8 @@ export default async ({
           <React.Fragment>
             {!hasCustomerID && (
               <p className={classes.error}>
-                This team does not have a billing account. Please contact support to resolve this
-                issue.
+                This team does not have a billing account. Please contact
+                support to resolve this issue.
               </p>
             )}
           </React.Fragment>
@@ -46,16 +48,22 @@ export default async ({
       {hasCustomerID && (
         <React.Fragment>
           {!isCurrentTeamOwner && (
-            <p className={classes.error}>You must be an owner of this team to manage billing.</p>
+            <p className={classes.error}>
+              You must be an owner of this team to manage billing.
+            </p>
           )}
           {isCurrentTeamOwner && (
             <React.Fragment>
               <h4>Payment Methods</h4>
               <p>
-                The following payment methods are available for this team. Projects that do not
-                specify a payment method will use this team's default payment method (if any).
+                The following payment methods are available for this team.
+                Projects that do not specify a payment method will use this
+                team's default payment method (if any).
               </p>
-              <CreditCardList team={team} initialPaymentMethods={paymentMethods} />
+              <CreditCardList
+                team={team}
+                initialPaymentMethods={paymentMethods}
+              />
             </React.Fragment>
           )}
           <HR />
@@ -74,7 +82,7 @@ export default async ({
 }
 
 export async function generateMetadata({
-  params,
+  params
 }: {
   params: Promise<{
     'team-slug': string
@@ -85,7 +93,7 @@ export async function generateMetadata({
     title: `${teamSlug} - Team Billing`,
     openGraph: {
       title: `${teamSlug} - Team Billing`,
-      url: `/cloud/${teamSlug}/settings/billing`,
-    },
+      url: `/cloud/${teamSlug}/settings/billing`
+    }
   }
 }

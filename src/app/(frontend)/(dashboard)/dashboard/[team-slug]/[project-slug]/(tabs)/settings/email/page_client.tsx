@@ -1,21 +1,24 @@
 'use client'
 
 import * as React from 'react'
+
 import { cloudSlug } from '@cloud/slug.js'
 import { CollapsibleGroup } from '@faceless-ui/collapsibles'
-import { Secret } from '@forms/fields/Secret/index.js'
-import { Text } from '@forms/fields/Text/index.js'
+import { Plan, Project, Team } from '@payload-cloud-types'
 
-import { Banner } from '@components/Banner/index.js'
-import Code from '@components/Code/index.js'
-import { Accordion } from '@components/Accordion/index.js'
-import { HR } from '@components/HR/index.js'
-import { MaxWidth } from '@components/MaxWidth/index.js'
-import { Plan, Project, Team } from '@root/payload-cloud-types.js'
-import { NoData } from '../_layoutComponents/NoData/index.js'
-import { SectionHeader } from '../_layoutComponents/SectionHeader/index.js'
-import { AddEmailDomain } from './AddEmailDomain/index.js'
-import { ManageEmailDomain } from './ManageEmailDomain/index.js'
+import { Secret } from '@forms/fields/Secret'
+import { Text } from '@forms/fields/Text'
+
+import { Accordion } from '@components/Accordion'
+import { Banner } from '@components/Banner'
+import Code from '@components/Code'
+import { HR } from '@components/HR'
+import { MaxWidth } from '@components/MaxWidth'
+
+import { NoData } from '../_layoutComponents/NoData'
+import { SectionHeader } from '../_layoutComponents/SectionHeader'
+import { AddEmailDomain } from './AddEmailDomain'
+import { ManageEmailDomain } from './ManageEmailDomain'
 
 export const ProjectEmailPage: React.FC<{
   project: Project
@@ -35,10 +38,10 @@ export const ProjectEmailPage: React.FC<{
       {
         credentials: 'include',
         headers: {
-          'Content-Type': 'application/json',
-        },
-      },
-    ).then(res => res.json())
+          'Content-Type': 'application/json'
+        }
+      }
+    ).then((res) => res.json())
 
     return value
   }, [project?.id])
@@ -51,9 +54,9 @@ export const ProjectEmailPage: React.FC<{
         <a href="https://resend.com" target="_blank">
           Resend
         </a>{' '}
-        to provide you with email functionality out of the box. Every project comes with an API key
-        for you to take advantage of Resend’s platform. By default, Payload will send email from
-        your default domain:{' '}
+        to provide you with email functionality out of the box. Every project
+        comes with an API key for you to take advantage of Resend’s platform. By
+        default, Payload will send email from your default domain:{' '}
         <a href={`https://${project?.defaultDomain}`} target="_blank">
           {project?.defaultDomain}
         </a>
@@ -61,14 +64,21 @@ export const ProjectEmailPage: React.FC<{
       {project?.resendDomainID ? (
         <Secret label="Resend API Key" loadSecret={loadEmailAPIKey} readOnly />
       ) : (
-        <Text label="Resend API Key" disabled placeholder="Resend API key not found" />
+        <Text
+          label="Resend API Key"
+          disabled
+          placeholder="Resend API key not found"
+        />
       )}
       <p></p>
       <p>
-        To use Resend’s email delivery in your Payload Cloud project, add the Payload Cloud plugin
-        to your project:
+        To use Resend’s email delivery in your Payload Cloud project, add the
+        Payload Cloud plugin to your project:
       </p>
-      <Code disableMinHeight showLineNumbers={false}>{`yarn add @payloadcms/plugin-cloud`}</Code>
+      <Code
+        disableMinHeight
+        showLineNumbers={false}
+      >{`yarn add @payloadcms/plugin-cloud`}</Code>
       <p></p>
       <p>
         <code>payload.config.js</code>:
@@ -88,8 +98,11 @@ export default buildConfig({
       {!supportsCustomEmail ? (
         <Banner type="error">
           <p>
-            Custom email domains are not supported on the Standard Plan. To use this feature,{' '}
-            <a href={`/${cloudSlug}/${teamSlug}/${project?.slug}/settings/plan`}>
+            Custom email domains are not supported on the Standard Plan. To use
+            this feature,{' '}
+            <a
+              href={`/${cloudSlug}/${teamSlug}/${project?.slug}/settings/plan`}
+            >
               upgrade your plan.
             </a>
           </p>
@@ -98,17 +111,21 @@ export default buildConfig({
         <React.Fragment>
           <CollapsibleGroup transTime={250} transCurve="ease">
             <Accordion openOnInit label="Add New Email Domain">
-              <AddEmailDomain project={project} environmentSlug={environmentSlug} />
+              <AddEmailDomain
+                project={project}
+                environmentSlug={environmentSlug}
+              />
             </Accordion>
           </CollapsibleGroup>
 
-          {project?.customEmailDomains && project.customEmailDomains.length > 0 ? (
+          {project?.customEmailDomains &&
+          project.customEmailDomains.length > 0 ? (
             <React.Fragment>
               <HR />
               <SectionHeader title="Manage Email Domains" />
               <CollapsibleGroup transTime={250} transCurve="ease" allowMultiple>
                 <div>
-                  {project.customEmailDomains.map(emailDomain => (
+                  {project.customEmailDomains.map((emailDomain) => (
                     <ManageEmailDomain
                       key={emailDomain.id}
                       emailDomain={emailDomain}

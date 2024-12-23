@@ -1,10 +1,11 @@
-import { fetchTeamWithCustomer } from '@cloud/_api/fetchTeam.js'
 import { Metadata } from 'next'
+
+import { fetchTeamWithCustomer } from '@cloud/_api/fetchTeam.js'
 
 import { TeamMembersPage } from './page_client.js'
 
 export default async ({
-  params,
+  params
 }: {
   params: Promise<{
     'team-slug': string
@@ -16,7 +17,7 @@ export default async ({
 }
 
 export async function generateMetadata({
-  params,
+  params
 }: {
   params: Promise<{
     'team-slug': string
@@ -27,7 +28,7 @@ export async function generateMetadata({
     title: `${teamSlug} - Team Members`,
     openGraph: {
       title: `${teamSlug} - Team Members`,
-      url: `/cloud/${teamSlug}/settings/members`,
-    },
+      url: `/cloud/${teamSlug}/settings/members`
+    }
   }
 }

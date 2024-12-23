@@ -1,15 +1,15 @@
 'use client'
 
 import React, { Fragment } from 'react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+
 import { ProjectWithSubscription } from '@cloud/_api/fetchProject.js'
 import { TeamWithCustomer } from '@cloud/_api/fetchTeam.js'
 import { projectHasPaymentMethod } from '@cloud/_utilities/projectHasPaymentMethod.js'
 import { teamHasDefaultPaymentMethod } from '@cloud/_utilities/teamHasDefaultPaymentMethod.js'
-import Link from 'next/link'
 
-import { usePathname } from 'next/navigation'
-
-import { Message } from '@components/Message/index.js'
+import { Message } from '@components/Message'
 
 export const TrialMessage: React.FC<{
   project: ProjectWithSubscription
@@ -18,13 +18,17 @@ export const TrialMessage: React.FC<{
   const pathname = usePathname()
 
   const daysLeft = Math.floor(
-    (new Date(project?.stripeSubscription?.trial_end * 1000).getTime() - new Date().getTime()) /
-      (1000 * 3600 * 24),
+    (new Date(project?.stripeSubscription?.trial_end * 1000).getTime() -
+      new Date().getTime()) /
+      (1000 * 3600 * 24)
   )
 
-  const trialEndDate = new Date(project?.stripeSubscription?.trial_end * 1000).toLocaleDateString()
+  const trialEndDate = new Date(
+    project?.stripeSubscription?.trial_end * 1000
+  ).toLocaleDateString()
 
-  const hasPaymentError = !projectHasPaymentMethod(project) && !teamHasDefaultPaymentMethod(team)
+  const hasPaymentError =
+    !projectHasPaymentMethod(project) && !teamHasDefaultPaymentMethod(team)
 
   const billingHref = `/cloud/${team?.slug}/${project?.slug}/settings/billing`
   const isOnBillingPage = pathname === billingHref
@@ -35,7 +39,8 @@ export const TrialMessage: React.FC<{
   // ensure that new projects don't show a warning message so that users do not think they made a mistake
   // we still need to display a message to the user, but not a warning message
   let severity = 'message'
-  if (hasPaymentError) severity = daysLeft < 3 ? 'error' : daysLeft < 7 ? 'warning' : 'message'
+  if (hasPaymentError)
+    severity = daysLeft < 3 ? 'error' : daysLeft < 7 ? 'warning' : 'message'
 
   return (
     <Message
@@ -43,7 +48,8 @@ export const TrialMessage: React.FC<{
         [severity]: (
           <Fragment>
             {`There ${daysLeft === 1 ? 'is' : 'are'} `}
-            <b> {` ${daysLeft} day${daysLeft === 1 ? '' : 's'}`}</b> {` left in your free trial.`}
+            <b> {` ${daysLeft} day${daysLeft === 1 ? '' : 's'}`}</b>{' '}
+            {` left in your free trial.`}
             {hasPaymentError ? (
               <Fragment>
                 {' '}
@@ -65,12 +71,16 @@ export const TrialMessage: React.FC<{
                   'the payment method(s) below'
                 )}
                 {` on ${trialEndDate}. `}
-                {!isOnPlanPage ? <Link href={planHref}>Cancel anytime</Link> : 'Cancel anytime'}
+                {!isOnPlanPage ? (
+                  <Link href={planHref}>Cancel anytime</Link>
+                ) : (
+                  'Cancel anytime'
+                )}
                 {'.'}
               </Fragment>
             )}
           </Fragment>
-        ),
+        )
       }}
     />
   )

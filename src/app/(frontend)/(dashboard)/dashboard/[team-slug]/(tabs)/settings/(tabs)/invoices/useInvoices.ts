@@ -1,16 +1,24 @@
-import type { InvoicesResult } from '@cloud/_api/fetchInvoices.js'
-import type { Team } from '@root/payload-cloud-types.js'
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useReducer,
+  useRef,
+  useState
+} from 'react'
 
 import { fetchInvoicesClient } from '@cloud/_api/fetchInvoices.js'
-import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react'
 import { toast } from 'sonner'
+
+import type { InvoicesResult } from '@cloud/_api/fetchInvoices.js'
+import type { Team } from '@payload-cloud-types'
 
 const reducer = (
   state: InvoicesResult | null,
   action: {
     payload?: InvoicesResult
     type: 'add' | 'reset'
-  },
+  }
 ): InvoicesResult | null => {
   switch (action.type) {
     case 'reset':
@@ -19,7 +27,7 @@ const reducer = (
       if (!state) return action.payload || null
       return {
         data: [...state.data, ...(action.payload?.data || [])],
-        has_more: action.payload?.has_more || false,
+        has_more: action.payload?.has_more || false
       }
     default:
       return state
@@ -55,13 +63,13 @@ export const useInvoices = (args: {
 
         const invoicesRes = await fetchInvoicesClient({
           starting_after,
-          team,
+          team
         })
 
         setTimeout(() => {
           dispatchResult({
             type: starting_after ? 'add' : 'reset',
-            payload: invoicesRes,
+            payload: invoicesRes
           })
 
           setError('')
@@ -78,7 +86,7 @@ export const useInvoices = (args: {
 
       isRequesting.current = false
     },
-    [delay, team],
+    [delay, team]
   )
 
   useEffect(() => {
@@ -99,7 +107,7 @@ export const useInvoices = (args: {
 
   const memoizedState = useMemo(
     () => ({ error, isLoading, loadMoreInvoices, refreshInvoices, result }),
-    [result, isLoading, error, refreshInvoices, loadMoreInvoices],
+    [result, isLoading, error, refreshInvoices, loadMoreInvoices]
   )
 
   return memoizedState

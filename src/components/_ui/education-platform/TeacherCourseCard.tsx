@@ -1,4 +1,12 @@
 import React from 'react'
+import Image from 'next/image'
+
+import { Pencil, Trash2 } from 'lucide-react'
+
+import type { TeacherCourseCardProps } from './types'
+
+import { cn } from '../../../lib/utils/cn'
+import { Button } from '../button'
 import {
   Card,
   CardContent,
@@ -6,11 +14,6 @@ import {
   CardHeader,
   CardTitle
 } from '../card'
-import Image from 'next/image'
-import { cn } from '../../../lib/utils/cn'
-import { Button } from '../button'
-import { Pencil, Trash2 } from 'lucide-react'
-import type { TeacherCourseCardProps } from './types'
 
 const TeacherCourseCard = ({
   course,

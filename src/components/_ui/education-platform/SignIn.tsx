@@ -1,10 +1,11 @@
 // @ts-nocheck
 'use client'
 
-import { SignIn, useUser } from '@clerk/nextjs'
 import React from 'react'
-import { dark } from '@clerk/themes'
 import { useSearchParams } from 'next/navigation'
+
+import { SignIn, useUser } from '@clerk/nextjs'
+import { dark } from '@clerk/themes'
 
 const SignInComponent = () => {
   const { user } = useUser()

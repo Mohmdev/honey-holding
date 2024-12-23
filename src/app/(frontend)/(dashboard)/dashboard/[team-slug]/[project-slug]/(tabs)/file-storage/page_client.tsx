@@ -1,13 +1,15 @@
 'use client'
 
 import * as React from 'react'
-import { Secret } from '@forms/fields/Secret/index.js'
-import Label from '@forms/Label/index.js'
 
-import { Banner } from '@components/Banner/index.js'
-import { CopyToClipboard } from '@components/CopyToClipboard/index.js'
-import { Gutter } from '@components/Gutter/index.js'
-import { Project, Team } from '@root/payload-cloud-types.js'
+import { Project, Team } from '@payload-cloud-types'
+
+import { Secret } from '@forms/fields/Secret'
+import Label from '@forms/Label'
+
+import { Banner } from '@components/Banner'
+import { CopyToClipboard } from '@components/CopyToClipboard'
+import { Gutter } from '@components/Gutter'
 
 import classes from './page.module.scss'
 
@@ -42,10 +44,10 @@ export const ProjectFileStoragePage: React.FC<{
       {
         credentials: 'include',
         headers: {
-          'Content-Type': 'application/json',
-        },
-      },
-    ).then(res => res.json())
+          'Content-Type': 'application/json'
+        }
+      }
+    ).then((res) => res.json())
 
     return value
   }, [project?.id])
@@ -55,7 +57,8 @@ export const ProjectFileStoragePage: React.FC<{
       <div className={classes.fields}>
         <Banner>
           <p>
-            Payload Cloud uses AWS Cognito for authentication to your S3 bucket. The{' '}
+            Payload Cloud uses AWS Cognito for authentication to your S3 bucket.
+            The{' '}
             <a
               href="https://github.com/payloadcms/payload/tree/main/packages/plugin-cloud#accessing-file-storage-from-local-environment"
               target="_blank"
@@ -63,15 +66,21 @@ export const ProjectFileStoragePage: React.FC<{
             >
               Payload Cloud Plugin
             </a>{' '}
-            will automatically pick up these values. These values are only if you'd like to access
-            your files directly, outside of Payload Cloud. Use copy to clipboard below for .env
-            formatted values. Paste in Cognito Password separately.
+            will automatically pick up these values. These values are only if
+            you'd like to access your files directly, outside of Payload Cloud.
+            Use copy to clipboard below for .env formatted values. Paste in
+            Cognito Password separately.
           </p>
         </Banner>
         <Label
           label={<h4>Cognito Variables</h4>}
           className={classes.label}
-          actionsSlot={<CopyToClipboard value={formatEnvVars(project)} hoverText="Copy as .env" />}
+          actionsSlot={
+            <CopyToClipboard
+              value={formatEnvVars(project)}
+              hoverText="Copy as .env"
+            />
+          }
         />
         <ul className={classes.meta}>
           <li>

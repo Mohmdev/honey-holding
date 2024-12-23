@@ -1,11 +1,17 @@
 // @ts-nocheck
 import React from 'react'
+
+import { registerPlugin } from 'filepond'
+import { Edit, Plus, X } from 'lucide-react'
+import { FilePond } from 'react-filepond'
 import {
   ControllerRenderProps,
   FieldValues,
-  useFormContext,
-  useFieldArray
+  useFieldArray,
+  useFormContext
 } from 'react-hook-form'
+
+import { Button } from '../button'
 import {
   FormControl,
   FormField,
@@ -14,8 +20,6 @@ import {
   FormMessage
 } from '../form'
 import { Input } from '../input'
-import { Button } from '../button'
-import { Textarea } from '../textarea'
 import {
   Select,
   SelectContent,
@@ -24,12 +28,13 @@ import {
   SelectValue
 } from '../select'
 import { Switch } from '../switch'
-import { Edit, X, Plus } from 'lucide-react'
-import { registerPlugin } from 'filepond'
-import { FilePond } from 'react-filepond'
+import { Textarea } from '../textarea'
+
 import 'filepond/dist/filepond.min.css'
-import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
+
 import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation'
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
+
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
 
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview)

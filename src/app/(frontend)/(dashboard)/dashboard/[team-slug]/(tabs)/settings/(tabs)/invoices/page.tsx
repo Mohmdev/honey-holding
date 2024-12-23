@@ -1,15 +1,17 @@
 import React from 'react'
+import { Metadata } from 'next'
+
 import { fetchInvoices } from '@cloud/_api/fetchInvoices.js'
 import { fetchMe } from '@cloud/_api/fetchMe.js'
 import { fetchTeamWithCustomer } from '@cloud/_api/fetchTeam.js'
-import { SectionHeader } from '@cloud/[team-slug]/[project-slug]/(tabs)/settings/_layoutComponents/SectionHeader/index.js'
-import { Metadata } from 'next'
+import { SectionHeader } from '@cloud/[team-slug]/[project-slug]/(tabs)/settings/_layoutComponents/SectionHeader'
 
-import { Message } from '@components/Message/index.js'
+import { Message } from '@components/Message'
+
 import { TeamInvoicesPage } from './page_client.js'
 
 export default async ({
-  params,
+  params
 }: {
   params: Promise<{
     'team-slug': string
@@ -34,7 +36,7 @@ export default async ({
 }
 
 export async function generateMetadata({
-  params,
+  params
 }: {
   params: Promise<{
     'team-slug': string
@@ -45,7 +47,7 @@ export async function generateMetadata({
     title: `${teamSlug} - Team Invoices`,
     openGraph: {
       title: `${teamSlug} - Team Invoices`,
-      url: `/cloud/${teamSlug}/invoices`,
-    },
+      url: `/cloud/${teamSlug}/invoices`
+    }
   }
 }

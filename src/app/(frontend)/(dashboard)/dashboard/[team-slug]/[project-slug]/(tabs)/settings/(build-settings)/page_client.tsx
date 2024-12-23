@@ -1,20 +1,23 @@
 'use client'
 
 import * as React from 'react'
-import { toast } from 'sonner'
-import { BranchSelector } from '@cloud/_components/BranchSelector/index.js'
-import { UniqueProjectSlug } from '@cloud/_components/UniqueSlug/index.js'
-import { Text } from '@forms/fields/Text/index.js'
-import Form from '@forms/Form/index.js'
-import Submit from '@forms/Submit/index.js'
 import { useRouter } from 'next/navigation'
 
-import { MaxWidth } from '@components/MaxWidth/index.js'
-import { Project, Team } from '@root/payload-cloud-types.js'
-import { SectionHeader } from '../_layoutComponents/SectionHeader/index.js'
+import { Project, Team } from '@payload-cloud-types'
+import { toast } from 'sonner'
 
+import { Text } from '@forms/fields/Text'
+import Form from '@forms/Form'
+import Submit from '@forms/Submit'
+
+import { MaxWidth } from '@components/MaxWidth'
+import { BranchSelector } from '@dashboard/BranchSelector'
+import { UniqueProjectSlug } from '@dashboard/UniqueSlug'
+
+import { SectionHeader } from '../_layoutComponents/SectionHeader'
 import classes from './page.module.scss'
-import { PRODUCTION_ENVIRONMENT_SLUG } from '@root/constants.js'
+
+import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants.js'
 
 export const ProjectBuildSettingsPage: React.FC<{
   team: Team
@@ -42,10 +45,10 @@ export const ProjectBuildSettingsPage: React.FC<{
             method: 'POST',
             credentials: 'include',
             headers: {
-              'Content-Type': 'application/json',
+              'Content-Type': 'application/json'
             },
-            body: JSON.stringify(unflattenedData),
-          },
+            body: JSON.stringify(unflattenedData)
+          }
         )
 
         const response: {
@@ -59,7 +62,9 @@ export const ProjectBuildSettingsPage: React.FC<{
         } = await req.json()
 
         if (!req.ok) {
-          toast.error(`Failed to update settings: ${response?.errors?.[0]?.message}`)
+          toast.error(
+            `Failed to update settings: ${response?.errors?.[0]?.message}`
+          )
           setError(response?.errors?.[0])
           return
         }
@@ -75,7 +80,7 @@ export const ProjectBuildSettingsPage: React.FC<{
           router.push(
             `/cloud/${typeof project.team === 'string' ? project.team : project.team?.slug}/${
               response.doc.slug
-            }/settings`,
+            }/settings`
           )
           return
         }
@@ -84,7 +89,7 @@ export const ProjectBuildSettingsPage: React.FC<{
         throw e
       }
     },
-    [project, router],
+    [project, router]
   )
 
   return (
@@ -100,7 +105,11 @@ export const ProjectBuildSettingsPage: React.FC<{
           required
         />
         <UniqueProjectSlug
-          teamID={typeof project?.team === 'string' ? project?.team : project?.team?.id}
+          teamID={
+            typeof project?.team === 'string'
+              ? project?.team
+              : project?.team?.id
+          }
           projectID={project?.id}
           initialValue={project?.slug}
           disabled={environmentSlug !== 'prod'}

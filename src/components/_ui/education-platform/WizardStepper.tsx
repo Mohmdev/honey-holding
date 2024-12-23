@@ -1,6 +1,9 @@
-import { cn } from '@utils/cn'
-import { Check } from 'lucide-react'
 import React from 'react'
+
+import { Check } from 'lucide-react'
+
+import { cn } from '@utils/cn'
+
 import type { WizardStepperProps } from './types'
 
 const WizardStepper = ({ currentStep }: WizardStepperProps) => {

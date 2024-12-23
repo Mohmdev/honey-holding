@@ -1,11 +1,13 @@
 'use client'
 
 import * as React from 'react'
-import { Secret } from '@forms/fields/Secret/index.js'
 
-import { Banner } from '@components/Banner/index.js'
-import { Gutter } from '@components/Gutter/index.js'
-import { Project, Team } from '@root/payload-cloud-types.js'
+import { Project, Team } from '@payload-cloud-types'
+
+import { Secret } from '@forms/fields/Secret'
+
+import { Banner } from '@components/Banner'
+import { Gutter } from '@components/Gutter'
 
 export const ProjectDatabasePage: React.FC<{
   project: Project
@@ -20,22 +22,26 @@ export const ProjectDatabasePage: React.FC<{
       {
         credentials: 'include',
         headers: {
-          'Content-Type': 'application/json',
-        },
-      },
-    ).then(res => res.json())
+          'Content-Type': 'application/json'
+        }
+      }
+    ).then((res) => res.json())
 
     return value
   }, [project?.id])
 
   return (
     <Gutter>
-      <Secret label="Mongo Connection String" loadSecret={loadConnectionString} readOnly />
+      <Secret
+        label="Mongo Connection String"
+        loadSecret={loadConnectionString}
+        readOnly
+      />
       <Banner>
         <p>
-          Backups, migration, and more is on its way. For now, if you need to take a backup, you can
-          use commands like <code>mongodump</code> and <code>mongorestore</code> using your
-          connection string above.
+          Backups, migration, and more is on its way. For now, if you need to
+          take a backup, you can use commands like <code>mongodump</code> and{' '}
+          <code>mongorestore</code> using your connection string above.
         </p>
       </Banner>
     </Gutter>

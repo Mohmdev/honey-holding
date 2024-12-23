@@ -56,6 +56,7 @@ const prettierConfig = {
     '^@icons/(.*)$',
     '^@components/(.*)$',
     '^@admin-components/(.*)$',
+    '^@dashboard/(.*)$',
     '',
     '^[./]', // Relative imports
     '',

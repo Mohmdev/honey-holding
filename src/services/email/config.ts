@@ -1,4 +1,5 @@
 import { resendAdapter } from '@payloadcms/email-resend'
+
 import type { Config } from 'payload'
 
 export const emailAdapter: Config['email'] = resendAdapter({

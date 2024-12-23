@@ -1,23 +1,29 @@
 import * as React from 'react'
-import { fetchMe } from '@cloud/_api/fetchMe.js'
-import { fetchPaymentMethods } from '@cloud/_api/fetchPaymentMethods.js'
-import { fetchProjectAndRedirect, ProjectWithSubscription } from '@cloud/_api/fetchProject.js'
-import { ProjectPaymentMethodSelector } from '@cloud/_components/CreditCardSelector/ProjectPaymentMethodSelector.js'
-import { cloudSlug } from '@cloud/slug.js'
-import { Text } from '@forms/fields/Text/index.js'
 import { Metadata } from 'next'
 import Link from 'next/link'
 
-import { Heading } from '@components/Heading/index.js'
-import { MaxWidth } from '@components/MaxWidth/index.js'
-import { Message } from '@components/Message/index.js'
-import { mergeOpenGraph } from '@root/seo/mergeOpenGraph.js'
-import { checkTeamRoles } from '@root/utilities/check-team-roles.js'
-import { SectionHeader } from '../_layoutComponents/SectionHeader/index.js'
+import { fetchMe } from '@cloud/_api/fetchMe.js'
+import { fetchPaymentMethods } from '@cloud/_api/fetchPaymentMethods.js'
+import {
+  fetchProjectAndRedirect,
+  ProjectWithSubscription
+} from '@cloud/_api/fetchProject.js'
+import { cloudSlug } from '@cloud/slug.js'
+import { mergeOpenGraph } from '@seo/mergeOpenGraph.js'
+import { checkTeamRoles } from '@utilities/check-team-roles.js'
+import { generateRoutePath } from '@utilities/generate-route-path.js'
 
+import { Text } from '@forms/fields/Text'
+
+import { Heading } from '@components/Heading'
+import { MaxWidth } from '@components/MaxWidth'
+import { Message } from '@components/Message'
+import { ProjectPaymentMethodSelector } from '@dashboard/CreditCardSelector/ProjectPaymentMethodSelector.js'
+
+import { SectionHeader } from '../_layoutComponents/SectionHeader'
 import classes from './page.module.scss'
-import { generateRoutePath } from '@root/utilities/generate-route-path.js'
-import { PRODUCTION_ENVIRONMENT_SLUG } from '@root/constants.js'
+
+import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants.js'
 
 const statusLabels = {
   active: 'Active',
@@ -28,11 +34,11 @@ const statusLabels = {
   trialing: 'Trialing',
   unpaid: 'Unpaid',
   paused: 'Paused',
-  unknown: 'Unknown',
+  unknown: 'Unknown'
 }
 
 export default async ({
-  params,
+  params
 }: {
   params: Promise<{
     'team-slug': string
@@ -43,14 +49,14 @@ export default async ({
   const {
     'team-slug': teamSlug,
     'project-slug': projectSlug,
-    'environment-slug': environmentSlug = PRODUCTION_ENVIRONMENT_SLUG,
+    'environment-slug': environmentSlug = PRODUCTION_ENVIRONMENT_SLUG
   } = await params
   const { user } = await fetchMe()
 
   const { team, project } = await fetchProjectAndRedirect({
     teamSlug,
     projectSlug,
-    environmentSlug,
+    environmentSlug
   })
 
   const isCurrentTeamOwner = checkTeamRoles(user, team, ['owner'])
@@ -58,7 +64,7 @@ export default async ({
   const hasSubscriptionID = project?.stripeSubscriptionID
 
   const paymentMethods = await fetchPaymentMethods({
-    team,
+    team
   })
 
   // check if this plan is free, and do not show a message if it is
@@ -71,12 +77,14 @@ export default async ({
       <SectionHeader title="Project billing" className={classes.header} />
       {!hasCustomerID && (
         <p className={classes.error}>
-          This team does not have a billing account. Please contact support to resolve this issue.
+          This team does not have a billing account. Please contact support to
+          resolve this issue.
         </p>
       )}
       {!hasSubscriptionID && (
         <p className={classes.error}>
-          This project does not have a subscription. Please contact support to resolve this issue.
+          This project does not have a subscription. Please contact support to
+          resolve this issue.
         </p>
       )}
       <div className={classes.fields}>
@@ -95,12 +103,16 @@ export default async ({
               description="This is the ID of the subscription for this project."
             />
             <Text
-              value={statusLabels?.[project?.stripeSubscriptionStatus || 'unknown']}
+              value={
+                statusLabels?.[project?.stripeSubscriptionStatus || 'unknown']
+              }
               label="Subscription Status"
               disabled
             />
             {!isCurrentTeamOwner && (
-              <p className={classes.error}>You must be an owner of this team to manage billing.</p>
+              <p className={classes.error}>
+                You must be an owner of this team to manage billing.
+              </p>
             )}
             {isCurrentTeamOwner && (
               <React.Fragment>
@@ -114,7 +126,10 @@ export default async ({
                 )}
                 <p className={classes.description}>
                   {`Select which card to use for this project. If your payment fails, we will attempt to bill your team's default payment method (if any). To set your team's default payment method or manage all payment methods on file, please visit the `}
-                  <Link href={`/${cloudSlug}/${team.slug}/settings/billing`} prefetch={false}>
+                  <Link
+                    href={`/${cloudSlug}/${team.slug}/settings/billing`}
+                    prefetch={false}
+                  >
                     team billing page
                   </Link>
                   {`.`}
@@ -134,7 +149,7 @@ export default async ({
 }
 
 export async function generateMetadata({
-  params,
+  params
 }: {
   params: Promise<{
     'team-slug': string
@@ -145,7 +160,7 @@ export async function generateMetadata({
   const {
     'team-slug': teamSlug,
     'project-slug': projectSlug,
-    'environment-slug': environmentSlug = PRODUCTION_ENVIRONMENT_SLUG,
+    'environment-slug': environmentSlug = PRODUCTION_ENVIRONMENT_SLUG
   } = await params
   return {
     title: 'Billing',
@@ -155,8 +170,8 @@ export async function generateMetadata({
         teamSlug,
         projectSlug,
         environmentSlug,
-        suffix: 'settings/billing',
-      }),
-    }),
+        suffix: 'settings/billing'
+      })
+    })
   }
 }

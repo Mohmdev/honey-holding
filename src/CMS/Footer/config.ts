@@ -1,5 +1,3 @@
-import { revalidatePath } from 'next/cache'
-
 import link from '@fields/link'
 import { isAdminOrEditor } from '@access/isAdminOrEditor'
 import { publishedOnly } from '@access/publishedOnly'
@@ -7,6 +5,8 @@ import { publishedOnly } from '@access/publishedOnly'
 // import { isAdmin } from '@access/isAdmin'
 
 import type { GlobalConfig } from 'payload'
+
+import { revalidateFooter } from './revalidateFooter'
 
 export const Footer: GlobalConfig = {
   slug: 'footer',
@@ -54,6 +54,6 @@ export const Footer: GlobalConfig = {
     }
   ],
   hooks: {
-    afterChange: [() => revalidatePath('/', 'layout')]
+    afterChange: [revalidateFooter]
   }
 }

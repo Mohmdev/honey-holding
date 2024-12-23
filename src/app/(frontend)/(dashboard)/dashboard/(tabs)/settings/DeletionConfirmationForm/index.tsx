@@ -1,20 +1,24 @@
-import { Button } from '@components/Button/index.js'
-import { Heading } from '@components/Heading/index.js'
-import { Message } from '@components/Message/index.js'
-import { useModal } from '@faceless-ui/modal'
-import Form from '@forms/Form/index.js'
-import Submit from '@forms/Submit/index.js'
-import { Text } from '@forms/fields/Text/index.js'
-import { useAuth } from '@root/providers/Auth/index.js'
-import { useRouter } from 'next/navigation'
 import React from 'react'
+import { useRouter } from 'next/navigation'
+
+import { useModal } from '@faceless-ui/modal'
 import { toast } from 'sonner'
+
+import { useAuth } from '@providers/Auth'
+
+import { Text } from '@forms/fields/Text'
+import Form from '@forms/Form'
+import Submit from '@forms/Submit'
+
+import { Button } from '@components/Button'
+import { Heading } from '@components/Heading'
+import { Message } from '@components/Message'
 
 import classes from './page.module.scss'
 
 export const DeletionConfirmationForm: React.FC<{
   modalSlug: string
-}> = props => {
+}> = (props) => {
   const { modalSlug } = props
   const { closeModal } = useModal()
   const [hasEmail, setHasEmail] = React.useState(false)
@@ -26,14 +30,16 @@ export const DeletionConfirmationForm: React.FC<{
     async ({ data }) => {
       if (user) {
         if (data.modalEmail !== user.email) {
-          toast.error('Email provided does not match your account, please try again.')
+          toast.error(
+            'Email provided does not match your account, please try again.'
+          )
           return undefined
         }
 
         try {
           const confirmedUser = await login({
             email: data.modalEmail as string,
-            password: data.modalPassword as string,
+            password: data.modalPassword as string
           })
 
           if (confirmedUser && confirmedUser.id === user.id) {
@@ -42,8 +48,8 @@ export const DeletionConfirmationForm: React.FC<{
                 `${process.env.NEXT_PUBLIC_CLOUD_CMS_URL}/api/users/${user.id}`,
                 {
                   credentials: 'include',
-                  method: 'DELETE',
-                },
+                  method: 'DELETE'
+                }
               )
 
               if (req.status === 200) {
@@ -51,7 +57,9 @@ export const DeletionConfirmationForm: React.FC<{
                 router.push('/logout')
               }
             } catch (e) {
-              toast.error('There was an issue deleting your account. Please try again.')
+              toast.error(
+                'There was an issue deleting your account. Please try again.'
+              )
             }
           }
         } catch (e) {
@@ -59,7 +67,7 @@ export const DeletionConfirmationForm: React.FC<{
         }
       }
     },
-    [login, router, user],
+    [login, router, user]
   )
 
   return (
@@ -67,17 +75,21 @@ export const DeletionConfirmationForm: React.FC<{
       <Heading as="h3" marginTop={false}>
         Are you sure you want to delete your account?
       </Heading>
-      <Message className={classes.warning} error="Deleting your account cannot be undone." />
+      <Message
+        className={classes.warning}
+        error="Deleting your account cannot be undone."
+      />
       <p>
-        Team ownership will be transferred to another team member where possible. If no other team
-        members exist, the team and associated projects / deployments will be
+        Team ownership will be transferred to another team member where
+        possible. If no other team members exist, the team and associated
+        projects / deployments will be
         <strong> permanently deleted</strong>.
       </p>
       <p>To proceed re-enter your account details below:</p>
       <Text
         className={classes.emailInput}
         label="Email"
-        onChange={value => {
+        onChange={(value) => {
           setHasEmail(Boolean(value))
         }}
         path="modalEmail"
@@ -85,7 +97,7 @@ export const DeletionConfirmationForm: React.FC<{
       />
       <Text
         label="Password"
-        onChange={value => {
+        onChange={(value) => {
           setHasPW(Boolean(value))
         }}
         path="modalPassword"
@@ -93,8 +105,16 @@ export const DeletionConfirmationForm: React.FC<{
         type="password"
       />
       <div className={classes.modalActions}>
-        <Button appearance="secondary" label="Cancel" onClick={() => closeModal(modalSlug)} />
-        <Submit appearance="danger" disabled={!(hasEmail && hasPW)} label="Delete my account" />
+        <Button
+          appearance="secondary"
+          label="Cancel"
+          onClick={() => closeModal(modalSlug)}
+        />
+        <Submit
+          appearance="danger"
+          disabled={!(hasEmail && hasPW)}
+          label="Delete my account"
+        />
       </div>
     </Form>
   )

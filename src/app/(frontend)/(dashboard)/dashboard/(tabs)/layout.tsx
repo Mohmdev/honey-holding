@@ -1,10 +1,11 @@
 import { Fragment } from 'react'
-import { DashboardTabs } from '@cloud/_components/DashboardTabs/index.js'
+
 import { cloudSlug } from '@cloud/slug.js'
+import { DashboardTabs } from '@root/app/(frontend)/(dashboard)/~/components/DashboardTabs'
 
-import { Gutter } from '@components/Gutter/index.js'
+import { Gutter } from '@components/Gutter'
 
-export default async props => {
+export default async (props) => {
   const { children } = props
 
   return (
@@ -15,16 +16,16 @@ export default async props => {
           tabs={{
             [cloudSlug]: {
               href: `/${cloudSlug}`,
-              label: 'Projects',
+              label: 'Projects'
             },
             teams: {
               label: 'Teams',
-              href: `/${cloudSlug}/teams`,
+              href: `/${cloudSlug}/teams`
             },
             settings: {
               label: 'Settings',
-              href: `/${cloudSlug}/settings`,
-            },
+              href: `/${cloudSlug}/settings`
+            }
           }}
         />
       </Gutter>

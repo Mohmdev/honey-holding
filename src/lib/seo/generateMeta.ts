@@ -2,62 +2,21 @@ import type { Metadata } from 'next'
 
 import { getServerSideURL } from '@utils/getURL'
 
-import type { Config, Media, Page, Post } from '@payload-types'
+import type { Page, Post } from '@payload-types'
 
 import { mergeOpenGraph } from './mergeOpenGraph'
 
-const getImageURL = (image?: Media | Config['db']['defaultIDType'] | null) => {
-  const serverUrl = getServerSideURL()
-
-  let url = serverUrl + '/website-template-OG.webp'
-
-  if (image && typeof image === 'object' && 'url' in image) {
-    const ogUrl = image.sizes?.og?.url
-
-    url = ogUrl ? serverUrl + ogUrl : serverUrl + image.url
-  }
-
-  return url
-}
-
-// export const generateMeta = async (args: {
-//   doc: Partial<Page> | Partial<Post>
-// }): Promise<Metadata> => {
-//   const { doc } = args || {}
-
-//   const ogImage = getImageURL(doc?.meta?.image)
-
-//   const title = doc?.meta?.title
-//     ? doc?.meta?.title + ' | Payload Website Template'
-//     : 'Payload Website Template'
-
-//   return {
-//     description: doc?.meta?.description,
-//     openGraph: mergeOpenGraph({
-//       description: doc?.meta?.description || '',
-//       images: ogImage
-//         ? [
-//             {
-//               url: ogImage
-//             }
-//           ]
-//         : undefined,
-//       title,
-//       url: Array.isArray(doc?.slug) ? doc?.slug.join('/') : '/'
-//     }),
-//     title
-//   }
-// }
+import { getGlobalSettings } from '@data/globals/cachedSiteMeta'
 
 export const generateMeta = async (args: {
   doc: Partial<Page> | Partial<Post>
 }): Promise<Metadata> => {
   const { doc } = args || {}
 
-  const siteName = (await getSiteName()) || 'Payload CMS'
+  const siteName = (await getGlobalSettings.siteName()) || 'Nexweb'
   const siteDescription =
-    (await getSiteDescription()) ||
-    'An open-source website built with Payload and Next.js.'
+    (await getGlobalSettings.siteDescription()) ||
+    'Nexweb Content Management Systems'
 
   const ogImage =
     typeof doc?.meta?.image === 'object' &&
@@ -85,21 +44,19 @@ export const generateMeta = async (args: {
     }
   }
 
-  // Special handling for posts route
   if (doc?.slug === 'posts') {
     return {
-      title: `Posts | ${siteName}`,
+      title: `Blog | ${siteName}`,
       description: 'Browse all posts.',
       openGraph: {
         ...openGraphBase,
-        title: `Posts | ${siteName}`,
+        title: `Blog | ${siteName}`,
         description: 'Browse all posts.',
-        url: '/posts'
+        url: '/blog'
       }
     }
   }
 
-  // Special handling for search route
   if (doc?.slug === 'search') {
     return {
       title: `Search | ${siteName}`,
@@ -117,6 +74,7 @@ export const generateMeta = async (args: {
   const documentTitle = doc?.meta?.title
     ? `${doc.meta.title} | ${siteName}`
     : siteName
+
   const documentDescription = doc?.meta?.description || siteDescription
 
   return {

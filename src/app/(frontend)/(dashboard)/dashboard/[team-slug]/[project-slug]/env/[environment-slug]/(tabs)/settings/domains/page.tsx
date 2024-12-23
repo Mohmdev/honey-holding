@@ -1,6 +1,6 @@
 import {
   default as EnvironmentSettingsDomainsPage,
-  generateMetadata,
+  generateMetadata
 } from '@cloud/[team-slug]/[project-slug]/(tabs)/settings/domains/page.js'
 
 export default EnvironmentSettingsDomainsPage

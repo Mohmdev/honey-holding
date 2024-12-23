@@ -1,5 +1,3 @@
-import { revalidatePath } from 'next/cache'
-
 import link from '@fields/link'
 import { isAdminOrEditor } from '@access/isAdminOrEditor'
 import { publishedOnly } from '@access/publishedOnly'
@@ -7,6 +5,8 @@ import { publishedOnly } from '@access/publishedOnly'
 // import { isAdmin } from '@access/isAdmin'
 
 import type { GlobalConfig } from 'payload'
+
+import { revalidateMainMenu } from './revalidateMainMenu'
 
 export const MainMenu: GlobalConfig = {
   slug: 'main-menu',
@@ -206,6 +206,6 @@ export const MainMenu: GlobalConfig = {
     })
   ],
   hooks: {
-    afterChange: [() => revalidatePath('/', 'layout')]
+    afterChange: [revalidateMainMenu]
   }
 }

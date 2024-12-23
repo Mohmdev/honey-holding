@@ -1,7 +1,21 @@
 // @ts-ignore
-import { useClerk, useUser } from '@clerk/nextjs'
-import { usePathname } from 'next/navigation'
 import React from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+
+import { useClerk, useUser } from '@clerk/nextjs'
+import {
+  BookOpen,
+  Briefcase,
+  DollarSign,
+  LogOut,
+  PanelLeft,
+  Settings,
+  User
+} from 'lucide-react'
+
+import { cn } from '../../../lib/utils/cn'
 import {
   Sidebar,
   SidebarContent,
@@ -12,19 +26,7 @@ import {
   SidebarMenuItem,
   useSidebar
 } from '../sidebar'
-import {
-  BookOpen,
-  Briefcase,
-  DollarSign,
-  LogOut,
-  PanelLeft,
-  Settings,
-  User
-} from 'lucide-react'
 import Loading from './Loading'
-import Image from 'next/image'
-import { cn } from '../../../lib/utils/cn'
-import Link from 'next/link'
 
 const AppSidebar = () => {
   const { user, isLoaded } = useUser()

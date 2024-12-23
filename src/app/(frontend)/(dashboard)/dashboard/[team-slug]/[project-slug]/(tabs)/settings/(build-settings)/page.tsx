@@ -1,13 +1,15 @@
-import { fetchProjectAndRedirect } from '@cloud/_api/fetchProject.js'
 import { Metadata } from 'next'
 
-import { mergeOpenGraph } from '@root/seo/mergeOpenGraph.js'
+import { fetchProjectAndRedirect } from '@cloud/_api/fetchProject.js'
+import { mergeOpenGraph } from '@seo/mergeOpenGraph.js'
+import { generateRoutePath } from '@utilities/generate-route-path.js'
+
 import { ProjectBuildSettingsPage } from './page_client.js'
-import { generateRoutePath } from '@root/utilities/generate-route-path.js'
-import { PRODUCTION_ENVIRONMENT_SLUG } from '@root/constants.js'
+
+import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants.js'
 
 export default async ({
-  params,
+  params
 }: {
   params: Promise<{
     'team-slug': string
@@ -18,21 +20,25 @@ export default async ({
   const {
     'team-slug': teamSlug,
     'project-slug': projectSlug,
-    'environment-slug': environmentSlug = PRODUCTION_ENVIRONMENT_SLUG,
+    'environment-slug': environmentSlug = PRODUCTION_ENVIRONMENT_SLUG
   } = await params
   const { team, project } = await fetchProjectAndRedirect({
     teamSlug,
     projectSlug,
-    environmentSlug,
+    environmentSlug
   })
 
   return (
-    <ProjectBuildSettingsPage project={project} team={team} environmentSlug={environmentSlug} />
+    <ProjectBuildSettingsPage
+      project={project}
+      team={team}
+      environmentSlug={environmentSlug}
+    />
   )
 }
 
 export async function generateMetadata({
-  params,
+  params
 }: {
   params: Promise<{
     'team-slug': string
@@ -43,7 +49,7 @@ export async function generateMetadata({
   const {
     'team-slug': teamSlug,
     'project-slug': projectSlug,
-    'environment-slug': environmentSlug = PRODUCTION_ENVIRONMENT_SLUG,
+    'environment-slug': environmentSlug = PRODUCTION_ENVIRONMENT_SLUG
   } = await params
   return {
     title: 'Build Settings',
@@ -53,8 +59,8 @@ export async function generateMetadata({
         teamSlug,
         projectSlug,
         environmentSlug,
-        suffix: 'settings/build-settings',
-      }),
-    }),
+        suffix: 'settings/build-settings'
+      })
+    })
   }
 }

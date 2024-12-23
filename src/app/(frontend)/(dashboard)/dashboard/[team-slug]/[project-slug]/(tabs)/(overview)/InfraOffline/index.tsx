@@ -1,20 +1,21 @@
 'use client'
 
 import * as React from 'react'
-import { fetchProjectClient } from '@cloud/_api/fetchProjects.js'
 import Link from 'next/link'
 
-import { Banner } from '@components/Banner/index.js'
-import { Gutter } from '@components/Gutter/index.js'
-import { Heading } from '@components/Heading/index.js'
-import { ExtendedBackground } from '@components/ExtendedBackground/index.js'
-import { Indicator } from '@components/Indicator/index.js'
-import { Message } from '@components/Message/index.js'
-import { Project, Team } from '@root/payload-cloud-types.js'
-import { RequireField } from '@root/ts-helpers/requireField.js'
-import { useGetProjectDeployments } from '@root/utilities/use-cloud-api.js'
-import { DeploymentLogs } from '../DeploymentLogs/index.js'
+import { fetchProjectClient } from '@cloud/_api/fetchProjects.js'
+import { Project, Team } from '@payload-cloud-types'
+import { RequireField } from '@ts-helpers/requireField.js'
+import { useGetProjectDeployments } from '@utilities/use-cloud-api.js'
 
+import { Banner } from '@components/Banner'
+import { ExtendedBackground } from '@components/ExtendedBackground'
+import { Gutter } from '@components/Gutter'
+import { Heading } from '@components/Heading'
+import { Indicator } from '@components/Indicator'
+import { Message } from '@components/Message'
+
+import { DeploymentLogs } from '../DeploymentLogs'
 import classes from './index.module.scss'
 
 type DeploymentPhases = RequireField<Project, 'infraStatus'>['infraStatus']
@@ -31,79 +32,80 @@ const deploymentStates: DeploymentStates = {
   notStarted: {
     step: 0,
     status: 'SUCCESS',
-    label: 'Setting up your project',
+    label: 'Setting up your project'
   },
   reinstating: {
     step: 0,
     status: 'SUCCESS',
-    label: 'Reinstating your project',
+    label: 'Reinstating your project'
   },
   awaitingDatabase: {
     step: 1,
     status: 'SUCCESS',
     label: 'Deploying project database',
-    timeframe: '1 to 3 min',
+    timeframe: '1 to 3 min'
   },
   deploying: {
     step: 2,
     status: 'SUCCESS',
     label: 'Deploying your project',
-    timeframe: '5 to 10 min',
+    timeframe: '5 to 10 min'
   },
   done: {
     step: 4,
     status: 'SUCCESS',
-    label: 'Deployment complete, reloading page',
+    label: 'Deployment complete, reloading page'
   },
   suspended: {
     step: 0,
     status: 'SUSPENDED',
-    label: 'Suspended. Contact info@payloadcms.com if you think this was a mistake.',
+    label:
+      'Suspended. Contact info@payloadcms.com if you think this was a mistake.'
   },
   error: {
     step: 0,
     status: 'ERROR',
-    label: 'Deployment failed',
+    label: 'Deployment failed'
   },
   deployError: {
     step: 0,
     status: 'ERROR',
-    label: 'Deployment failed',
+    label: 'Deployment failed'
   },
   appCreationError: {
     step: 0,
     status: 'ERROR',
-    label: 'Failed to create application',
+    label: 'Failed to create application'
   },
   infraCreationError: {
     step: 0,
     status: 'ERROR',
-    label: 'Failed to create infrastructure',
+    label: 'Failed to create infrastructure'
   },
   reinstatingError: {
     step: 0,
     status: 'ERROR',
-    label: 'Failed to reinstate project',
+    label: 'Failed to reinstate project'
   },
   suspendingError: {
     step: 0,
     status: 'ERROR',
-    label: 'Failed to suspend project',
-  },
+    label: 'Failed to suspend project'
+  }
 }
 
 const initialDeploymentPhases: DeploymentPhases[] = [
   'notStarted',
   'awaitingDatabase',
   'deploying',
-  'reinstating',
+  'reinstating'
 ]
 
 export const InfraOffline: React.FC<{
   project: Project
   team: Team
   environmentSlug: string
-}> = props => {
+}> = (props) => {
   const { project: initialProject, team, environmentSlug } = props
   const [project, setProject] = React.useState(initialProject)
 
@@ -111,7 +113,7 @@ export const InfraOffline: React.FC<{
     const newProject = await fetchProjectClient({
       teamID: team.id,
       projectSlug: initialProject.slug,
-      environmentSlug,
+      environmentSlug
     })
 
     setProject(newProject)
@@ -128,17 +130,17 @@ export const InfraOffline: React.FC<{
     'error',
     'deployError',
     'appCreationError',
-    'infraCreationError',
+    'infraCreationError'
   ].includes(infraStatus)
   const deploymentStep = deploymentStates[infraStatus]
 
   const {
     result: deployments,
     reqStatus,
-    reload: reloadDeployments,
+    reload: reloadDeployments
   } = useGetProjectDeployments({
     projectID: project?.id,
-    environmentSlug,
+    environmentSlug
   })
 
   const latestDeployment = deployments?.[0]
@@ -212,7 +214,9 @@ export const InfraOffline: React.FC<{
                   className={[
                     classes.progressBar,
                     classes[`step--${deploymentStep.step}`],
-                    classes[`status--${deploymentStep?.status?.toLocaleLowerCase()}`],
+                    classes[
+                      `status--${deploymentStep?.status?.toLocaleLowerCase()}`
+                    ]
                   ]
                     .filter(Boolean)
                     .join(' ')}
@@ -242,78 +246,97 @@ export const InfraOffline: React.FC<{
                     <p>Status:</p>
                     <p>
                       <b>{deploymentStep.label}</b>{' '}
-                      {deploymentStep.timeframe ? `— (${deploymentStep.timeframe})` : ''}
+                      {deploymentStep.timeframe
+                        ? `— (${deploymentStep.timeframe})`
+                        : ''}
                     </p>
                   </div>
                 )}
               </div>
-              {failedDeployment && (!unsuccessfulDeployment || !hasDeployedBefore) && (
-                <React.Fragment>
-                  <div className={classes.tips}>
-                    <Heading element="h4" marginTop={false}>
-                      Troubleshooting help
-                    </Heading>
-                    {!unsuccessfulDeployment && (
-                      <>
-                        <h6>
-                          Does the branch <code>{project?.deploymentBranch}</code> exist?
-                        </h6>
-                        <p className={classes.helpText}>
-                          Validate that your branch exists. If it doesn't, go to{' '}
-                          <Link href={`/cloud/${team?.slug}/${project?.slug}/settings`}>
-                            Settings
-                          </Link>{' '}
-                          and change your branch to a valid branch that exists.
-                        </p>
-                        <h6>Can you build your project locally?</h6>
-                        <p className={classes.helpText}>
-                          If you're importing a project, make sure it can build on your local
-                          machine. If you can't build locally, fix the errors and then push a commit
-                          to restart this process.
-                        </p>
-                      </>
-                    )}
-                    {unsuccessfulDeployment && !hasDeployedBefore && (
-                      <>
-                        <h6>Ensure Local Build</h6>
-                        <p className={classes.helpText}>Ensure that your project builds locally.</p>
+              {failedDeployment &&
+                (!unsuccessfulDeployment || !hasDeployedBefore) && (
+                  <React.Fragment>
+                    <div className={classes.tips}>
+                      <Heading element="h4" marginTop={false}>
+                        Troubleshooting help
+                      </Heading>
+                      {!unsuccessfulDeployment && (
+                        <>
+                          <h6>
+                            Does the branch{' '}
+                            <code>{project?.deploymentBranch}</code> exist?
+                          </h6>
+                          <p className={classes.helpText}>
+                            Validate that your branch exists. If it doesn't, go
+                            to{' '}
+                            <Link
+                              href={`/cloud/${team?.slug}/${project?.slug}/settings`}
+                            >
+                              Settings
+                            </Link>{' '}
+                            and change your branch to a valid branch that
+                            exists.
+                          </p>
+                          <h6>Can you build your project locally?</h6>
+                          <p className={classes.helpText}>
+                            If you're importing a project, make sure it can
+                            build on your local machine. If you can't build
+                            locally, fix the errors and then push a commit to
+                            restart this process.
+                          </p>
+                        </>
+                      )}
+                      {unsuccessfulDeployment && !hasDeployedBefore && (
+                        <>
+                          <h6>Ensure Local Build</h6>
+                          <p className={classes.helpText}>
+                            Ensure that your project builds locally.
+                          </p>
 
-                        <h6>Check Run Script</h6>
-                        <p className={classes.helpText}>
-                          Check that your Project's Run Script is the correct command for the script
-                          in your package.json
-                        </p>
+                          <h6>Check Run Script</h6>
+                          <p className={classes.helpText}>
+                            Check that your Project's Run Script is the correct
+                            command for the script in your package.json
+                          </p>
 
-                        <h6>Required ENV variables</h6>
-                        <p className={classes.helpText}>
-                          Your Payload config must use <code>MONGODB_URI/DATABASE_URI</code> and{' '}
-                          <code>PAYLOAD_SECRET</code> variables. Payload Cloud provides these for
-                          you. Ensure your spelling is correct.
-                        </p>
+                          <h6>Required ENV variables</h6>
+                          <p className={classes.helpText}>
+                            Your Payload config must use{' '}
+                            <code>MONGODB_URI/DATABASE_URI</code> and{' '}
+                            <code>PAYLOAD_SECRET</code> variables. Payload Cloud
+                            provides these for you. Ensure your spelling is
+                            correct.
+                          </p>
 
-                        <h6>Are you specifying a port correctly?</h6>
-                        <p className={classes.helpText}>
-                          By default, Payload Cloud listens on port 3000. Make sure that your app is
-                          set up to listen on port 3000, or go to{' '}
-                          <Link href={`/cloud/${team?.slug}/${project?.slug}/settings`}>
-                            Settings
-                          </Link>{' '}
-                          and specify a <code>PORT</code> environment variable to manually set the
-                          port to listen on.
-                        </p>
-                      </>
-                    )}
-                  </div>
-                  <Banner type="default" margin={false}>
-                    Still running into trouble? Connect with us on{' '}
-                    <a href="https://discord.com/invite/r6sCXqVk3v" target="_blank">
-                      discord.
-                    </a>{' '}
-                    We would love to help! Please provide your issue and Project ID from Settings
-                    -&gt; Billing.
-                  </Banner>
-                </React.Fragment>
-              )}
+                          <h6>Are you specifying a port correctly?</h6>
+                          <p className={classes.helpText}>
+                            By default, Payload Cloud listens on port 3000. Make
+                            sure that your app is set up to listen on port 3000,
+                            or go to{' '}
+                            <Link
+                              href={`/cloud/${team?.slug}/${project?.slug}/settings`}
+                            >
+                              Settings
+                            </Link>{' '}
+                            and specify a <code>PORT</code> environment variable
+                            to manually set the port to listen on.
+                          </p>
+                        </>
+                      )}
+                    </div>
+                    <Banner type="default" margin={false}>
+                      Still running into trouble? Connect with us on{' '}
+                      <a
+                        href="https://discord.com/invite/r6sCXqVk3v"
+                        target="_blank"
+                      >
+                        discord.
+                      </a>{' '}
+                      We would love to help! Please provide your issue and
+                      Project ID from Settings -&gt; Billing.
+                    </Banner>
+                  </React.Fragment>
+                )}
             </div>
           }
         />

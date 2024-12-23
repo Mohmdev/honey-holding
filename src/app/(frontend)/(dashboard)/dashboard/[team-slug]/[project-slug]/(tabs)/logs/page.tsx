@@ -1,11 +1,13 @@
-import { fetchProjectAndRedirect } from '@cloud/_api/fetchProject.js'
 import { Metadata } from 'next'
 
+import { fetchProjectAndRedirect } from '@cloud/_api/fetchProject.js'
+
 import { ProjectLogsPage } from './page_client.js'
-import { PRODUCTION_ENVIRONMENT_SLUG } from '@root/constants.js'
+
+import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants.js'
 
 export default async ({
-  params,
+  params
 }: {
   params: Promise<{
     'team-slug': string
@@ -16,16 +18,22 @@ export default async ({
   const {
     'team-slug': teamSlug,
     'project-slug': projectSlug,
-    'environment-slug': environmentSlug = PRODUCTION_ENVIRONMENT_SLUG,
+    'environment-slug': environmentSlug = PRODUCTION_ENVIRONMENT_SLUG
   } = await params
   const { team, project } = await fetchProjectAndRedirect({
     teamSlug,
     projectSlug,
-    environmentSlug,
+    environmentSlug
   })
-  return <ProjectLogsPage project={project} team={team} environmentSlug={environmentSlug} />
+  return (
+    <ProjectLogsPage
+      project={project}
+      team={team}
+      environmentSlug={environmentSlug}
+    />
+  )
 }
 
 export const metadata: Metadata = {
-  title: 'Logs',
+  title: 'Logs'
 }

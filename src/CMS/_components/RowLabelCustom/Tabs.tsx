@@ -1,7 +1,8 @@
 'use client'
 
-import { useRowLabel } from '@payloadcms/ui'
 import { PayloadClientReactComponent, RowLabelComponent } from 'payload'
+
+import { useRowLabel } from '@payloadcms/ui'
 
 const CustomRowLabelTabs: PayloadClientReactComponent<
   RowLabelComponent

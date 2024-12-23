@@ -31,7 +31,9 @@ export const GettingStarted: React.FC = () => {
           >
             fields
           </a>
-          {' as needed. If you are new to Payload, we also recommend you check out the '}
+          {
+            ' as needed. If you are new to Payload, we also recommend you check out the '
+          }
           <a
             href="https://payloadcms.com/docs/beta/getting-started/what-is-payload"
             rel="noopener noreferrer"

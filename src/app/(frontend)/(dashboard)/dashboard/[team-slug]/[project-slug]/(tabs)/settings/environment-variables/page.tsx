@@ -1,17 +1,17 @@
 import { fetchProjectAndRedirect } from '@cloud/_api/fetchProject.js'
-import { Accordion } from '@components/Accordion/index.js'
-import { HR } from '@components/HR/index.js'
-import { MaxWidth } from '@components/MaxWidth/index.js'
-import { PRODUCTION_ENVIRONMENT_SLUG } from '@root/constants.js'
-import { mergeOpenGraph } from '@root/seo/mergeOpenGraph.js'
-import { generateRoutePath } from '@root/utilities/generate-route-path.js'
+import { Accordion } from '@components/Accordion'
+import { HR } from '@components/HR
+import { MaxWidth } from '@components/MaxWidth
+import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants.js'
+import { mergeOpenGraph } from '@seo/mergeOpenGraph.js'
+import { generateRoutePath } from '@utilities/generate-route-path.js'
 import React from 'react'
 
-import { NoData } from '../_layoutComponents/NoData/index.js'
-import { SectionHeader } from '../_layoutComponents/SectionHeader/index.js'
-import { AddEnvs } from './AddEnvs/index.js'
-import { ManageEnvs } from './ManageEnvs/index.js'
-import { Secret } from './Secret/index.js'
+import { NoData } from '../_layoutComponents/NoData
+import { SectionHeader } from '../_layoutComponents/SectionHeader
+import { AddEnvs } from './AddEnvs
+import { ManageEnvs } from './ManageEnvs
+import { Secret } from './Secret
 import classes from './page.module.scss'
 
 export default async ({

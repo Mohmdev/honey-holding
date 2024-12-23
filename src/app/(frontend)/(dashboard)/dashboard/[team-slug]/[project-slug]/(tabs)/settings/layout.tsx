@@ -1,14 +1,17 @@
-import { Sidebar } from '@cloud/_components/Sidebar/index.js'
-import { Gutter } from '@components/Gutter/index.js'
-import { PRODUCTION_ENVIRONMENT_SLUG } from '@root/constants.js'
-import { generateRoutePath } from '@root/utilities/generate-route-path'
 import * as React from 'react'
+
+import { generateRoutePath } from '@utilities/generate-route-path'
+
+import { Gutter } from '@components/Gutter'
+import { Sidebar } from '@dashboard/Sidebar'
+
+import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants.js'
 
 const settingsSlug = 'settings'
 
 export default async ({
   children,
-  params,
+  params
 }: {
   children: React.ReactNode
   params: Promise<{
@@ -20,7 +23,7 @@ export default async ({
   const {
     'environment-slug': environmentSlug = PRODUCTION_ENVIRONMENT_SLUG,
     'project-slug': projectSlug,
-    'team-slug': teamSlug,
+    'team-slug': teamSlug
   } = await params
   return (
     <Gutter className="grid">
@@ -33,8 +36,8 @@ export default async ({
                 environmentSlug,
                 projectSlug,
                 suffix: settingsSlug,
-                teamSlug,
-              }),
+                teamSlug
+              })
             },
             {
               label: 'Environment Variables',
@@ -42,8 +45,8 @@ export default async ({
                 environmentSlug,
                 projectSlug,
                 suffix: 'settings/environment-variables',
-                teamSlug,
-              }),
+                teamSlug
+              })
             },
             {
               label: 'Domains',
@@ -51,8 +54,8 @@ export default async ({
                 environmentSlug,
                 projectSlug,
                 suffix: 'settings/domains',
-                teamSlug,
-              }),
+                teamSlug
+              })
             },
             {
               label: 'Email',
@@ -60,8 +63,8 @@ export default async ({
                 environmentSlug,
                 projectSlug,
                 suffix: 'settings/email',
-                teamSlug,
-              }),
+                teamSlug
+              })
             },
             {
               label: 'Ownership',
@@ -69,8 +72,8 @@ export default async ({
                 environmentSlug,
                 projectSlug,
                 suffix: 'settings/ownership',
-                teamSlug,
-              }),
+                teamSlug
+              })
             },
             {
               label: 'Plan',
@@ -78,8 +81,8 @@ export default async ({
                 environmentSlug,
                 projectSlug,
                 suffix: 'settings/plan',
-                teamSlug,
-              }),
+                teamSlug
+              })
             },
             {
               label: 'Billing',
@@ -87,9 +90,9 @@ export default async ({
                 environmentSlug,
                 projectSlug,
                 suffix: 'settings/billing',
-                teamSlug,
-              }),
-            },
+                teamSlug
+              })
+            }
           ]}
         />
       </div>

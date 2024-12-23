@@ -29,7 +29,7 @@
       "@utils/*": ["src/lib/utils/*"],
       "@data": ["src/_data"],
       "@data/*": ["src/_data/*"],
-      "@dashboard/*": ["./src/app/(frontend)/(dashboard)/dashboard/*"],
+      "@dashboard/*": ["src/app/(frontend)/(dashboard)/~/*"],
       "@components/*": ["src/components/*"],
       "@providers": ["src/providers"],
       "@providers/*": ["src/providers/*"],

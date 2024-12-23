@@ -1,4 +1,5 @@
 import { getServerSideURL } from '@utils/getURL'
+
 import { generateEmailHTML } from './generateEmailHTML'
 
 type User = {
