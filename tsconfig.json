@@ -17,12 +17,10 @@
     "resolveJsonModule": true,
     "sourceMap": true,
     "isolatedModules": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
     "paths": {
+      "react": ["node_modules/@types/react"],
+      "@payload-config": ["src/CMS/payload-config.ts"],
+      "@payload-types": ["src/CMS/payload-types.ts"],
       "@CMS/*": ["src/CMS/*"],
       "@admin-components/*": ["src/CMS/_components/*"],
       "@access/*": ["src/services/access/*"],
@@ -44,12 +42,15 @@
       "@lib/*": ["src/lib/*"],
       "@hooks/*": ["src/lib/hooks/*"],
       "@constants": ["src/lib/constants.ts"],
-      "react": ["node_modules/@types/react"],
-      "@root/*": ["src/*"],
-      "@payload-config": ["src/CMS/payload-config.ts"],
-      "@payload-types": ["src/CMS/payload-types.ts"]
+      "@app/*": ["src/app/*"],
+      "@root/*": ["src/*"]
     }
   },
+  "plugins": [
+    {
+      "name": "next"
+    }
+  ],
   "include": [
     "**/*.ts",
     "**/*.tsx",
