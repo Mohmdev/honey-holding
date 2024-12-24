@@ -1,0 +1,171 @@
+@use '@scss/common' as *;
+
+.blog {
+  border-bottom: 1px solid var(--grid-line-dark);
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 3rem;
+
+  @include data-theme-selector('dark') {
+    border-color: var(--grid-line-dark);
+  }
+
+  @include data-theme-selector('light') {
+    border-color: var(--grid-line-light);
+  }
+}
+
+.titleWrap {
+  padding: 2.5rem 0;
+}
+
+.title {
+  @include h1;
+  & {
+    margin: 0;
+    width: calc(var(--column) * 11);
+  }
+
+  @include large-break {
+    @include h2;
+    margin: 0 !important;
+  }
+
+  @include mid-break {
+    width: 100%;
+  }
+}
+
+.breadcrumbs {
+  @include uppercaseLabel;
+}
+
+.blogWrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.authorTimeSlots {
+  padding: 2.5rem 1rem;
+  border-bottom: 1px solid var(--grid-line-dark);
+
+  @include data-theme-selector('dark') {
+    border-color: var(--grid-line-dark);
+  }
+
+  @include data-theme-selector('light') {
+    border-color: var(--grid-line-light);
+  }
+
+  @include mid-break {
+    margin-top: 1rem;
+  }
+}
+
+.dateSlot {
+  padding: 1.25rem 0 0;
+  display: flex;
+  flex-direction: column;
+
+  @include mid-break {
+    padding: 0.5rem 0 0;
+  }
+}
+
+.date {
+  @include body;
+  & {
+    letter-spacing: 0;
+    color: var(--theme-elevation-900);
+    margin: 0;
+  }
+}
+
+.publishLabel {
+  @include uppercaseLabel;
+}
+
+.stickyColumn {
+  @include mid-break {
+    display: none;
+  }
+}
+
+.stickyContent {
+  top: 0;
+  position: sticky;
+}
+
+.excerpt {
+  margin: 3rem 0 1rem;
+
+  @include mid-break {
+    margin: 1rem 0;
+  }
+}
+
+.heroImageWrap {
+  @include mid-break {
+    display: none;
+  }
+}
+
+.heroImage {
+  width: 100%;
+
+  & img {
+    width: 100%;
+  }
+}
+
+.blocks {
+  & > * {
+    & > * {
+      margin-top: 2rem;
+
+      &:last-child {
+        margin-bottom: 2rem;
+      }
+    }
+  }
+}
+
+.mobileAuthor,
+.mobileImage {
+  display: none;
+
+  @include mid-break {
+    display: unset;
+  }
+}
+
+@include mid-break {
+  .mobileAuthor {
+    margin-top: 2rem;
+    display: flex;
+
+    > * {
+      width: 50%;
+    }
+  }
+
+  .breadcrumbs {
+    width: 100%;
+  }
+}
+
+@include small-break {
+  .titleWrap {
+    display: unset;
+  }
+
+  .mobileAuthor {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .heroImage {
+    padding-bottom: 1.5rem;
+  }
+}

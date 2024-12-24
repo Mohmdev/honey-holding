@@ -1,0 +1,27 @@
+import React from 'react'
+import { Metadata } from 'next'
+
+import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
+
+import { CommunityHelpPage } from './client_page'
+
+const Page = async (props) => {
+  return <CommunityHelpPage {...props} />
+}
+
+export default Page
+
+export const metadata: Metadata = {
+  title: {
+    absolute: 'Community Help | Nexweb',
+    template: '%s | Community Help | Nexweb'
+  },
+  description:
+    'Find what you need faster. The Nexweb Community Help archive is a great place to start.',
+  openGraph: mergeOpenGraph({
+    title: 'Community Help | Nexweb',
+    description:
+      'Find what you need faster. The Nexweb Community Help archive is a great place to start.',
+    url: '/community-help'
+  })
+}

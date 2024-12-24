@@ -23,13 +23,14 @@ import { BoldFeatureClient as BoldFeatureClient_e70f5e05f09f93e00b997edb1ef0c864
 import { ItalicFeatureClient as ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { LargeBodyFeatureClient as LargeBodyFeatureClient_6d181b38ed52301f81dd4b459a707445 } from '@fields/richText/features/largeBody/client'
 import { LabelFeatureClient as LabelFeatureClient_859bd91e2f8da2e60c1acd991b1396f3 } from '@fields/richText/features/label/client'
-import { SlugComponent as SlugComponent_a2d4102ad227efd5b46d67038e549296 } from '@fields/slug/client'
+import { SlugComponent as SlugComponent_e7747f4fc3d7d717c1d85bd16cefd46b } from '@fields/slug/client'
 import { OverviewComponent as OverviewComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'
 import { MetaTitleComponent as MetaTitleComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'
 import { MetaDescriptionComponent as MetaDescriptionComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'
 import { MetaImageComponent as MetaImageComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'
 import { PreviewComponent as PreviewComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'
 import { BlogMarkdownField as BlogMarkdownField_5e3e9de288481369dfdb26ed701b24cc } from '@blocks/BlogMarkdown/Field'
+import { UploadAltComponent as UploadAltComponent_aa4748e67cc255d52070bacb2371fc6e } from '@fields/uploadAlt/client'
 import { FixedToolbarFeatureClient as FixedToolbarFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { Docs as Docs_526b5b714de42f9d3393e2cf5aab9bf3 } from '@CMS/Docs/Component'
 import { Tickets as Tickets_d2f03e2c0605419c1b880f11a0a2ae5a } from '@CMS/Tickets/Component'
@@ -67,13 +68,14 @@ export const importMap = {
   "@payloadcms/richtext-lexical/client#ItalicFeatureClient": ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@fields/richText/features/largeBody/client#LargeBodyFeatureClient": LargeBodyFeatureClient_6d181b38ed52301f81dd4b459a707445,
   "@fields/richText/features/label/client#LabelFeatureClient": LabelFeatureClient_859bd91e2f8da2e60c1acd991b1396f3,
-  "@fields/slug/Component#SlugComponent": SlugComponent_a2d4102ad227efd5b46d67038e549296,
+  "@fields/slug/client#SlugComponent": SlugComponent_e7747f4fc3d7d717c1d85bd16cefd46b,
   "@payloadcms/plugin-seo/client#OverviewComponent": OverviewComponent_a8a977ebc872c5d5ea7ee689724c0860,
   "@payloadcms/plugin-seo/client#MetaTitleComponent": MetaTitleComponent_a8a977ebc872c5d5ea7ee689724c0860,
   "@payloadcms/plugin-seo/client#MetaDescriptionComponent": MetaDescriptionComponent_a8a977ebc872c5d5ea7ee689724c0860,
   "@payloadcms/plugin-seo/client#MetaImageComponent": MetaImageComponent_a8a977ebc872c5d5ea7ee689724c0860,
   "@payloadcms/plugin-seo/client#PreviewComponent": PreviewComponent_a8a977ebc872c5d5ea7ee689724c0860,
   "@blocks/BlogMarkdown/Field#BlogMarkdownField": BlogMarkdownField_5e3e9de288481369dfdb26ed701b24cc,
+  "@fields/uploadAlt/client#UploadAltComponent": UploadAltComponent_aa4748e67cc255d52070bacb2371fc6e,
   "@payloadcms/richtext-lexical/client#FixedToolbarFeatureClient": FixedToolbarFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@CMS/Docs/Component#Docs": Docs_526b5b714de42f9d3393e2cf5aab9bf3,
   "@CMS/Tickets/Component#Tickets": Tickets_d2f03e2c0605419c1b880f11a0a2ae5a,

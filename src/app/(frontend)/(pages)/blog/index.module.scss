@@ -1,0 +1,37 @@
+@use '@scss/common' as *;
+
+.hero {
+  margin-bottom: 5rem;
+}
+
+.pageTitle {
+  @include h5;
+  & {
+    opacity: 0.5;
+    margin: 0;
+    margin-bottom: 2rem;
+  }
+}
+
+.title {
+  @include h1;
+  & {
+    margin: 0;
+  }
+
+  @include mid-break {
+    margin-bottom: 2rem;
+  }
+}
+
+.description {
+  margin: 0;
+}
+
+.cardGrid {
+  row-gap: 5rem;
+
+  @include mid-break {
+    row-gap: 2.5rem;
+  }
+}
