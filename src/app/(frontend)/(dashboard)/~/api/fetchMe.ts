@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
-import { getClientSideURL } from '@utils/getURL.js'
+import { getClientSideURL } from '@utils/getURL'
 
 import type { User } from '@dashboard/types'
 

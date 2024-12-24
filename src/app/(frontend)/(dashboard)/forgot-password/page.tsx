@@ -3,9 +3,9 @@ import { redirect } from 'next/navigation'
 
 import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
 
-import { fetchMe } from '@dashboard/api/fetchMe.js'
+import { fetchMe } from '@dashboard/api/fetchMe'
 
-import { ForgotPassword } from './page_client.js'
+import { ForgotPassword } from './page_client'
 
 export default async function Page(props) {
   const { user } = await fetchMe()

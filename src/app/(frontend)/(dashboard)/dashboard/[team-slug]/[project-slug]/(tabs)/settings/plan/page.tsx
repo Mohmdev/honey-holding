@@ -6,7 +6,7 @@ import { isExpandedDoc } from '@utils/is-expanded-doc'
 import { canUserMangeProject } from '@access/canUserMangeProject'
 
 import { MaxWidth } from '@components/MaxWidth'
-import { fetchMe } from '@dashboard/api/fetchMe.js'
+import { fetchMe } from '@dashboard/api/fetchMe'
 import { fetchProjectAndRedirect } from '@dashboard/api/fetchProject'
 import { Plan } from '@dashboard/types'
 import { generateRoutePath } from '@dashboard/utils/generate-route-path'

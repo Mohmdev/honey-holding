@@ -2,7 +2,6 @@ import React from 'react'
 import { Metadata } from 'next'
 
 import { Providers } from '@providers'
-import { GeistMono } from 'geist/font/mono'
 
 import { PrivacyProvider } from '@providers/Privacy'
 import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
@@ -12,6 +11,8 @@ import { GoogleTagManager } from '@components/Analytics/GoogleTagManager'
 import { PrivacyBanner } from '@components/PrivacyBanner'
 
 import '@styles/app.scss'
+
+import { GeistMono } from 'geist/font/mono'
 
 import { untitledSans } from '@lib/fonts/fonts'
 import { getClientSideURL, getServerSideURL } from '@utils/getURL'

@@ -84,7 +84,7 @@ export const ProjectEmailPage: React.FC<{
       >{`yarn add @payloadcms/plugin-cloud`}</Code>
       <p></p>
       <p>
-        <code>payload.config.js</code>:
+        <code>payload.config</code>:
       </p>
       <Code
         disableMinHeight

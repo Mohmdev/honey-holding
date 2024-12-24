@@ -10,19 +10,19 @@ import {
 // import { useElements, useStripe } from '@stripe/react-stripe-js'
 import { toast } from 'sonner'
 
-import { getClientSideURL } from '@utils/getURL.js'
+import { getClientSideURL } from '@utils/getURL'
 
 import type { TeamWithCustomer } from '@dashboard/api/fetchTeam'
 
 // import type { PaymentMethod, SetupIntent } from '@stripe/stripe-js'
 
 import { revalidateCache } from '@dashboard/actions/revalidateCache'
-import { fetchPaymentMethod } from '@dashboard/api/fetchPaymentMethod.js'
-import { fetchPaymentMethodsClient } from '@dashboard/api/fetchPaymentMethods.js'
-import { updateCustomer } from '@dashboard/api/updateCustomer.js'
+import { fetchPaymentMethod } from '@dashboard/api/fetchPaymentMethod'
+import { fetchPaymentMethodsClient } from '@dashboard/api/fetchPaymentMethods'
+import { updateCustomer } from '@dashboard/api/updateCustomer'
 
-import { confirmCardSetup } from '../../../new/(checkout)/confirmCardSetup.js'
-import { cardReducer } from './reducer.js'
+import { confirmCardSetup } from '../../../new/(checkout)/confirmCardSetup'
+import { cardReducer } from './reducer'
 
 type SaveNewPaymentMethod = (paymentMethodID: string) => Promise<
   // SetupIntent |

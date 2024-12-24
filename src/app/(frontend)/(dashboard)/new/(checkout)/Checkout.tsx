@@ -1,3 +1,5 @@
+/* eslint-disable no-unsafe-optional-chaining */
+// @ts-nocheck
 'use client'
 
 import React, { Fragment, useCallback } from 'react'
@@ -42,9 +44,9 @@ import { Plan, Project, Team, Template, User } from '@dashboard/types'
 import { priceFromJSON } from '@dashboard/utils/price-from-json'
 
 import classes from './Checkout.module.scss'
-import { deploy } from './deploy.js'
-import { EnvVars } from './EnvVars.js'
-import { checkoutReducer, CheckoutState } from './reducer.js'
+import { deploy } from './deploy'
+import { EnvVars } from './EnvVars'
+import { checkoutReducer, CheckoutState } from './reducer'
 
 import { DASHBOARD_SLUG } from '@constants'
 

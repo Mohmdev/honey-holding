@@ -19,7 +19,7 @@ import { TeamWithCustomer } from '@dashboard/api/fetchTeam'
 import { CreditCardElement } from '@dashboard/CreditCardElement'
 
 import classes from './index.module.scss'
-import { usePaymentMethods } from './usePaymentMethods.js'
+import { usePaymentMethods } from './usePaymentMethods'
 
 const apiKey = `${process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}`
 const Stripe = loadStripe(apiKey)

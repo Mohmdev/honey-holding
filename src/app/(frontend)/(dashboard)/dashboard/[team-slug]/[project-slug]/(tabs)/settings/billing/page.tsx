@@ -11,7 +11,7 @@ import { Text } from '@forms/fields/Text'
 import { Heading } from '@components/Heading'
 import { MaxWidth } from '@components/MaxWidth'
 import { Message } from '@components/Message'
-import { fetchMe } from '@dashboard/api/fetchMe.js'
+import { fetchMe } from '@dashboard/api/fetchMe'
 import { fetchPaymentMethods } from '@dashboard/api/fetchPaymentMethods'
 import {
   fetchProjectAndRedirect,

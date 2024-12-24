@@ -11,7 +11,7 @@ import type { Team } from '@dashboard/types'
 //   StripeElements
 // } from '@stripe/stripe-js'
 
-import { createSetupIntent } from './createSetupIntent.js'
+import { createSetupIntent } from './createSetupIntent'
 
 export const confirmCardSetup = async (args: {
   team?: Team

@@ -1,8 +1,8 @@
-import { getClientSideURL } from '@utils/getURL.js'
+import { getClientSideURL } from '@utils/getURL'
 
 import type { Team } from '@dashboard/types'
 
-import { payloadCloudToken } from './token.js'
+import { payloadCloudToken } from './token'
 
 import { TEAM_QUERY, TEAMS_QUERY } from '@data/team'
 

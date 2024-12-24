@@ -1,7 +1,7 @@
 import React from 'react'
 import { Metadata } from 'next'
 import { unstable_cache } from 'next/cache'
-import { draftMode } from 'next/headers.js'
+import { draftMode } from 'next/headers'
 
 import { fetchBlogPost, fetchPosts } from '@data'
 

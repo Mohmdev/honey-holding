@@ -3,7 +3,7 @@
 // import { CardElement as StripeCardElement } from '@stripe/react-stripe-js'
 
 import type { PayloadStripeSubscription } from './createSubscription'
-import type { CheckoutState } from './reducer.js'
+import type { CheckoutState } from './reducer'
 
 // import type {
 //   PaymentIntent,

@@ -1,4 +1,4 @@
-import { getClientSideURL } from '@utils/getURL.js'
+import { getClientSideURL } from '@utils/getURL'
 
 import type { Customer, TeamWithCustomer } from './fetchTeam'
 

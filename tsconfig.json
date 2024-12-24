@@ -3,7 +3,11 @@
     "baseUrl": ".",
     "esModuleInterop": true,
     "target": "ES2024",
-    "lib": ["DOM", "DOM.Iterable", "ES2024"],
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ES2024"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -18,33 +22,90 @@
     "sourceMap": true,
     "isolatedModules": true,
     "paths": {
-      "react": ["node_modules/@types/react"],
-      "@payload-config": ["src/CMS/payload-config.ts"],
-      "@payload-types": ["src/CMS/payload-types.ts"],
-      "@CMS/*": ["src/CMS/*"],
-      "@admin-components/*": ["src/CMS/_components/*"],
-      "@access/*": ["src/services/access/*"],
-      "@utils/*": ["src/lib/utils/*"],
-      "@data": ["src/_data"],
-      "@data/*": ["src/_data/*"],
-      "@dashboard/*": ["src/app/(frontend)/(dashboard)/~/*"],
-      "@components/*": ["src/components/*"],
-      "@providers": ["src/providers"],
-      "@providers/*": ["src/providers/*"],
-      "@forms/*": ["src/forms/*"],
-      "@blocks/*": ["src/blocks/*"],
-      "@fields/*": ["src/fields/*"],
-      "@ui/*": ["src/components/_ui/*"],
-      "@graphics/*": ["src/components/_ui/graphics/*"],
-      "@icons/*": ["src/components/_ui/icons/*"],
-      "@styles/*": ["src/styles/*"],
-      "@services/*": ["src/services/*"],
-      "@lib/*": ["src/lib/*"],
-      "@hooks/*": ["src/lib/hooks/*"],
-      "@constants": ["src/lib/constants.ts"],
-      "@app/*": ["src/app/*"],
-      "@root/*": ["src/*"]
-    }
+      "react": [
+        "node_modules/@types/react"
+      ],
+      "@payload-config": [
+        "src/CMS/payload-config.ts"
+      ],
+      "@payload-types": [
+        "src/CMS/payload-types.ts"
+      ],
+      "@CMS/*": [
+        "src/CMS/*"
+      ],
+      "@admin-components/*": [
+        "src/CMS/_components/*"
+      ],
+      "@access/*": [
+        "src/services/access/*"
+      ],
+      "@utils/*": [
+        "src/lib/utils/*"
+      ],
+      "@data": [
+        "src/_data"
+      ],
+      "@data/*": [
+        "src/_data/*"
+      ],
+      "@dashboard/*": [
+        "src/app/(frontend)/(dashboard)/~/*"
+      ],
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@providers": [
+        "src/providers"
+      ],
+      "@providers/*": [
+        "src/providers/*"
+      ],
+      "@forms/*": [
+        "src/forms/*"
+      ],
+      "@blocks/*": [
+        "src/blocks/*"
+      ],
+      "@fields/*": [
+        "src/fields/*"
+      ],
+      "@ui/*": [
+        "src/components/_ui/*"
+      ],
+      "@graphics/*": [
+        "src/components/_ui/graphics/*"
+      ],
+      "@icons/*": [
+        "src/components/_ui/icons/*"
+      ],
+      "@styles/*": [
+        "src/styles/*"
+      ],
+      "@services/*": [
+        "src/services/*"
+      ],
+      "@lib/*": [
+        "src/lib/*"
+      ],
+      "@hooks/*": [
+        "src/lib/hooks/*"
+      ],
+      "@constants": [
+        "src/lib/constants.ts"
+      ],
+      "@app/*": [
+        "src/app/*"
+      ],
+      "@root/*": [
+        "src/*"
+      ]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
   "plugins": [
     {

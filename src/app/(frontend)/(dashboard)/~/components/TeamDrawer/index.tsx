@@ -6,12 +6,8 @@ import { useModal } from '@faceless-ui/modal'
 
 import { Drawer, DrawerToggler } from '@components/Drawer'
 
-import { TeamDrawerContent } from './DrawerContent.jsx'
-import {
-  TeamDrawerProps,
-  TeamDrawerTogglerProps,
-  UseTeamDrawer
-} from './types.js'
+import { TeamDrawerContent } from './DrawerContent'
+import { TeamDrawerProps, TeamDrawerTogglerProps, UseTeamDrawer } from './types'
 
 const formatTeamDrawerSlug = ({
   uuid

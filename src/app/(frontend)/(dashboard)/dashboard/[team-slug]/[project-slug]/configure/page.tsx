@@ -4,13 +4,13 @@ import { redirect } from 'next/navigation'
 
 import Checkout from '@root/app/(frontend)/(dashboard)/new/(checkout)/Checkout'
 
-import { fetchGitHubToken } from '@dashboard/api/fetchGitHubToken.js'
+import { fetchGitHubToken } from '@dashboard/api/fetchGitHubToken'
 import { fetchInstalls } from '@dashboard/api/fetchInstalls'
-import { fetchMe } from '@dashboard/api/fetchMe.js'
-import { fetchPaymentMethods } from '@dashboard/api/fetchPaymentMethods.js'
-import { fetchPlans } from '@dashboard/api/fetchPlans.js'
+import { fetchMe } from '@dashboard/api/fetchMe'
+import { fetchPaymentMethods } from '@dashboard/api/fetchPaymentMethods'
+import { fetchPlans } from '@dashboard/api/fetchPlans'
 import { fetchProjectWithSubscription } from '@dashboard/api/fetchProject'
-import { fetchTemplates } from '@dashboard/api/fetchTemplates.js'
+import { fetchTemplates } from '@dashboard/api/fetchTemplates'
 
 export const dynamic = 'force-dynamic'
 

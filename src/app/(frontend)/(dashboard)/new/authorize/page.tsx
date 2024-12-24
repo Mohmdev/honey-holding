@@ -3,10 +3,10 @@ import { redirect } from 'next/navigation'
 
 import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
 
-import { fetchGitHubToken } from '@dashboard/api/fetchGitHubToken.js'
-import { fetchMe } from '@dashboard/api/fetchMe.js'
+import { fetchGitHubToken } from '@dashboard/api/fetchGitHubToken'
+import { fetchMe } from '@dashboard/api/fetchMe'
 
-import { AuthorizePage } from './page_client.js'
+import { AuthorizePage } from './page_client'
 
 export default async function Page({
   searchParams

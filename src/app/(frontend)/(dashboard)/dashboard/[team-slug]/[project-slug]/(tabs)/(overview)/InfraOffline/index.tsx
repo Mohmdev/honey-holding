@@ -11,7 +11,7 @@ import { Gutter } from '@components/Gutter'
 import { Heading } from '@components/Heading'
 import { Indicator } from '@components/Indicator'
 import { Message } from '@components/Message'
-import { fetchProjectClient } from '@dashboard/api/fetchProjects.js'
+import { fetchProjectClient } from '@dashboard/api/fetchProjects'
 import { Project, Team } from '@dashboard/types'
 import { useGetProjectDeployments } from '@dashboard/utils/use-cloud-api'
 

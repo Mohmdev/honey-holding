@@ -4,7 +4,7 @@ import React, { useCallback } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 
-import { exchangeCode } from '@root/app/(frontend)/(dashboard)/new/authorize/exchangeCode.js'
+import { exchangeCode } from '@root/app/(frontend)/(dashboard)/new/authorize/exchangeCode'
 
 import { usePopupWindow } from '@utils/use-popup-window'
 
@@ -14,7 +14,7 @@ import { Gutter } from '@components/Gutter'
 import { Heading } from '@components/Heading'
 import { RenderParams } from '@components/RenderParams'
 import { revalidateCache } from '@dashboard/actions/revalidateCache'
-import { fetchGithubTokenClient } from '@dashboard/api/fetchGitHubToken.js'
+import { fetchGithubTokenClient } from '@dashboard/api/fetchGitHubToken'
 
 import classes from './page.module.scss'
 

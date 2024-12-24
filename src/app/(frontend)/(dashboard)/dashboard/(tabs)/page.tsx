@@ -6,7 +6,7 @@ import { fetchMe } from '@dashboard/api/fetchMe'
 import { fetchProjects } from '@dashboard/api/fetchProjects'
 import { fetchTemplates } from '@dashboard/api/fetchTemplates'
 
-import { CloudPage } from './page_client.js'
+import { CloudPage } from './page_client'
 
 export default async function Page() {
   const { user } = await fetchMe()

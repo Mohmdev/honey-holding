@@ -14,7 +14,7 @@ import { getClientSideURL } from '@utils/getURL'
 import type {
   Subscription,
   SubscriptionsResult
-} from '@dashboard/api/fetchSubscriptions.js'
+} from '@dashboard/api/fetchSubscriptions'
 import type { Team } from '@dashboard/types'
 
 import { fetchSubscriptionsClient } from '@dashboard/api/fetchSubscriptions'

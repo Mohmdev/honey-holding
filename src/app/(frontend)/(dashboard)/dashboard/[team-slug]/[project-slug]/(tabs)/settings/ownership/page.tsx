@@ -4,7 +4,7 @@ import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
 
 import { fetchProjectAndRedirect } from '@dashboard/api/fetchProject'
 
-import { ProjectOwnershipPage } from './page_client.js'
+import { ProjectOwnershipPage } from './page_client'
 
 import { PRODUCTION_ENVIRONMENT_SLUG } from '@constants'
 

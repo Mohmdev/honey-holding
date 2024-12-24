@@ -6,7 +6,7 @@ import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
 import { LinkGrid } from '@blocks/LinkGrid'
 
 import { Gutter } from '@components/Gutter'
-import { fetchMe } from '@dashboard/api/fetchMe.js'
+import { fetchMe } from '@dashboard/api/fetchMe'
 import { fetchTeams } from '@dashboard/api/fetchTeam'
 import { TeamDrawer, TeamDrawerToggler } from '@dashboard/components/TeamDrawer'
 

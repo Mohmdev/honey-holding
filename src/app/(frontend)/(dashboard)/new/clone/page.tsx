@@ -6,8 +6,8 @@ import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
 
 import { Gutter } from '@components/Gutter'
 import { RenderParams } from '@components/RenderParams'
-import { fetchMe } from '@dashboard/api/fetchMe.js'
-import { fetchTemplates } from '@dashboard/api/fetchTemplates.js'
+import { fetchMe } from '@dashboard/api/fetchMe'
+import { fetchTemplates } from '@dashboard/api/fetchTemplates'
 import { NewProjectBlock } from '@dashboard/components/NewProject'
 
 export default async function Page() {

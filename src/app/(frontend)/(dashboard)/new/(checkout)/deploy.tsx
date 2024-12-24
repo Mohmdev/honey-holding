@@ -3,16 +3,16 @@ import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.share
 // import { type Stripe, type StripeElements } from '@stripe/stripe-js'
 import { toast } from 'sonner'
 
-import { getClientSideURL } from '@utils/getURL.js'
+import { getClientSideURL } from '@utils/getURL'
 
-import { updateCustomer } from '@dashboard/api/updateCustomer.js'
+import { updateCustomer } from '@dashboard/api/updateCustomer'
 import { Project, User } from '@dashboard/types'
 import { teamHasDefaultPaymentMethod } from '@dashboard/utils/teamHasDefaultPaymentMethod'
 
-import { confirmCardPayment } from './confirmCardPayment.js'
-import { confirmCardSetup } from './confirmCardSetup.js'
-import { createSubscription } from './createSubscription.js'
-import { CheckoutState } from './reducer.js'
+import { confirmCardPayment } from './confirmCardPayment'
+import { confirmCardSetup } from './confirmCardSetup'
+import { createSubscription } from './createSubscription'
+import { CheckoutState } from './reducer'
 
 export const deploy = async (args: {
   project: Project | null | undefined

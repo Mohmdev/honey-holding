@@ -5,7 +5,7 @@ import { components } from 'react-select'
 import { Select } from '@forms/fields/Select'
 
 import { LoadingShimmer } from '@components/LoadingShimmer'
-import { useTeamDrawer } from '@dashboard/TeamDrawer'
+import { useTeamDrawer } from '@dashboard/components/TeamDrawer'
 import { Team, User } from '@dashboard/types'
 
 import classes from './index.module.scss'
@@ -22,7 +22,7 @@ const SelectMenuButton = (props) => {
 
 export const TeamSelector: React.FC<{
   value?: string
-  onChange?: (value?: Team) => void // eslint-disable-line no-unused-vars
+  onChange?: (value?: Team) => void
   className?: string
   allowEmpty?: boolean
   initialValue?: string

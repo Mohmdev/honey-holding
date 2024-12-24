@@ -1,12 +1,12 @@
 import React, { Fragment } from 'react'
 
-import { formatDate } from '@utils/format-date-time.js'
+import { formatDate } from '@utils/format-date-time'
 
 import { Heading } from '@components/Heading'
 import { Team, User } from '@dashboard/types'
 
 import classes from './index.module.scss'
-import { TeamMemberRow } from './TeamMemberRow.js'
+import { TeamMemberRow } from './TeamMemberRow'
 
 export type Member = {
   user?: string | User | undefined
@@ -40,6 +40,7 @@ export const TeamMembers: React.FC<{
   const handleUpdateRoles =
     (index: number, member: Member) =>
     (newRoles: ('owner' | 'admin' | 'user')[]) => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       onUpdateRoles && onUpdateRoles(index, newRoles, member)
     }
   return (

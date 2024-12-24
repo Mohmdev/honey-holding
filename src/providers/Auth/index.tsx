@@ -41,9 +41,7 @@ const AuthContext = createContext({} as AuthContext)
 
 const DASHBOARD_CONNECTION_ERROR = 'Error connecting to dashboard'
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
-  children
-}) => {
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   // used to track the single event of logging in or logging out
   // useful for `useEffect` hooks that should only run once
   const [status, setStatus] = useState<'loggedIn' | 'loggedOut' | undefined>()

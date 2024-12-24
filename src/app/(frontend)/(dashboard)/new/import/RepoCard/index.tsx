@@ -3,7 +3,7 @@ import React from 'react'
 import { ArrowIcon } from '@icons/ArrowIcon'
 import { BackgroundScanline } from '@components/Background/Scanline'
 import { LoadingShimmer } from '@components/LoadingShimmer'
-import { Repo } from '@dashboard/api/fetchRepos.js'
+import { Repo } from '@dashboard/api/fetchRepos'
 
 import classes from './index.module.scss'
 

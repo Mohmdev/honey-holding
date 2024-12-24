@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 // import algoliasearch, { SearchClient } from 'algoliasearch/lite'
 // import { Configure, InstantSearch } from 'react-instantsearch'
 
-import { getInitialState } from './getInitialState.js'
+import { getInitialState } from './getInitialState'
 
 // let searchClient: SearchClient
 const appID = process.env.NEXT_PUBLIC_ALGOLIA_CH_ID

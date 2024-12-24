@@ -1,3 +1,4 @@
+import React from 'react'
 import { Metadata } from 'next'
 
 import { DashboardFooter } from '@root/app/(frontend)/(dashboard)/~/components/DashboardFooter'
@@ -21,10 +22,11 @@ export const metadata: Metadata = {
   // TODO: Add Dashboard graphic
   openGraph: mergeOpenGraph()
 }
+interface LayoutProps {
+  children: React.ReactNode
+}
 
-export default async function Layout(props) {
-  const { children } = props
-
+export default async function Layout({ children }: LayoutProps) {
   return (
     <div className={classes.layout}>
       <DashboardHeader />
