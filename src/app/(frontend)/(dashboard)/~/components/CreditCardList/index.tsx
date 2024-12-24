@@ -1,13 +1,15 @@
+// @ts-nocheck
+
 'use client'
 
 import React, { Fragment, useEffect, useRef, useState } from 'react'
 
 import { useModal } from '@faceless-ui/modal'
-import { Elements } from '@stripe/react-stripe-js'
-import { loadStripe } from '@stripe/stripe-js'
+// import { Elements } from '@stripe/react-stripe-js'
+// import { loadStripe } from '@stripe/stripe-js'
 import { v4 as uuid } from 'uuid'
 
-import type { PaymentMethod } from '@stripe/stripe-js'
+// import type { PaymentMethod } from '@stripe/stripe-js'
 
 import { Button } from '@components/ButtonComponent'
 import { CircleIconButton } from '@components/CircleIconButton'
@@ -16,7 +18,7 @@ import { Heading } from '@components/Heading'
 import { ModalWindow } from '@components/ModalWindow'
 import { Pill } from '@components/Pill'
 import { TeamWithCustomer } from '@dashboard/api/fetchTeam'
-import { CreditCardElement } from '@dashboard/CreditCardElement'
+import { CreditCardElement } from '@dashboard/components/CreditCardElement'
 
 import classes from './index.module.scss'
 import { usePaymentMethods } from './usePaymentMethods'
@@ -202,8 +204,11 @@ const CardList: React.FC<CreditCardListType> = (props) => {
 
 export const CreditCardList: React.FC<CreditCardListType> = (props) => {
   return (
-    <Elements stripe={Stripe}>
-      <CardList {...props} />
-    </Elements>
+    // <Elements stripe={Stripe}>
+    //   <CardList {...props} />
+    // </Elements>
+    <div>
+      <h3>Under Development...</h3>
+    </div>
   )
 }

@@ -1,4 +1,4 @@
-@use '@scss/common.scss' as *;
+@use '@styles/common.scss' as *;
 
 .container {
   --bg-extension: calc(var(--gutter-h) * 0.5);

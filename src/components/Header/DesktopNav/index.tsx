@@ -59,7 +59,6 @@ export const DesktopNav: React.FC<DesktopNavType> = ({
         })
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hideBackground])
   const hoverTimeout = React.useRef<number | null>(null)
 
