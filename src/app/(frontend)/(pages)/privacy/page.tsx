@@ -14,6 +14,6 @@ export const metadata: Metadata = {
   description: 'Nexweb Privacy Policy',
   openGraph: mergeOpenGraph({
     title: 'Privacy Policy | Nexweb',
-    url: '/Privacy/index'
+    url: '/privacy'
   })
 }

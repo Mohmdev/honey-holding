@@ -4,7 +4,7 @@ export interface LocateResponse {
 }
 
 export const locate = (): Promise<Response> =>
-  fetch('/api/locate', {
+  fetch('/next/locate', {
     headers: {
       'Content-Type': 'application/json'
     }

@@ -28,7 +28,7 @@ const heroes = {
   three: ThreeHero
 }
 
-export const Hero: React.FC<{
+export const RenderHero: React.FC<{
   page: Page
   firstContentBlock?: BlocksProp
 }> = (props) => {

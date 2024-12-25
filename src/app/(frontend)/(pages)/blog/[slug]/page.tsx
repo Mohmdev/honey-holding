@@ -8,23 +8,23 @@ import { fetchBlogPost, fetchPosts } from '@data'
 import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
 import { getServerSideURL } from '@utils/getURL'
 
+import { LivePreviewListener } from '@components/LivePreviewListener'
 import { PayloadRedirects } from '@components/PayloadRedirects'
-import { RefreshRouteOnSave } from '@components/RefreshRouterOnSave'
 
 import { BlogPost } from './BlogPost'
 
-const getPost = (slug, draft?) =>
+const getPost = (slug, draft?: boolean) =>
   draft
     ? fetchBlogPost(slug)
     : unstable_cache(fetchBlogPost, ['blogPost', `post-${slug}`])(slug)
 
-const Post = async ({
+export default async function Post({
   params
 }: {
   params: Promise<{
     slug: any
   }>
-}) => {
+}) {
   const { isEnabled: draft } = await draftMode()
   const { slug } = await params
 
@@ -39,13 +39,11 @@ const Post = async ({
   return (
     <>
       <PayloadRedirects disableNotFound url={url} />
-      <RefreshRouteOnSave />
+      {draft && <LivePreviewListener />}
       <BlogPost {...blogPost} />
     </>
   )
 }
-
-export default Post
 
 export async function generateStaticParams() {
   const getPosts = unstable_cache(fetchPosts, ['blogPosts'])

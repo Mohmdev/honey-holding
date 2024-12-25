@@ -45,6 +45,11 @@ export default buildConfig({
   plugins: [...plugins],
   editor: defaultLexical,
   secret: process.env.PAYLOAD_SECRET,
+  serverURL: process.env.NEXT_PUBLIC_SERVER_URL,
   cors: [getServerSideURL()].filter(Boolean),
-  typescript: { outputFile: 'src/CMS/payload-types.ts' }
+  csrf: [process.env.NEXT_PUBLIC_SERVER_URL].filter(Boolean),
+  typescript: { outputFile: 'src/CMS/payload-types.ts' },
+  cookiePrefix: 'nexweb',
+  telemetry: false,
+  debug: true
 })

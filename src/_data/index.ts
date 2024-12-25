@@ -38,7 +38,7 @@ export const fetchPage = async (
   const data = await payload.find({
     collection: 'pages',
     depth: 2,
-    draft,
+    draft: true,
     limit: 1,
     where: {
       and: [
@@ -88,7 +88,7 @@ export const fetchPages = async (): Promise<Partial<Page>[]> => {
       and: [
         {
           slug: {
-            not_equals: 'cloud'
+            not_equals: 'dashboard'
           }
         },
         {

@@ -9,20 +9,22 @@ import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
 
 import { RenderBlocks } from '@blocks/RenderBlocks'
 
-import { Hero } from '@components/Hero'
+import { RenderHero } from '@components/Hero/RenderHero'
+import { LivePreviewListener } from '@components/LivePreviewListener'
 import { PayloadRedirects } from '@components/PayloadRedirects'
-import { RefreshRouteOnSave } from '@components/RefreshRouterOnSave'
 
-const getPage = async (slug, draft?) =>
-  draft ? fetchPage(slug) : unstable_cache(fetchPage, [`page-${slug}`])(slug)
+const getPage = async (slug, draft?: boolean) =>
+  draft // is draft mode?
+    ? fetchPage(slug) // Yes: direct fetch
+    : unstable_cache(fetchPage, [`page-${slug}`])(slug) // No: cached fetch
 
-const Page = async ({
+export default async function Page({
   params
 }: {
   params: Promise<{
-    slug: any
+    slug?: string
   }>
-}) => {
+}) {
   const { isEnabled: draft } = await draftMode()
   const { slug } = await params
   const url = '/' + (Array.isArray(slug) ? slug.join('/') : slug)
@@ -36,14 +38,12 @@ const Page = async ({
   return (
     <React.Fragment>
       <PayloadRedirects disableNotFound url={url} />
-      <RefreshRouteOnSave />
-      <Hero page={page} firstContentBlock={page.layout[0]} />
+      {draft && <LivePreviewListener />}
+      <RenderHero page={page} firstContentBlock={page.layout[0]} />
       <RenderBlocks blocks={page.layout} hero={page.hero} />
     </React.Fragment>
   )
 }
-
-export default Page
 
 export async function generateStaticParams() {
   const getPages = unstable_cache(fetchPages, ['pages'])

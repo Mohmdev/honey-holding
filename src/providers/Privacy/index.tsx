@@ -8,7 +8,11 @@ import React, {
   useState
 } from 'react'
 
-import { locate, LocateResponse } from '@providers/Privacy/functions-api'
+import {
+  locate,
+  LocateResponse
+} from '@app/(frontend)/next/locate/functions-api'
+
 import canUseDom from '@utils/canUseDOM'
 
 type Privacy = {
