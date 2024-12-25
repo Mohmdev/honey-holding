@@ -4,7 +4,15 @@ import { getPayload } from 'payload'
 
 import config from '@payload-config'
 
-import type { Footer, MainMenu, Page, Portfolio, Post } from '@payload-types'
+import type {
+  Asset,
+  Footer,
+  GlobalSetting,
+  MainMenu,
+  Page,
+  Portfolio,
+  Post
+} from '@payload-types'
 
 export const fetchGlobals = async (): Promise<{
   footer: Footer

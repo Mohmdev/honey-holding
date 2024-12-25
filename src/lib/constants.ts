@@ -1,9 +1,11 @@
 import type { CollectionSlug, GlobalSlug } from 'payload'
 
 export const PRODUCTION_ENVIRONMENT_SLUG = 'prod'
-
 export const ROLES_WITH_ADMIN_ACCESS = ['admin', 'editor'] as const
 export const DASHBOARD_SLUG = 'dashboard'
+
+export const SITE_NAME_SHORT = 'Nexweb'
+export const SITE_NAME_LONG = 'Nexweb Cloud'
 
 export const ENABLED_COLLECTIONS: CollectionSlug[] = [
   // 'pages',
@@ -11,8 +13,8 @@ export const ENABLED_COLLECTIONS: CollectionSlug[] = [
   'portfolio'
 ] as const
 export const PREVIEWABLE_COLLECTIONS: CollectionSlug[] = [
-  // 'pages',
-  // 'posts',
+  'pages',
+  'posts',
   'portfolio'
 ] as const
 export const LINKABLE_COLLECTIONS: CollectionSlug[] = [

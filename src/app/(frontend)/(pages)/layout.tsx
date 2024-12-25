@@ -4,7 +4,6 @@ import { draftMode } from 'next/headers'
 
 import { fetchGlobals } from '@data'
 
-import { AdminBar } from '@components/AdminBar'
 import { Footer } from '@components/Footer'
 import { Header } from '@components/Header'
 
@@ -24,7 +23,6 @@ export default async function Layout({
 
   return (
     <React.Fragment>
-      <AdminBar adminBarProps={{ preview: draft }} />
       <Header {...mainMenu} />
       <div>
         {children}

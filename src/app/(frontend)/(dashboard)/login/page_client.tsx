@@ -90,7 +90,7 @@ export const Login: React.FC = () => {
   return (
     <Gutter>
       <RenderParams />
-      <h1 className={classes.heading}>Log in to Payload Cloud</h1>
+      <h1 className={classes.heading}>Log in to Nexweb Dashboard</h1>
       <div className="grid">
         <div className={['cols-6 cols-m-8'].filter(Boolean).join(' ')}>
           <Form

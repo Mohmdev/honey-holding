@@ -1,4 +1,5 @@
 import { unstable_cache } from 'next/cache'
+import { draftMode } from 'next/headers'
 
 import { getPayload } from 'payload'
 
@@ -36,11 +37,17 @@ async function getGlobal<T extends Global>(
  * @param options
  *
  * Returns a unstable_cache function mapped with the cache tag for the slug
+ *
  */
-export const getCachedGlobals = <T extends Global>(
+export const getCachedGlobals = async <T extends Global>(
   slug: T,
   options: GlobalOptions<T> = {}
-) =>
-  unstable_cache(async () => getGlobal(slug, options), [slug], {
-    tags: [`global_${slug}`]
-  })
+) => {
+  const { isEnabled: draft } = await draftMode()
+
+  return draft
+    ? getGlobal(slug, options)
+    : unstable_cache(async () => getGlobal(slug, options), [slug], {
+        tags: [`global_${slug}`]
+      })
+}

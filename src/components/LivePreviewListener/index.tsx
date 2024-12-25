@@ -11,7 +11,8 @@ export const LivePreviewListener: React.FC = () => {
   const router = useRouter()
   return (
     <PayloadLivePreview
-      refresh={() => router.refresh()}
+      // refresh={() => router.refresh()}  // creates a new function on every render
+      refresh={router.refresh} // passes the function reference directly, no new function created
       serverURL={getServerSideURL() || ''}
     />
   )

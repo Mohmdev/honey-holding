@@ -7,7 +7,7 @@ import { useSearchParams } from 'next/navigation'
 import { useAuth } from '@providers/Auth'
 import canUseDom from '@utils/canUseDOM'
 import { getCookie } from '@utils/get-cookie'
-import { getClientSideURL } from '@utils/getURL'
+import { getClientSideURL, getServerSideURL } from '@utils/getURL'
 
 import { Text } from '@forms/fields/Text'
 import Form from '@forms/Form'
@@ -81,8 +81,8 @@ export const Signup: React.FC = () => {
 
       try {
         const hubspotCookie = getCookie('hubspotutk')
-        const pageUri = `${process.env.NEXT_PUBLIC_SITE_URL}/signup`
-        const pageName = 'Cloud Sign Up'
+        const pageUri = `${getServerSideURL()}/signup`
+        const pageName = 'Dashboard Sign Up'
         const req = await fetch(
           `${getClientSideURL()}/api/graphql${
             formData?.redirect ? `?redirect=${formData.redirect}` : ''
@@ -146,7 +146,7 @@ export const Signup: React.FC = () => {
               />
               <Button
                 label="Dashboard"
-                href="/cloud"
+                href="/dashboard"
                 appearance="secondary"
                 el="link"
               />

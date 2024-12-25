@@ -2,10 +2,16 @@ import { getCachedGlobals } from '@utils/getGlobals'
 
 import type { Footer } from '@payload-types'
 
-const getCachedFooter = getCachedGlobals('footer', {
+const getCachedFooter = await getCachedGlobals('footer', {
   depth: 1
 })
 
 export const getFooter = {
-  all: async () => (await getCachedFooter()) as Footer
+  all: async () => {
+    const footer =
+      typeof getCachedFooter === 'function'
+        ? await getCachedFooter()
+        : getCachedFooter
+    return footer as Footer
+  }
 }

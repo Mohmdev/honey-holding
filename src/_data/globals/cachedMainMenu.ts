@@ -2,10 +2,16 @@ import { getCachedGlobals } from '@utils/getGlobals'
 
 import type { MainMenu } from '@payload-types'
 
-const getCachedMainMenu = getCachedGlobals('main-menu', {
+const getCachedMainMenu = await getCachedGlobals('main-menu', {
   depth: 1
 })
 
 export const getMainMenu = {
-  all: async () => (await getCachedMainMenu()) as MainMenu
+  all: async () => {
+    const menu =
+      typeof getCachedMainMenu === 'function'
+        ? await getCachedMainMenu()
+        : getCachedMainMenu
+    return menu as MainMenu
+  }
 }

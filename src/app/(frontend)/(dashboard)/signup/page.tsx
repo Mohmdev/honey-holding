@@ -12,7 +12,7 @@ export default async function Page() {
 
   if (user) {
     redirect(
-      `/cloud?error=${encodeURIComponent('You must be logged out to sign up')}`
+      `/dashboard?error=${encodeURIComponent('You must be logged out to sign up')}`
     )
   }
 

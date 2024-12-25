@@ -47,9 +47,9 @@ export default buildConfig({
   secret: process.env.PAYLOAD_SECRET,
   serverURL: process.env.NEXT_PUBLIC_SERVER_URL,
   cors: [getServerSideURL()].filter(Boolean),
-  csrf: [process.env.NEXT_PUBLIC_SERVER_URL].filter(Boolean),
   typescript: { outputFile: 'src/CMS/payload-types.ts' },
   cookiePrefix: 'nexweb',
-  telemetry: false,
-  debug: true
+  // csrf: [process.env.NEXT_PUBLIC_SERVER_URL].filter(Boolean),
+  // debug: true,
+  telemetry: false
 })

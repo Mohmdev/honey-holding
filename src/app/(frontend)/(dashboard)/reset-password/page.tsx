@@ -12,7 +12,7 @@ export default async function Page(props) {
 
   if (user) {
     redirect(
-      `/cloud?error=${encodeURIComponent('You must be logged out to reset your password')}`
+      `/dashboard?error=${encodeURIComponent('You must be logged out to reset your password')}`
     )
   }
 

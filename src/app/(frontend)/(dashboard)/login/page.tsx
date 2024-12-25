@@ -12,7 +12,7 @@ export default async function Page() {
 
   if (user) {
     redirect(
-      `/cloud?warning=${encodeURIComponent('You are already logged in')}`
+      `/dashboard?warning=${encodeURIComponent('You are already logged in')}`
     )
   }
 

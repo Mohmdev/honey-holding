@@ -62,16 +62,20 @@ export const Pages: CollectionConfig<'pages'> = {
     {
       name: 'title',
       type: 'text',
-      required: true
+      required: true,
+      unique: true
     },
     fullTitle,
     {
       name: 'noindex',
       type: 'checkbox',
+      label: 'Hide from Search Engines',
       admin: {
-        position: 'sidebar'
-      },
-      label: 'No Index'
+        position: 'sidebar',
+        // TODO: Make the description a tooltip
+        description:
+          'When checked, this page will not appear in search engines like Google. Use this for private pages or temporary content that should not be publicly searchable.'
+      }
     },
     {
       type: 'tabs',

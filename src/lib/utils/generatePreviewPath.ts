@@ -1,6 +1,6 @@
 import { CollectionSlug, PayloadRequest } from 'payload'
 
-import { PREVIEWABLE_COLLECTIONS } from '../constants'
+import { PREVIEWABLE_COLLECTIONS } from '@constants'
 
 // Dynamic collection prefix map
 const collectionPrefixMap: Partial<Record<CollectionSlug, string>> =

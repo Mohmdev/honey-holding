@@ -46,11 +46,11 @@ export const CookieClientPage: React.FC = () => {
               subsidiaries and affiliates (&quot;<b>Nexweb</b>,&quot; &quot;
               <b>we</b>&quot;, “<b>us</b>” or &quot;<b>our</b>&quot;) use
               cookies to help improve your experience of our website at{' '}
-              <a href="https://payloadcms.com/">https://payloadcms.com</a> and
-              any other website that we own or control and which posts or links
-              to this cookie policy (collectively, the “Sites”). This cookie
-              policy complements Nexweb’s privacy policy. It covers the use of
-              cookies between your device and our Sites.
+              <a href="https://nexweb.studio/">https://nexweb.studio</a> and any
+              other website that we own or control and which posts or links to
+              this cookie policy (collectively, the “Sites”). This cookie policy
+              complements Nexweb’s privacy policy. It covers the use of cookies
+              between your device and our Sites.
             </p>
             <p>
               We also provide basic information on third-party services we may
@@ -442,7 +442,7 @@ export const CookieClientPage: React.FC = () => {
             <p>
               If you have any questions about this cookie policy, please contact
               us by email at
-              <a href="mailto:info@payloadcms.com">info@payloadcms.com</a>.
+              <a href="mailto:info@nexweb.studio">info@nexweb.studio</a>.
             </p>
           </div>
           <div className="cols-16 cols-m-8">
