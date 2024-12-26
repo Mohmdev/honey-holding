@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import { useRouter } from 'next/navigation'
 
@@ -48,14 +50,19 @@ export const DeletionConfirmationForm: React.FC<{
               const req = await fetch(
                 `${getClientSideURL()}/api/users/${user.id}`,
                 {
+                  method: 'DELETE',
                   credentials: 'include',
-                  method: 'DELETE'
+                  headers: {
+                    'Content-Type': 'application/json'
+                  }
                 }
               )
 
-              if (req.status === 200) {
+              if (req.ok) {
                 toast.success('Your account has been deleted successfully.')
                 router.push('/logout')
+              } else {
+                throw new Error('Failed to delete account')
               }
             } catch (e) {
               toast.error(
@@ -80,12 +87,12 @@ export const DeletionConfirmationForm: React.FC<{
         className={classes.warning}
         error="Deleting your account cannot be undone."
       />
-      <p>
+      {/* <p>
         Team ownership will be transferred to another team member where
         possible. If no other team members exist, the team and associated
         projects / deployments will be
         <strong> permanently deleted</strong>.
-      </p>
+      </p> */}
       <p>To proceed re-enter your account details below:</p>
       <Text
         className={classes.emailInput}

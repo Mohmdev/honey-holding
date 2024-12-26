@@ -53,7 +53,7 @@ export const Users: CollectionConfig<'users'> = {
     {
       name: 'photo',
       type: 'upload',
-      relationTo: 'user-photos',
+      relationTo: 'media',
       displayPreview: true
     },
     {

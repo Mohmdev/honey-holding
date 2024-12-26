@@ -19,6 +19,7 @@ export interface Config {
     media: Media;
     assets: Asset;
     users: User;
+    'user-photos': UserPhoto;
     docs: Doc;
     tickets: Ticket;
     forms: Form;
@@ -33,6 +34,9 @@ export interface Config {
     categories: {
       postsInCategory: 'posts';
     };
+    'user-photos': {
+      user: 'users';
+    };
   };
   collectionsSelect: {
     pages: PagesSelect<false> | PagesSelect<true>;
@@ -43,6 +47,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     assets: AssetsSelect<false> | AssetsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
+    'user-photos': UserPhotosSelect<false> | UserPhotosSelect<true>;
     docs: DocsSelect<false> | DocsSelect<true>;
     tickets: TicketsSelect<false> | TicketsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
@@ -101,6 +106,9 @@ export interface Page {
   id: string;
   title: string;
   fullTitle?: string | null;
+  /**
+   * When checked, this page will not appear in search engines like Google. Use this for private pages or temporary content that should not be publicly searchable.
+   */
   noindex?: boolean | null;
   hero: {
     type:
@@ -5177,13 +5185,10 @@ export interface Category {
  */
 export interface User {
   id: string;
-  firstName: string;
-  lastName: string;
-  /**
-   * Example: `nexwebdev`
-   */
-  twitter?: string | null;
-  photo?: (string | null) | Media;
+  username: string;
+  firstName?: string | null;
+  lastName?: string | null;
+  photo?: (string | null) | UserPhoto;
   role: 'admin' | 'editor' | 'public';
   updatedAt: string;
   createdAt: string;
@@ -5192,9 +5197,68 @@ export interface User {
   resetPasswordExpiration?: string | null;
   salt?: string | null;
   hash?: string | null;
+  _verified?: boolean | null;
+  _verificationToken?: string | null;
   loginAttempts?: number | null;
   lockUntil?: string | null;
   password?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "user-photos".
+ */
+export interface UserPhoto {
+  id: string;
+  alt?: string | null;
+  user?: {
+    docs?: (string | User)[] | null;
+    hasNextPage?: boolean | null;
+  } | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    square?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    small?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    medium?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -5365,6 +5429,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'users';
         value: string | User;
+      } | null)
+    | ({
+        relationTo: 'user-photos';
+        value: string | UserPhoto;
       } | null)
     | ({
         relationTo: 'docs';
@@ -8506,9 +8574,9 @@ export interface AssetsSelect<T extends boolean = true> {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  username?: T;
   firstName?: T;
   lastName?: T;
-  twitter?: T;
   photo?: T;
   role?: T;
   updatedAt?: T;
@@ -8518,8 +8586,73 @@ export interface UsersSelect<T extends boolean = true> {
   resetPasswordExpiration?: T;
   salt?: T;
   hash?: T;
+  _verified?: T;
+  _verificationToken?: T;
   loginAttempts?: T;
   lockUntil?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "user-photos_select".
+ */
+export interface UserPhotosSelect<T extends boolean = true> {
+  alt?: T;
+  user?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        square?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        small?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        medium?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

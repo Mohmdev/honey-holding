@@ -3,12 +3,12 @@ import { redirect } from 'next/navigation'
 
 import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
 
-import { fetchMe } from '@dashboard/api/fetchMe'
-
 import { ResetPassword } from './page_client'
 
-export default async function Page(props) {
-  const { user } = await fetchMe()
+import { getMeUser } from '@data/getMeUser'
+
+export default async function Page() {
+  const { user } = await getMeUser()
 
   if (user) {
     redirect(
@@ -16,7 +16,7 @@ export default async function Page(props) {
     )
   }
 
-  return <ResetPassword {...props} />
+  return <ResetPassword />
 }
 
 export const metadata: Metadata = {

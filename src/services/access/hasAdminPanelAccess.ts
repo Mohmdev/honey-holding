@@ -10,7 +10,3 @@ export const hasAdminPanelAccess = (...roles: User['role'][]) => {
     return roles.some((role) => checkRole(role, user))
   }
 }
-
-// Hardcoded role check
-// export const hasAdminPanelAccess = ({ req: { user } }) =>
-//   user ? checkRole('admin', user) || checkRole('editor', user) : false

@@ -12,11 +12,7 @@ import classes from './layout.module.scss'
 
 import { DASHBOARD_SLUG } from '@constants'
 
-type ProjectSettingsLayoutType = {
-  children: React.ReactNode
-}
-
-export default function Layout({ children }: ProjectSettingsLayoutType) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   const [, settingsTab] = usePathnameSegments()
   const pathname = usePathname()
 

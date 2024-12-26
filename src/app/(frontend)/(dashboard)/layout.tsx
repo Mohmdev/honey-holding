@@ -1,10 +1,10 @@
 import React from 'react'
 import { Metadata } from 'next'
 
-import { DashboardFooter } from '@root/app/(frontend)/(dashboard)/~/components/DashboardFooter'
-import { DashboardHeader } from '@root/app/(frontend)/(dashboard)/~/components/DashboardHeader'
-
 import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
+
+import { DashboardFooter } from '@dashboard/components/DashboardFooter'
+import { DashboardHeader } from '@dashboard/components/DashboardHeader'
 
 import classes from './layout.module.scss'
 

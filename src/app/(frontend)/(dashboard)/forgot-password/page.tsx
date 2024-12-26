@@ -3,20 +3,20 @@ import { redirect } from 'next/navigation'
 
 import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
 
-import { fetchMe } from '@dashboard/api/fetchMe'
-
 import { ForgotPassword } from './page_client'
 
-export default async function Page(props) {
-  const { user } = await fetchMe()
+import { getMeUser } from '@data/getMeUser'
+
+export default async function Page() {
+  const { user } = await getMeUser()
 
   if (user) {
     redirect(
-      `/cloud?error=${encodeURIComponent('You must be logged out to reset your password')}`
+      `/dashboard?error=${encodeURIComponent('You must be logged out to reset your password')}`
     )
   }
 
-  return <ForgotPassword {...props} />
+  return <ForgotPassword />
 }
 
 export const metadata: Metadata = {

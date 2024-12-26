@@ -5,7 +5,6 @@ import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
 import { getClientSideURL } from '@utils/getURL'
 
 // force this component to use dynamic search params, see https://github.com/vercel/next.js/issues/43077
-// this is only an issue in production
 export const dynamic = 'force-dynamic'
 
 export default async ({ searchParams }) => {
@@ -13,40 +12,50 @@ export default async ({ searchParams }) => {
 
   if (token) {
     try {
-      const res = await fetch(`${getClientSideURL()}/api/graphql`, {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          query: `mutation {
-            verifyEmailUser(token: "${token}")
-        }`
-        })
-      })
+      const res = await fetch(
+        `${getClientSideURL()}/api/users/verify/${token}`,
+        {
+          method: 'POST',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+      )
 
-      if (res.ok) {
-        const { data, errors } = await res.json()
-        if (errors) throw new Error(errors[0].message)
-      } else {
-        throw new Error('Invalid login')
+      if (!res.ok) {
+        throw new Error('Verification failed')
       }
-    } catch (e) {
-      throw new Error(`Error verifying email: ${e.message}`)
-    }
 
-    redirect(
-      `/login?success=${encodeURIComponent('Your email has been verified. You may now log in.')}${
-        redirectParam ? `&redirect=${redirectParam}` : ''
-      }${emailParam ? `&email=${emailParam}` : ''}`
-    )
+      const data = await res.json()
+
+      // Successful verification
+      redirect(
+        `/login?success=${encodeURIComponent(
+          data.message || 'Your email has been verified. You may now log in.'
+        )}${redirectParam ? `&redirect=${redirectParam}` : ''}${
+          emailParam ? `&email=${emailParam}` : ''
+        }`
+      )
+    } catch (e) {
+      // Handle verification error
+      redirect(
+        `/login?error=${encodeURIComponent(
+          'Email verification failed. Please try again or contact support.'
+        )}${redirectParam ? `&redirect=${redirectParam}` : ''}${
+          emailParam ? `&email=${emailParam}` : ''
+        }`
+      )
+    }
   }
 
+  // No token provided
   redirect(
-    `/login?error=${encodeURIComponent('Invalid verification token. Please try again.')}${
-      redirectParam ? `&redirect=${redirectParam}` : ''
-    }${emailParam ? `&email=${emailParam}` : ''}`
+    `/login?error=${encodeURIComponent(
+      'Invalid verification token. Please try again.'
+    )}${redirectParam ? `&redirect=${redirectParam}` : ''}${
+      emailParam ? `&email=${emailParam}` : ''
+    }`
   )
 }
 

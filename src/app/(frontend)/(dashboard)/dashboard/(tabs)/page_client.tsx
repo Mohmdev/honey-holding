@@ -6,33 +6,60 @@ import Link from 'next/link'
 import { useAuth } from '@providers/Auth'
 import { useDebounce } from '@utils/useDebounce'
 
+import type { User } from '@payload-types' // Update this import
+
 import { Text } from '@forms/fields/Text'
 
 import { Gutter } from '@components/Gutter'
 import { Pagination } from '@components/Pagination'
-import { fetchProjectsClient, ProjectsRes } from '@dashboard/api/fetchProjects'
 import { NewProjectBlock } from '@dashboard/components/NewProject'
-import { ProjectCard } from '@dashboard/components/ProjectCard'
-import { TeamSelector } from '@dashboard/components/TeamSelector'
-import { Team, Template, User } from '@dashboard/types'
 
 import classes from './page.module.scss'
 
 const delay = 500
 const debounce = 350
 
-export const CloudPage: React.FC<{
-  initialState: ProjectsRes
-  user: User
-  templates: Template[]
-}> = ({ initialState, templates }) => {
-  const { user } = useAuth()
-  const [selectedTeam, setSelectedTeam] = React.useState<string | 'none'>()
-  const prevSelectedTeam = React.useRef<string | 'none' | undefined>(
-    selectedTeam
-  )
+type Project = {
+  id: string
+  title: string
+  description: string
+  createdAt: string
+}
 
-  const [result, setResult] = React.useState<ProjectsRes>(initialState)
+type ProjectsResponse = {
+  docs: Project[]
+  totalDocs: number
+  page: number
+  totalPages: number
+}
+
+const sampleProjects: ProjectsResponse = {
+  docs: [
+    {
+      id: '1',
+      title: 'Project 1',
+      description: 'Sample project 1',
+      createdAt: new Date().toISOString()
+    },
+    {
+      id: '2',
+      title: 'Project 2',
+      description: 'Sample project 2',
+      createdAt: new Date().toISOString()
+    }
+  ],
+  totalDocs: 2,
+  page: 1,
+  totalPages: 1
+}
+
+export const DashboardPage: React.FC<{
+  initialState?: ProjectsResponse
+  user: User // This now uses Payload's User type
+}> = ({ initialState = sampleProjects }) => {
+  const { user } = useAuth()
+
+  const [result, setResult] = React.useState(initialState)
   const [page, setPage] = React.useState<number>(initialState?.page || 1)
   const [search, setSearch] = React.useState<string>('')
   const debouncedSearch = useDebounce(search, debounce)
@@ -42,100 +69,62 @@ export const CloudPage: React.FC<{
   const [enableSearch, setEnableSearch] = React.useState<boolean>(false)
   const requestRef = React.useRef<NodeJS.Timeout | null>(null)
 
-  // on initial load, we'll know whether or not to render the `NewProjectBlock`
-  // this will prevent subsequent searches from showing the `NewProjectBlock`
-  // this will also prevent content flash if using `projectRes.docs.length` to conditionally render
-  const [renderNewProjectBlock, setRenderNewProjectBlock] =
-    React.useState<boolean>(initialState?.totalDocs === 0)
+  const ProjectCard: React.FC<{ project?: Project; isLoading?: boolean }> = ({
+    project,
+    isLoading
+  }) => (
+    <div className={classes.projectCard}>
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : (
+        project && (
+          <div>
+            <h3>{project.title}</h3>
+            <p>{project.description}</p>
+            <small>{new Date(project.createdAt).toLocaleDateString()}</small>
+          </div>
+        )
+      )}
+    </div>
+  )
 
   useEffect(() => {
-    // keep a timer reference so that we can cancel the old request
-    // this is if the old request takes longer than the debounce time
     if (requestRef.current) clearTimeout(requestRef.current)
 
-    // only perform searches after the user has engaged with the search field or pagination
-    // this will ensure this effect is accidentally run on initial load, etc
-    // the only stable way of doing this is to explicitly set the `enableSearch` flag on these event handlers
     if (enableSearch) {
       setIsLoading(true)
 
-      // reset the page back to 1 if the team or search has changed
       const searchChanged = prevSearch.current !== debouncedSearch
-      if (searchChanged) prevSearch.current = debouncedSearch
-      const teamChanged = prevSelectedTeam.current !== selectedTeam
-      if (teamChanged) prevSelectedTeam.current = selectedTeam
+      if (searchChanged) {
+        setPage(1)
+        prevSearch.current = debouncedSearch
+      }
 
       const doFetch = async () => {
-        // give the illusion of loading, so that fast network connections appear to flash
-        // this gives the user a visual indicator that something is happening
         const start = Date.now()
 
-        // reduce user teams to an array of team IDs
-        // const userTeams =
-        //   user?.teams?.map(({ team }) =>
-        //     team && typeof team === 'object' && team !== null && 'id' in team
-        //       ? team.id
-        //       : team
-        //   ) || [].filter(Boolean)
-
-        // filter 'none' from the selected teams array
-        // select all user teams if no team is selected
-        // const teams =
-        // !selectedTeam || selectedTeam === 'none' ? userTeams : [selectedTeam]
-
         try {
-          requestRef.current = setTimeout(async () => {
-            // const projectsRes = await fetchProjectsClient({
-            //   teamIDs: teams,
-            //   page: searchChanged || teamChanged ? 1 : page,
-            //   search: debouncedSearch
-            // })
+          requestRef.current = setTimeout(() => {
+            // Simulate API call with sample data
+            const filtered = sampleProjects.docs.filter((p) =>
+              p.title.toLowerCase().includes(debouncedSearch.toLowerCase())
+            )
 
-            const end = Date.now()
-            const diff = end - start
-
-            // the request was too fast, so we'll add a delay to make it appear as if it took longer
-            if (diff < delay) {
-              await new Promise((resolve) => setTimeout(resolve, delay - diff))
-            }
-
-            // setRenderNewProjectBlock(
-            //   !debouncedSearch && projectsRes?.totalDocs === 0
-            // )
-            // setResult(projectsRes)
+            setResult({
+              ...sampleProjects,
+              docs: filtered,
+              totalDocs: filtered.length
+            })
             setIsLoading(false)
-          }, 0)
-        } catch (error) {
+          }, delay)
+        } catch (error: any) {
           setError(error.message || 'Something went wrong')
+          setIsLoading(false)
         }
       }
       doFetch()
     }
-  }, [page, debouncedSearch, selectedTeam, enableSearch, user])
-
-  // this will prevent layout shift, where we display loading card states on the screen in place of real data
-  // to do this, we'll map an array of loading cards for the exactly number of cards that we expect to render
-  // starting with the number of results from the API, the falling back to the limit used in the request
-  const cardArray = isLoading
-    ? Array.from(Array(result?.docs?.length || result?.limit).keys())
-    : result?.docs || []
-
-  // const matchedTeam = user?.teams?.find(({ team }) =>
-  //   typeof team === 'string' ? team === selectedTeam : team?.id === selectedTeam
-  // )?.team as Team
-
-  if (initialState?.totalDocs === 0) {
-    return (
-      <NewProjectBlock
-        heading={
-          selectedTeam ? `Team team has no projects` : `You have no projects`
-        }
-        cardLeader="New"
-        // teamSlug={matchedTeam?.slug}
-        templates={templates}
-      />
-    )
-  }
+  }, [page, debouncedSearch, enableSearch, user])
 
   return (
     <Gutter>
@@ -150,60 +139,39 @@ export const CloudPage: React.FC<{
           }}
           className={['cols-8 cols-l-8 cols-m-8', classes.search].join(' ')}
         />
-        <TeamSelector
-          onChange={(incomingTeam) => {
-            setSelectedTeam(incomingTeam?.id)
-            setEnableSearch(true)
-          }}
-          className={[
-            'cols-6 cols-l-4 cols-m-6 cols-s-4',
-            classes.teamSelector
-          ].join(' ')}
-          initialValue="none"
-          allowEmpty
-          label={false}
-          // user={user}
-        />
         <div className="cols-2 cols-l-4 cols-m-2 cols-s-4">
-          {/* <Link
-            className={classes.createButton}
-            href={`/new${matchedTeam?.slug ? `?team=${matchedTeam?.slug}` : ''}`}
-          >
+          <Link className={classes.createButton} href="">
             New Project
-          </Link> */}
+          </Link>
         </div>
       </div>
-      {renderNewProjectBlock && !isLoading && (
+      {!isLoading && (
         <NewProjectBlock
-          heading={
-            selectedTeam ? `Team has no projects` : `You have no projects`
-          }
+          heading="You have no projects"
           cardLeader="New"
           largeHeading={false}
           // teamSlug={matchedTeam?.slug}
-          templates={templates}
         />
       )}
-      {(!renderNewProjectBlock || isLoading) && (
-        <div className={classes.content}>
-          {!isLoading && debouncedSearch && result?.totalDocs === 0 ? (
-            <p className={classes.description}>
-              {"Your search didn't return any results, please try again."}
-            </p>
-          ) : (
-            <div className={['grid', classes.projects].join(' ')}>
-              {cardArray?.map((project, index) => (
-                <ProjectCard
-                  key={project.id}
-                  project={project}
-                  className={classes.projectCard}
-                  isLoading={isLoading}
-                />
-              ))}
-            </div>
-          )}
-        </div>
-      )}
+
+      <div className={classes.content}>
+        {!isLoading && debouncedSearch && result?.totalDocs === 0 ? (
+          <p className={classes.description}>
+            {"Your search didn't return any results, please try again."}
+          </p>
+        ) : (
+          <div className={['grid', classes.projects].join(' ')}>
+            {isLoading ? (
+              <ProjectCard isLoading />
+            ) : (
+              result?.docs.map((project) => (
+                <ProjectCard key={project.id} project={project} />
+              ))
+            )}
+          </div>
+        )}
+      </div>
+
       {result?.totalPages > 1 && (
         <Pagination
           className={classes.pagination}

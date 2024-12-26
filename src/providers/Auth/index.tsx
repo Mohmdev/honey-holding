@@ -10,32 +10,14 @@ import {
 
 import { getClientSideURL } from '@utils/getURL'
 
-import { User } from '@payload-types'
-
-type Create = (args: {
-  email: string
-  password: string
-  passwordConfirm: string
-}) => Promise<void>
-type Login = (args: { email: string; password: string }) => Promise<User>
-type Logout = () => Promise<void>
-type ForgotPassword = (args: { email: string }) => Promise<void>
-type ResetPassword = (args: {
-  password: string
-  passwordConfirm: string
-  token: string
-}) => Promise<void>
-type AuthContext = {
-  create: Create
-  login: Login
-  logout: Logout
-  forgotPassword: ForgotPassword
-  resetPassword: ResetPassword
-  status: 'loggedIn' | 'loggedOut' | undefined
-  user?: User | null
-  setUser: (user: User | null) => void
-  updateUser: (user: Partial<User>) => void
-}
+import type {
+  AuthContext,
+  ForgotPassword,
+  Login,
+  Logout,
+  ResetPassword
+} from './types'
+import type { User } from '@payload-types'
 
 const AuthContext = createContext({} as AuthContext)
 
@@ -46,61 +28,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   // useful for `useEffect` hooks that should only run once
   const [status, setStatus] = useState<'loggedIn' | 'loggedOut' | undefined>()
   const [user, setUser] = useState<User | null>()
-
-  useEffect(() => {
-    const fetchMe = async () => {
-      try {
-        const res = await fetch(`${getClientSideURL()}/api/users/me`, {
-          credentials: 'include',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          method: 'GET'
-        })
-
-        if (res.ok) {
-          const { user: meUser } = await res.json()
-          setUser(meUser || null)
-          setStatus(meUser ? 'loggedIn' : undefined)
-        } else {
-          throw new Error('An error occurred while fetching your account.')
-        }
-      } catch (e) {
-        setUser(null)
-        throw new Error('An error occurred while fetching your account.')
-      }
-    }
-
-    void fetchMe()
-  }, [])
-
-  const create = useCallback<Create>(async (args) => {
-    try {
-      const res = await fetch(`${getClientSideURL()}/api/users/create`, {
-        body: JSON.stringify({
-          email: args.email,
-          password: args.password,
-          passwordConfirm: args.passwordConfirm
-        }),
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        method: 'POST'
-      })
-
-      if (res.ok) {
-        const { data, errors } = await res.json()
-        if (errors) throw new Error(errors[0].message)
-        setUser(data?.loginUser?.user)
-        setStatus('loggedIn')
-      } else {
-        throw new Error('Invalid login')
-      }
-    } catch (e) {
-      throw new Error('An error occurred while attempting to login.')
-    }
-  }, [])
 
   const login = useCallback<Login>(
     async (args) => {
@@ -246,11 +173,38 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     [user]
   )
 
+  // On mount, get user and set
+  useEffect(() => {
+    const fetchMe = async () => {
+      try {
+        const res = await fetch(`${getClientSideURL()}/api/users/me`, {
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          method: 'GET'
+        })
+
+        if (res.ok) {
+          const { user: meUser } = await res.json()
+          setUser(meUser || null)
+          setStatus(meUser ? 'loggedIn' : undefined)
+        } else {
+          throw new Error('An error occurred while fetching your account.')
+        }
+      } catch (e) {
+        setUser(null)
+        throw new Error('An error occurred while fetching your account.')
+      }
+    }
+
+    void fetchMe()
+  }, [])
+
   return (
     <AuthContext.Provider
       value={{
         user,
-        create,
         setUser,
         updateUser,
         status,

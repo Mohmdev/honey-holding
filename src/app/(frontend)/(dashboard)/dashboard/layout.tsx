@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import React, { Fragment } from 'react'
 import { Metadata } from 'next'
 
 import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
@@ -22,9 +22,11 @@ export const metadata: Metadata = {
   openGraph: mergeOpenGraph()
 }
 
-export default async function Layout(props) {
-  const { children } = props
-
+export default async function Layout({
+  children
+}: {
+  children: React.ReactNode
+}) {
   await fetchMe({
     nullUserRedirect: `/login?error=${encodeURIComponent(
       'You must be logged in to visit this page'

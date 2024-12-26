@@ -4,8 +4,8 @@ import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
 
 import { Logout } from './page_client'
 
-export default function Page(props) {
-  return <Logout {...props} />
+export default function Page() {
+  return <Logout />
 }
 
 export const metadata: Metadata = {

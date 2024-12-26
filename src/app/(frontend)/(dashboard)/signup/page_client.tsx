@@ -6,8 +6,7 @@ import { useSearchParams } from 'next/navigation'
 
 import { useAuth } from '@providers/Auth'
 import canUseDom from '@utils/canUseDOM'
-import { getCookie } from '@utils/get-cookie'
-import { getClientSideURL, getServerSideURL } from '@utils/getURL'
+import { getClientSideURL } from '@utils/getURL'
 
 import { Text } from '@forms/fields/Text'
 import Form from '@forms/Form'
@@ -24,12 +23,24 @@ import { Gutter } from '@components/Gutter'
 
 import classes from './page.module.scss'
 
+// type Create = (args: {
+//   email: string
+//   password: string
+//   passwordConfirm: string
+// }) => Promise<void>
+
 const initialFormState: InitialState = {
   email: {
     value: '',
     valid: false,
     initialValue: undefined,
     errorMessage: 'Please enter a valid email address'
+  },
+  username: {
+    value: '',
+    valid: false,
+    initialValue: undefined,
+    errorMessage: 'Please enter a username'
   },
   password: {
     value: '',
@@ -80,45 +91,48 @@ export const Signup: React.FC = () => {
       }
 
       try {
-        const hubspotCookie = getCookie('hubspotutk')
-        const pageUri = `${getServerSideURL()}/signup`
-        const pageName = 'Dashboard Sign Up'
-        const req = await fetch(
-          `${getClientSideURL()}/api/graphql${
-            formData?.redirect ? `?redirect=${formData.redirect}` : ''
-          }`,
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              query: `mutation {
-            createUser(data: { email: "${formData.email}", password: "${formData.password}"}) {
-              email
-            }
-          }`,
-              hubspotCookie,
-              pageUri,
-              pageName
-            })
-          }
-        )
+        const req = await fetch(`${getClientSideURL()}/api/users/create`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            email: formData.email,
+            username: formData.username,
+            password: formData.password,
+            redirect: formData.redirect
+          })
+        })
 
-        const { data, errors } = await req.json()
+        const response = await req.json()
 
         if (req.ok) {
-          if (errors) {
-            throw new Error(errors[0].message)
-          }
-
-          if (!data?.createUser) {
-            throw new Error('An error occurred')
-          }
-
           setSuccessfullySubmitted(true)
         } else {
-          throw new Error(errors?.[0]?.message)
+          // Handle specific error cases
+          if (response.errors?.email) {
+            dispatchFields({
+              type: 'UPDATE',
+              payload: {
+                path: 'email',
+                errorMessage: response.errors.email,
+                valid: false,
+                value: formData.email
+              }
+            })
+          }
+          if (response.errors?.username) {
+            dispatchFields({
+              type: 'UPDATE',
+              payload: {
+                path: 'username',
+                errorMessage: response.errors.username,
+                valid: false,
+                value: formData.username
+              }
+            })
+          }
+          throw new Error(response.message || 'An error occurred during signup')
         }
       } catch (e) {
         console.error(e)
@@ -210,6 +224,7 @@ export const Signup: React.FC = () => {
               required
               initialValue={searchParams?.get('email') || undefined}
             />
+            <Text path="username" label="Username" required />
             <Text path="password" label="Password" type="password" required />
             <Text
               path="passwordConfirm"

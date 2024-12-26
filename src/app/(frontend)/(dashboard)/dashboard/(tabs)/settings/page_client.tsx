@@ -3,10 +3,11 @@
 import React, { Fragment, useCallback } from 'react'
 
 import { useModal } from '@faceless-ui/modal'
-import { SectionHeader } from '@root/app/(frontend)/(dashboard)/dashboard/[team-slug]/[project-slug]/(tabs)/settings/_layoutComponents/SectionHeader'
 import { toast } from 'sonner'
 
 import { useAuth } from '@providers/Auth'
+
+import type { User, UserPhoto } from '@payload-types'
 
 import { Text } from '@forms/fields/Text'
 import Form from '@forms/Form'
@@ -20,7 +21,7 @@ import { Heading } from '@components/Heading'
 import { HR } from '@components/HR'
 import { ModalWindow } from '@components/ModalWindow'
 import { revalidateCache } from '@dashboard/actions/revalidateCache'
-import { User } from '@dashboard/types'
+import { SectionHeader } from '@dashboard/components/_layoutComponents/SectionHeader'
 
 import { DeletionConfirmationForm } from './DeletionConfirmationForm'
 import classes from './page.module.scss'
@@ -69,11 +70,20 @@ export const SettingsPage: React.FC<{
       }
 
       try {
-        await updateUser({
-          firstName: data?.firstName,
-          email: data?.email,
-          password: data?.password
-        })
+        // match Partial<User> type from AuthContext
+        const updates: Partial<User> = {
+          username: data?.username || undefined,
+          firstName: data?.firstName || undefined,
+          lastName: data?.lastName || undefined,
+          email: data?.email || undefined
+        }
+
+        // Only add password if it exists
+        if (data?.password) {
+          updates.password = data.password
+        }
+
+        await updateUser(updates)
 
         toast.success('Your account has been updated successfully.')
 
@@ -133,16 +143,35 @@ export const SettingsPage: React.FC<{
         <FormProcessing message="Updating profile, one moment" />
         {formToShow === 'account' && (
           <>
+            {/* TODO */}
+            {/* <Media
+              path="photo"
+              label="Profile Photo"
+              relationTo="user-photos"
+              description="Upload a profile photo"
+              initialValue={user?.photo}
+            /> */}
             <Text
-              path="name"
-              label="Your Full Name"
-              initialValue={user?.name}
+              path="username"
+              label="Username"
+              initialValue={user?.username || ''}
+              required
+            />
+            <Text
+              path="firstName"
+              label="Your First Name"
+              initialValue={user?.firstName || ''}
+            />
+            <Text
+              path="lastName"
+              label="Your Last Name"
+              initialValue={user?.lastName || ''}
             />
             <Text
               path="email"
               label="Email"
               required
-              initialValue={user?.email}
+              initialValue={user?.email || ''}
             />
           </>
         )}
@@ -182,9 +211,8 @@ export const SettingsPage: React.FC<{
         value={user?.id}
         label="User ID"
         disabled
-        description="This is your user's ID within Payload"
+        description="This is your user's ID within Nexweb"
       />
-      <HR />
       <Heading element="h2" as="h4" marginTop={false} marginBottom={false}>
         Delete account
       </Heading>

@@ -1,26 +1,24 @@
-import { Fragment } from 'react'
+import React, { Fragment } from 'react'
 
 import { Gutter } from '@components/Gutter'
 import { DashboardTabs } from '@dashboard/components/DashboardTabs'
 
 import { DASHBOARD_SLUG } from '@constants'
 
-export default async function Layout(props) {
-  const { children } = props
-
+export default async function Layout({
+  children
+}: {
+  children: React.ReactNode
+}) {
   return (
     <Fragment>
       <Gutter>
-        <h2>Cloud</h2>
+        <h2>Dashboard</h2>
         <DashboardTabs
           tabs={{
-            [DASHBOARD_SLUG]: {
-              href: `/${DASHBOARD_SLUG}`,
-              label: 'Projects'
-            },
             teams: {
-              label: 'Teams',
-              href: `/${DASHBOARD_SLUG}/teams`
+              label: 'Something',
+              href: `/${DASHBOARD_SLUG}/something`
             },
             settings: {
               label: 'Settings',

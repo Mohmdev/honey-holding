@@ -17,6 +17,7 @@ import { Posts } from '@CMS/Posts/config'
 import { ReusableContent } from '@CMS/ReusableContent/config'
 import { Tickets } from '@CMS/Tickets/config'
 import { Users } from '@CMS/Users/config'
+import { UserPhotos } from '@CMS/Users/config.UserMedia'
 import { adminConfig } from '@services/admin/config'
 import { MongooseAdapter } from '@services/database/config'
 import { defaultLexical } from '@services/editor/defaultLexical'
@@ -33,7 +34,7 @@ export default buildConfig({
       ReusableContent
     ]),
     ...collectionGroup('Uploads', [Media, Assets]),
-    ...collectionGroup('Settings', [Users]),
+    ...collectionGroup('Settings', [Users, UserPhotos]),
     ...collectionGroup('Support', [Docs, Tickets])
   ],
   globals: [...globalGroup('Customize', [GlobalSettings, MainMenu, Footer])],
@@ -44,12 +45,12 @@ export default buildConfig({
   db: MongooseAdapter,
   plugins: [...plugins],
   editor: defaultLexical,
+  cookiePrefix: 'nexweb-secure',
+  serverURL: getServerSideURL(),
   secret: process.env.PAYLOAD_SECRET,
-  serverURL: process.env.NEXT_PUBLIC_SERVER_URL,
   cors: [getServerSideURL()].filter(Boolean),
+  csrf: [getServerSideURL()].filter(Boolean),
   typescript: { outputFile: 'src/CMS/payload-types.ts' },
-  cookiePrefix: 'nexweb',
-  // csrf: [process.env.NEXT_PUBLIC_SERVER_URL].filter(Boolean),
   // debug: true,
   telemetry: false
 })

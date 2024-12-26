@@ -12,26 +12,64 @@ import FormSubmissionError from '@forms/FormSubmissionError'
 import Submit from '@forms/Submit'
 
 import { Gutter } from '@components/Gutter'
-import { Heading } from '@components/Heading'
 
 import classes from './page.module.scss'
 
+const initialFormState = {
+  password: {
+    value: '',
+    valid: false,
+    errorMessage: 'Please enter a password'
+  },
+  passwordConfirm: {
+    value: '',
+    valid: false,
+    errorMessage: 'Please confirm your password'
+  }
+}
+
 export const ResetPassword: React.FC = () => {
   const searchParams = useSearchParams()
-
+  const { user, resetPassword } = useAuth()
   const token = searchParams?.get('token')
 
-  const { user, resetPassword } = useAuth()
-
   const handleSubmit = useCallback(
-    async ({ data }) => {
+    async ({ data, dispatchFields }) => {
+      // Basic validation
+      if (data.password !== data.passwordConfirm) {
+        dispatchFields({
+          type: 'UPDATE',
+          payload: [
+            {
+              path: 'passwordConfirm',
+              errorMessage: 'Passwords do not match',
+              valid: false,
+              value: data.passwordConfirm
+            },
+            {
+              path: 'password',
+              errorMessage: 'Passwords do not match',
+              valid: false,
+              value: data.password
+            }
+          ]
+        })
+        return
+      }
+
       try {
         await resetPassword({
-          password: data.password as string,
-          passwordConfirm: data.passwordConfirm as string,
+          password: data.password,
+          passwordConfirm: data.passwordConfirm,
           token: token as string
         })
+
+        // Redirect to login on success
+        redirect('/login?message=Password successfully reset. Please log in.')
       } catch (e: any) {
+        if (e.message.includes('token')) {
+          redirect('/forgot-password?error=Invalid or expired token')
+        }
         throw new Error(e.message)
       }
     },
@@ -55,22 +93,12 @@ export const ResetPassword: React.FC = () => {
   return (
     <Gutter>
       <h2>Reset password</h2>
-      <div className={['grid'].filter(Boolean).join(' ')}>
-        <div className={['cols-5 cols-m-8'].filter(Boolean).join(' ')}>
+      <div className="grid">
+        <div className="cols-5 cols-m-8">
           <Form
             onSubmit={handleSubmit}
             className={classes.form}
-            initialState={{
-              password: {
-                value: ''
-              },
-              passwordConfirm: {
-                value: ''
-              },
-              token: {
-                value: ''
-              }
-            }}
+            initialState={initialFormState}
           >
             <FormSubmissionError />
             <FormProcessing message="Resetting password, one moment..." />

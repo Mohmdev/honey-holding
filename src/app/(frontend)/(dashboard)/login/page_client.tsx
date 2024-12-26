@@ -61,23 +61,49 @@ export const Login: React.FC = () => {
   }, [searchParams])
 
   const handleSubmit = useCallback(
-    async ({ data }) => {
+    async ({ data, dispatchFields }) => {
       setTimeout(() => {
         window.scrollTo(0, 0)
       }, 0)
 
       try {
-        const loggedInUser = await login({
-          email: data.email as string,
-          password: data.password as string
+        await login({
+          email: data.email,
+          password: data.password
         })
-
-        if (!loggedInUser) {
-          throw new Error(`Invalid email or password`)
-        }
       } catch (err) {
-        console.error(err)
-        throw new Error(`Invalid email or password`)
+        // Handle specific error cases
+        if (err.message.includes('not verified')) {
+          dispatchFields({
+            type: 'UPDATE',
+            payload: {
+              path: 'email',
+              errorMessage: 'Please verify your email before logging in',
+              valid: false,
+              value: data.email
+            }
+          })
+        } else {
+          // Generic error for invalid credentials
+          dispatchFields({
+            type: 'UPDATE',
+            payload: [
+              {
+                path: 'email',
+                errorMessage: 'Invalid email or password',
+                valid: false,
+                value: data.email
+              },
+              {
+                path: 'password',
+                errorMessage: 'Invalid email or password',
+                valid: false,
+                value: data.password
+              }
+            ]
+          })
+        }
+        throw new Error('Invalid credentials')
       }
     },
     [login]

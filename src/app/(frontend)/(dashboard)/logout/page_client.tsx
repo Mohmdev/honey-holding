@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 
 import { useAuth } from '@providers/Auth'
 
@@ -12,9 +12,7 @@ import classes from './page.module.scss'
 const threshold = 1000
 
 export const Logout: React.FC = () => {
-  const { user, logout } = useAuth()
-  const [isLoggingOut, setLoggingOut] = useState(false)
-  const [hasLoggedOut, setLoggedOut] = useState(false)
+  const { user, status, logout } = useAuth()
   const isRequesting = useRef(false)
 
   useEffect(() => {
@@ -22,25 +20,19 @@ export const Logout: React.FC = () => {
       isRequesting.current = true
 
       const doLogout = async () => {
-        setLoggingOut(true)
-
         try {
           const start = Date.now()
 
           await logout()
 
-          const end = Date.now()
-          const time = end - start
-          const delay = threshold - time
-
           // give the illusion of a delay, so that the content doesn't blink on fast networks
-          if (delay > 0)
+          const timeElapsed = Date.now() - start
+          const delay = threshold - timeElapsed
+          if (delay > 0) {
             await new Promise((resolve) => setTimeout(resolve, delay))
-
-          setLoggingOut(false)
-          setLoggedOut(true)
+          }
         } catch (e) {
-          console.error(e)
+          console.error('Error during logout:', e)
         }
 
         isRequesting.current = false
@@ -50,7 +42,8 @@ export const Logout: React.FC = () => {
     }
   }, [logout, user])
 
-  if (user === null && hasLoggedOut) {
+  // Show different states based on auth status
+  if (status === 'loggedOut') {
     return (
       <Gutter>
         <h3>You have been logged out.</h3>
@@ -68,7 +61,7 @@ export const Logout: React.FC = () => {
     )
   }
 
-  if (user === null && !isLoggingOut && !hasLoggedOut) {
+  if (!user && status === undefined) {
     return (
       <Gutter>
         <h3>You are already logged out.</h3>

@@ -1,19 +1,18 @@
 'use client'
 
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 
 import { useAuth } from '@providers/Auth'
 import canUseDom from '@utils/canUseDOM'
-import { getClientSideURL } from '@utils/getURL'
 
 import { Text } from '@forms/fields/Text'
 import Form from '@forms/Form'
 import FormProcessing from '@forms/FormProcessing'
 import FormSubmissionError from '@forms/FormSubmissionError'
 import Submit from '@forms/Submit'
-import { InitialState, OnSubmit } from '@forms/types'
+import { InitialState } from '@forms/types'
 
 import { Gutter } from '@components/Gutter'
 import { Heading } from '@components/Heading'
@@ -32,46 +31,42 @@ const initialFormState: InitialState = {
 }
 
 export const ForgotPassword: React.FC = () => {
-  const { user } = useAuth()
-  const [successfullySubmitted, setSuccessfullySubmitted] =
-    React.useState(false)
+  const { user, forgotPassword } = useAuth()
+  const [successfullySubmitted, setSuccessfullySubmitted] = useState(false)
 
-  const handleSubmit: OnSubmit = useCallback(
+  const handleSubmit = useCallback(
     async ({ data, dispatchFields }) => {
       try {
-        const req = await fetch(`${getClientSideURL()}/api/graphql`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            query: `mutation {
-              forgotPasswordUser(email: "${data.email}")
-            }`
-          })
-        })
+        await forgotPassword({ email: data.email })
 
-        const res = await req.json()
-
+        // Reset form and show success
         dispatchFields({
           type: 'RESET',
           payload: initialFormState
         })
-
         setSuccessfullySubmitted(true)
-        return
       } catch (err) {
+        // Handle specific error cases
+        dispatchFields({
+          type: 'UPDATE',
+          payload: {
+            path: 'email',
+            errorMessage: err.message || 'Failed to send recovery email',
+            valid: false,
+            value: data.email
+          }
+        })
         throw new Error(err.message)
       }
     },
-    [setSuccessfullySubmitted]
+    [forgotPassword]
   )
 
   if (user === undefined) return null
 
   if (user) {
     redirect(
-      `/cloud/settings?error=${encodeURIComponent(
+      `/dashboard/settings?error=${encodeURIComponent(
         'Cannot reset password while logged in. To change your password, you may use your account settings below or log out and try again.'
       )}`
     )
@@ -83,8 +78,8 @@ export const ForgotPassword: React.FC = () => {
         <Heading marginTop={false} element="h2" as="h2">
           <Highlight text="Success" />
         </Heading>
-        <div className={['grid'].filter(Boolean).join(' ')}>
-          <div className={['cols-6 cols-m-8'].filter(Boolean).join(' ')}>
+        <div className="grid">
+          <div className="cols-6 cols-m-8">
             <Heading marginTop={false} element="p" as="h4">
               We have sent you an email with a link to reset your password.
               Please check your inbox.
@@ -110,8 +105,8 @@ export const ForgotPassword: React.FC = () => {
       <Heading marginTop={false} element="h1">
         Forgot password
       </Heading>
-      <div className={['grid'].filter(Boolean).join(' ')}>
-        <div className={['cols-6 cols-m-8'].filter(Boolean).join(' ')}>
+      <div className="grid">
+        <div className="cols-6 cols-m-8">
           <div className={classes.links}>
             <p>
               {`Know your password? `}

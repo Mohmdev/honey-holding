@@ -3,12 +3,12 @@ import { redirect } from 'next/navigation'
 
 import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
 
-import { fetchMe } from '@dashboard/api/fetchMe'
-
 import { Login } from './page_client'
 
+import { getMeUser } from '@data/getMeUser'
+
 export default async function Page() {
-  const { user } = await fetchMe()
+  const { user } = await getMeUser()
 
   if (user) {
     redirect(
