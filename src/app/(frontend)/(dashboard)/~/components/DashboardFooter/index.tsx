@@ -6,10 +6,7 @@ import Link from 'next/link'
 import { useAuth } from '@providers/Auth'
 import { useHeaderObserver } from '@providers/HeaderIntersectionObserver'
 import { useThemePreference } from '@providers/Theme'
-import {
-  getImplicitPreference,
-  themeLocalStorageKey
-} from '@providers/Theme/shared'
+import { getImplicitPreference } from '@providers/Theme/shared'
 import { Theme } from '@providers/Theme/types'
 
 import { ThemeAutoIcon } from '@graphics/ThemeAutoIcon'
@@ -19,6 +16,8 @@ import { ChevronUpDownIcon } from '@icons/ChevronUpDownIcon'
 import { Gutter } from '@components/Gutter'
 
 import classes from './classes.module.scss'
+
+// import { THEME_LOCAL_STORAGE_KEY } from '@constants/keys'
 
 export const DashboardFooter = () => {
   const { user } = useAuth()

@@ -1,10 +1,9 @@
+import { REDIRECTABLE_COLLECTIONS } from '@lib/constants/constants'
 import { revalidateRedirects } from '@hooks/revalidateRedirects'
 
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 
 import type { Plugin } from 'payload'
-
-import { REDIRECTABLE_COLLECTIONS } from '@constants'
 
 export const redirectsPluginConfig: Plugin = redirectsPlugin({
   collections: REDIRECTABLE_COLLECTIONS,

@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { redirect, useSearchParams } from 'next/navigation'
 
 import { useAuth } from '@providers/Auth'
+import { DASHBOARD_SLUG } from '@lib/constants/constants'
 
 import { Text } from '@forms/fields/Text'
 import Form from '@forms/Form'
@@ -17,8 +18,6 @@ import { Gutter } from '@components/Gutter'
 import { RenderParams } from '@components/RenderParams'
 
 import classes from './page.module.scss'
-
-import { DASHBOARD_SLUG } from '@constants'
 
 const initialFormState: InitialState = {
   email: {

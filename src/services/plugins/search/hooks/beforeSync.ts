@@ -1,6 +1,6 @@
-import { BeforeSync, DocToSync } from '@payloadcms/plugin-search/types'
+import { INDEXED_TAXONOMY_COLLECTIONS } from '@lib/constants/constants'
 
-import { INDEXED_TAXONOMY_COLLECTIONS } from '@constants'
+import { BeforeSync, DocToSync } from '@payloadcms/plugin-search/types'
 
 export const beforeSyncWithSearch: BeforeSync = async ({
   originalDoc,

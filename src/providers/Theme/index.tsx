@@ -8,13 +8,10 @@ import React, {
   useState
 } from 'react'
 
+import { THEME_LOCAL_STORAGE_KEY } from '@lib/constants/keys'
 import canUseDom from '@utils/canUseDOM'
 
-import {
-  defaultTheme,
-  getImplicitPreference,
-  themeLocalStorageKey
-} from './shared'
+import { defaultTheme, getImplicitPreference } from './shared'
 import { Theme, themeIsValid, ThemePreferenceContextType } from './types'
 
 const initialContext: ThemePreferenceContextType = {
@@ -35,7 +32,7 @@ export const ThemePreferenceProvider: React.FC<{
 
   const setTheme = useCallback((themeToSet: Theme | null) => {
     if (themeToSet === null) {
-      window.localStorage.removeItem(themeLocalStorageKey)
+      window.localStorage.removeItem(THEME_LOCAL_STORAGE_KEY)
       const implicitPreference = getImplicitPreference()
       document.documentElement.setAttribute(
         'data-theme',
@@ -44,14 +41,14 @@ export const ThemePreferenceProvider: React.FC<{
       if (implicitPreference) setThemeState(implicitPreference)
     } else {
       setThemeState(themeToSet)
-      window.localStorage.setItem(themeLocalStorageKey, themeToSet)
+      window.localStorage.setItem(THEME_LOCAL_STORAGE_KEY, themeToSet)
       document.documentElement.setAttribute('data-theme', themeToSet)
     }
   }, [])
 
   useEffect(() => {
     let themeToSet: Theme = defaultTheme
-    const preference = window.localStorage.getItem(themeLocalStorageKey)
+    const preference = window.localStorage.getItem(THEME_LOCAL_STORAGE_KEY)
 
     if (themeIsValid(preference)) {
       themeToSet = preference

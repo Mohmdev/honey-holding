@@ -1,7 +1,7 @@
+import { DASHBOARD_SLUG } from '@lib/constants/constants'
+
 import { Button } from '@components/ButtonComponent'
 import { Gutter } from '@components/Gutter'
-
-import { DASHBOARD_SLUG } from '@constants'
 
 export default function NotFound() {
   return (

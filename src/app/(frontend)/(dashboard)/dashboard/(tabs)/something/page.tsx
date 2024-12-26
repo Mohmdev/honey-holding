@@ -1,13 +1,13 @@
 import React from 'react'
 import { Metadata } from 'next'
 
+import { DASHBOARD_SLUG } from '@lib/constants/constants'
 import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
 
 import { Gutter } from '@components/Gutter'
 
 import classes from './page.module.scss'
 
-import { DASHBOARD_SLUG } from '@constants'
 import { getMeUser } from '@data/getMeUser'
 
 export default async function Page() {

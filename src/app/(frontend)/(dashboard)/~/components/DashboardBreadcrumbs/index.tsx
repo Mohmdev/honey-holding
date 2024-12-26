@@ -4,11 +4,11 @@ import React from 'react'
 import Link from 'next/link'
 import { useParams, useSelectedLayoutSegments } from 'next/navigation'
 
+import { DASHBOARD_SLUG } from '@lib/constants/constants'
+
 import { FullLogo } from '@graphics/FullLogo'
 
 import classes from './index.module.scss'
-
-import { DASHBOARD_SLUG } from '@constants'
 
 export const DashboardBreadcrumbs = () => {
   let segments = useSelectedLayoutSegments()

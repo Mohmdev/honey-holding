@@ -1,4 +1,4 @@
-import { DASHBOARD_SLUG } from '@constants'
+import { DASHBOARD_SLUG } from '@lib/constants/constants'
 
 type Args = {
   environmentSlug?: string

@@ -3,11 +3,10 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 import { useAuth } from '@providers/Auth/index'
+import { DASHBOARD_SLUG } from '@lib/constants/constants'
 import useClickAway from '@utils/use-click-away'
 
 import classes from './index.module.scss'
-
-import { DASHBOARD_SLUG } from '@constants'
 
 export const DropdownMenu: React.FC<{
   isOpen: boolean

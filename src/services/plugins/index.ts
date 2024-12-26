@@ -1,3 +1,5 @@
+import { ENABLED_PLUGINS } from '@lib/constants/constants'
+
 import type { Plugin } from 'payload'
 
 import { formBuilderPluginConfig } from './formBuilder'
@@ -6,8 +8,6 @@ import { redirectsPluginConfig } from './redirects'
 import { s3StoragePlugin } from './s3Storage'
 import { searchPluginConfig } from './search'
 import { seoPluginConfig } from './seo'
-
-import { ENABLED_PLUGINS } from '@constants'
 
 export const plugins: Plugin[] = [
   ...(ENABLED_PLUGINS.s3Storage ? [s3StoragePlugin] : []),

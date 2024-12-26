@@ -1,6 +1,7 @@
 import { buildConfig } from 'payload'
 import sharp from 'sharp'
 
+import { COOKIE_PREFIX } from '@lib/constants/keys'
 import { getServerSideURL } from '@utils/getURL'
 import { collectionGroup, globalGroup } from '@utils/groupContent'
 
@@ -45,7 +46,7 @@ export default buildConfig({
   db: MongooseAdapter,
   plugins: [...plugins],
   editor: defaultLexical,
-  // cookiePrefix: 'nexweb-secure',
+  cookiePrefix: `${COOKIE_PREFIX}`,
   serverURL: getServerSideURL(),
   secret: process.env.PAYLOAD_SECRET,
   cors: [getServerSideURL()].filter(Boolean),

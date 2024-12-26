@@ -1,5 +1,7 @@
 import { Config } from 'payload'
 
+import { LINKABLE_COLLECTIONS } from '@lib/constants/constants'
+
 import {
   BoldFeature,
   ItalicFeature,
@@ -8,8 +10,6 @@ import {
   ParagraphFeature,
   UnderlineFeature
 } from '@payloadcms/richtext-lexical'
-
-import { LINKABLE_COLLECTIONS } from '@constants'
 
 export const defaultLexical: Config['editor'] = lexicalEditor({
   features: () => {

@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation'
 
+import { COOKIE_STORE_KEY } from '@lib/constants/keys'
 import { getServerSideURL } from '@utils/getURL'
 
 import type { User } from '@payload-types'
@@ -17,7 +18,7 @@ export const getMeUser = async (args?: {
     // Dynamically import cookies to avoid build-time errors
     const { cookies } = await import('next/headers')
     const cookieStore = await cookies()
-    const token = cookieStore.get('payload-token')?.value
+    const token = cookieStore.get(`${COOKIE_STORE_KEY}`)?.value
 
     if (!token && nullUserRedirect) {
       redirect(nullUserRedirect)

@@ -1,6 +1,7 @@
 // import { slateEditor } from '@payloadcms/richtext-slate'
 import { revalidatePath } from 'next/cache'
 
+import { ENABLED_PORTFOLIO_BLOCKS } from '@lib/constants/constants'
 import { getLivePreviewUrl } from '@utils/getLivePreviewUrl'
 import { getPreviewUrl } from '@utils/getPreviewUrl'
 
@@ -35,8 +36,6 @@ import { isAdminOrSelf } from '@access/isAdminOrSelf'
 import { publishedOnly } from '@access/publishedOnly'
 
 import type { CollectionConfig } from 'payload'
-
-import { ENABLED_PORTFOLIO_BLOCKS } from '@constants'
 
 export const Portfolio: CollectionConfig<'portfolio'> = {
   slug: 'portfolio',

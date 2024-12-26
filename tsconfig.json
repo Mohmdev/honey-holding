@@ -41,7 +41,7 @@
       "@services/*": ["src/services/*"],
       "@lib/*": ["src/lib/*"],
       "@hooks/*": ["src/lib/hooks/*"],
-      "@constants": ["src/lib/constants.ts"],
+      "@constants": ["src/lib/constants/constants.ts"],
       "@app/*": ["src/app/*"],
       "@root/*": ["src/*"]
     },

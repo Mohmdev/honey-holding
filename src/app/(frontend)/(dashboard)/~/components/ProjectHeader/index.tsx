@@ -3,14 +3,17 @@
 import React from 'react'
 import { useParams, usePathname, useRouter } from 'next/navigation'
 
+import {
+  DASHBOARD_SLUG,
+  PRODUCTION_ENVIRONMENT_SLUG
+} from '@lib/constants/constants'
+
 import { Select } from '@forms/fields/Select'
 import Form from '@forms/Form'
 
 import { generateRoutePath } from '@dashboard/utils/generate-route-path'
 
 import classes from './index.module.scss'
-
-import { DASHBOARD_SLUG, PRODUCTION_ENVIRONMENT_SLUG } from '@constants'
 
 export function ProjectHeader({ environmentOptions, title }) {
   const {

@@ -1,11 +1,13 @@
+import {
+  SEO_ENABLED_COLLECTIONS,
+  SEO_ENABLED_GLOBALS
+} from '@lib/constants/constants'
 import { getServerSideURL } from '@utils/getURL'
 
 import { seoPlugin } from '@payloadcms/plugin-seo'
 
 import type { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
 import type { Plugin } from 'payload'
-
-import { SEO_ENABLED_COLLECTIONS, SEO_ENABLED_GLOBALS } from '@constants'
 
 const generateURL: GenerateURL = ({ doc }) => {
   const url = getServerSideURL()

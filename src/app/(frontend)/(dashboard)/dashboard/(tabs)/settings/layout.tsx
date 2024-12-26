@@ -4,13 +4,13 @@ import * as React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
+import { DASHBOARD_SLUG } from '@lib/constants/constants'
+
 import { EdgeScroll } from '@components/EdgeScroll'
 import { Gutter } from '@components/Gutter'
 import { usePathnameSegments } from '@dashboard/utils/use-pathname-segments'
 
 import classes from './layout.module.scss'
-
-import { DASHBOARD_SLUG } from '@constants'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [, settingsTab] = usePathnameSegments()

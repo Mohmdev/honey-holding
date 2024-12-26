@@ -5,8 +5,8 @@ import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
 
 import { CookieClientPage } from './client_page'
 
-export default function Page(props) {
-  return <CookieClientPage {...props} />
+export default function Page(): React.ReactElement {
+  return <CookieClientPage />
 }
 
 export const metadata: Metadata = {

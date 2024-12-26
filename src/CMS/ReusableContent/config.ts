@@ -1,3 +1,5 @@
+import { ENABLED_REUSABLE_BLOCKS } from '@lib/constants/constants'
+
 import { Banner } from '@blocks/Banner/config'
 import { BlogContent } from '@blocks/BlogContent/config'
 import { BlogMarkdown } from '@blocks/BlogMarkdown/config'
@@ -30,8 +32,6 @@ import { isAdminOrEditor } from '@access/isAdminOrEditor'
 import { isAdminOrSelf } from '@access/isAdminOrSelf'
 
 import type { CollectionConfig } from 'payload'
-
-import { ENABLED_REUSABLE_BLOCKS } from '@constants'
 
 export const ReusableContent: CollectionConfig = {
   slug: 'reusable-content',

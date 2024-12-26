@@ -1,6 +1,8 @@
 import React from 'react'
 import Link from 'next/link'
 
+import { DASHBOARD_SLUG } from '@lib/constants/constants'
+
 import { GitHubIcon } from '@graphics/GitHub'
 import { ArrowIcon } from '@icons/ArrowIcon'
 import { BranchIcon } from '@icons/BranchIcon'
@@ -11,8 +13,6 @@ import { Project } from '@dashboard/types'
 import { hasBadSubscription } from '@dashboard/utils/hasBadSubscription'
 
 import classes from './index.module.scss'
-
-import { DASHBOARD_SLUG } from '@constants'
 
 export const ProjectCard: React.FC<{
   project: Partial<Project>

@@ -1,31 +1,23 @@
 'use client'
 
 import React, { useId } from 'react'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 
 import { useHeaderObserver } from '@providers/HeaderIntersectionObserver'
 import { useThemePreference } from '@providers/Theme'
-import {
-  getImplicitPreference,
-  themeLocalStorageKey
-} from '@providers/Theme/shared'
+import { getImplicitPreference } from '@providers/Theme/shared'
 import { Theme } from '@providers/Theme/types'
+import { THEME_LOCAL_STORAGE_KEY } from '@lib/constants/keys'
 
 import { Footer as FooterType } from '@payload-types'
 
-import { Text } from '@forms/fields/Text'
-import FormComponent from '@forms/Form'
-import { validateEmail } from '@forms/validations'
-
 import { DiscordIcon } from '@graphics/DiscordIcon'
-import { FacebookIcon } from '@graphics/FacebookIcon'
 import { InstagramIcon } from '@graphics/InstagramIcon'
 import { ThemeAutoIcon } from '@graphics/ThemeAutoIcon'
 import { ThemeDarkIcon } from '@graphics/ThemeDarkIcon'
 import { ThemeLightIcon } from '@graphics/ThemeLightIcon'
 import { TwitterIconAlt } from '@graphics/TwitterIconAlt'
 import { YoutubeIcon } from '@graphics/YoutubeIcon'
-import { ArrowIcon } from '@icons/ArrowIcon'
 import { ChevronUpDownIcon } from '@icons/ChevronUpDownIcon'
 import { BackgroundGrid } from '@components/Background/Grid'
 import { CMSLink } from '@components/CMSLink'
@@ -56,7 +48,7 @@ export const Footer: React.FC<FooterType> = (props) => {
   }
 
   React.useEffect(() => {
-    const preference = window.localStorage.getItem(themeLocalStorageKey)
+    const preference = window.localStorage.getItem(THEME_LOCAL_STORAGE_KEY)
     if (selectRef.current) {
       selectRef.current.value = preference ?? 'auto'
     }

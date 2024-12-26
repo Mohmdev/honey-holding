@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react'
 
+import { DASHBOARD_SLUG } from '@lib/constants/constants'
+
 import { Gutter } from '@components/Gutter'
 import { DashboardTabs } from '@dashboard/components/DashboardTabs'
-
-import { DASHBOARD_SLUG } from '@constants'
 
 export default async function Layout({
   children

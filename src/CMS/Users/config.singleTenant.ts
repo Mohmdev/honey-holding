@@ -1,3 +1,5 @@
+import { ROLES_WITH_ADMIN_ACCESS } from '@lib/constants/constants'
+
 import { generateForgotPasswordEmail } from '@services/email/generateForgotPasswordEmail'
 import { generateVerificationEmail } from '@services/email/generateVerificationEmail'
 import { anyone } from '@access/anyone'
@@ -10,8 +12,6 @@ import { isAdminOrSelf, isAdminOrSelfFieldLevel } from '@access/isAdminOrSelf'
 import type { CollectionConfig } from 'payload'
 
 import { ensureFirstUserIsAdmin } from './ensureFirstUserIsAdmin'
-
-import { ROLES_WITH_ADMIN_ACCESS } from '@constants'
 
 export const Users: CollectionConfig<'users'> = {
   slug: 'users',

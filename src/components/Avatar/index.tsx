@@ -2,11 +2,10 @@ import * as React from 'react'
 import Link from 'next/link'
 
 import { useAuth } from '@providers/Auth'
+import { DASHBOARD_SLUG } from '@lib/constants/constants'
 
 // import { DropdownMenu } from './DropdownMenu'
 import classes from './index.module.scss'
-
-import { DASHBOARD_SLUG } from '@constants'
 
 export const Avatar: React.FC<{ className?: string }> = ({ className }) => {
   const { user } = useAuth()

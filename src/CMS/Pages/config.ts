@@ -1,5 +1,6 @@
 import { revalidatePath } from 'next/cache'
 
+import { ENABLED_PAGE_BLOCKS } from '@lib/constants/constants'
 import { getLivePreviewUrl } from '@utils/getLivePreviewUrl'
 import { getPreviewUrl } from '@utils/getPreviewUrl'
 
@@ -35,8 +36,6 @@ import { isAdminOrSelf } from '@access/isAdminOrSelf'
 import { publishedOnly } from '@access/publishedOnly'
 
 import type { CollectionConfig } from 'payload'
-
-import { ENABLED_PAGE_BLOCKS } from '@constants'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',

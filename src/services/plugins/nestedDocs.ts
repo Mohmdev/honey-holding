@@ -1,8 +1,8 @@
+import { NESTED_COLLECTIONS } from '@lib/constants/constants'
+
 import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
 
 import type { Plugin } from 'payload'
-
-import { NESTED_COLLECTIONS } from '@constants'
 
 export const nestedDocsPluginConfig: Plugin = nestedDocsPlugin({
   collections: NESTED_COLLECTIONS,

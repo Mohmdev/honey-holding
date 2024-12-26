@@ -1,8 +1,7 @@
+import { LINKABLE_COLLECTIONS } from '@lib/constants/constants'
 import deepMerge from '@utils/deepMerge'
 
 import type { Field, GroupField } from 'payload'
-
-import { LINKABLE_COLLECTIONS } from '@constants'
 
 export const appearanceOptions = {
   default: {
