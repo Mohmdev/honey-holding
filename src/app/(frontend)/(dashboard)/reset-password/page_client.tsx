@@ -28,10 +28,12 @@ const initialFormState = {
   }
 }
 
-export const ResetPassword: React.FC = () => {
-  const searchParams = useSearchParams()
+interface ResetPasswordProps {
+  token: string
+}
+
+export const ResetPassword: React.FC<ResetPasswordProps> = ({ token }) => {
   const { user, resetPassword } = useAuth()
-  const token = searchParams?.get('token')
 
   const handleSubmit = useCallback(
     async ({ data, dispatchFields }) => {

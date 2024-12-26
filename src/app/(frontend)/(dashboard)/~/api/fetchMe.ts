@@ -5,7 +5,7 @@ import { getClientSideURL } from '@utils/getURL'
 
 import type { User } from '@dashboard/types'
 
-import { payloadCloudToken } from './token'
+import { payloadToken } from '../../../../../_data/token'
 
 import { ME_QUERY } from '@data/me'
 
@@ -18,7 +18,7 @@ export const fetchMe = async (args?: {
 }> => {
   const { nullUserRedirect, userRedirect } = args || {}
   const cookieStore = await cookies()
-  const token = cookieStore.get(payloadCloudToken)?.value
+  const token = cookieStore.get(payloadToken)?.value
 
   const meUserReq = await fetch(`${getClientSideURL()}/api/graphql`, {
     body: JSON.stringify({

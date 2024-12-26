@@ -2,7 +2,7 @@ import { getClientSideURL } from '@utils/getURL'
 
 import type { Team } from '@dashboard/types'
 
-import { payloadCloudToken } from './token'
+import { payloadToken } from '../../../../../_data/token'
 
 import { TEAM_QUERY, TEAMS_QUERY } from '@data/team'
 
@@ -25,7 +25,7 @@ export interface Customer {
 
 export const fetchTeams = async (teamIDs: string[]): Promise<Team[]> => {
   const { cookies } = await import('next/headers')
-  const token = (await cookies()).get(payloadCloudToken)?.value ?? null
+  const token = (await cookies()).get(payloadToken)?.value ?? null
   if (!token) throw new Error('No token provided')
 
   const res: Team[] = await fetch(`${getClientSideURL()}/api/graphql`, {
@@ -56,7 +56,7 @@ export const fetchTeams = async (teamIDs: string[]): Promise<Team[]> => {
 
 export const fetchTeam = async (teamSlug?: string): Promise<Team> => {
   const { cookies } = await import('next/headers')
-  const token = (await cookies()).get(payloadCloudToken)?.value ?? null
+  const token = (await cookies()).get(payloadToken)?.value ?? null
   if (!token) throw new Error('No token provided')
 
   const doc: Team = await fetch(`${getClientSideURL()}/api/graphql`, {
@@ -109,7 +109,7 @@ export const fetchTeamWithCustomer = async (
   slug?: string
 ): Promise<TeamWithCustomer> => {
   const { cookies } = await import('next/headers')
-  const token = (await cookies()).get(payloadCloudToken)?.value ?? null
+  const token = (await cookies()).get(payloadToken)?.value ?? null
   if (!token) throw new Error('No token provided')
 
   if (!slug) throw new Error('No slug provided')

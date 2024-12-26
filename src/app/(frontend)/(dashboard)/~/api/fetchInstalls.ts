@@ -2,7 +2,7 @@ import { getClientSideURL } from '@utils/getURL'
 
 import type { Endpoints } from '@octokit/types'
 
-import { payloadCloudToken } from './token'
+import { payloadToken } from '../../../../../_data/token'
 
 export type GitHubInstallationsResponse =
   Endpoints['GET /user/installations']['response']
@@ -11,7 +11,7 @@ export type Install = GitHubInstallationsResponse['data']['installations'][0]
 
 export const fetchInstalls = async (): Promise<Install[]> => {
   const { cookies } = await import('next/headers')
-  const token = (await cookies()).get(payloadCloudToken)?.value ?? null
+  const token = (await cookies()).get(payloadToken)?.value ?? null
   if (!token) throw new Error('No token provided')
 
   const docs: Install[] = await fetch(

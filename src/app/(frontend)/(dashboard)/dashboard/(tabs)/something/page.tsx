@@ -14,7 +14,7 @@ export default async function Page() {
   const { user } = await getMeUser()
 
   // Testing user data display and role-based content
-  const isAdmin = user.role === 'admin'
+  const isAdmin = user?.role === 'admin'
 
   return (
     <React.Fragment>

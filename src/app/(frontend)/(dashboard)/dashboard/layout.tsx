@@ -5,7 +5,8 @@ import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
 
 import { Gutter } from '@components/Gutter'
 import { RenderParams } from '@components/RenderParams'
-import { fetchMe } from '@dashboard/api/fetchMe'
+
+import { getMeUser } from '@data/getMeUser'
 
 export const metadata: Metadata = {
   title: {
@@ -27,7 +28,7 @@ export default async function Layout({
 }: {
   children: React.ReactNode
 }) {
-  await fetchMe({
+  await getMeUser({
     nullUserRedirect: `/login?error=${encodeURIComponent(
       'You must be logged in to visit this page'
     )}`

@@ -43,11 +43,17 @@ export const getCachedGlobals = async <T extends Global>(
   slug: T,
   options: GlobalOptions<T> = {}
 ) => {
-  const { isEnabled: draft } = await draftMode()
-
-  return draft
-    ? getGlobal(slug, options)
-    : unstable_cache(async () => getGlobal(slug, options), [slug], {
-        tags: [`global_${slug}`]
-      })
+  try {
+    const { isEnabled: draft } = await draftMode()
+    return draft
+      ? getGlobal(slug, options)
+      : unstable_cache(async () => getGlobal(slug, options), [slug], {
+          tags: [`global_${slug}`]
+        })
+  } catch (err) {
+    // Default to cached version during build
+    return unstable_cache(async () => getGlobal(slug, options), [slug], {
+      tags: [`global_${slug}`]
+    })
+  }
 }

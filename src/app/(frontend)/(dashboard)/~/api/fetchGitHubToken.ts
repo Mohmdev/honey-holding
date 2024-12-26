@@ -6,7 +6,7 @@ type GitHubResponse = Endpoints['GET /user']['response']
 
 export const fetchGitHubToken = async (): Promise<null | string> => {
   const { cookies } = await import('next/headers')
-  const token = (await cookies()).get('payload-cloud-token')?.value ?? null
+  const token = (await cookies()).get('payload-token')?.value ?? null
 
   if (!token) {
     return null

@@ -15,7 +15,7 @@ import { CMSLink } from '@components/CMSLink'
 import { Gutter } from '@components/Gutter'
 import { RichText } from '@components/RichText'
 
-import { DocSearch } from '../Docsearch'
+// import { DocSearch } from '../Docsearch'
 import classes from './index.module.scss'
 
 type DesktopNavType = Pick<MainMenu, 'tabs' | 'menuCta'> & {
@@ -347,7 +347,7 @@ export const DesktopNav: React.FC<DesktopNavType> = ({
                   )}
                 </>
               )}
-              <DocSearch />
+              {/* <DocSearch /> */}
             </div>
           </div>
         </div>

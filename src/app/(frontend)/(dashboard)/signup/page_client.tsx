@@ -6,7 +6,7 @@ import { useSearchParams } from 'next/navigation'
 
 import { useAuth } from '@providers/Auth'
 import canUseDom from '@utils/canUseDOM'
-import { getClientSideURL } from '@utils/getURL'
+import { getServerSideURL } from '@utils/getURL'
 
 import { Text } from '@forms/fields/Text'
 import Form from '@forms/Form'
@@ -55,11 +55,12 @@ const initialFormState: InitialState = {
     errorMessage: 'Please confirm your password'
   }
 }
-
-export const Signup: React.FC = () => {
-  const searchParams = useSearchParams()
+interface SignupProps {
+  email?: string
+  redirectPath?: string
+}
+export const Signup: React.FC<SignupProps> = ({ email, redirectPath }) => {
   const { user } = useAuth()
-
   const [successfullySubmitted, setSuccessfullySubmitted] = useState(false)
 
   const createAccount: OnSubmit = useCallback(
@@ -91,7 +92,7 @@ export const Signup: React.FC = () => {
       }
 
       try {
-        const req = await fetch(`${getClientSideURL()}/api/users/create`, {
+        const req = await fetch(`${getServerSideURL()}/api/users/create`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -141,8 +142,6 @@ export const Signup: React.FC = () => {
     },
     []
   )
-
-  const redirectParam = searchParams?.get('redirect')
 
   if (user) {
     return (
@@ -204,7 +203,7 @@ export const Signup: React.FC = () => {
           <div className={classes.links}>
             {`Already have an account? `}
             <Link
-              href={`/login${redirectParam ? `?redirect=${redirectParam}` : ''}`}
+              href={`/login${redirectPath ? `?redirect=${redirectPath}` : ''}`}
             >
               Log in now
             </Link>
@@ -214,7 +213,7 @@ export const Signup: React.FC = () => {
             onSubmit={createAccount}
             className={classes.form}
             initialState={initialFormState}
-            formId={'payload_cloud_sign_up'}
+            formId={'nexweb_dashboard_sign_up'}
           >
             <FormSubmissionError />
             <FormProcessing message="Signing up, one moment..." />
@@ -222,7 +221,7 @@ export const Signup: React.FC = () => {
               path="email"
               label="Email"
               required
-              initialValue={searchParams?.get('email') || undefined}
+              initialValue={email || undefined}
             />
             <Text path="username" label="Username" required />
             <Text path="password" label="Password" type="password" required />
@@ -232,8 +231,8 @@ export const Signup: React.FC = () => {
               type="password"
               required
             />
-            {typeof redirectParam === 'string' && (
-              <Text path="redirect" type="hidden" value={redirectParam} />
+            {typeof redirectPath === 'string' && (
+              <Text path="redirect" type="hidden" value={redirectPath} />
             )}
             <div>
               <Submit label="Signup" className={classes.submit} />

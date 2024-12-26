@@ -1,13 +1,20 @@
+import { Suspense } from 'react'
 import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 
 import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
 
+import { Spinner } from '@components/Spinner'
+
 import { Login } from './page_client'
 
 import { getMeUser } from '@data/getMeUser'
 
-export default async function Page() {
+export default async function Page({
+  searchParams
+}: {
+  searchParams: { email?: string; redirect?: string }
+}) {
   const { user } = await getMeUser()
 
   if (user) {
@@ -16,14 +23,18 @@ export default async function Page() {
     )
   }
 
-  return <Login />
+  return (
+    <Suspense fallback={<Spinner />}>
+      <Login email={searchParams.email} redirectPath={searchParams.redirect} />
+    </Suspense>
+  )
 }
 
 export const metadata: Metadata = {
-  title: 'Login | Nexweb Cloud',
-  description: 'Login to Nexweb Cloud',
+  title: 'Login | Nexweb Dashboard',
+  description: 'Login to Nexweb Dashboard',
   openGraph: mergeOpenGraph({
-    title: 'Login | Nexweb Cloud',
+    title: 'Login | Nexweb Dashboard',
     url: '/login'
   })
 }

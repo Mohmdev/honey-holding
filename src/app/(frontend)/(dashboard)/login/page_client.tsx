@@ -34,45 +34,40 @@ const initialFormState: InitialState = {
     errorMessage: 'Please enter a password'
   }
 }
+interface LoginProps {
+  email?: string
+  redirectPath?: string
+}
 
-export const Login: React.FC = () => {
-  const searchParams = useSearchParams()
+export const Login: React.FC<LoginProps> = ({ email, redirectPath }) => {
   const { user, login } = useAuth()
   const [redirectTo, setRedirectTo] = useState(DASHBOARD_SLUG)
 
   const trustedRoutes = ['/'] // .. add more routes or external links
 
   useEffect(() => {
-    const redirectParam = searchParams?.get('redirect')
-    if (redirectParam) {
-      // Check if the provided 'redirectParam' is among the trusted routes
-      const isTrustedRoute = trustedRoutes.includes(redirectParam)
+    if (redirectPath) {
+      // Check if the provided 'redirectPath' is among the trusted routes
+      const isTrustedRoute = trustedRoutes.includes(redirectPath)
 
-      // If the 'redirectParam' is trusted, update the redirection target
-      if (isTrustedRoute) {
-        setRedirectTo(redirectParam)
-      }
-
-      // If the 'redirectParam' is not trusted, redirect to the default 'DASHBOARD_SLUG'
-      else {
-        setRedirectTo(DASHBOARD_SLUG)
-      }
+      // If the 'redirectPath' is trusted, update the redirection target
+      // If the 'redirectPath' is not trusted, redirect to the default 'DASHBOARD_SLUG'
+      setRedirectTo(isTrustedRoute ? redirectPath : DASHBOARD_SLUG)
     }
-  }, [searchParams])
+  }, [redirectPath])
 
   const handleSubmit = useCallback(
     async ({ data, dispatchFields }) => {
       setTimeout(() => {
         window.scrollTo(0, 0)
       }, 0)
-
       try {
         await login({
           email: data.email,
           password: data.password
         })
+        // Login successful - no need to throw error
       } catch (err) {
-        // Handle specific error cases
         if (err.message.includes('not verified')) {
           dispatchFields({
             type: 'UPDATE',
@@ -84,7 +79,6 @@ export const Login: React.FC = () => {
             }
           })
         } else {
-          // Generic error for invalid credentials
           dispatchFields({
             type: 'UPDATE',
             payload: [
@@ -103,7 +97,6 @@ export const Login: React.FC = () => {
             ]
           })
         }
-        throw new Error('Invalid credentials')
       }
     },
     [login]
@@ -131,7 +124,7 @@ export const Login: React.FC = () => {
               label="Email"
               required
               elementAttributes={{ autoComplete: 'on' }}
-              initialValue={searchParams?.get('email') || undefined}
+              initialValue={email || undefined}
             />
             <Text path="password" label="Password" type="password" required />
             <div>

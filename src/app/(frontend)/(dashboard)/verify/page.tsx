@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 
 import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
-import { getClientSideURL } from '@utils/getURL'
+import { getServerSideURL } from '@utils/getURL'
 
 // force this component to use dynamic search params, see https://github.com/vercel/next.js/issues/43077
 export const dynamic = 'force-dynamic'
@@ -30,7 +30,7 @@ export default async function VerifyPage({ searchParams }: VerifyProps) {
   }
 
   try {
-    const res = await fetch(`${getClientSideURL()}/api/users/verify/${token}`, {
+    const res = await fetch(`${getServerSideURL()}/api/users/verify/${token}`, {
       method: 'POST',
       credentials: 'include',
       headers: {

@@ -23,7 +23,7 @@ import { CMSLink } from '@components/CMSLink'
 import { Gutter } from '@components/Gutter'
 import { RichText } from '@components/RichText'
 
-import { DocSearch } from '../Docsearch'
+// import { DocSearch } from '../Docsearch'
 import classes from './index.module.scss'
 
 export const modalSlug = 'mobile-nav'
@@ -329,7 +329,7 @@ export const MobileNav: React.FC<NavItems> = (props) => {
                   {starCount}
                 </a>
                 {user && <Avatar className={classes.avatar} />}
-                <DocSearch />
+                {/* <DocSearch /> */}
                 <div
                   className={[
                     classes.modalToggler,

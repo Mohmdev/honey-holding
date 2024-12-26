@@ -7,7 +7,7 @@ import { useModal } from '@faceless-ui/modal'
 import { toast } from 'sonner'
 
 import { useAuth } from '@providers/Auth'
-import { getClientSideURL } from '@utils/getURL'
+import { getServerSideURL } from '@utils/getURL'
 
 import { Text } from '@forms/fields/Text'
 import Form from '@forms/Form'
@@ -48,7 +48,7 @@ export const DeletionConfirmationForm: React.FC<{
           if (confirmedUser && confirmedUser.id === user.id) {
             try {
               const req = await fetch(
-                `${getClientSideURL()}/api/users/${user.id}`,
+                `${getServerSideURL()}/api/users/${user.id}`,
                 {
                   method: 'DELETE',
                   credentials: 'include',

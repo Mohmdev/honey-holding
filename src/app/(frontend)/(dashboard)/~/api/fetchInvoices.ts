@@ -2,7 +2,7 @@ import { getClientSideURL } from '@utils/getURL'
 
 import type { Team } from '@dashboard/types'
 
-import { payloadCloudToken } from './token'
+import { payloadToken } from '../../../../../_data/token'
 
 // TODO: type this using the Stripe module
 export interface Invoice {
@@ -45,7 +45,7 @@ export const fetchInvoices = async (
   if (!teamID) throw new Error('No team ID provided')
 
   const { cookies } = await import('next/headers')
-  const token = (await cookies()).get(payloadCloudToken)?.value ?? null
+  const token = (await cookies()).get(payloadToken)?.value ?? null
   if (!token) throw new Error('No token provided')
 
   const res: InvoicesResult = await fetch(

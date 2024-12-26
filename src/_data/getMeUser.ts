@@ -1,7 +1,6 @@
-import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
-import { getClientSideURL } from '@utils/getURL'
+import { getServerSideURL } from '@utils/getURL'
 
 import type { User } from '@payload-types'
 
@@ -9,36 +8,53 @@ export const getMeUser = async (args?: {
   nullUserRedirect?: string
   validUserRedirect?: string
 }): Promise<{
-  token: string
-  user: User
+  token: string | null
+  user: User | null
 }> => {
   const { nullUserRedirect, validUserRedirect } = args || {}
-  const cookieStore = await cookies()
-  const token = cookieStore.get('payload-token')?.value
 
-  const meUserReq = await fetch(`${getClientSideURL()}/api/users/me`, {
-    headers: {
-      Authorization: `JWT ${token}`
+  try {
+    // Dynamically import cookies to avoid build-time errors
+    const { cookies } = await import('next/headers')
+    const cookieStore = await cookies()
+    const token = cookieStore.get('payload-token')?.value
+
+    if (!token && nullUserRedirect) {
+      redirect(nullUserRedirect)
     }
-  })
 
-  const {
-    user
-  }: {
-    user: User
-  } = await meUserReq.json()
+    const meUserReq = await fetch(`${getServerSideURL()}/api/users/me`, {
+      headers: {
+        Authorization: `JWT ${token}`
+      }
+    })
 
-  if (validUserRedirect && meUserReq.ok && user) {
-    redirect(validUserRedirect)
-  }
+    const {
+      user
+    }: {
+      user: User
+    } = await meUserReq.json()
 
-  if (nullUserRedirect && (!meUserReq.ok || !user)) {
-    redirect(nullUserRedirect)
-  }
+    if (validUserRedirect && meUserReq.ok && user) {
+      redirect(validUserRedirect)
+    }
 
-  // Token will exist here because if it doesn't the user will be redirected
-  return {
-    token: token!,
-    user
+    if (nullUserRedirect && (!meUserReq.ok || !user)) {
+      redirect(nullUserRedirect)
+    }
+
+    return {
+      token: token || null,
+      user
+    }
+  } catch (err) {
+    // Handle build-time calls gracefully
+    if (process.env.NODE_ENV === 'production') {
+      return {
+        token: null,
+        user: null
+      }
+    }
+    throw err
   }
 }
