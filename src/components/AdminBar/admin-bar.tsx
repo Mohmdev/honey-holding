@@ -185,7 +185,7 @@ export const PayloadAdminBar: React.FC<PayloadAdminBarProps> = (props) => {
               : {})
           }}
         >
-          {logo || 'Payload CMS'}
+          {logo || 'Nexweb CMS'}
         </a>
         <a
           href={`${cmsURL}${adminPath}/collections/users/${userID}`}

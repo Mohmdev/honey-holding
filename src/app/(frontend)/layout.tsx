@@ -1,6 +1,5 @@
 import React from 'react'
 import { Metadata } from 'next'
-import { draftMode } from 'next/headers'
 
 import { Providers } from '@providers'
 import { GeistMono } from 'geist/font/mono'
@@ -10,7 +9,6 @@ import { untitledSans } from '@lib/fonts/fonts'
 import { mergeOpenGraph } from '@lib/seo/mergeOpenGraph'
 import { getClientSideURL, getServerSideURL } from '@utils/getURL'
 
-import { AdminBar } from '@components/AdminBar'
 // import { GoogleAnalytics } from '@components/Analytics/GoogleAnalytics'
 import { GoogleTagManager } from '@components/Analytics/GoogleTagManager'
 import Favicon from '@components/Favicon'
@@ -23,7 +21,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const { isEnabled: draft } = await draftMode()
   return (
     <html lang="en">
       <PrivacyProvider>
@@ -47,7 +44,6 @@ export default async function RootLayout({
         <body className={[GeistMono.variable, untitledSans.variable].join(' ')}>
           <GoogleTagManager />
           <Providers>
-            <AdminBar adminBarProps={{ preview: draft }} />
             {children}
             <PrivacyBanner />
           </Providers>

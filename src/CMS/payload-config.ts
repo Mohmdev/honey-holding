@@ -45,7 +45,7 @@ export default buildConfig({
   db: MongooseAdapter,
   plugins: [...plugins],
   editor: defaultLexical,
-  cookiePrefix: 'nexweb-secure',
+  // cookiePrefix: 'nexweb-secure',
   serverURL: getServerSideURL(),
   secret: process.env.PAYLOAD_SECRET,
   cors: [getServerSideURL()].filter(Boolean),
